@@ -1,0 +1,1 @@
+typedef struct { unsigned int mode:3; unsigned int state:4; unsigned int active:1; int normal; } Device; typedef struct { unsigned int mode:5; unsigned int state:2; unsigned int active:1; } Sensor; extern Device device; extern Sensor sensor;

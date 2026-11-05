@@ -1,0 +1,34 @@
+{
+  "frozen": true,
+  "executable": "C:\\Range\\RangeValidator-Python-Source\\build\\rebuilt-6-2\\RangeValidator\\RangeValidator.exe",
+  "cwd": "C:\\Range",
+  "direct_dialog_automation": false,
+  "analysis": {
+    "MATCH": 4,
+    "MISMATCH": 2,
+    "CREATE": 2,
+    "REVIEW": 7
+  },
+  "save": {
+    "SKIPPED": 3,
+    "SAVED_VERIFIED": 6
+  },
+  "outputs": [
+    "C:\\Range\\RangeValidator-Python-Source\\build\\acceptance-6-2-final\\outputs\\RangeValidator_20261105_143931\\BMS_합성_fixed.xlsx",
+    "C:\\Range\\RangeValidator-Python-Source\\build\\acceptance-6-2-final\\outputs\\RangeValidator_20261105_143931\\Sensor_합성_fixed.xlsx"
+  ],
+  "report": "C:\\Range\\RangeValidator-Python-Source\\build\\acceptance-6-2-final\\outputs\\RangeValidator_20261105_143931\\RangeValidator_Report.xlsx",
+  "original_preserved": true,
+  "gui_callback_navigation_filter_search": true,
+  "progress_complete": true,
+  "collision_isolation": true,
+  "source_readers": {
+    "C:\\Range\\RangeValidator-Python-Source\\build\\acceptance-6-2-final\\BMS_합성.xlsx": "com",
+    "C:\\Range\\RangeValidator-Python-Source\\build\\acceptance-6-2-final\\Sensor_합성.xlsx": "com"
+  },
+  "kinds": [
+    "AUTO_CREATE",
+    "AUTO_MISMATCH",
+    "MANUAL_REVIEW"
+  ]
+}

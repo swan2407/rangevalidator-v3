@@ -1,0 +1,1 @@
+typedef struct { unsigned int active:1; } Device_t; extern Device_t *p;

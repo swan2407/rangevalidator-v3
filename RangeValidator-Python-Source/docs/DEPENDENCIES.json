@@ -1,0 +1,310 @@
+[
+  {
+    "name": "altgraph",
+    "version": "0.17.5",
+    "license": "MIT",
+    "classifiers": [
+      "Intended Audience :: Developers",
+      "License :: OSI Approved :: MIT License",
+      "Programming Language :: Python",
+      "Programming Language :: Python :: 2",
+      "Programming Language :: Python :: 2.7",
+      "Programming Language :: Python :: 3",
+      "Programming Language :: Python :: 3.4",
+      "Programming Language :: Python :: 3.5",
+      "Programming Language :: Python :: 3.6",
+      "Programming Language :: Python :: 3.7",
+      "Programming Language :: Python :: 3.8",
+      "Programming Language :: Python :: 3.9",
+      "Programming Language :: Python :: 3.10",
+      "Programming Language :: Python :: 3.11",
+      "Programming Language :: Python :: 3.12",
+      "Programming Language :: Python :: 3.13",
+      "Programming Language :: Python :: 3.14",
+      "Topic :: Software Development :: Libraries :: Python Modules",
+      "Topic :: Scientific/Engineering :: Mathematics",
+      "Topic :: Scientific/Engineering :: Visualization"
+    ],
+    "wheel": "altgraph-0.17.5-py2.py3-none-any.whl",
+    "sha256": "f3a22400bce1b0c701683820ac4f3b159cd301acab067c51c653e06961600597",
+    "licenses": [
+      "docs\\dependency-licenses\\altgraph-0-LICENSE"
+    ]
+  },
+  {
+    "name": "et_xmlfile",
+    "version": "2.0.0",
+    "license": "MIT",
+    "classifiers": [
+      "Development Status :: 5 - Production/Stable",
+      "Operating System :: MacOS :: MacOS X",
+      "Operating System :: Microsoft :: Windows",
+      "Operating System :: POSIX",
+      "License :: OSI Approved :: MIT License",
+      "Programming Language :: Python",
+      "Programming Language :: Python :: 3.8",
+      "Programming Language :: Python :: 3.9",
+      "Programming Language :: Python :: 3.10",
+      "Programming Language :: Python :: 3.11",
+      "Programming Language :: Python :: 3.12",
+      "Programming Language :: Python :: 3.13"
+    ],
+    "wheel": "et_xmlfile-2.0.0-py3-none-any.whl",
+    "sha256": "7a91720bc756843502c3b7504c77b8fe44217c85c537d85037f0f536151b2caa",
+    "licenses": [
+      "docs\\dependency-licenses\\et_xmlfile-0-LICENCE.python",
+      "docs\\dependency-licenses\\et_xmlfile-1-LICENCE.rst"
+    ]
+  },
+  {
+    "name": "openpyxl",
+    "version": "3.1.5",
+    "license": "MIT",
+    "classifiers": [
+      "Development Status :: 5 - Production/Stable",
+      "Operating System :: MacOS :: MacOS X",
+      "Operating System :: Microsoft :: Windows",
+      "Operating System :: POSIX",
+      "License :: OSI Approved :: MIT License",
+      "Programming Language :: Python",
+      "Programming Language :: Python :: 3.6",
+      "Programming Language :: Python :: 3.7",
+      "Programming Language :: Python :: 3.8",
+      "Programming Language :: Python :: 3.9",
+      "Programming Language :: Python :: 3.10",
+      "Programming Language :: Python :: 3.11"
+    ],
+    "wheel": "openpyxl-3.1.5-py2.py3-none-any.whl",
+    "sha256": "5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2",
+    "licenses": [
+      "docs\\dependency-licenses\\openpyxl-0-LICENCE.rst"
+    ]
+  },
+  {
+    "name": "packaging",
+    "version": "26.3",
+    "license": "Apache-2.0 OR BSD-2-Clause",
+    "classifiers": [
+      "Development Status :: 5 - Production/Stable",
+      "Intended Audience :: Developers",
+      "Programming Language :: Python",
+      "Programming Language :: Python :: 3",
+      "Programming Language :: Python :: 3 :: Only",
+      "Programming Language :: Python :: 3.9",
+      "Programming Language :: Python :: 3.10",
+      "Programming Language :: Python :: 3.11",
+      "Programming Language :: Python :: 3.12",
+      "Programming Language :: Python :: 3.13",
+      "Programming Language :: Python :: 3.14",
+      "Programming Language :: Python :: 3.15",
+      "Programming Language :: Python :: Implementation :: CPython",
+      "Programming Language :: Python :: Implementation :: PyPy",
+      "Programming Language :: Python :: Free Threading :: 4 - Resilient",
+      "Typing :: Typed"
+    ],
+    "wheel": "packaging-26.3-py3-none-any.whl",
+    "sha256": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c",
+    "licenses": [
+      "docs\\dependency-licenses\\packaging-0-__init__.py",
+      "docs\\dependency-licenses\\packaging-1-_spdx.py",
+      "docs\\dependency-licenses\\packaging-2-LICENSE",
+      "docs\\dependency-licenses\\packaging-3-LICENSE.APACHE",
+      "docs\\dependency-licenses\\packaging-4-LICENSE.BSD"
+    ]
+  },
+  {
+    "name": "pefile",
+    "version": "2024.8.26",
+    "license": "MIT",
+    "classifiers": [
+      "Development Status :: 5 - Production/Stable",
+      "Intended Audience :: Developers",
+      "Intended Audience :: Science/Research",
+      "Natural Language :: English",
+      "Operating System :: OS Independent",
+      "Programming Language :: Python",
+      "Topic :: Software Development :: Libraries :: Python Modules"
+    ],
+    "wheel": "pefile-2024.8.26-py3-none-any.whl",
+    "sha256": "76f8b485dcd3b1bb8166f1128d395fa3d87af26360c2358fb75b80019b957c6f",
+    "licenses": [
+      "docs\\dependency-licenses\\pefile-0-LICENSE"
+    ]
+  },
+  {
+    "name": "pillow",
+    "version": "13.0.0",
+    "license": "MIT-CMU",
+    "classifiers": [
+      "Development Status :: 6 - Mature",
+      "Programming Language :: Python :: 3 :: Only",
+      "Programming Language :: Python :: 3.11",
+      "Programming Language :: Python :: 3.12",
+      "Programming Language :: Python :: 3.13",
+      "Programming Language :: Python :: 3.14",
+      "Programming Language :: Python :: 3.15",
+      "Programming Language :: Python :: Implementation :: CPython",
+      "Programming Language :: Python :: Implementation :: PyPy",
+      "Topic :: Multimedia :: Graphics",
+      "Topic :: Multimedia :: Graphics :: Capture :: Digital Camera",
+      "Topic :: Multimedia :: Graphics :: Capture :: Screen Capture",
+      "Topic :: Multimedia :: Graphics :: Graphics Conversion",
+      "Topic :: Multimedia :: Graphics :: Viewers",
+      "Typing :: Typed"
+    ],
+    "wheel": "pillow-13.0.0-cp313-cp313-win_amd64.whl",
+    "sha256": "9dda0788a9932776a75d8bcc020076edc308ce2508b51f6739a45e3158b3fc42",
+    "licenses": [
+      "docs\\dependency-licenses\\pillow-0-LICENSE"
+    ]
+  },
+  {
+    "name": "pyinstaller",
+    "version": "6.22.3",
+    "license": "GPLv2-or-later with a special exception which allows to use PyInstaller to build and distribute non-free programs (including commercial ones)",
+    "classifiers": [
+      "Development Status :: 6 - Mature",
+      "Environment :: Console",
+      "Intended Audience :: Developers",
+      "Intended Audience :: Other Audience",
+      "Intended Audience :: System Administrators",
+      "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+      "Natural Language :: English",
+      "Operating System :: MacOS :: MacOS X",
+      "Operating System :: Microsoft :: Windows",
+      "Operating System :: POSIX",
+      "Operating System :: POSIX :: AIX",
+      "Operating System :: POSIX :: BSD",
+      "Operating System :: POSIX :: Linux",
+      "Operating System :: POSIX :: SunOS/Solaris",
+      "Programming Language :: C",
+      "Programming Language :: Python",
+      "Programming Language :: Python :: 3",
+      "Programming Language :: Python :: 3 :: Only",
+      "Programming Language :: Python :: 3.8",
+      "Programming Language :: Python :: 3.9",
+      "Programming Language :: Python :: 3.10",
+      "Programming Language :: Python :: 3.11",
+      "Programming Language :: Python :: 3.12",
+      "Programming Language :: Python :: 3.13",
+      "Programming Language :: Python :: 3.14",
+      "Programming Language :: Python :: 3.15",
+      "Programming Language :: Python :: Implementation :: CPython",
+      "Topic :: Software Development",
+      "Topic :: Software Development :: Build Tools",
+      "Topic :: Software Development :: Interpreters",
+      "Topic :: Software Development :: Libraries :: Python Modules",
+      "Topic :: System :: Installation/Setup",
+      "Topic :: System :: Software Distribution",
+      "Topic :: Utilities"
+    ],
+    "wheel": "pyinstaller-6.22.3-py3-none-win_amd64.whl",
+    "sha256": "500bd58c7bf7e584a8435adccbd763a0b918d5c12b08d74ff50fd79b2915458b",
+    "licenses": [
+      "docs\\dependency-licenses\\pyinstaller-0-COPYING.txt"
+    ]
+  },
+  {
+    "name": "pyinstaller-hooks-contrib",
+    "version": "2026.9",
+    "license": null,
+    "classifiers": [
+      "Intended Audience :: Developers",
+      "Topic :: Software Development :: Build Tools",
+      "License :: OSI Approved :: Apache Software License",
+      "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+      "Natural Language :: English",
+      "Operating System :: OS Independent",
+      "Programming Language :: Python",
+      "Programming Language :: Python :: 3"
+    ],
+    "wheel": "pyinstaller_hooks_contrib-2026.9-py3-none-any.whl",
+    "sha256": "fb3e67dd64122561724c48ad0366ac9e8c16e638b63bf7d85de03bf3fdbf06c3",
+    "licenses": [
+      "docs\\dependency-licenses\\pyinstaller-hooks-contrib-0-LICENSE"
+    ]
+  },
+  {
+    "name": "pywin32",
+    "version": "311",
+    "license": "PSF",
+    "classifiers": [
+      "Environment :: Win32 (MS Windows)",
+      "Intended Audience :: Developers",
+      "License :: OSI Approved :: Python Software Foundation License",
+      "Development Status :: 5 - Production/Stable",
+      "Operating System :: Microsoft :: Windows",
+      "Programming Language :: Python :: 3.8",
+      "Programming Language :: Python :: 3.9",
+      "Programming Language :: Python :: 3.10",
+      "Programming Language :: Python :: 3.11",
+      "Programming Language :: Python :: 3.12",
+      "Programming Language :: Python :: 3.13",
+      "Programming Language :: Python :: 3.14",
+      "Programming Language :: Python :: Implementation :: CPython"
+    ],
+    "wheel": "pywin32-311-cp313-cp313-win_amd64.whl",
+    "sha256": "718a38f7e5b058e76aee1c56ddd06908116d35147e133427e59a3983f703a20d",
+    "licenses": [
+      "docs\\dependency-licenses\\pywin32-0-license.txt",
+      "docs\\dependency-licenses\\pywin32-1-license.txt",
+      "docs\\dependency-licenses\\pywin32-2-license.txt",
+      "docs\\dependency-licenses\\pywin32-3-License.txt"
+    ]
+  },
+  {
+    "name": "pywin32-ctypes",
+    "version": "0.2.3",
+    "license": "BSD-3-Clause",
+    "classifiers": [
+      "Programming Language :: Python :: 3",
+      "Programming Language :: Python :: 3.6",
+      "Programming Language :: Python :: 3.7",
+      "Programming Language :: Python :: 3.8",
+      "Programming Language :: Python :: 3.9",
+      "Programming Language :: Python :: 3.10",
+      "Programming Language :: Python :: 3.11"
+    ],
+    "wheel": "pywin32_ctypes-0.2.3-py3-none-any.whl",
+    "sha256": "8a1513379d709975552d202d942d9837758905c8d01eb82b8bcc30918929e7b8",
+    "licenses": [
+      "docs\\dependency-licenses\\pywin32-ctypes-0-LICENSE.txt"
+    ]
+  },
+  {
+    "name": "setuptools",
+    "version": "84.2.1",
+    "license": "MIT",
+    "classifiers": [
+      "Development Status :: 5 - Production/Stable",
+      "Intended Audience :: Developers",
+      "Programming Language :: Python :: 3",
+      "Programming Language :: Python :: 3 :: Only",
+      "Topic :: Software Development :: Libraries :: Python Modules",
+      "Topic :: System :: Archiving :: Packaging",
+      "Topic :: System :: Systems Administration",
+      "Topic :: Utilities"
+    ],
+    "wheel": "setuptools-84.2.1-py3-none-any.whl",
+    "sha256": "ca140b45d5325a9478f880e351484f62fef15f336462e449ca0c03c873d589c2",
+    "licenses": [
+      "docs\\dependency-licenses\\setuptools-0-LICENSE",
+      "docs\\dependency-licenses\\setuptools-1-LICENSE",
+      "docs\\dependency-licenses\\setuptools-2-LICENSE",
+      "docs\\dependency-licenses\\setuptools-3-LICENSE",
+      "docs\\dependency-licenses\\setuptools-4-__init__.py",
+      "docs\\dependency-licenses\\setuptools-5-_spdx.py",
+      "docs\\dependency-licenses\\setuptools-6-LICENSE",
+      "docs\\dependency-licenses\\setuptools-7-LICENSE.APACHE",
+      "docs\\dependency-licenses\\setuptools-8-LICENSE.BSD",
+      "docs\\dependency-licenses\\setuptools-9-LICENSE",
+      "docs\\dependency-licenses\\setuptools-10-LICENSE",
+      "docs\\dependency-licenses\\setuptools-11-LICENSE.txt",
+      "docs\\dependency-licenses\\setuptools-12-LICENSE",
+      "docs\\dependency-licenses\\setuptools-13-LICENSE",
+      "docs\\dependency-licenses\\setuptools-14-LICENSE",
+      "docs\\dependency-licenses\\setuptools-15-LICENSE",
+      "docs\\dependency-licenses\\setuptools-16-LICENSE"
+    ]
+  }
+]

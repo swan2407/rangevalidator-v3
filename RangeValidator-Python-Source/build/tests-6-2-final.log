@@ -1,0 +1,201 @@
+test_boundaries (test_analysis.AnalysisTests.test_boundaries) ... ok
+test_exceeding_width_and_duplicates_are_reviews (test_analysis.AnalysisTests.test_exceeding_width_and_duplicates_are_reviews) ... ok
+test_extern_tag (test_analysis.AnalysisTests.test_extern_tag) ... ok
+test_include_guard (test_analysis.AnalysisTests.test_include_guard) ... ok
+test_lexical_literals (test_analysis.AnalysisTests.test_lexical_literals) ... ok
+test_local_excluded (test_analysis.AnalysisTests.test_local_excluded) ... ok
+test_metadata_comments_multiline (test_analysis.AnalysisTests.test_metadata_comments_multiline) ... ok
+test_negative_00 (test_analysis.AnalysisTests.test_negative_00) ... ok
+test_negative_01 (test_analysis.AnalysisTests.test_negative_01) ... ok
+test_negative_02 (test_analysis.AnalysisTests.test_negative_02) ... ok
+test_negative_03 (test_analysis.AnalysisTests.test_negative_03) ... ok
+test_negative_04 (test_analysis.AnalysisTests.test_negative_04) ... ok
+test_negative_05 (test_analysis.AnalysisTests.test_negative_05) ... ok
+test_negative_06 (test_analysis.AnalysisTests.test_negative_06) ... ok
+test_nested_and_multiple_declarators (test_analysis.AnalysisTests.test_nested_and_multiple_declarators) ... ok
+test_ordinary_member_excluded (test_analysis.AnalysisTests.test_ordinary_member_excluded) ... ok
+test_pointer_object (test_analysis.AnalysisTests.test_pointer_object) ... ok
+test_preprocessor_and_functions_tolerated (test_analysis.AnalysisTests.test_preprocessor_and_functions_tolerated) ... ok
+test_type_identity (test_analysis.AnalysisTests.test_type_identity) ... ok
+test_typedef_dictionary_chain (test_analysis.AnalysisTests.test_typedef_dictionary_chain) ... ok
+test_uint (test_analysis.AnalysisTests.test_uint) ... ok
+test_unresolved_width_is_per_member (test_analysis.AnalysisTests.test_unresolved_width_is_per_member) ... ok
+test_width_macro_and_expression (test_analysis.AnalysisTests.test_width_macro_and_expression) ... ok
+test_anonymous_and_tagged_typedefs_keep_independent_members (test_bitfield_catalog.BitfieldCatalogTests.test_anonymous_and_tagged_typedefs_keep_independent_members) ... ok
+test_common_header_identity_and_local_typedef_shadow (test_bitfield_catalog.BitfieldCatalogTests.test_common_header_identity_and_local_typedef_shadow) ... ok
+test_conditional_definitions_and_macros_are_uncertain (test_bitfield_catalog.BitfieldCatalogTests.test_conditional_definitions_and_macros_are_uncertain) ... ok
+test_conditional_include_cannot_certify_type_or_macro (test_bitfield_catalog.BitfieldCatalogTests.test_conditional_include_cannot_certify_type_or_macro) ... ok
+test_conflicting_integer_typedef_in_visible_headers (test_bitfield_catalog.BitfieldCatalogTests.test_conflicting_integer_typedef_in_visible_headers) ... ok
+test_conflicting_translation_units_stay_distinct (test_bitfield_catalog.BitfieldCatalogTests.test_conflicting_translation_units_stay_distinct) ... ok
+test_links_distributed_definitions_aliases_and_integer_types (test_bitfield_catalog.BitfieldCatalogTests.test_links_distributed_definitions_aliases_and_integer_types) ... ok
+test_missing_input_is_recorded (test_bitfield_catalog.BitfieldCatalogTests.test_missing_input_is_recorded) ... ok
+test_unresolved_declarations_do_not_block_good_fields (test_bitfield_catalog.BitfieldCatalogTests.test_unresolved_declarations_do_not_block_good_fields) ... ok
+test_common_alias_is_ignored_even_in_real_source_context (test_catalog_comparison.CatalogComparisonTests.test_common_alias_is_ignored_even_in_real_source_context) ... ok
+test_conditional_variable_after_a_spliced_line (test_catalog_comparison.CatalogComparisonTests.test_conditional_variable_after_a_spliced_line) ... ok
+test_context_distinguishes_conflicting_source_declarations (test_catalog_comparison.CatalogComparisonTests.test_context_distinguishes_conflicting_source_declarations) ... ok
+test_filters_candidates_and_preserves_range_decisions (test_catalog_comparison.CatalogComparisonTests.test_filters_candidates_and_preserves_range_decisions) ... ok
+test_range_formula_and_non_anchor_merge_still_block_candidates (test_catalog_comparison.CatalogComparisonTests.test_range_formula_and_non_anchor_merge_still_block_candidates) ... ok
+test_reuses_catalog_for_multiple_documents (test_catalog_comparison.CatalogComparisonTests.test_reuses_catalog_for_multiple_documents) ... ok
+test_analyze_and_error_json (test_cli_fixtures.CliTests.test_analyze_and_error_json) ... ok
+test_original_matching_fixture (test_cli_fixtures.V1FixtureTests.test_original_matching_fixture) ... ok
+test_original_range_fixture (test_cli_fixtures.V1FixtureTests.test_original_range_fixture) ... ok
+test_actual_large_five_column_sheet (test_com_reference.ActualExcelTests.test_actual_large_five_column_sheet) ... skipped 'Actual Excel opt-in required'
+test_common_ab_multifile_engine_and_preserve (test_com_reference.ActualExcelTests.test_common_ab_multifile_engine_and_preserve) ... skipped 'Actual Excel opt-in required'
+test_both_fail_empty (test_com_reference.BoundsTests.test_both_fail_empty) ... ok
+test_column_find_failure_uses_usedrange_cap (test_com_reference.BoundsTests.test_column_find_failure_uses_usedrange_cap) ... ok
+test_find_both_ok (test_com_reference.BoundsTests.test_find_both_ok) ... ok
+test_phantom_empty_string_cells_do_not_extend_bounds (test_com_reference.BoundsTests.test_phantom_empty_string_cells_do_not_extend_bounds) ... ok
+test_row_find_failure_uses_usedrange_cap (test_com_reference.BoundsTests.test_row_find_failure_uses_usedrange_cap) ... ok
+test_values_formulas_merges (test_com_reference.BoundsTests.test_values_formulas_merges) ... ok
+test_bulk_values_formula_and_hidden (test_com_reference.ReaderTests.test_bulk_values_formula_and_hidden) ... ok
+test_cleanup_failures_retained (test_com_reference.ReaderTests.test_cleanup_failures_retained) ... ok
+test_find_hresult_sheet_name_and_fallback_bounds (test_com_reference.ReaderTests.test_find_hresult_sheet_name_and_fallback_bounds) ... ok
+test_large_bulk_read (test_com_reference.ReaderTests.test_large_bulk_read) ... ok
+test_merges_restored (test_com_reference.ReaderTests.test_merges_restored) ... ok
+test_open_none_exact_fullpath (test_com_reference.ReaderTests.test_open_none_exact_fullpath) ... ok
+test_open_none_same_basename_other_path_rejected (test_com_reference.ReaderTests.test_open_none_same_basename_other_path_rejected) ... ok
+test_security_open_failure_cleanup (test_com_reference.ReaderTests.test_security_open_failure_cleanup) ... ok
+test_session_reuses_and_closes (test_com_reference.ReaderTests.test_session_reuses_and_closes) ... ok
+test_blank_forms_create_and_nonblank_decisions_are_preserved (test_create.CreateTests.test_blank_forms_create_and_nonblank_decisions_are_preserved) ... ok
+test_create_mismatch_and_manual_review_save_together (test_create.CreateTests.test_create_mismatch_and_manual_review_save_together) ... ok
+test_formula_merge_and_partial_evidence_cannot_create (test_create.CreateTests.test_formula_merge_and_partial_evidence_cannot_create) ... ok
+test_unresolved_types_and_non_bitfields_do_not_create (test_create.CreateTests.test_unresolved_types_and_non_bitfields_do_not_create) ... ok
+test_duplicate_headers (test_design.DesignTests.test_duplicate_headers) ... ok
+test_headers_both_formats_coordinates (test_design.DesignTests.test_headers_both_formats_coordinates) ... ok
+test_numeric_policy (test_design.DesignTests.test_numeric_policy) ... ok
+test_ordinary_skip (test_design.DesignTests.test_ordinary_skip) ... ok
+test_partial_table_terminates (test_design.DesignTests.test_partial_table_terminates) ... ok
+test_type_contradiction (test_design.DesignTests.test_type_contradiction) ... ok
+test_unsafe_data_headers (test_design.DesignTests.test_unsafe_data_headers) ... ok
+test_failed_read_retains_object_and_last_result (test_diagnostics.DiagnosticGuiTests.test_failed_read_retains_object_and_last_result) ... ok
+test_failure_window_reopen_and_copy (test_diagnostics.DiagnosticGuiTests.test_failure_window_reopen_and_copy) ... ok
+test_log_view_remains_available_while_busy (test_diagnostics.DiagnosticGuiTests.test_log_view_remains_available_while_busy) ... ok
+test_view_button_scroll_and_zoom (test_diagnostics.DiagnosticGuiTests.test_view_button_scroll_and_zoom) ... ok
+test_cleanup_failure_hresults_retained (test_diagnostics.DiagnosticLogTests.test_cleanup_failure_hresults_retained) ... ok
+test_com_cell_failure_log_formats_coordinate_and_sheet_name (test_diagnostics.DiagnosticLogTests.test_com_cell_failure_log_formats_coordinate_and_sheet_name) ... ok
+test_fallback_records_both_outcomes_without_drm_claim (test_diagnostics.DiagnosticLogTests.test_fallback_records_both_outcomes_without_drm_claim) ... ok
+test_find_and_value2_failure_api (test_diagnostics.DiagnosticLogTests.test_find_and_value2_failure_api) ... ok
+test_masking_is_closed_by_default (test_diagnostics.DiagnosticLogTests.test_masking_is_closed_by_default) ... ok
+test_native_extract_failure_last_success (test_diagnostics.DiagnosticLogTests.test_native_extract_failure_last_success) ... ok
+test_native_success_missing_and_no_modification (test_diagnostics.DiagnosticLogTests.test_native_success_missing_and_no_modification) ... ok
+test_open_failure_primary_and_cleanup_stages (test_diagnostics.DiagnosticLogTests.test_open_failure_primary_and_cleanup_stages) ... ok
+test_repeated_empty_find_retains_previous_success (test_diagnostics.DiagnosticLogTests.test_repeated_empty_find_retains_previous_success) ... ok
+test_review_log_has_sheet_cell_reason_but_not_cell_data_or_path (test_diagnostics.DiagnosticLogTests.test_review_log_has_sheet_cell_reason_but_not_cell_data_or_path) ... ok
+test_success_cannot_be_fabricated_after_failure (test_diagnostics.DiagnosticLogTests.test_success_cannot_be_fabricated_after_failure) ... ok
+test_success_transitions_and_completion (test_diagnostics.DiagnosticLogTests.test_success_transitions_and_completion) ... ok
+test_trace_never_changes_reader_calls_or_results (test_diagnostics.DiagnosticLogTests.test_trace_never_changes_reader_calls_or_results) ... ok
+test_diagnostic_header_displays_file_sheet_phase (test_drm_batch.BatchGuiTests.test_diagnostic_header_displays_file_sheet_phase) ... ok
+test_failed_document_selection_does_not_start_writer (test_drm_batch.BatchGuiTests.test_failed_document_selection_does_not_start_writer) ... ok
+test_file_error_table_and_counts (test_drm_batch.BatchGuiTests.test_file_error_table_and_counts) ... ok
+test_file_read_error_is_not_a_bitfield_review (test_drm_batch.BatchGuiTests.test_file_read_error_is_not_a_bitfield_review) ... ok
+test_empty_document_not_reported_as_variable_comparison (test_drm_batch.BatchWorkflowTests.test_empty_document_not_reported_as_variable_comparison) ... ok
+test_headers_only_unique_type_name_mismatch_is_editable (test_drm_batch.BatchWorkflowTests.test_headers_only_unique_type_name_mismatch_is_editable) ... ok
+test_normal_comparison_contains_real_bitfield_evidence (test_drm_batch.BatchWorkflowTests.test_normal_comparison_contains_real_bitfield_evidence) ... ok
+test_partial_com_workbook_keeps_results_but_blocks_all_saves (test_drm_batch.BatchWorkflowTests.test_partial_com_workbook_keeps_results_but_blocks_all_saves) ... ok
+test_partial_reader_failure_is_file_error_not_review (test_drm_batch.BatchWorkflowTests.test_partial_reader_failure_is_file_error_not_review) ... ok
+test_twenty_read_failures_never_become_twenty_bitfield_reviews (test_drm_batch.BatchWorkflowTests.test_twenty_read_failures_never_become_twenty_bitfield_reviews) ... ok
+test_cleanup_failure_is_not_a_successful_read (test_drm_batch.ComReadTests.test_cleanup_failure_is_not_a_successful_read) ... ok
+test_com_error_args_fallback_preserves_hresult (test_drm_batch.ComReadTests.test_com_error_args_fallback_preserves_hresult) ... ok
+test_disconnected_and_generic_not_retried (test_drm_batch.ComReadTests.test_disconnected_and_generic_not_retried) ... ok
+test_empty_find_is_success_not_error (test_drm_batch.ComReadTests.test_empty_find_is_success_not_error) ... ok
+test_find_failure_falls_back_to_usedrange_cap (test_drm_batch.ComReadTests.test_find_failure_falls_back_to_usedrange_cap) ... ok
+test_find_rejection_recovers_in_full_reader (test_drm_batch.ComReadTests.test_find_rejection_recovers_in_full_reader) ... ok
+test_mutating_apis_cannot_retry (test_drm_batch.ComReadTests.test_mutating_apis_cannot_retry) ... ok
+test_none_hresult_python_type_error_is_classified (test_drm_batch.ComReadTests.test_none_hresult_python_type_error_is_classified) ... ok
+test_rejected_exhausts_three_attempts (test_drm_batch.ComReadTests.test_rejected_exhausts_three_attempts) ... ok
+test_rejected_then_success_bounded_same_thread (test_drm_batch.ComReadTests.test_rejected_then_success_bounded_same_thread) ... ok
+test_file_metadata_and_content_changes_do_not_block_save (test_file_state_removal.FileStateRemovalTests.test_file_metadata_and_content_changes_do_not_block_save) ... ok
+test_missing_inputs_still_fail (test_file_state_removal.FileStateRemovalTests.test_missing_inputs_still_fail) ... ok
+test_session_selection_and_source_integrity (test_file_state_removal.FileStateRemovalTests.test_session_selection_and_source_integrity) ... ok
+test_writer_checks_original_cell_and_refuses_overwrite (test_file_state_removal.FileStateRemovalTests.test_writer_checks_original_cell_and_refuses_overwrite) ... ok
+test_conflicting_prototype_and_conditional_definition_are_uncertain (test_function_scope.FunctionScopeTests.test_conflicting_prototype_and_conditional_definition_are_uncertain) ... ok
+test_function_and_block_shadowing (test_function_scope.FunctionScopeTests.test_function_and_block_shadowing) ... ok
+test_member_exclusion_precedes_access_operator (test_function_scope.FunctionScopeTests.test_member_exclusion_precedes_access_operator) ... ok
+test_parameters_and_locals_with_header_prototype (test_function_scope.FunctionScopeTests.test_parameters_and_locals_with_header_prototype) ... ok
+test_same_static_function_in_two_translation_units (test_function_scope.FunctionScopeTests.test_same_static_function_in_two_translation_units) ... ok
+test_unsupported_pointer_parameter_does_not_fall_back_to_global (test_function_scope.FunctionScopeTests.test_unsupported_pointer_parameter_does_not_fall_back_to_global) ... ok
+test_no_function_sheets (test_function_sheets.FunctionSheetTests.test_no_function_sheets) ... ok
+test_selects_names_and_preserves_decisions (test_function_sheets.FunctionSheetTests.test_selects_names_and_preserves_decisions) ... ok
+test_async_compare_selection_and_invalidation (test_gui.GuiTests.test_async_compare_selection_and_invalidation) ... skipped 'Tk GUI opt-in required'
+test_close_waits_for_worker_cleanup (test_gui.GuiTests.test_close_waits_for_worker_cleanup) ... skipped 'Tk GUI opt-in required'
+test_com_failure_auto_log_and_masking (test_gui.GuiTests.test_com_failure_auto_log_and_masking) ... skipped 'Tk GUI opt-in required'
+test_pagination_preserves_access_to_all_results (test_gui.GuiTests.test_pagination_preserves_access_to_all_results) ... skipped 'Tk GUI opt-in required'
+test_report_only_worker (test_gui.GuiTests.test_report_only_worker) ... skipped 'Tk GUI opt-in required'
+test_analysis_progress_uses_catalog_and_workbook_operations (test_gui_progress.ProgressTests.test_analysis_progress_uses_catalog_and_workbook_operations) ... ok
+test_folder_scan_and_registration_are_limited_to_supported_sources (test_gui_progress.ProgressTests.test_folder_scan_and_registration_are_limited_to_supported_sources) ... ok
+test_only_successful_completion_sets_one_hundred (test_gui_progress.ProgressTests.test_only_successful_completion_sets_one_hundred) ... ok
+test_start_resets_progress_and_report_success_finishes (test_gui_progress.ProgressTests.test_start_resets_progress_and_report_success_finishes) ... ok
+test_worker_progress_only_enqueues_and_display_never_regresses (test_gui_progress.ProgressTests.test_worker_progress_only_enqueues_and_display_never_regresses) ... ok
+test_automatic_and_manual_share_save_without_changing_analysis (test_manual_edits.ManualWriterTests.test_automatic_and_manual_share_save_without_changing_analysis) ... ok
+test_invalid_empty_noop_and_duplicate_requests_do_not_block_automatic (test_manual_edits.ManualWriterTests.test_invalid_empty_noop_and_duplicate_requests_do_not_block_automatic) ... ok
+test_manual_only_save_does_not_require_automatic_candidates (test_manual_edits.ManualWriterTests.test_manual_only_save_does_not_require_automatic_candidates) ... ok
+test_manual_preflight_still_checks_formula_merge_and_old_value (test_manual_edits.ManualWriterTests.test_manual_preflight_still_checks_formula_merge_and_old_value) ... ok
+test_nonfunction_foreign_and_partial_requests_cannot_write (test_manual_edits.ManualWriterTests.test_nonfunction_foreign_and_partial_requests_cannot_write) ... ok
+test_common_declaration_metadata (test_pipeline.PipelineTests.test_common_declaration_metadata) ... ok
+test_cp949_header_encoding_auto (test_pipeline.PipelineTests.test_cp949_header_encoding_auto) ... ok
+test_explicit_context_is_advisory (test_pipeline.PipelineTests.test_explicit_context_is_advisory) ... ok
+test_filename_rules (test_pipeline.PipelineTests.test_filename_rules) ... ok
+test_invalid_and_foreign_selection_blocked (test_pipeline.PipelineTests.test_invalid_and_foreign_selection_blocked) ... ok
+test_literal_decisions_both_formats (test_pipeline.PipelineTests.test_literal_decisions_both_formats) ... ok
+test_native_error_fallback_contract (test_pipeline.PipelineTests.test_native_error_fallback_contract) ... ok
+test_partial_detail_failure_isolated (test_pipeline.PipelineTests.test_partial_detail_failure_isolated) ... ok
+test_preprocessor_does_not_block (test_pipeline.PipelineTests.test_preprocessor_does_not_block) ... ok
+test_qualifier_array_negative (test_pipeline.PipelineTests.test_qualifier_array_negative) ... ok
+test_report_literal_and_all_sheets (test_pipeline.PipelineTests.test_report_literal_and_all_sheets) ... ok
+test_sections_exclude_macro_struct_calibration (test_pipeline.PipelineTests.test_sections_exclude_macro_struct_calibration) ... ok
+test_session_tampering_blocked (test_pipeline.PipelineTests.test_session_tampering_blocked) ... ok
+test_unknown_sheet_is_reported_not_blocking (test_pipeline.PipelineTests.test_unknown_sheet_is_reported_not_blocking) ... ok
+test_unrelated_header_type_is_isolated (test_pipeline.PipelineTests.test_unrelated_header_type_is_isolated) ... ok
+test_com_only_evidence_never_reports_protection_verified (test_pipeline.WriterIntegrationTests.test_com_only_evidence_never_reports_protection_verified) ... skipped 'Actual Excel opt-in required'
+test_com_saveas_selected_preservation (test_pipeline.WriterIntegrationTests.test_com_saveas_selected_preservation) ... skipped 'Actual Excel opt-in required'
+test_per_file_failure_continues (test_pipeline.WriterIntegrationTests.test_per_file_failure_continues) ... skipped 'Actual Excel opt-in required'
+test_reader_semantic_decisions_equal (test_pipeline.WriterIntegrationTests.test_reader_semantic_decisions_equal) ... skipped 'Actual Excel opt-in required'
+test_owned_process_timeout_reported (test_readers.ComCleanupExtraTests.test_owned_process_timeout_reported) ... ok
+test_path_validation_before_dispatch (test_readers.ComCleanupExtraTests.test_path_validation_before_dispatch) ... ok
+test_primary_failure_retains_cleanup_error (test_readers.ComCleanupExtraTests.test_primary_failure_retains_cleanup_error) ... ok
+test_cleanup_failures_independent (test_readers.ComContractTests.test_cleanup_failures_independent) ... ok
+test_empty_and_budget (test_readers.ComContractTests.test_empty_and_budget) ... ok
+test_error_stages_and_cleanup (test_readers.ComContractTests.test_error_stages_and_cleanup) ... ok
+test_extraction_failure_marks_partial (test_readers.ComContractTests.test_extraction_failure_marks_partial) ... ok
+test_success_contract (test_readers.ComContractTests.test_success_contract) ... ok
+test_real_excel_synthetic_readonly (test_readers.ExcelIntegrationTests.test_real_excel_synthetic_readonly) ... skipped 'Explicit RV_TEST_EXCEL=1 and Excel/pywin32 required'
+test_existing_instance_preserved_and_owned_exits (test_readers.ExcelLifecycleTests.test_existing_instance_preserved_and_owned_exits) ... skipped 'Explicit Excel integration opt-in required'
+test_missing_corrupt_paths (test_readers.ExcelLifecycleTests.test_missing_corrupt_paths) ... skipped 'Explicit Excel integration opt-in required'
+test_mta_refused (test_readers.ExcelLifecycleTests.test_mta_refused) ... skipped 'Explicit Excel integration opt-in required'
+test_shared_value_semantics (test_readers.ExcelLifecycleTests.test_shared_value_semantics) ... skipped 'Explicit Excel integration opt-in required'
+test_actual_far_data_budget (test_readers.OpenpyxlTests.test_actual_far_data_budget) ... ok
+test_budgets (test_readers.OpenpyxlTests.test_budgets) ... ok
+test_missing_corrupt_no_com_fallback (test_readers.OpenpyxlTests.test_missing_corrupt_no_com_fallback) ... ok
+test_os_denied (test_readers.OpenpyxlTests.test_os_denied) ... ok
+test_read_metadata_preserve (test_readers.OpenpyxlTests.test_read_metadata_preserve) ... ok
+test_code (test_readers.PathTests.test_code) ... ok
+test_explicit_backend (test_readers.PathTests.test_explicit_backend) ... ok
+test_invalid_paths (test_readers.PathTests.test_invalid_paths) ... ok
+test_path_normalization (test_readers.PathTests.test_path_normalization) ... ok
+test_empty_report_and_unselected_draft_are_safe (test_report_layout.ReportTests.test_empty_report_and_unselected_draft_are_safe) ... ok
+test_histories_filters_manual_value_and_original_reason (test_report_layout.ReportTests.test_histories_filters_manual_value_and_original_reason) ... ok
+test_summary_counts_paths_and_read_errors (test_report_layout.ReportTests.test_summary_counts_paths_and_read_errors) ... ok
+test_create_filter_counts_and_selection_preserve_manual_requests (test_result_browse.ResultBrowseTests.test_create_filter_counts_and_selection_preserve_manual_requests) ... ok
+test_index_groups_counts_and_partial_errors_by_full_path (test_result_browse.ResultBrowseTests.test_index_groups_counts_and_partial_errors_by_full_path) ... ok
+test_navigation_filters_search_and_selection_use_stable_ids (test_result_browse.ResultBrowseTests.test_navigation_filters_search_and_selection_use_stable_ids) ... ok
+test_review_input_and_selection_survive_navigation (test_result_browse.ResultBrowseTests.test_review_input_and_selection_survive_navigation) ... ok
+test_tree_shows_read_errors_without_synthetic_result_rows (test_result_browse.ResultBrowseTests.test_tree_shows_read_errors_without_synthetic_result_rows) ... ok
+test_gui_uses_file_status_and_cell_counts (test_save_display.SaveDisplayTests.test_gui_uses_file_status_and_cell_counts) ... ok
+test_report_retains_raw_status_labels_counts_and_warnings (test_save_display.SaveDisplayTests.test_report_retains_raw_status_labels_counts_and_warnings) ... ok
+test_forward_declaration_extern_definition_and_access (test_variable_bindings.VariableBindingTests.test_forward_declaration_extern_definition_and_access) ... ok
+test_internal_linkage_and_distinct_translation_units (test_variable_bindings.VariableBindingTests.test_internal_linkage_and_distinct_translation_units) ... ok
+test_shared_extern_conflict_and_pointer_typedef_conflict (test_variable_bindings.VariableBindingTests.test_shared_extern_conflict_and_pointer_typedef_conflict) ... ok
+test_cell_evidence_and_cleanup_warning_are_preserved (test_writer_isolation.WriterIsolationTests.test_cell_evidence_and_cleanup_warning_are_preserved) ... ok
+test_com_write_failure_never_calls_saveas (test_writer_isolation.WriterIsolationTests.test_com_write_failure_never_calls_saveas) ... ok
+test_existing_output_and_partial_saveas_are_save_failures (test_writer_isolation.WriterIsolationTests.test_existing_output_and_partial_saveas_are_save_failures) ... ok
+test_fixed_path_preserves_suffix_and_existing_fixed_name (test_writer_isolation.WriterIsolationTests.test_fixed_path_preserves_suffix_and_existing_fixed_name) ... ok
+test_missing_sheet_and_invalid_address_are_local_but_com_failure_is_not (test_writer_isolation.WriterIsolationTests.test_missing_sheet_and_invalid_address_are_local_but_com_failure_is_not) ... ok
+test_partial_read_scopes (test_writer_isolation.WriterIsolationTests.test_partial_read_scopes) ... ok
+test_preflight_excludes_individual_cells_and_verifies_only_written_cells (test_writer_isolation.WriterIsolationTests.test_preflight_excludes_individual_cells_and_verifies_only_written_cells) ... ok
+test_reopen_failure_preserves_path_and_does_not_retry (test_writer_isolation.WriterIsolationTests.test_reopen_failure_preserves_path_and_does_not_retry) ... ok
+test_selected_file_locks_and_saveas_failure_are_isolated (test_writer_isolation.WriterIsolationTests.test_selected_file_locks_and_saveas_failure_are_isolated) ... ok
+
+----------------------------------------------------------------------
+Ran 196 tests in 17.464s
+
+OK (skipped=16)
