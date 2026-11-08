@@ -2,6 +2,7 @@ from dataclasses import replace
 import hashlib
 import os
 from pathlib import Path
+import re
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -16,6 +17,21 @@ except ImportError:
 
 def snapshot(path):
     return hashlib.sha256(path.read_bytes()).hexdigest(), path.stat().st_mtime_ns
+
+
+def range_ends(cells, first, last):
+    """Resolve both Range overloads exposed by the real Excel worksheet."""
+    if not isinstance(first, str):
+        return first, last
+    endpoints = first.split(':')
+    resolved = []
+    for address in endpoints:
+        letters, row = re.fullmatch(r'([A-Z]+)([0-9]+)', address).groups()
+        column = 0
+        for letter in letters:
+            column = column * 26 + ord(letter) - 64
+        resolved.append(cells.Item(int(row), column))
+    return resolved[0], resolved[-1]
 
 
 def fixture(path):
@@ -171,8 +187,11 @@ class FakeSheet:
         self.Cells = FakeCells(runtime)
         from types import SimpleNamespace as NS
         self.UsedRange = NS(Row=1, Column=1, Rows=NS(Count=1), Columns=NS(Count=1))
-    def Range(self, first, last):
+    def Range(self, first, last=None):
         from types import SimpleNamespace as NS
+        if isinstance(first, str) and ':' not in first:
+            return range_ends(self.Cells, first, last)[0]
+        first, last = range_ends(self.Cells, first, last)
         values=tuple(tuple(self.Cells.Item(r,c).Value2 for c in range(first.Column,last.Column+1)) for r in range(first.Row,last.Row+1))
         formulas=tuple(tuple(self.Cells.Item(r,c).Formula or self.Cells.Item(r,c).Value2 for c in range(first.Column,last.Column+1)) for r in range(first.Row,last.Row+1))
         return NS(Value2=values,Formula=formulas,MergeCells=None)

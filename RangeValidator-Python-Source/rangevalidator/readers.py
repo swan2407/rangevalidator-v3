@@ -39,6 +39,7 @@ def _merge(cell, ranges):
 
 
 def read_openpyxl(path, limits=ReaderLimits()):
+    from time import perf_counter
     stage, formula_book, value_book = 'path', None, None
     failure, result, cleanup = None, None, []
     try:
@@ -50,12 +51,17 @@ def read_openpyxl(path, limits=ReaderLimits()):
         stage = 'openpyxl.open'
         # Normal mode exposes merge metadata; input file handles are read-only.
         # Never call Workbook.save(). Separate load gets stored cached values.
+        tick = perf_counter()
         formula_book = load_workbook(p, read_only=False, data_only=False, keep_links=False)
         value_book = load_workbook(p, read_only=False, data_only=True, keep_links=False)
+        open_seconds = perf_counter() - tick
         stage = 'openpyxl.extract'
         if len(formula_book.worksheets) > limits.max_sheets:
             raise ValueError('Sheet budget exceeded')
         result = Workbook(str(p), 'openpyxl')
+        result.source_sheet_count = len(formula_book.worksheets)
+        result.read_timings['open_seconds'] = open_seconds
+        tick = perf_counter()
         total, text = 0, 0
         for ws in formula_book.worksheets:
             values = value_book[ws.title]
@@ -94,6 +100,7 @@ def read_openpyxl(path, limits=ReaderLimits()):
                             raise ValueError('Text budget exceeded')
                         sheet.cells[cell.address] = cell
             result.sheets.append(sheet)
+        result.read_timings['body_read_seconds'] = perf_counter() - tick
     except Exception as exc:
         failure = ReadFailure(stage, exc)
     finally:
@@ -131,6 +138,18 @@ class Win32Runtime:
 
     def dispatch(self):
         return self.client.DispatchEx('Excel.Application')
+
+    def dispatch_owned(self):
+        """Prove this Reader can safely configure and later quit the new process."""
+        existing = self.process_ids()
+        app = self.dispatch()
+        try:
+            pid = self.pid(app)
+            if not pid or pid in existing:
+                raise RuntimeError('Cannot prove new Excel ownership')
+        except Exception as exc:
+            raise ReadFailure('com.instance.verify', exc) from None
+        return app, pid
 
     def pid(self, app):
         return self.process.GetWindowThreadProcessId(app.Hwnd)[1]
@@ -172,9 +191,10 @@ def _merge_coordinates(region):
     return bounds
 
 
-def read_com(path, limits=ReaderLimits(), *, _runtime=None, _trace=None):
+def read_com(path, limits=ReaderLimits(), *, _runtime=None, _trace=None, function_sheets_only=False):
     from .com_values import read_workbook_values
-    return read_workbook_values(path, limits, _runtime=_runtime, _trace=_trace)
+    return read_workbook_values(path, limits, _runtime=_runtime, _trace=_trace,
+                                function_sheets_only=function_sheets_only)
 
 
 def read_workbook(path, backend='openpyxl', limits=ReaderLimits()):
@@ -186,7 +206,7 @@ def read_workbook(path, backend='openpyxl', limits=ReaderLimits()):
 
 
 
-def read_auto(path, limits=ReaderLimits(), diagnostics=None):
+def read_auto(path, limits=ReaderLimits(), diagnostics=None, *, function_sheets_only=False):
     """Native failure is only a backend failure, never a DRM diagnosis."""
     if diagnostics:
         diagnostics.emit('openpyxl','openpyxl.open')
@@ -205,4 +225,6 @@ def read_auto(path, limits=ReaderLimits(), diagnostics=None):
             raise
         if diagnostics:
             diagnostics.emit('COM','fallback','ENTER',message='Native Reader failed; DRM status unknown')
+        if function_sheets_only:
+            return read_com(path,limits,_trace=diagnostics,function_sheets_only=True)
         return read_com(path,limits,_trace=diagnostics)

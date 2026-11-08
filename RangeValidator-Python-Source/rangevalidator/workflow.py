@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import uuid
+from time import perf_counter
 from .diagnostics import Diagnostics
 from .engine import catalog_headers, compare_book, is_function_sheet
 from .readers import read_auto, read_workbook, read_com
@@ -59,6 +60,7 @@ class Session:
     books: dict = field(default_factory=dict,repr=False)
     files: list[FileStatus] = field(default_factory=list)
     catalog_summary: dict = field(default_factory=dict)
+    excel1_timings: dict = field(default_factory=dict, repr=False)
     _signature: str = ''
 
     def signature(self):
@@ -89,8 +91,8 @@ def _run_comparison(headers,details,backend='auto',encoding='utf-8-sig',diagnost
         role,index=roles[path];diag.set_context(input_role=role,file_index=index,sheet_index=0,row=0,column=0,sheet_name='')
     def read(path):
         context(path)
-        if backend=='auto':book=read_auto(path,diagnostics=diag)
-        elif backend=='com':book=read_com(path,_trace=diag)
+        if backend=='auto':book=read_auto(path,diagnostics=diag,function_sheets_only=True)
+        elif backend=='com':book=read_com(path,_trace=diag,function_sheets_only=True)
         else:
             book=read_workbook(path,backend);diag.emit(backend,'read.complete','OK')
         s.readers[path]=book.backend;s.books[path]=book
@@ -105,6 +107,7 @@ def _run_comparison(headers,details,backend='auto',encoding='utf-8-sig',diagnost
         ctx=getattr(exc,'context',{})
         from .error_info import classify_error
         item=dict(file=path,stage=stage,api=api,code=code,exception_type=typename,error_class=getattr(exc,'error_class',classify_error(code,typename)),error_kind=kind,
+                  inner_hresult=getattr(exc,'inner_hresult',None),
                   file_index=roles[path][1],sheet_index=ctx.get('sheet_index',0),search_phase=ctx.get('search_phase',''),
                   reason=kind+': see file execution status; DRM status unknown')
         s.errors.append(item)
@@ -125,17 +128,22 @@ def _run_comparison(headers,details,backend='auto',encoding='utf-8-sig',diagnost
     for path, record in zip(det, s.files):
         name = Path(path).name
         advance(f'Excel 열기·시트 읽기 중 — {name}')
+        read_started = perf_counter()
         try:
             book=read(path);record.read_status='SUCCESS';record.reader=book.backend
         except Exception as exc:
+            s.excel1_timings[path] = {'read_total_seconds': perf_counter() - read_started}
             record.reader=getattr(exc,'backend','') or ('com' if str(getattr(exc,'stage','')).startswith('com.') else backend)
             s.readers[path]=record.reader
             item=error(path,exc,'READ_ERROR');record.read_status='FAILED';record.status='ERROR';record.error_kind='READ_ERROR'
             for attr,k in (('failed_api','api'),('failed_stage','stage'),('code','code'),('exception_type','exception_type'),('error_class','error_class'),('sheet_index','sheet_index'),('search_phase','search_phase')):setattr(record,attr,item[k])
             record.reason='Document read failed; comparison not performed'
             continue
+        s.excel1_timings[path] = {'read_total_seconds': perf_counter() - read_started,
+                                  **book.read_timings}
         completed += 1
         advance(f'Excel 함수 시트 범위 비교 중 — {name}')
+        comparison_started = perf_counter()
         try:
             relative=str(Path(path).relative_to(common_root)) if common_root else Path(path).name
             result,coverage=compare_book(None,catalog,book,relative)
@@ -182,6 +190,8 @@ def _run_comparison(headers,details,backend='auto',encoding='utf-8-sig',diagnost
             diag.emit('native','comparison.result','OK',decision='ERROR',detail=record.reason)
         else:
             completed += 1
+        finally:
+            s.excel1_timings[path]['comparison_seconds'] = perf_counter() - comparison_started
     advance('결과 집계 및 Excel 정리 중')
     s._signature=s.signature()
     return s

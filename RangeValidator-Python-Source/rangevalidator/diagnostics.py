@@ -6,7 +6,8 @@ import threading
 import uuid
 from .error_info import ERROR_CLASSES, classify_error
 
-STAGES = frozenset('''path backend cleanup fallback dependency.pywin32 dependency.openpyxl
+STAGES = frozenset('''SHEET_NAME_DISCOVERED SHEET_INCLUDED SHEET_EXCLUDED SHEET_BODY_READ_STARTED SHEET_BODY_READ_COMPLETED SHEET_BODY_READ_FAILED
+path backend cleanup fallback dependency.pywin32 dependency.openpyxl
 com.sheet.error com.cell.error com.cellwise com.bounds.find com.bounds.usedrange com.bounds.end com.bounds.final com.bounds.blocked com.merge.restored com.merge.skipped com.extract
 com.STA.initialize com.STA.uninitialize com.process.snapshot com.DispatchEx com.instance.verify
 com.security com.Workbooks.Open com.readonly.verify com.sheets com.Find com.cell com.Value2

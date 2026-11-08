@@ -10,7 +10,7 @@ from rangevalidator.com_values import _last_cell, _copy_sheet, excel_session, cl
 from rangevalidator.readers import read_com
 from rangevalidator.models import ReadFailure, ReaderLimits
 from rangevalidator.diagnostics import Diagnostics, format_event
-from test_readers import FakeRuntime, FakeCell, ComError, snapshot
+from test_readers import FakeRuntime, FakeCell, ComError, snapshot, range_ends
 
 
 class Cells:
@@ -43,8 +43,11 @@ class Sheet:
         self.formulas=formulas or {};self.merges=set(merges); self.fail_find=fail_find
         self.Cells=Cells(self);self.range_calls=0
         self.UsedRange=NS(Row=1,Column=1,Rows=NS(Count=max((r for r,c in self.data),default=1)),Columns=NS(Count=max((c for r,c in self.data),default=1)))
-    def Range(self, first,last):
+    def Range(self, first,last=None):
         self.range_calls+=1
+        if isinstance(first, str) and ':' not in first:
+            return range_ends(self.Cells, first, last)[0]
+        first, last = range_ends(self.Cells, first, last)
         values=tuple(tuple(self.data.get((r,c)) for c in range(first.Column,last.Column+1)) for r in range(first.Row,last.Row+1))
         formulas=tuple(tuple(self.formulas.get((r,c),self.data.get((r,c))) for c in range(first.Column,last.Column+1)) for r in range(first.Row,last.Row+1))
         return NS(Value2=values,Formula=formulas,MergeCells=None if self.merges else False)

@@ -4,7 +4,7 @@ from pathlib import Path
 import re
 from .analysis import analyze, identifier
 from .bitfield_catalog import BitfieldCatalog, build_bitfield_catalog
-from .common import key, rows, at, text, norm
+from .common import key, rows, at, text, norm, safe_header
 from .models import Cell
 
 
@@ -147,15 +147,6 @@ def source_context(path):
     if not stem.lower().endswith('.c'):
         stem += '.c'
     return key(str(p.parent / stem))
-
-
-def safe_header(c):
-    if c.is_formula or c.kind == 'error':
-        return False
-    if not c.merged_range:
-        return True
-    m = re.fullmatch(r'([A-Z]+)([0-9]+):([A-Z]+)([0-9]+)', c.merged_range)
-    return bool(m and m[2] == m[4] and c.merge_anchor == c.address)
 
 
 EXPR_RE = re.compile(r'\s*([A-Za-z_]\w*)\s*((?:\[[^\]]*\]\s*)*)((?:\s*(?:->|\.)\s*[A-Za-z_]\w*\s*(?:\[[^\]]*\]\s*)*)+)\s*\Z', re.ASCII)
@@ -335,26 +326,27 @@ def compare_book(common, catalog, book, relative_path=None):
     for sheet in book.sheets:
         if not is_function_sheet(sheet.name):
             continue
+        from .a_extraction import scan_a
+        from .b_extraction import scan_b
+        a_headers, _, a_candidates = scan_a(sheet)
+        a_rows = {c['row'] for c in a_candidates if c['range_cell'] is not None}
         table = rows(sheet)
+        b_headers, _, b_candidates = scan_b(sheet, table)
+        b_rows = {c['row'] for c in b_candidates if c['range_cell'] is not None}
         headers, issues = {}, []
         for row, cs in table.items():
             labels = {}
             for c in cs:
                 labels.setdefault(norm(c), []).append(c)
-            found = []
-            for fmt, keys in [('A',('name','type','range')), ('B',('input/output','property','name','data type','scope'))]:
-                if all(k in labels for k in keys):
-                    found.append((fmt,keys))
-            if found:
-                if len(found) != 1:
+            if row in a_headers:
+                ah = a_headers[row]
+                headers[row] = ('B',[ah[k] for k in ('name','datatype','scope')],
+                                [ah[k] for k in ('input/output','property')])
+                if row in b_headers or all(k in labels for k in ('name','type','range')):
                     issues.append('Conflicting A/B header')
-                    continue
-                fmt,keys = found[0]
-                if any(len(labels[k]) != 1 or not safe_header(labels[k][0]) for k in keys):
-                    issues.append('Duplicate/unsafe header')
-                    continue
-                names = ('name','type','range') if fmt == 'A' else ('name','data type','scope')
-                headers[row] = (fmt,[labels[k][0] for k in names],[labels[k][0] for k in ('input/output','property')] if fmt == 'B' else [])
+                continue
+            if row in b_headers:
+                headers[row] = ('A',[b_headers[row][k] for k in ('name','type','range')],[])
             else:
                 potential = len({'name','type','range'} & set(labels)) >= 2 or len({'input/output','property','name','data type','scope'} & set(labels)) >= 4
                 if potential and any(c.is_formula or c.kind == 'error' for c in cs):
@@ -388,6 +380,10 @@ def compare_book(common, catalog, book, relative_path=None):
             if header is None or section == 'calibration':
                 continue
             fmt,h,classification = header
+            if fmt == 'B' and row not in a_rows:
+                continue
+            if fmt == 'A' and row not in b_rows:
+                continue
             nc,tc,rc = [at(sheet,row,c.column) for c in h]
             if fmt == 'A' and (norm(nc),norm(tc),norm(rc)) == ('name','type','value'):
                 header = None

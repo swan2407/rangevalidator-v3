@@ -35,6 +35,15 @@ def unsafe(c):
     return c.is_formula or c.merged_range is not None or c.kind == 'error'
 
 
+def safe_header(c):
+    if c.is_formula or c.kind == 'error':
+        return False
+    if not c.merged_range:
+        return True
+    match = re.fullmatch(r'([A-Z]+)([0-9]+):([A-Z]+)([0-9]+)', c.merged_range)
+    return bool(match and match[2] == match[4] and c.merge_anchor == c.address)
+
+
 @dataclass
 class Declaration:
     source_file: str

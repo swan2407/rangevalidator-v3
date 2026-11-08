@@ -33,6 +33,10 @@ class Workbook:
     sheets: list[Sheet] = field(default_factory=list)
     partial: bool = False
     read_errors: list[dict] = field(default_factory=list)
+    source_sheet_count: int | None = field(default=None, compare=False)
+    # Observational timings for Excel-1 diagnostics; comparison does not use them.
+    read_timings: dict[str, float] = field(default_factory=dict, compare=False)
+    sheet_observations: list[dict] = field(default_factory=list, compare=False)
 
 
 @dataclass(frozen=True)
