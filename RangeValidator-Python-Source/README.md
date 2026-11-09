@@ -22,6 +22,21 @@ Python/pip/MSYS2 설치는 필요하지 않습니다. COM에는 설치·인증�
 실제 회사 DRM 파일의 읽기/거부/출력 보호 유지는 **미검증**입니다.
 저장 상태 `SAVED_VERIFIED`는 수정한 셀의 값 검증 결과입니다. DRM 적용 여부는 별도로 확인해야 합니다.
 
+## DirectCompare 최종 Windows 배포판
+
+[Windows x64 배포 ZIP](dist/RangeValidator-DirectCompare-final-Windows-x64.zip)을 풀고
+`RangeValidator-DirectCompare-final-Windows-x64.exe`를 실행하세요. Python 설치가 필요 없는 단일 EXE입니다.
+비교 결과에서 파일별 오류와 간단한 REVIEW 사유를 확인할 수 있고, 진행률 옆에 경과 시간과 최종 소요 시간을 표시합니다.
+
+이 배포판은 아래 명령으로 실행하거나 다시 빌드할 수 있습니다. 빌드 도구는 Windows CPython 3.13 x64에 설치합니다.
+
+```powershell
+py -3.13 -m pip install openpyxl==3.1.5 pywin32==312 PyInstaller==6.22.3
+py -3.13 run_gui.py
+py -3.13 run_gui.py --selftest
+py -3.13 -m PyInstaller --distpath dist --workpath build/directcompare-final tools/RangeValidator-DirectCompare-final-Windows-x64.spec
+```
+
 ## 개발 실행
 
 GUI, 테스트, 패키지 설치와 EXE 빌드에는 Tcl/Tk가 포함된 **Windows CPython 3.13 x64**를 사용합니다.
