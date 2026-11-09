@@ -1,0 +1,9 @@
+{
+  "backend": "com",
+  "rows": 34,
+  "same_rows_and_decisions": true,
+  "production_counts": {
+    "MATCH": 14,
+    "REVIEW": 14
+  }
+}

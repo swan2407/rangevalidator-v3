@@ -14,6 +14,17 @@ def norm(c):
     return ' '.join(text(c).split()).casefold()
 
 
+def normalize_member_expression(value):
+    """Ignore spacing around member operators and subscripts, retaining identifier boundaries."""
+    value = re.sub(r'-\s*>', '->', value.strip())
+    return re.sub(r'\s*(->|[.\[\]])\s*', r'\1', value)
+
+
+def sheet_function_name(name):
+    """Remove the conventional numeric prefix when it precedes a function name."""
+    return re.sub(r'^\s*\d+\.\s*', '', name, count=1).strip() or name.strip()
+
+
 def key(s):
     return posixpath.normpath(str(s).strip().replace('\\', '/')).lower() if str(s).strip() else ''
 

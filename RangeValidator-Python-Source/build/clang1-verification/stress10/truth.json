@@ -1,0 +1,1708 @@
+[
+  {
+    "name": "unit_00",
+    "source": "unit_00.c",
+    "args": [
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc",
+      "-DRV_ENABLED"
+    ],
+    "db": true,
+    "confirmed": true,
+    "status": "PARSE_OK",
+    "records": [
+      {
+        "location": [
+          "common/base.h",
+          3
+        ],
+        "tag": "Shared",
+        "aliases": [
+          "Shared_t"
+        ],
+        "fields": {
+          "state": [
+            2,
+            false,
+            [
+              0,
+              3
+            ]
+          ]
+        },
+        "parent": null,
+        "forwards": 0
+      },
+      {
+        "location": [
+          "unit_00.h",
+          9
+        ],
+        "tag": "Tag_0",
+        "aliases": [
+          "Alias_0"
+        ],
+        "fields": {
+          "padding_number_0": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_1": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_2": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_3": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_4": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_5": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_6": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_7": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_8": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_9": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_10": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_11": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_12": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_13": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_14": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_15": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_16": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_17": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_18": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_19": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_20": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_21": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_22": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_23": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_24": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_25": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_26": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_27": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_28": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_29": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_30": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_31": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_32": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_33": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_34": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_35": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_36": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_37": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_38": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_39": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_40": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_41": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_42": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_43": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_44": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_45": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_46": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_47": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_48": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_49": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_50": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_51": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_52": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_53": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_54": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_55": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_56": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_57": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_58": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_59": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_60": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_61": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_62": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_63": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_64": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_65": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_66": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_67": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_68": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_69": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_70": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_71": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_72": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_73": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_74": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_75": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_76": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_77": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_78": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_79": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_80": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_81": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_82": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_83": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_84": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_85": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_86": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_87": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_88": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_89": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_90": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_91": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_92": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_93": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_94": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_95": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_96": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_97": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_98": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "padding_number_99": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "state": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "selected": [
+            5,
+            false,
+            [
+              0,
+              31
+            ]
+          ]
+        },
+        "parent": null,
+        "forwards": 0
+      }
+    ],
+    "variables": [
+      {
+        "location": [
+          "common/base.h",
+          5
+        ],
+        "name": "shared_state",
+        "record": [
+          "common/base.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "EXTERN",
+        "spelling": null
+      },
+      {
+        "location": [
+          "unit_00.c",
+          4
+        ],
+        "name": "shared_state",
+        "record": [
+          "common/base.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "unit_00.c",
+          5
+        ],
+        "name": "g_0",
+        "record": [
+          "unit_00.h",
+          9
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "unit_00.c",
+          6
+        ],
+        "name": "param",
+        "record": [
+          "unit_00.h",
+          9
+        ],
+        "kind": "PARAMETER",
+        "function": "run_0",
+        "pointers": 1,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "unit_00.c",
+          7
+        ],
+        "name": "local",
+        "record": [
+          "unit_00.h",
+          9
+        ],
+        "kind": "LOCAL",
+        "function": "run_0",
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      }
+    ],
+    "accesses": [
+      {
+        "location": [
+          "unit_00.c",
+          8
+        ],
+        "expression": "g_0.state",
+        "function": "run_0",
+        "variable": [
+          "unit_00.c",
+          5
+        ],
+        "member_record": [
+          "unit_00.h",
+          9
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "location": [
+          "unit_00.c",
+          9
+        ],
+        "expression": "local.selected",
+        "function": "run_0",
+        "variable": [
+          "unit_00.c",
+          7
+        ],
+        "member_record": [
+          "unit_00.h",
+          9
+        ],
+        "range": [
+          0,
+          31
+        ]
+      },
+      {
+        "location": [
+          "unit_00.c",
+          10
+        ],
+        "expression": "param->state",
+        "function": "run_0",
+        "variable": [
+          "unit_00.c",
+          6
+        ],
+        "member_record": [
+          "unit_00.h",
+          9
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "location": [
+          "unit_00.c",
+          11
+        ],
+        "expression": "shared_state.state",
+        "function": "run_0",
+        "variable": [
+          "unit_00.c",
+          4
+        ],
+        "member_record": [
+          "common/base.h",
+          3
+        ],
+        "range": [
+          0,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "name": "unit_01",
+    "source": "unit_01.c",
+    "args": [
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc",
+      "-DRV_ENABLED"
+    ],
+    "db": true,
+    "confirmed": true,
+    "status": "PARSE_OK",
+    "records": [
+      {
+        "location": [
+          "common/base.h",
+          3
+        ],
+        "tag": "Shared",
+        "aliases": [
+          "Shared_t"
+        ],
+        "fields": {
+          "state": [
+            2,
+            false,
+            [
+              0,
+              3
+            ]
+          ]
+        },
+        "parent": null,
+        "forwards": 0
+      },
+      {
+        "location": [
+          "unit_01.h",
+          9
+        ],
+        "tag": "Tag_1",
+        "aliases": [
+          "Alias_1"
+        ],
+        "fields": {
+          "state": [
+            2,
+            false,
+            [
+              0,
+              3
+            ]
+          ],
+          "selected": [
+            5,
+            false,
+            [
+              0,
+              31
+            ]
+          ]
+        },
+        "parent": null,
+        "forwards": 0
+      }
+    ],
+    "variables": [
+      {
+        "location": [
+          "common/base.h",
+          5
+        ],
+        "name": "shared_state",
+        "record": [
+          "common/base.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "EXTERN",
+        "spelling": null
+      },
+      {
+        "location": [
+          "unit_01.c",
+          4
+        ],
+        "name": "g_1",
+        "record": [
+          "unit_01.h",
+          9
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "unit_01.c",
+          5
+        ],
+        "name": "param",
+        "record": [
+          "unit_01.h",
+          9
+        ],
+        "kind": "PARAMETER",
+        "function": "run_1",
+        "pointers": 1,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "unit_01.c",
+          6
+        ],
+        "name": "local",
+        "record": [
+          "unit_01.h",
+          9
+        ],
+        "kind": "LOCAL",
+        "function": "run_1",
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      }
+    ],
+    "accesses": [
+      {
+        "location": [
+          "unit_01.c",
+          7
+        ],
+        "expression": "g_1.state",
+        "function": "run_1",
+        "variable": [
+          "unit_01.c",
+          4
+        ],
+        "member_record": [
+          "unit_01.h",
+          9
+        ],
+        "range": [
+          0,
+          3
+        ]
+      },
+      {
+        "location": [
+          "unit_01.c",
+          8
+        ],
+        "expression": "local.selected",
+        "function": "run_1",
+        "variable": [
+          "unit_01.c",
+          6
+        ],
+        "member_record": [
+          "unit_01.h",
+          9
+        ],
+        "range": [
+          0,
+          31
+        ]
+      },
+      {
+        "location": [
+          "unit_01.c",
+          9
+        ],
+        "expression": "param->state",
+        "function": "run_1",
+        "variable": [
+          "unit_01.c",
+          5
+        ],
+        "member_record": [
+          "unit_01.h",
+          9
+        ],
+        "range": [
+          0,
+          3
+        ]
+      },
+      {
+        "location": [
+          "unit_01.c",
+          10
+        ],
+        "expression": "shared_state.state",
+        "function": "run_1",
+        "variable": [
+          "common/base.h",
+          5
+        ],
+        "member_record": [
+          "common/base.h",
+          3
+        ],
+        "range": [
+          0,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "name": "unit_02",
+    "source": "unit_02.c",
+    "args": [
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc",
+      "-DRV_ENABLED"
+    ],
+    "db": true,
+    "confirmed": true,
+    "status": "PARSE_OK",
+    "records": [
+      {
+        "location": [
+          "common/base.h",
+          3
+        ],
+        "tag": "Shared",
+        "aliases": [
+          "Shared_t"
+        ],
+        "fields": {
+          "state": [
+            2,
+            false,
+            [
+              0,
+              3
+            ]
+          ]
+        },
+        "parent": null,
+        "forwards": 0
+      },
+      {
+        "location": [
+          "unit_02.h",
+          9
+        ],
+        "tag": "Tag_2",
+        "aliases": [
+          "Alias_2"
+        ],
+        "fields": {
+          "state": [
+            3,
+            false,
+            [
+              0,
+              7
+            ]
+          ],
+          "selected": [
+            5,
+            false,
+            [
+              0,
+              31
+            ]
+          ]
+        },
+        "parent": null,
+        "forwards": 0
+      }
+    ],
+    "variables": [
+      {
+        "location": [
+          "common/base.h",
+          5
+        ],
+        "name": "shared_state",
+        "record": [
+          "common/base.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "EXTERN",
+        "spelling": null
+      },
+      {
+        "location": [
+          "unit_02.c",
+          4
+        ],
+        "name": "g_2",
+        "record": [
+          "unit_02.h",
+          9
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "unit_02.c",
+          5
+        ],
+        "name": "param",
+        "record": [
+          "unit_02.h",
+          9
+        ],
+        "kind": "PARAMETER",
+        "function": "run_2",
+        "pointers": 1,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "unit_02.c",
+          6
+        ],
+        "name": "local",
+        "record": [
+          "unit_02.h",
+          9
+        ],
+        "kind": "LOCAL",
+        "function": "run_2",
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      }
+    ],
+    "accesses": [
+      {
+        "location": [
+          "unit_02.c",
+          7
+        ],
+        "expression": "g_2.state",
+        "function": "run_2",
+        "variable": [
+          "unit_02.c",
+          4
+        ],
+        "member_record": [
+          "unit_02.h",
+          9
+        ],
+        "range": [
+          0,
+          7
+        ]
+      },
+      {
+        "location": [
+          "unit_02.c",
+          8
+        ],
+        "expression": "local.selected",
+        "function": "run_2",
+        "variable": [
+          "unit_02.c",
+          6
+        ],
+        "member_record": [
+          "unit_02.h",
+          9
+        ],
+        "range": [
+          0,
+          31
+        ]
+      },
+      {
+        "location": [
+          "unit_02.c",
+          9
+        ],
+        "expression": "param->state",
+        "function": "run_2",
+        "variable": [
+          "unit_02.c",
+          5
+        ],
+        "member_record": [
+          "unit_02.h",
+          9
+        ],
+        "range": [
+          0,
+          7
+        ]
+      },
+      {
+        "location": [
+          "unit_02.c",
+          10
+        ],
+        "expression": "shared_state.state",
+        "function": "run_2",
+        "variable": [
+          "common/base.h",
+          5
+        ],
+        "member_record": [
+          "common/base.h",
+          3
+        ],
+        "range": [
+          0,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "name": "unit_03",
+    "source": "unit_03.c",
+    "args": [
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc",
+      "-DRV_ENABLED"
+    ],
+    "db": true,
+    "confirmed": true,
+    "status": "PARSE_OK",
+    "records": [
+      {
+        "location": [
+          "common/base.h",
+          3
+        ],
+        "tag": "Shared",
+        "aliases": [
+          "Shared_t"
+        ],
+        "fields": {
+          "state": [
+            2,
+            false,
+            [
+              0,
+              3
+            ]
+          ]
+        },
+        "parent": null,
+        "forwards": 0
+      },
+      {
+        "location": [
+          "unit_03.h",
+          9
+        ],
+        "tag": "Tag_3",
+        "aliases": [
+          "Alias_3"
+        ],
+        "fields": {
+          "state": [
+            4,
+            false,
+            [
+              0,
+              15
+            ]
+          ],
+          "selected": [
+            5,
+            false,
+            [
+              0,
+              31
+            ]
+          ]
+        },
+        "parent": null,
+        "forwards": 0
+      }
+    ],
+    "variables": [
+      {
+        "location": [
+          "common/base.h",
+          5
+        ],
+        "name": "shared_state",
+        "record": [
+          "common/base.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "EXTERN",
+        "spelling": null
+      },
+      {
+        "location": [
+          "unit_03.c",
+          4
+        ],
+        "name": "g_3",
+        "record": [
+          "unit_03.h",
+          9
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "unit_03.c",
+          5
+        ],
+        "name": "param",
+        "record": [
+          "unit_03.h",
+          9
+        ],
+        "kind": "PARAMETER",
+        "function": "run_3",
+        "pointers": 1,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "unit_03.c",
+          6
+        ],
+        "name": "local",
+        "record": [
+          "unit_03.h",
+          9
+        ],
+        "kind": "LOCAL",
+        "function": "run_3",
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      }
+    ],
+    "accesses": [
+      {
+        "location": [
+          "unit_03.c",
+          7
+        ],
+        "expression": "g_3.state",
+        "function": "run_3",
+        "variable": [
+          "unit_03.c",
+          4
+        ],
+        "member_record": [
+          "unit_03.h",
+          9
+        ],
+        "range": [
+          0,
+          15
+        ]
+      },
+      {
+        "location": [
+          "unit_03.c",
+          8
+        ],
+        "expression": "local.selected",
+        "function": "run_3",
+        "variable": [
+          "unit_03.c",
+          6
+        ],
+        "member_record": [
+          "unit_03.h",
+          9
+        ],
+        "range": [
+          0,
+          31
+        ]
+      },
+      {
+        "location": [
+          "unit_03.c",
+          9
+        ],
+        "expression": "param->state",
+        "function": "run_3",
+        "variable": [
+          "unit_03.c",
+          5
+        ],
+        "member_record": [
+          "unit_03.h",
+          9
+        ],
+        "range": [
+          0,
+          15
+        ]
+      },
+      {
+        "location": [
+          "unit_03.c",
+          10
+        ],
+        "expression": "shared_state.state",
+        "function": "run_3",
+        "variable": [
+          "common/base.h",
+          5
+        ],
+        "member_record": [
+          "common/base.h",
+          3
+        ],
+        "range": [
+          0,
+          3
+        ]
+      }
+    ]
+  }
+]

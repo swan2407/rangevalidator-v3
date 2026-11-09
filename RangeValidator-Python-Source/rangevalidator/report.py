@@ -55,7 +55,7 @@ def _entry(row, outcomes, requests, selected_ids):
     value = (outcome.get('manual_value', request.value if request else '')
              if row.status == 'REVIEW' else row.expected if row.status in ('MISMATCH', 'CREATE') else '')
     state = outcome.get('status') or ('PENDING' if selected else
-                                    'NOT_SELECTED' if row.status != 'MATCH' else 'NOT_APPLICABLE')
+                                    'NOT_APPLICABLE' if row.status in ('MATCH', 'SKIP') else 'NOT_SELECTED')
     return dict(outcome=outcome, kind=kind, selected=selected, value=value, state=state)
 
 
@@ -70,7 +70,7 @@ def _summary(ws, session, index, entries):
         ('대상 함수 시트 수', len(sheets)),
         ('분석한 함수 시트 수', sum(s.status not in incomplete for s in sheets)),
         ('오류·불완전 함수 시트 수', sum(s.status in incomplete for s in sheets)),
-        *[(state, counts[state]) for state in STATES],
+        *[('일반 멤버 (SKIP)' if state == 'SKIP' else state, counts[state]) for state in STATES],
         ('자동 MISMATCH 수정 선택 건수', selected[AUTO_MISMATCH]),
         ('CREATE 수정 선택 건수', selected[AUTO_CREATE]),
         ('REVIEW 수동 수정 선택 건수', selected[MANUAL_REVIEW]),
@@ -82,7 +82,8 @@ def _summary(ws, session, index, entries):
     row = ws.max_row + 3
     header(ws, row, ['파일별 집계'])
     row += 1
-    header(ws, row, ['원본 파일명','전체 경로','함수 시트 수',*STATES,
+    header(ws, row, ['원본 파일명','전체 경로','함수 시트 수',
+                    *('일반 멤버 (SKIP)' if s == 'SKIP' else s for s in STATES),
                     *SAVE_LABELS.values(),'파일 저장 상태','출력 파일 경로',CLEANUP_LABEL,'읽기·분석 상태'])
     by_file = {}
     file_keys = {row.file: canonical(row.file) for row in index.rows.values()}
@@ -102,7 +103,8 @@ def _summary(ws, session, index, entries):
     row += 3
     header(ws, row, ['시트별 집계'])
     row += 1
-    header(ws, row, ['원본 파일명','전체 경로','함수 시트명',*STATES,'분석 상태','상태 상세'])
+    header(ws, row, ['원본 파일명','전체 경로','함수 시트명',
+                    *('일반 멤버 (SKIP)' if s == 'SKIP' else s for s in STATES),'분석 상태','상태 상세'])
     for file in index.files.values():
         for name, sheet in file.sheets.items():
             row += 1
@@ -179,7 +181,8 @@ def create_report(session, outcomes, path, *, manual_requests=(), selected_ids=(
                     selected,entry['value'],state,o.get('output', ''),reason])
             ws = workbook['Results']
             literal(ws, ws.max_row+1, [row.file,row.sheet,row.cell,row.expression,row.struct,row.member,
-                row.width,row.signed,row.expected,row.existing,row.status,state,reason or row.reason,
+                row.width,row.signed,row.expected,row.existing,
+                '일반 멤버 (SKIP)' if row.status == 'SKIP' else row.status,state,reason or row.reason,
                 row.source,row.source_line,row.backend,o.get('file_status', ''),o.get('output', ''),
                 _warning(o),SAVE_LABELS.get(state, ''),SAVE_LABELS.get(o.get('file_status'), '')])
         errors = workbook['Errors']

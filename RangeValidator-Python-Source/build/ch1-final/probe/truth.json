@@ -1,0 +1,232 @@
+[
+  {
+    "function": "global",
+    "expression": "can_data1.state",
+    "range": [
+      0,
+      7
+    ]
+  },
+  {
+    "function": "global",
+    "expression": "can_data_p->state",
+    "range": [
+      0,
+      7
+    ]
+  },
+  {
+    "function": "global",
+    "expression": "local_static.active",
+    "range": [
+      0,
+      1
+    ]
+  },
+  {
+    "function": "global",
+    "expression": "can_data_array[0].state",
+    "range": [
+      0,
+      7
+    ]
+  },
+  {
+    "function": "global",
+    "expression": "wrapped.valid",
+    "range": [
+      0,
+      1
+    ]
+  },
+  {
+    "function": "global",
+    "expression": "wrapped.status.fault",
+    "range": [
+      0,
+      1
+    ]
+  },
+  {
+    "function": "global",
+    "expression": "wrapped.status.mode",
+    "range": [
+      0,
+      7
+    ]
+  },
+  {
+    "function": "global",
+    "expression": "wrapped_p->status.fault",
+    "range": [
+      0,
+      1
+    ]
+  },
+  {
+    "function": "global",
+    "expression": "wrapped_array[0].status.mode",
+    "range": [
+      0,
+      7
+    ]
+  },
+  {
+    "function": "global",
+    "expression": "wrapped.status",
+    "range": null
+  },
+  {
+    "function": "global",
+    "expression": "device.state",
+    "range": [
+      0,
+      3
+    ]
+  },
+  {
+    "function": "func",
+    "expression": "device.state",
+    "range": [
+      0,
+      31
+    ]
+  },
+  {
+    "function": "update",
+    "expression": "param_p->state",
+    "range": [
+      0,
+      7
+    ]
+  },
+  {
+    "function": "global",
+    "expression": "param_p->state",
+    "range": [
+      0,
+      3
+    ]
+  },
+  {
+    "function": "update",
+    "expression": "local_data.state",
+    "range": [
+      0,
+      7
+    ]
+  },
+  {
+    "function": "other",
+    "expression": "local_data.state",
+    "range": [
+      0,
+      31
+    ]
+  },
+  {
+    "function": "global",
+    "expression": "control.mode",
+    "range": [
+      0,
+      7
+    ]
+  },
+  {
+    "function": "global",
+    "expression": "same_control.enable",
+    "range": [
+      0,
+      1
+    ]
+  },
+  {
+    "function": "global",
+    "expression": "later.active",
+    "range": [
+      0,
+      3
+    ]
+  },
+  {
+    "function": "global",
+    "expression": "never->active",
+    "range": null
+  },
+  {
+    "function": "global",
+    "expression": "lost.state",
+    "range": null
+  },
+  {
+    "function": "global",
+    "expression": "missing_record.state",
+    "range": null
+  },
+  {
+    "function": "global",
+    "expression": "unknown.state",
+    "range": null
+  },
+  {
+    "function": "global",
+    "expression": "unknown_p->state",
+    "range": null
+  },
+  {
+    "function": "global",
+    "expression": "unknown_a[0].state",
+    "range": null
+  },
+  {
+    "function": "global",
+    "expression": "can_chg_p->active",
+    "range": [
+      0,
+      1
+    ]
+  },
+  {
+    "function": "global",
+    "expression": "widths.literal",
+    "range": [
+      0,
+      15
+    ]
+  },
+  {
+    "function": "global",
+    "expression": "widths.unknown_width",
+    "range": null
+  },
+  {
+    "function": "global",
+    "expression": "conditional_width.mode",
+    "range": null
+  },
+  {
+    "function": "global",
+    "expression": "optional.active",
+    "range": null
+  },
+  {
+    "function": "global",
+    "expression": "absent.state",
+    "range": null
+  },
+  {
+    "function": "global",
+    "expression": "can_data1.no_such_member",
+    "range": null
+  },
+  {
+    "function": "global",
+    "expression": "can_data1->state",
+    "range": null
+  },
+  {
+    "function": "global",
+    "expression": "can_data_array.state",
+    "range": null
+  }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "directory": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\functional",
+    "file": "app/main.c",
+    "arguments": [
+      "clang",
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc",
+      "-Dcinst=",
+      "-c",
+      "app/main.c",
+      "-o",
+      "ignore.obj"
+    ]
+  },
+  {
+    "directory": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\functional",
+    "file": "options/config.c",
+    "arguments": [
+      "clang",
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc",
+      "-I",
+      "include",
+      "-isystem",
+      "sdk",
+      "-D",
+      "ENABLE_CAN",
+      "-DMODE_BITS=3",
+      "-c",
+      "options/config.c",
+      "-o",
+      "ignore.obj"
+    ]
+  }
+]

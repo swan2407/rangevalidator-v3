@@ -1,0 +1,1 @@
+typedef struct { unsigned int state:3; } T;extern T obj; extern T *ptr; extern T arr[4];

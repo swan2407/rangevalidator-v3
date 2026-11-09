@@ -67,6 +67,8 @@ class SelectionTests(unittest.TestCase):
         self.assertFalse(any(k=='body' for k,_ in events))
 
     def test_only_functions(self):
-        book, _ = self.run_reader(['1.Main','2. Process_CAN','3. Update_State'])
-        self.assertEqual(len(book.sheets),3)
+        included = ['1.Main', 'update1', '1_update', '1', '1.', 'CAN2.Update']
+        book, events = self.run_reader(['Common Parameter', *included, '목차'])
+        self.assertEqual([s.name for s in book.sheets], included)
+        self.assertEqual([name for kind, name in events if kind == 'body'], included)
 

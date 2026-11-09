@@ -3,7 +3,7 @@ from collections import defaultdict
 import re
 
 from .a_extraction import normalize_header
-from .common import at, rows, safe_header, text
+from .common import at, rows, safe_header, text, sheet_function_name, normalize_member_expression
 
 
 HEADERS = ('name', 'type', 'range')
@@ -99,7 +99,7 @@ def scan_b(sheet, table_rows=None):
             name = text(sheet.cells.get(name_cell.merge_anchor, name_cell)).strip()
         if name in ('-', '--', 'N/A'):
             continue
-        valid_name = DECLARATION_NAME.fullmatch(name) is not None
+        valid_name = DECLARATION_NAME.fullmatch(normalize_member_expression(name)) is not None
         standalone_label = (len(populated) == 1 and populated[0].address == name_cell.address
                             and re.fullmatch(r'[A-Za-z_]\w*', name))
         if not valid_name and name:
@@ -118,7 +118,7 @@ def scan_b(sheet, table_rows=None):
         active['last_variable_row'] = number
         range_cell = at(sheet, number, columns['range'].column) if active['state'] == 'HEADER_FOUND' else None
         candidates.append(dict(
-            sheet=sheet.name, function=sheet.name.split('.', 1)[-1].strip(), format='B',
+            sheet=sheet.name, function=sheet_function_name(sheet.name), format='B',
             section=section, section_cell=section_cell, table_id=active['table_id'],
             name=name, name_cell=name_cell.address, range_cell=range_cell.address if range_cell else None,
             existing_range=range_cell.value if range_cell else None,

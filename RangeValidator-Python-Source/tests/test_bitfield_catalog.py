@@ -84,7 +84,7 @@ typedef struct { u1 status:2; } CAN_A_t, Alias; typedef struct B { u1 status:5; 
             unlinked_c='typedef struct Shared Local;')
         catalog = build_bitfield_catalog([header, first, second, unlinked])
         self.assertEqual(catalog.lookup(header, 'Local').status, 'AMBIGUOUS')
-        self.assertEqual(catalog.lookup(unlinked, 'Local').status, 'INCOMPLETE')
+        self.assertEqual(catalog.lookup(unlinked, 'Local').status, 'AMBIGUOUS')
         self.assertNotEqual(catalog.lookup(first, 'Local').definition,
                             catalog.lookup(second, 'Local').definition)
 
@@ -154,7 +154,7 @@ struct U { unsigned int unknown:WIDTH; unsigned int known:1; };
         self.assertNotEqual(catalog.lookup(second, 'Local').definition, shared_id)
         self.assertEqual(len(catalog.definitions), 2)
 
-    def test_conditional_include_cannot_certify_type_or_macro(self):
+    def test_conditional_include_retains_condition_and_calculates_declared_width(self):
         header, source = self.files(
             types_h='typedef unsigned int Word;\n#define WIDTH 3',
             main_c='#if FEATURE\n#include "types.h"\n#endif\n'
@@ -162,7 +162,8 @@ struct U { unsigned int unknown:WIDTH; unsigned int known:1; };
         catalog = build_bitfield_catalog([header, source])
         self.assertEqual(catalog.lookup(source, 'Word').status, 'CONDITIONAL')
         fields = next(iter(catalog.definitions.values())).fields
-        self.assertEqual([f.status for f in fields], ['CONDITIONAL', 'WIDTH_UNRESOLVED'])
+        self.assertEqual([f.status for f in fields], ['CONDITIONAL', 'CONDITIONAL'])
+        self.assertEqual([f.declaration.maximum for f in fields], [1, 7])
 
     def test_missing_input_is_recorded(self):
         source, = self.files(a_h='struct T { unsigned int status:2; };')

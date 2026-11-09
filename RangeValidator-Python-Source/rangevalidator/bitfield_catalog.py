@@ -2,12 +2,13 @@
 import ast
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field, replace
+from functools import cached_property
 from pathlib import Path
 import operator
 import re
 
 from .analysis import (BASE_PROFILES, QUALIFIERS, BitField, Diagnostic, SourceModel, Token,
-                       _CMT_STR, _Parser, identifier, tokenize)
+                       _CMT_STR, _Parser, canonical_keyword, identifier, matching_names, tokenize)
 
 
 @dataclass(frozen=True, order=True)
@@ -25,6 +26,7 @@ class TypeLink:
     evidence: tuple[Origin, ...] = ()
     pointer_depth: int = 0
     qualifiers: tuple[tuple[str, ...], ...] = ()
+    assumptions: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -57,6 +59,7 @@ class FunctionScope:
     file: str
     status: str
     variables: dict[str, VariableBinding] = field(default_factory=dict)
+    alternatives: tuple['FunctionScope', ...] = ()
 
 
 @dataclass(frozen=True)
@@ -88,6 +91,7 @@ class CatalogStruct:
     aliases: tuple[str, ...]
     status: str
     fields: tuple[CatalogField, ...]
+    ordinary_members: tuple[str, ...] = ()
 
 
 @dataclass
@@ -102,7 +106,8 @@ class BitfieldCatalog:
     functions: dict[str, tuple[FunctionScope, ...]] = field(default_factory=dict)
 
     def lookup_function(self, file, name):
-        candidates = self.functions.get(name, ())
+        names = matching_names(self.functions, name)
+        candidates = tuple(scope for spelling in names for scope in self.functions[spelling])
         if file is not None:
             file = str(Path(file).resolve())
             visible = self.source_scopes.get(file, {})
@@ -110,20 +115,65 @@ class BitfieldCatalog:
                           or tuple(scope for scope in candidates if scope.file in visible))
         if len(candidates) == 1:
             scope = candidates[0]
-            if file and self.source_scopes.get(file, {}).get(scope.file, False):
+            if scope.status == 'RESOLVED' and file and self.source_scopes.get(file, {}).get(scope.file, False):
                 return replace(scope, status='CONDITIONAL')
             return scope
-        if candidates or name in self.functions:
+        if len(names) == 1 and candidates and len({scope.file for scope in candidates}) == 1:
+            return FunctionScope(candidates[0].file, 'MULTIPLE', alternatives=candidates)
+        if candidates or names:
             return FunctionScope(file or '', 'AMBIGUOUS')
         return FunctionScope(file or '', 'MISSING')
 
-    def lookup_variable(self, file, name):
+    @cached_property
+    def variable_spellings(self):
+        spellings = defaultdict(list)
+        for scope, name in self.variable_bindings:
+            spellings[scope, name.casefold()].append(name)
+        return spellings
+
+    def lookup_variable(self, file, name, local=None):
         scope = str(Path(file).resolve()) if file is not None else None
-        return self.variable_bindings.get((scope, name), VariableBinding('MISSING'))
+        local = local or {}
+        if name in local:
+            return local[name]
+        if (scope, name) in self.variable_bindings:
+            return self.variable_bindings[scope, name]
+        names = set(self.variable_spellings.get((scope, name.casefold()), ()))
+        names.update(matching_names(local, name))
+        if len(names) != 1:
+            return VariableBinding('AMBIGUOUS' if names else 'MISSING')
+        spelling = names.pop()
+        return local.get(spelling) or self.variable_bindings[scope, spelling]
+
+    @cached_property
+    def function_declaration_locations(self):
+        locations = defaultdict(set)
+        for function, scopes in self.functions.items():
+            for scope in scopes:
+                for name, binding in scope.variables.items():
+                    locations[name].update((d.origin, function) for d in binding.declarations
+                                           if d.origin.file == scope.file)
+        return {name: tuple(sorted(origins)) for name, origins in locations.items()}
 
     def lookup(self, file, spelling):
         """Resolve a type in an input file's scope, preserving uncertainty."""
-        return self.links.get((str(Path(file).resolve()), spelling), TypeLink('UNRESOLVED'))
+        file = str(Path(file).resolve())
+        spelling = ' '.join(canonical_keyword(word) for word in spelling.split())
+        names = matching_names({name for path, name in self.links if path == file}, spelling)
+        if len(names) == 1:
+            return self.links[file, names[0]]
+        return TypeLink('AMBIGUOUS' if names else 'UNRESOLVED')
+
+    @cached_property
+    def type_candidates(self):
+        types = defaultdict(dict)
+        for definition in self.definitions.values():
+            for name in {definition.name, definition.tag, *definition.aliases} - {''}:
+                types[name][definition.origin] = definition
+        for (_, name), link in self.links.items():
+            if link.definition in self.definitions and not link.pointer_depth and not name.startswith('struct '):
+                types[name][link.definition] = self.definitions[link.definition]
+        return {name: tuple(definitions.values()) for name, definitions in types.items()}
 
 
 @dataclass(frozen=True)
@@ -156,6 +206,7 @@ class _Collector(_Parser):
 
 _DIRECTIVE = re.compile(r'^\s*#\s*(\w+)\b\s*(.*)$')
 _INCLUDE = re.compile(r'"([^"]+)"$')
+_NEGATED_DEFINED = re.compile(r'!\s*defined(?:\s*\(\s*(\w+)\s*\)|\s+(\w+))', re.IGNORECASE)
 _INTEGER = re.compile(r'\b(0[xX][0-9a-fA-F]+|0[bB][01]+|0[0-7]*|[1-9][0-9]*)([uUlL]*)\b')
 _OPERATORS = {
     ast.Add: operator.add, ast.Sub: operator.sub, ast.Mult: operator.mul,
@@ -167,12 +218,23 @@ _OPERATORS = {
 
 def _guard(directives, lines):
     """Recognize a conventional whole-file include guard."""
+    prologue = [line for line, command, body in directives[:1] if command == 'pragma'
+                and body.strip().casefold() == 'once']
+    directives = directives[len(prologue):]
     if len(directives) < 3:
         return None
     (start, opening, name), (_, define, body), (end, closing, _) = (
         directives[0], directives[1], directives[-1])
-    if (opening != 'ifndef' or define != 'define' or body != name or closing != 'endif'
-            or not identifier(name) or any(line.strip() for line in lines[:start - 1] + lines[end:])):
+    name = name.strip()
+    if opening == 'if':
+        match = _NEGATED_DEFINED.fullmatch(name)
+        name = next(part for part in match.groups() if part) if match else ''
+    elif opening != 'ifndef':
+        return None
+    if (not identifier(name) or define != 'define'
+            or not re.fullmatch(rf'{re.escape(name)}(?:\s+[01])?\s*', body) or closing != 'endif'
+            or any(text.strip() for index, text in enumerate(lines[:start - 1], 1) if index not in prologue)
+            or any(text.strip() for text in lines[end:])):
         return None
     depth = 0
     for _, command, _ in directives[:-1]:
@@ -185,7 +247,41 @@ def _guard(directives, lines):
     return start if depth == 1 else None
 
 
-def _collect(source, file, files):
+def _expand_declaration_macros(tokens, file, events, inputs):
+    """Expand empty and type-keyword aliases from registered includes in source order."""
+    expanded, active = [], {}
+    visited = {file}
+
+    def apply(name, value, depth):
+        if name is not None:
+            if value is None:
+                active.pop(name, None)
+            else:
+                active[name] = value
+            return
+        if value not in inputs or value in visited or depth >= 64:
+            active.clear()
+            return
+        visited.add(value)
+        for _, included_name, included_value in inputs[value]:
+            apply(included_name, included_value, depth + 1)
+
+    events = iter(events)
+    event = next(events, None)
+    for token in tokens:
+        while event is not None and event[0] < token.line:
+            _, name, value = event
+            apply(name, value, 0)
+            event = next(events, None)
+        replacement = active.get(token.text)
+        if replacement is None:
+            expanded.append(token)
+        else:
+            expanded.extend(Token(word, token.line) for word in replacement)
+    return expanded
+
+
+def _prepare_unit(source, file, files):
     unit = _Unit()
     lines = source.lstrip('\ufeff').splitlines()
     # Join splices before stripping comments, retaining physical line numbers.
@@ -196,10 +292,10 @@ def _collect(source, file, files):
     source = _CMT_STR.sub(lambda m: m[0] if m[0][0] in "\"'" else ' ' + '\n' * m[0].count('\n'),
                           '\n'.join(lines))
     lines = source.split('\n')
-    directives = [(i, *match.groups()) for i, line in enumerate(lines, 1)
+    directives = [(i, match[1].casefold(), match[2]) for i, line in enumerate(lines, 1)
                   if (match := _DIRECTIVE.fullmatch(line))]
     guard = _guard(directives, lines)
-    conditions, conditional = [], set()
+    conditions, conditional, macro_events = [], set(), []
     by_line = {line: (command, body.strip()) for line, command, body in directives}
     for i, line in enumerate(lines, 1):
         if i not in by_line:
@@ -216,15 +312,40 @@ def _collect(source, file, files):
             match = re.match(r'([A-Za-z_]\w*)(.*)', body)
             if match:
                 name, expr = match.groups()
+                replacement = None
+                words = [canonical_keyword(word) for word in expr.split()]
+                if command == 'define' and not any(conditions) and not expr.startswith('('):
+                    if not words or ' '.join(words) in BASE_PROFILES or words == ['struct']:
+                        replacement = tuple(words)
+                macro_events.append((i, name, replacement))
                 target = expr.strip() if command == 'define' and not expr.startswith('(') else ''
                 unit.macros[name].append(_Declaration(target, Origin(file, i), any(conditions)))
-        elif command == 'include':
+        if command == 'include':
+            local = None
             match = _INCLUDE.fullmatch(body)
             if match:
                 local = str((Path(file).parent / match[1]).resolve())
+                local = next((path for path in files if path.casefold() == local.casefold()), local)
                 if local in files:
                     unit.includes[local] = unit.includes.get(local, True) and any(conditions)
-    parser = _Collector(tokenize('\n'.join(lines), file, unit.reviews), file, SourceModel())
+            macro_events.append((i, None, None if any(conditions) else local))
+        elif command in ('include_next', 'import') or (command == 'pragma' and body.casefold() != 'once'):
+            macro_events.append((i, None, None))
+    return unit, '\n'.join(lines), conditional, macro_events
+
+
+def _collect_units(sources, files):
+    prepared = {file: _prepare_unit(source, file, files) for file, source in sources.items()}
+    inputs = {file: item[3] for file, item in prepared.items()}
+    return {file: _collect_prepared(item, file, inputs) for file, item in prepared.items()}
+
+
+def _collect_prepared(prepared, file, inputs):
+    unit, source, conditional, macro_events = prepared
+    tokens = tokenize(source, file, unit.reviews)
+    if macro_events:
+        tokens = _expand_declaration_macros(tokens, file, macro_events, inputs)
+    parser = _Collector(tokens, file, SourceModel())
     def function(head, body):
         declaration = _collect_function(parser, head, body, conditional)
         if declaration is not None:
@@ -527,11 +648,22 @@ def _collect_typedef(parser, tokens, origin, uncertain, unit):
 
 
 def _qualify(link, qualifiers):
-    if not qualifiers or link.status not in ('STRUCT', 'INTEGER', 'SCALAR'):
+    if not qualifiers or (link.status not in ('STRUCT', 'INTEGER', 'SCALAR')
+                          and not (link.status == 'CONDITIONAL' and (link.definition is not None or link.integer_type))):
         return link
     base = link.qualifiers or ((),)
     combined = (*base[:-1], tuple(sorted(set(base[-1]) | set(qualifiers[0]))), *qualifiers[1:])
     return replace(link, pointer_depth=len(combined) - 1, qualifiers=combined)
+
+
+def _type_identity(link):
+    status = link.status
+    if status == 'CONDITIONAL':
+        if link.definition is not None:
+            status = 'STRUCT'
+        elif link.integer_type:
+            status = 'SCALAR' if link.integer_type in _NON_STRUCT_SCALARS else 'INTEGER'
+    return status, link.definition, link.integer_type, link.qualifiers
 
 
 def _visible(file, units):
@@ -550,60 +682,104 @@ class _Registry:
         self.units = units
         self.scopes = {file: _visible(file, units) for file in units}
         self.definitions = {key: value for unit in units.values() for key, value in unit.definitions.items()}
+        self.type_names = {file: {name for path in scope for name in units[path].types}
+                           for file, scope in self.scopes.items()}
+        self.macro_names = {file: {name for path in scope for name in units[path].macros}
+                            for file, scope in self.scopes.items()}
+        self.global_scope = dict.fromkeys(units, False)
+        self.all_type_names = set().union(*self.type_names.values())
+        self.all_macro_names = set().union(*self.macro_names.values())
 
     def resolve(self, file, name, root=None, seen=frozenset()):
         root = root or file
+        name = ' '.join(canonical_keyword(word) for word in name.split())
         if (name in BASE_PROFILES and name != 'bool') or name == 'char':
             return TypeLink('INTEGER', integer_type=name)
         if name in _NON_STRUCT_SCALARS:
             return TypeLink('SCALAR', integer_type=name)
-        key = (file, name)
-        if key in seen or len(seen) >= 128:
-            return TypeLink('UNRESOLVED')
         scope = self.scopes[file]
         is_tag = name.startswith('struct ')
         if is_tag:
             scope = self.scopes[root]
+        names = matching_names(self.type_names[root if is_tag else file], name)
+        if not names:
+            scope = self.global_scope
+            names = matching_names(self.all_type_names, name)
+        if len(names) > 1:
+            return TypeLink('AMBIGUOUS')
+        if names:
+            name = names[0]
+        key = (file, name)
+        if key in seen or len(seen) >= 128:
+            return TypeLink('UNRESOLVED')
         declarations = [d for path in sorted(scope) for d in self.units[path].types.get(name, ())]
-        if is_tag and root == file and Path(file).suffix.lower() == '.h' and not any(
+        if is_tag and not any(
                 isinstance(d.target, Origin) for d in declarations) and declarations:
-            # An including C file can complete an explicit header forward declaration.
-            declarations.extend(d for path, visible in sorted(self.scopes.items())
-                                if path != file and visible.get(file) is False
-                                for d in self.units[path].types.get(name, ())
+            # Comparison inputs form one catalog, even without an include edge.
+            declarations.extend(d for path in sorted(self.units)
+                                for spelling in matching_names(self.units[path].types, name)
+                                for d in self.units[path].types[spelling]
                                 if isinstance(d.target, Origin))
+        if not declarations and not is_tag:
+            macro_scope = self.scopes[file]
+            macro_names = matching_names(self.macro_names[file], name)
+            if not macro_names:
+                macro_scope = self.global_scope
+                macro_names = matching_names(self.all_macro_names, name)
+            if len(macro_names) > 1:
+                return TypeLink('AMBIGUOUS')
+            if macro_names:
+                declarations = [d for path in sorted(macro_scope)
+                                for d in self.units[path].macros.get(macro_names[0], ())]
+                scope = macro_scope
         evidence = tuple(sorted({d.origin for d in declarations}))
-        if any(d.conditional or scope.get(d.origin.file, False) for d in declarations):
-            return TypeLink('CONDITIONAL', evidence=evidence)
+        conditional = any(d.conditional or scope.get(d.origin.file, False) for d in declarations)
         if is_tag:
             declarations = [d for d in declarations if d.target != name]
             if not declarations and evidence:
-                return TypeLink('INCOMPLETE', evidence=evidence)
+                return TypeLink('CONDITIONAL' if conditional else 'INCOMPLETE', evidence=evidence)
         if not declarations:
+            # The photographed code uses uint without showing its definition. Explicit
+            # source typedefs/macros always win; this fallback is recorded in the result.
+            if name.casefold() == 'uint':
+                return TypeLink('INTEGER', integer_type='unsigned int',
+                                assumptions=('uint 정의 미수집: 관용 타입 unsigned int 적용',))
             return TypeLink('UNRESOLVED', evidence=evidence)
         targets = dict.fromkeys((d.origin.file, d.target, d.qualifiers) for d in declarations)
         links = [_qualify(TypeLink('STRUCT', target) if isinstance(target, Origin)
                           else self.resolve(path, target, root, seen | {key}), qualifiers)
                  for path, target, qualifiers in targets]
         first = links[0]
-        outcomes = {(link.status, link.definition, link.integer_type, link.qualifiers) for link in links}
+        outcomes = {_type_identity(link) for link in links}
+        conditional |= any(link.status == 'CONDITIONAL' for link in links)
         evidence = tuple(sorted(set(evidence).union(*(link.evidence for link in links))))
         if len(outcomes) > 1 or (first.status in ('UNRESOLVED', 'INCOMPLETE')
                                 and len({d.target for d in declarations}) > 1):
-            return TypeLink('AMBIGUOUS', evidence=evidence)
-        return replace(first, evidence=evidence)
+            return TypeLink('CONDITIONAL' if conditional else 'AMBIGUOUS', evidence=evidence)
+        assumptions = tuple(sorted({note for link in links for note in link.assumptions}))
+        return replace(first, status='CONDITIONAL' if conditional else first.status,
+                       evidence=evidence, assumptions=assumptions)
 
-    def width(self, expression, file):
+    def width(self, expression, file, *, allow_conditional=False):
         scope = self.scopes[file]
 
         def expand(text, stack):
             def substitute(match):
                 name = match[0]
+                names = matching_names(self.macro_names[file], name)
+                macro_scope = scope
+                if not names:
+                    names = matching_names(self.all_macro_names, name)
+                    macro_scope = self.global_scope
+                if len(names) != 1:
+                    raise ValueError('missing or conflicting macro spelling')
+                name = names[0]
                 if name in stack or len(stack) >= 32:
                     raise ValueError('recursive macro')
-                declarations = [d for path in scope for d in self.units[path].macros.get(name, ())]
+                declarations = [d for path in macro_scope for d in self.units[path].macros.get(name, ())]
                 bodies = {d.target for d in declarations}
-                if len(bodies) != 1 or any(d.conditional or scope[d.origin.file] for d in declarations):
+                if len(bodies) != 1 or (not allow_conditional and any(
+                        d.conditional or macro_scope[d.origin.file] for d in declarations)):
                     raise ValueError('missing, conflicting or conditional macro')
                 body = bodies.pop()
                 if not body:
@@ -658,21 +834,30 @@ class _Registry:
 
 def _field(raw, registry, blocked):
     width = registry.width(raw.note, raw.file)
+    conditional_width = False
+    if width is None:
+        width = registry.width(raw.note, raw.file, allow_conditional=True)
+        conditional_width = width is not None
     link = registry.resolve(raw.file, raw.declared_type)
     signed = None
     minimum = maximum = None
     integer = link.integer_type
-    if blocked:
+    if blocked and blocked != 'CONDITIONAL':
         status = blocked
     elif width is None or not 1 <= width <= 1024 or (integer == '_Bool' and width != 1):
         status = 'WIDTH_UNRESOLVED'
-    elif link.status != 'INTEGER' or link.pointer_depth or integer in ('char', 'int'):
-        status = link.status if link.status not in ('INTEGER', 'STRUCT') else 'SIGNEDNESS_UNRESOLVED'
+    elif (link.status not in ('INTEGER', 'CONDITIONAL') or integer not in BASE_PROFILES
+          or link.pointer_depth or integer in ('char', 'int')):
+        if link.status in ('INTEGER', 'STRUCT') or integer:
+            status = 'SIGNEDNESS_UNRESOLVED'
+        else:
+            status = 'TYPE_UNRESOLVED' if link.status == 'CONDITIONAL' else link.status
     else:
         signed = BASE_PROFILES[integer][0]
         minimum = -(1 << (width - 1)) if signed else 0
         maximum = (1 << (width - int(signed))) - 1
-        status = 'RESOLVED'
+        status = ('CONDITIONAL' if blocked == 'CONDITIONAL' or link.status == 'CONDITIONAL'
+                  or conditional_width else 'RESOLVED')
     declaration = BitField(raw.struct_name, raw.struct_tag, raw.member, raw.declared_type,
                            width or 0, raw.file, raw.line, signed, minimum, maximum,
                            '' if status == 'RESOLVED' else status)
@@ -681,25 +866,27 @@ def _field(raw, registry, blocked):
 
 def _bind_declarations(registry, declarations, root):
     links = []
+    conditional = False
     for declaration in declarations:
         file = declaration.origin.file
         context = root if file in registry.scopes.get(root, ()) else file
         if declaration.conditional or registry.scopes[context].get(file, False):
-            return VariableBinding('CONDITIONAL', declarations)
+            conditional = True
         link = (TypeLink('STRUCT', declaration.target) if declaration.target else
                 registry.resolve(file, declaration.spelling, context))
         links.append(_qualify(link, declaration.qualifiers))
-    identities = {(link.status, link.definition, link.integer_type, link.qualifiers, len(d.arrays))
-                  for d, link in zip(declarations, links)}
+    identities = {(_type_identity(link), len(d.arrays)) for d, link in zip(declarations, links)}
+    conditional |= any(link.status == 'CONDITIONAL' for link in links)
     if len(identities) != 1:
-        return VariableBinding('AMBIGUOUS', declarations)
+        return VariableBinding('CONDITIONAL' if conditional else 'AMBIGUOUS', declarations)
     if any(len({d.arrays[i] for d in declarations if d.arrays[i]}) > 1
            for i in range(len(declarations[0].arrays))):
-        return VariableBinding('AMBIGUOUS', declarations)
+        return VariableBinding('CONDITIONAL' if conditional else 'AMBIGUOUS', declarations)
     link = links[0]
     evidence = tuple(sorted(set().union(*(item.evidence for item in links),
                                         {d.origin for d in declarations})))
-    return VariableBinding(link.status, declarations, replace(link, evidence=evidence))
+    status = 'CONDITIONAL' if conditional else link.status
+    return VariableBinding(status, declarations, replace(link, status=status, evidence=evidence))
 
 def _bind_variables(registry):
     groups = defaultdict(list)
@@ -762,10 +949,12 @@ def _bind_functions(registry, globals_by_scope):
     def signature(function, root):
         types = []
         for parameter in function.parameters:
-            if parameter is None or parameter.conditional:
+            if parameter is None:
                 return None
             link = _bind_declarations(registry, (parameter,), root).type_link
-            if not link or link.status not in ('STRUCT', 'INTEGER', 'SCALAR'):
+            if not link or (link.status not in ('STRUCT', 'INTEGER', 'SCALAR')
+                            and not (link.status == 'CONDITIONAL' and
+                                     (link.definition is not None or link.integer_type))):
                 return None
             qualifiers = link.qualifiers or ((),)
             if parameter.arrays:
@@ -786,7 +975,8 @@ def _bind_functions(registry, globals_by_scope):
             status = 'CONDITIONAL' if definition.conditional else 'RESOLVED'
             if any(p.conditional or visible[p.origin.file] for p in prototypes):
                 status = 'CONDITIONAL'
-            elif prototypes and any(p.return_type != definition.return_type
+            if prototypes and any(tuple(w.casefold() for w in p.return_type) !=
+                                    tuple(w.casefold() for w in definition.return_type)
                                     or (p.prototyped and (signature(p, file) is None
                                         or signature(p, file) != signature(definition, file)))
                                     for p in prototypes):
@@ -803,7 +993,9 @@ def _bind_functions(registry, globals_by_scope):
                 items = tuple(item for item, _ in candidates)
                 nested = candidates[0][1]
                 previous = globals_by_scope.get((file, variable))
-                if len(items) != 1 or (nested and previous is not None):
+                repeated_at_same_level = (len(items) > 1 and any(d.conditional for d in items)
+                                          and all(not inner and d.kind != 'PARAMETER' for d, inner in candidates))
+                if (len(items) != 1 and not repeated_at_same_level) or (nested and previous is not None):
                     binding = VariableBinding('AMBIGUOUS', items)
                 elif items[0].storage == 'extern':
                     if previous and previous.status not in ('STRUCT', 'INTEGER', 'SCALAR'):
@@ -822,11 +1014,11 @@ def _bind_functions(registry, globals_by_scope):
 def build_bitfield_catalog(paths, encoding='utf-8-sig'):
     """Collect input files first, then link declarations by source scope.
 
-    Only include paths that resolve to supplied files participate. Numeric ranges describe
+    Includes supply the preferred context; missing types use all supplied files. Numeric ranges describe
     the declared width and signedness, without asserting target storage capacity or layout.
     """
     files = sorted({str(Path(path).resolve()) for path in paths})
-    units, diagnostics = {}, []
+    units, sources, diagnostics = {}, {}, []
     for file in files:
         try:
             raw = Path(file).read_bytes()
@@ -840,8 +1032,9 @@ def build_bitfield_catalog(paths, encoding='utf-8-sig'):
                 break
             except UnicodeDecodeError:
                 continue
-        units[file] = _collect(source, file, files)
-        diagnostics.extend(units[file].reviews)
+        sources[file] = source
+    units.update(_collect_units(sources, set(files)))
+    diagnostics.extend(d for unit in units.values() for d in unit.reviews)
     registry = _Registry(units)
     links, aliases = {}, defaultdict(set)
     for file, scope in registry.scopes.items():
@@ -864,7 +1057,7 @@ def build_bitfield_catalog(paths, encoding='utf-8-sig'):
         fields = tuple(_field(raw, registry, status if status != 'RESOLVED' else
                               'AMBIGUOUS' if counts[raw.member] > 1 else '') for raw in st.fields)
         definitions[origin] = CatalogStruct(origin, st.name, st.tag,
-                                             tuple(sorted(aliases[origin])), status, fields)
+                                             tuple(sorted(aliases[origin])), status, fields, tuple(st.ordinary))
     conditional = frozenset(origin for unit in units.values() for origin in unit.conditional_declarations)
     variables, bindings = _bind_variables(registry)
     return BitfieldCatalog(definitions, links, tuple(diagnostics), registry.scopes, conditional,

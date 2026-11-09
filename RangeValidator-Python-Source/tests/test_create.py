@@ -42,7 +42,7 @@ class CreateTests(unittest.TestCase):
 
     def test_unresolved_types_and_non_bitfields_do_not_create(self):
         for expression, status in [('unknown.state', 'REVIEW'), ('obj.sign', 'REVIEW'),
-                                   ('count', None), ('obj.normal', None)]:
+                                   ('count', None), ('obj.normal', 'SKIP')]:
             results, _ = compare_book(None, self.catalog, self.book(None, expression))
             self.assertEqual([r.status for r in results], [status] if status else [])
 

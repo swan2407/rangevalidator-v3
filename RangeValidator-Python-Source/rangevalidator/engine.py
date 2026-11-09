@@ -2,9 +2,9 @@
 from dataclasses import dataclass, field, replace
 from pathlib import Path
 import re
-from .analysis import analyze, identifier
+from .analysis import analyze, identifier, matching_names
 from .bitfield_catalog import BitfieldCatalog, build_bitfield_catalog
-from .common import key, rows, at, text, norm, safe_header
+from .common import key, rows, at, text, norm, normalize_member_expression, safe_header, sheet_function_name
 from .models import Cell
 
 
@@ -268,8 +268,81 @@ def _input_source(bitfields, hint):
     return matches[0] if len(matches) == 1 else None
 
 
-def _catalog_match(catalog, access, source_file, function):
+def _missing_declaration_reason(bitfields, name, source_file, function_name):
+    locations = [(d.origin, '') for spelling in matching_names(bitfields.variables, name)
+                 for d in bitfields.variables[spelling]]
+    locations.extend(item for spelling in matching_names(bitfields.function_declaration_locations, name)
+                     for item in bitfields.function_declaration_locations[spelling])
+    if not locations:
+        return f"DECL_NOT_COLLECTED: 등록된 C/H에서 '{name}' 선언을 수집하지 못함"
+
+    context = f'함수 {function_name}' if function_name else '현재 함수'
+    if source_file:
+        context += f' / {Path(source_file).name}'
+    locations = list(dict.fromkeys(locations))
+    shown = ', '.join(f'{Path(origin.file).name}:{origin.line}' +
+                      (f' ({function})' if function else '')
+                      for origin, function in locations[:3])
+    if len(locations) > 3:
+        shown += f' 외 {len(locations) - 3}곳'
+    return (f"DECL_OUT_OF_SCOPE: '{name}' 선언은 수집했으나 {context}에서 연결되지 않음 "
+            f"({shown})")
+
+
+def _catalog_match(catalog, access, source_file, function, *, function_name=None):
     bitfields = catalog.bitfields
+    name, member = access['base'], access['member']
+    if function.alternatives:
+        scopes = function.alternatives
+        local_scopes = [scope for scope in scopes if matching_names(scope.variables, name)]
+        if local_scopes and len(local_scopes) != len(scopes):
+            shared = bitfields.lookup_variable(source_file or function.file, name)
+            if shared.status == 'MISSING' and bitfields.lookup_variable(None, name).status == 'MISSING':
+                scopes = local_scopes
+        matches = [_catalog_match(catalog, access, source_file, scope, function_name=function_name)
+                   for scope in scopes]
+        return _agree_member_matches(matches, name, member)
+    if function.status not in ('MISSING', 'RESOLVED', 'CONDITIONAL'):
+        return 'REVIEW', f'함수 정의를 확정할 수 없음 ({function.status})', None
+    source_file = source_file or function.file or None
+    binding = bitfields.lookup_variable(source_file, name, function.variables)
+    if binding.status == 'MISSING' and source_file is not None:
+        binding = bitfields.lookup_variable(None, name)
+    if binding.status == 'MISSING':
+        return _member_catalog_match(bitfields, access,
+            _missing_declaration_reason(bitfields, name, source_file, function_name))
+
+    match = _match_binding(bitfields, access, binding)
+    if binding.declarations and function.variables.get(binding.declarations[0].name) is binding:
+        if all(d.conditional for d in binding.declarations):
+            fallback = bitfields.lookup_variable(source_file, name)
+            if fallback.status != 'MISSING':
+                return _agree_member_matches([match, _match_binding(bitfields, access, fallback)], name, member)
+    return match
+
+
+def _agree_member_matches(matches, name, member):
+    """Combine the results for the same Excel row across source declarations."""
+    first = matches[0]
+    if all(match == first for match in matches):
+        return first
+    if all(status == 'TYPE_MATCH' for status, _, _ in matches):
+        ranges = {(field.minimum, field.maximum) for _, _, field in matches}
+        if len(ranges) == 1:
+            return first[0], first[1] + ' / 선언 후보의 범위 동일', first[2]
+    if all(status == 'SKIP' and reason for status, reason, _ in matches):
+        return first[0], first[1] + ' / 모든 선언 후보에서 일반 멤버', None
+    details = []
+    for status, reason, field in matches:
+        if status == 'TYPE_MATCH':
+            details.append(f'{field.minimum}~{field.maximum} ({Path(field.file).name}:{field.line})')
+        else:
+            details.append(reason or '구조체 멤버가 아님')
+    shown = ' / '.join(list(dict.fromkeys(details))[:5])
+    return 'REVIEW', f"'{name}.{member}'의 선언 후보별 비교 결과가 다름: {shown}", None
+
+
+def _match_binding(bitfields, access, binding):
     name, member = access['base'], access['member']
     indexed, arrow = access['index'] is not None, access['operator'] == '->'
 
@@ -283,40 +356,118 @@ def _catalog_match(catalog, access, source_file, function):
                 return False
         return dimensions == 0 and depth == int(arrow)
 
-    if function.status not in ('MISSING', 'RESOLVED'):
-        return 'REVIEW', f'함수 정의를 확정할 수 없음 ({function.status})', None
-    if function.status == 'RESOLVED':
-        source_file = source_file or function.file
-    binding = function.variables.get(name) or bitfields.lookup_variable(source_file, name)
-    if binding.status == 'MISSING':
-        return 'REVIEW', f"'{name}' 의 구조체 타입을 확인할 C/H 선언이 없음", None
-    if binding.status in ('INTEGER', 'SCALAR'):
-        return 'SKIP', '', None
-    if binding.status != 'STRUCT':
-        return 'REVIEW', f"'{name}' 의 변수 선언 연결이 불확실함 ({binding.status})", None
     link = binding.type_link
+    definition = bitfields.definitions.get(link.definition) if link else None
+    if binding.status in ('INTEGER', 'SCALAR') or (link and link.integer_type and not definition):
+        return 'SKIP', '', None
+    if binding.status not in ('STRUCT', 'CONDITIONAL'):
+        return 'REVIEW', f"'{name}' 의 변수 선언 연결이 불확실함 ({binding.status})", None
     first = binding.declarations[0]
     reason = f'C 선언 {Path(first.origin.file).name}:{first.origin.line} ({first.spelling})'
-    dimensions = len(first.arrays)
-    decay = int(first.kind == 'PARAMETER' and dimensions == 1)
-    compatible = supports_access(link.pointer_depth + decay, dimensions - decay)
-    definition = bitfields.definitions[link.definition]
-    if definition.status != 'RESOLVED':
-        return 'REVIEW', f"'{definition.name}' 구조체 정의가 불확실함 ({definition.status})", None
-    fields = [f for f in definition.fields if f.declaration.member == member]
-    if not fields:
-        return 'SKIP', '', None
-    # An ordinary or absent member is excluded before validating the operator.
+    candidates = {definition.origin: definition} if definition else {}
+    if not candidates:
+        # Check definitions of the declared type, never unrelated member names.
+        for declaration in binding.declarations:
+            if declaration.target in bitfields.definitions:
+                record = bitfields.definitions[declaration.target]
+                candidates[record.origin] = record
+                continue
+            spelling = declaration.spelling.removeprefix('struct ')
+            names = matching_names(bitfields.type_candidates, spelling)
+            if not names:
+                return 'REVIEW', f"'{name}'의 선언 타입 '{spelling}' 후보를 찾지 못함 / {reason}", None
+            for spelling in names:
+                candidates.update((d.origin, d) for d in bitfields.type_candidates[spelling])
+    status, reason, field = _compare_member_candidates(list(candidates.values()), member, reason)
+    # Ordinary-member classification does not require a bitfield access check.
+    if status != 'TYPE_MATCH':
+        return status, reason, field
+    compatible = True
+    for declaration in binding.declarations:
+        dimensions = len(declaration.arrays)
+        decay = int(declaration.kind == 'PARAMETER' and dimensions == 1)
+        depth = link.pointer_depth if definition else declaration.pointer_depth
+        compatible &= supports_access(depth + decay, dimensions - decay)
     if not compatible:
         return 'REVIEW', f"'{name}' 의 배열/포인터 선언과 접근 형태가 다름", None
-    f = fields[0]
-    if len(fields) != 1 or f.status != 'RESOLVED':
-        return 'REVIEW', f"'{member}' 의 비트필드 범위를 확정할 수 없음 ({f.status})", f.declaration
-    return 'TYPE_MATCH', reason, f.declaration
+    return status, reason, field
+
+
+def _member_catalog_match(bitfields, access, missing_reason):
+    """Infer the root's struct type first, then compare only members of that type."""
+    base, member = access['base'], access['member']
+    stems = [base]
+    if access['operator'] == '->' and base.casefold().endswith('_p'):
+        stems.insert(0, base[:-2])
+    attempts = list(dict.fromkeys(name for stem in stems
+                    for name in ((stem,) if stem.casefold().endswith('_t') else (stem + '_t', stem))))
+    candidates = {}
+    type_names = ()
+    for spelling in attempts:
+        type_names = matching_names(bitfields.type_candidates, spelling)
+        if type_names:
+            for name in type_names:
+                candidates.update((d.origin, d) for d in bitfields.type_candidates[name])
+            break
+    if not candidates:
+        return 'REVIEW', (missing_reason + ' / 변수명에 대응하는 구조체 타입을 찾지 못함 '
+                          f"({', '.join(attempts)})"), None
+    candidates = list(candidates.values())
+    locations = [f'{d.name} ({Path(d.origin.file).name}:{d.origin.line})' for d in candidates]
+    shown = ', '.join(locations[:5]) + (f' 외 {len(locations) - 5}개' if len(locations) > 5 else '')
+    reason = (f"변수 선언 연결 없이 변수명으로 타입 추정: '{base}' → {', '.join(type_names)} / "
+              f"해당 구조체의 '{member}' 비교 / {shown}")
+    return _compare_member_candidates(candidates, member, reason)
+
+
+def _compare_member_candidates(candidates, member, reason):
+    """Compare source-declared ranges, independently of build-branch activation."""
+    if not candidates:
+        return 'REVIEW', f"'{member}'의 구조체 타입 후보가 없음 / {reason}", None
+    if any(d.status not in ('RESOLVED', 'CONDITIONAL') for d in candidates):
+        return 'REVIEW', f'구조체 정의 후보가 충돌함 / {reason}', None
+    members = {}
+    for definition in candidates:
+        available = set(definition.ordinary_members) | {f.declaration.member for f in definition.fields}
+        names = matching_names(available, member)
+        if not names:
+            return 'REVIEW', f"MEMBER_NOT_FOUND: '{definition.name}'에서 '{member}' 멤버를 찾지 못함 / {reason}", None
+        if len(names) != 1:
+            return 'REVIEW', f"대소문자만 다른 멤버 후보가 여러 개 있음: {', '.join(sorted(names))} / {reason}", None
+        members[definition.origin] = names[0]
+    fields = [f for d in candidates for f in d.fields if f.declaration.member == members[d.origin]]
+    ordinary = [d for d in candidates if members[d.origin] in d.ordinary_members]
+    if not fields and ordinary:
+        spellings = ', '.join(sorted(set(members.values())))
+        return 'SKIP', f"일반 멤버: '{spellings}' (비트필드 아님) / {reason}", None
+    if ordinary:
+        return 'REVIEW', f'후보에 일반 멤버와 비트필드가 함께 있음 / {reason}', None
+    unresolved = [f for f in fields if f.status not in ('RESOLVED', 'CONDITIONAL')
+                  or f.declaration.minimum is None or f.declaration.maximum is None]
+    if unresolved:
+        details = ', '.join(f'{f.declaration.declared_type} {f.declaration.member}:{f.width_expression} '
+                            f'({f.status}, {Path(f.declaration.file).name}:{f.declaration.line})'
+                            for f in unresolved[:5])
+        return 'REVIEW', f'비트필드 후보의 타입·부호 또는 폭을 계산하지 못함: {details} / {reason}', (
+            fields[0].declaration if len(fields) == 1 else None)
+    ranges = {(f.declaration.minimum, f.declaration.maximum) for f in fields}
+    if len(ranges) != 1:
+        details = ', '.join(f'{f.declaration.struct_name}.{f.declaration.member} '
+                            f'{f.declaration.minimum}~{f.declaration.maximum} '
+                            f'({Path(f.declaration.file).name}:{f.declaration.line})' for f in fields[:5])
+        return 'REVIEW', f'같은 타입·멤버의 후보별 범위가 다름: {details} / {reason}', None
+    field = fields[0].declaration
+    if len(fields) > 1:
+        field = replace(field, struct_name=' / '.join(sorted({d.name for d in candidates})))
+        reason += ' / 후보들의 범위 동일'
+    assumptions = sorted({note for f in fields for note in f.type_link.assumptions})
+    if assumptions:
+        reason += ' / ' + ' / '.join(assumptions)
+    return 'TYPE_MATCH', reason, field
 
 
 def is_function_sheet(name):
-    return bool(re.fullmatch(r'\s*\d+\.\s*\S.*', name))
+    return re.search(r'\d', name) is not None
 
 
 def compare_book(common, catalog, book, relative_path=None):
@@ -327,12 +478,22 @@ def compare_book(common, catalog, book, relative_path=None):
         if not is_function_sheet(sheet.name):
             continue
         from .a_extraction import scan_a
-        from .b_extraction import scan_b
+        from .b_extraction import scan_b, DECLARATION_NAME
         a_headers, _, a_candidates = scan_a(sheet)
         a_rows = {c['row'] for c in a_candidates if c['range_cell'] is not None}
         table = rows(sheet)
         b_headers, _, b_candidates = scan_b(sheet, table)
         b_rows = {c['row'] for c in b_candidates if c['range_cell'] is not None}
+        for candidate in (*a_candidates, *b_candidates):
+            expr = candidate['name']
+            normalized = normalize_member_expression(expr)
+            if candidate['range_cell'] is None and DECLARATION_NAME.fullmatch(normalized) and re.search(r'\.|->', normalized):
+                results.append(Result(
+                    id=f"{book.path}|{sheet.name}|{candidate['name_cell']}|unresolved-range",
+                    file=book.path, sheet=sheet.name, cell='', expression=expr, status='REVIEW',
+                    reason=f"RANGE_CELL_UNRESOLVED: Name {candidate['name_cell']}에서 변수는 읽었으나 "
+                           f"Range/Scope 셀을 확정하지 못함 ({candidate['reason']})",
+                    format='B' if candidate['format'] == 'A' else 'A', backend=book.backend))
         headers, issues = {}, []
         for row, cs in table.items():
             labels = {}
@@ -361,7 +522,7 @@ def compare_book(common, catalog, book, relative_path=None):
             continue
         coverage.append((sheet.name,'TARGET','Design headers recognized'))
         source_file = _input_source(catalog.bitfields, filename)
-        function_name = sheet.name.split('.', 1)[1].strip()
+        function_name = sheet_function_name(sheet.name)
         function = catalog.bitfields.lookup_function(source_file, function_name) if catalog.bitfields else None
         header, section = None,''
         for row,cs in table.items():
@@ -372,7 +533,7 @@ def compare_book(common, catalog, book, relative_path=None):
             if len(populated) == 1:
                 title = norm(populated[0])
                 if re.fullmatch(r'(parameter|global|local|static|return|calibration|input|output|전역|지역|매개|파라미터|반환|캘리브레이션|보정)\w*(\s*(variable|variables|변수|값))?(\s*\((input|output|입력|출력)\))?',title) \
-                        or parse_expression(text(populated[0]).strip()) is None:
+                        or parse_expression(normalize_member_expression(text(populated[0]))) is None:
                     section = title                                   # 섹션 제목 행 (Global Variable, Local Variable, …)
                     if title.startswith(('calibration','캘리브레이션','보정')):
                         header = None
@@ -394,14 +555,19 @@ def compare_book(common, catalog, book, relative_path=None):
             expr = text(nc).strip()
             if not expr and nc.merge_anchor:
                 expr = text(sheet.cells.get(nc.merge_anchor,nc)).strip()
-            access = MEMBER_ACCESS.fullmatch(expr)
-            if not access or access['member'] not in catalog.bitfield_members:
+            normalized = normalize_member_expression(expr)
+            access = MEMBER_ACCESS.fullmatch(normalized)
+            if not DECLARATION_NAME.fullmatch(normalized) or not re.search(r'\.|->', normalized):
                 continue
-            if not identifier(access['base']) or (access['index'] and not (
-                    access['index'].isdigit() or identifier(access['index']))):
-                continue
-            status,reason,f = _catalog_match(catalog, access, source_file, function)
-            if status == 'SKIP':
+            if access and identifier(access['base']) and (not access['index'] or
+                    access['index'].isdigit() or identifier(access['index'])):
+                status,reason,f = _catalog_match(catalog, access, source_file, function,
+                                                 function_name=function_name)
+            else:
+                status,reason,f = ('REVIEW',
+                    'MEMBER_PATH_UNRESOLVED: Excel 변수 행을 읽었으나 중첩 멤버 또는 첨자 경로의 타입을 확정하지 못함',
+                    None)
+            if status == 'SKIP' and not reason:
                 continue
             rid = f'{book.path}|{sheet.name}|{rc.address}'
             base = dict(id=rid,file=book.path,sheet=sheet.name,cell=rc.address,expression=expr,existing=rc.formula if rc.is_formula else rc.value,format=fmt,backend=book.backend)
@@ -409,9 +575,10 @@ def compare_book(common, catalog, book, relative_path=None):
                 base.update(struct=f.struct_name,member=f.member,width=f.width,signed=f.signed,source=f.file,source_line=f.line,
                             expected=f'{f.minimum}~{f.maximum}' if f.minimum is not None else '')
                 design_type=text(tc).strip()
-                if design_type and f.declared_type and design_type.replace(' ','').lower()!=f.declared_type.replace(' ','').lower():
+                if design_type and f.declared_type and ''.join(design_type.split()).casefold() != ''.join(f.declared_type.split()).casefold():
                     reason=f"{reason} / 설계서 Type '{design_type}' ≠ 코드 '{f.declared_type}'"
             if status == 'TYPE_MATCH':
+                binding_reason = reason
                 if rc.is_formula or rc.kind == 'error':
                     status,reason = 'REVIEW','범위 칸에 수식/오류 값이 있어 자동 수정하지 않음'
                 elif rc.merged_range and rc.merge_anchor != rc.address:
@@ -427,10 +594,12 @@ def compare_book(common, catalog, book, relative_path=None):
                 else:
                     status,reason = interval_status(rc.value,base['expected'])
                     reason = reason + ' / ' + how_text(f) if status in ('MATCH','MISMATCH','CREATE') else reason
+                reason += ' / ' + binding_reason
             results.append(Result(**base,status=status,reason=reason,candidate=status in ('MISMATCH','CREATE')))
     # Duplicate target coordinates are never independent edits.
     counts = {}
     for r in results:
         k = (r.sheet,r.cell)
         counts[k] = counts.get(k,0) + 1
-    return [replace(r,status='REVIEW',reason='Duplicate target cell',candidate=False) if counts[(r.sheet,r.cell)] > 1 else r for r in results], coverage
+    return [replace(r,status='REVIEW',reason='Duplicate target cell',candidate=False)
+            if r.cell and counts[(r.sheet,r.cell)] > 1 else r for r in results], coverage

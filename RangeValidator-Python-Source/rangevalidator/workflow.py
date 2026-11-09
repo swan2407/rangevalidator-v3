@@ -179,9 +179,13 @@ def _run_comparison(headers,details,backend='auto',encoding='utf-8-sig',diagnost
             if not record.partial:
                 record.reason='C/H 소스 기준 비교 완료'
             if not coverage and not record.partial:
-                record.status='NO_VARIABLES';record.reason='비교 대상 함수 시트(숫자.함수이름)가 없습니다.'
+                record.status='NO_VARIABLES';record.reason='비교 대상 함수 시트(이름에 숫자가 포함된 시트)가 없습니다.'
             elif not record.extracted_variables and not record.partial:
-                record.status='NO_VARIABLES';record.reason='NO_VARIABLES: no variable comparison performed'
+                record.status='NO_VARIABLES'
+                layout_issues = [f'{sheet}: {reason}' for sheet, status, reason in coverage if status == 'REVIEW']
+                record.reason = ('Excel 시트/헤더 확인 필요 — ' + '; '.join(layout_issues)
+                                 if layout_issues else
+                                 '함수 시트에서 구조체 멤버 표현식을 찾지 못했습니다. Name 열과 Range/Scope 헤더를 확인하세요.')
         except Exception as exc:
             item=error(path,exc,'COMPARISON_ERROR');record.status='ERROR';record.error_kind='COMPARISON_ERROR'
             record.failed_stage='comparison.run';record.failed_api='comparison.run';record.code=item['code'];record.exception_type=item['exception_type']

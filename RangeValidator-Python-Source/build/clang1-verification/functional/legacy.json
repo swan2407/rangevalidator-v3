@@ -1,0 +1,767 @@
+{
+  "status": "MEASURED",
+  "inventory": {
+    "records": 26,
+    "bitfields": 41,
+    "aliases": 9,
+    "global_variables": 20,
+    "local_variables": 2,
+    "parameters": 1
+  },
+  "jobs": [
+    {
+      "job": "types_and_access",
+      "counts": {
+        "record_correct": 10,
+        "alias_correct": 9,
+        "bitfield_flag_correct": 22,
+        "width_correct": 19,
+        "range_correct": 17,
+        "signedness_correct": 17,
+        "range_unresolved": 2,
+        "signedness_unresolved": 2,
+        "bitfield_flag_wrong": 1,
+        "variable_link_correct": 19,
+        "variable_link_unresolved": 2,
+        "access_owner_correct": 9,
+        "access_variable_correct": 9,
+        "access_range_correct": 9,
+        "access_excluded": 2,
+        "access_unresolved": 6
+      },
+      "differences": [
+        {
+          "metric": "range",
+          "context": [
+            [
+              "include/types.h",
+              19
+            ],
+            "plain"
+          ],
+          "expected": [
+            -8,
+            7
+          ],
+          "actual": null
+        },
+        {
+          "metric": "signedness",
+          "context": [
+            [
+              "include/types.h",
+              19
+            ],
+            "plain"
+          ],
+          "expected": true,
+          "actual": null
+        },
+        {
+          "metric": "range",
+          "context": [
+            [
+              "include/types.h",
+              19
+            ],
+            "level"
+          ],
+          "expected": [
+            -2,
+            1
+          ],
+          "actual": null
+        },
+        {
+          "metric": "signedness",
+          "context": [
+            [
+              "include/types.h",
+              19
+            ],
+            "level"
+          ],
+          "expected": true,
+          "actual": null
+        },
+        {
+          "metric": "bitfield_flag",
+          "context": [
+            [
+              "include/types.h",
+              19
+            ],
+            ""
+          ],
+          "expected": true,
+          "actual": false
+        },
+        {
+          "metric": "variable_link",
+          "context": [
+            [
+              "app/main.c",
+              13
+            ],
+            "can_chg_p"
+          ],
+          "expected": [
+            "include/types.h",
+            3
+          ],
+          "actual": null
+        },
+        {
+          "metric": "variable_link",
+          "context": [
+            [
+              "app/main.c",
+              38
+            ],
+            "shadow"
+          ],
+          "expected": [
+            "include/types.h",
+            15
+          ],
+          "actual": null
+        },
+        {
+          "metric": "access_unresolved",
+          "context": {
+            "location": [
+              "app/main.c",
+              29
+            ],
+            "expression": "wrapped.status.fault",
+            "function": "update",
+            "variable": [
+              "app/main.c",
+              12
+            ],
+            "member_record": [
+              "include/types.h",
+              9
+            ],
+            "range": [
+              0,
+              1
+            ]
+          }
+        },
+        {
+          "metric": "access_unresolved",
+          "context": {
+            "location": [
+              "app/main.c",
+              30
+            ],
+            "expression": "wrapped.status.mode",
+            "function": "update",
+            "variable": [
+              "app/main.c",
+              12
+            ],
+            "member_record": [
+              "include/types.h",
+              9
+            ],
+            "range": [
+              0,
+              7
+            ]
+          }
+        },
+        {
+          "metric": "access_unresolved",
+          "context": {
+            "location": [
+              "app/main.c",
+              33
+            ],
+            "expression": "shadow.state",
+            "function": "update",
+            "variable": [
+              "app/main.c",
+              19
+            ],
+            "member_record": [
+              "include/types.h",
+              14
+            ],
+            "range": [
+              0,
+              3
+            ]
+          }
+        },
+        {
+          "metric": "access_unresolved",
+          "context": {
+            "location": [
+              "app/main.c",
+              36
+            ],
+            "expression": "container.inner.ready",
+            "function": "update",
+            "variable": [
+              "app/main.c",
+              16
+            ],
+            "member_record": [
+              "include/types.h",
+              12
+            ],
+            "range": [
+              0,
+              1
+            ]
+          }
+        },
+        {
+          "metric": "access_unresolved",
+          "context": {
+            "location": [
+              "app/main.c",
+              39
+            ],
+            "expression": "shadow.state",
+            "function": "update",
+            "variable": [
+              "app/main.c",
+              38
+            ],
+            "member_record": [
+              "include/types.h",
+              15
+            ],
+            "range": [
+              0,
+              31
+            ]
+          }
+        },
+        {
+          "metric": "access_unresolved",
+          "context": {
+            "location": [
+              "app/main.c",
+              41
+            ],
+            "expression": "shadow.state",
+            "function": "update",
+            "variable": [
+              "app/main.c",
+              19
+            ],
+            "member_record": [
+              "include/types.h",
+              14
+            ],
+            "range": [
+              0,
+              3
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "job": "options_on",
+      "counts": {
+        "record_correct": 1,
+        "alias_unresolved": 1,
+        "bitfield_flag_unresolved": 3,
+        "width_unresolved": 4,
+        "range_unresolved": 4,
+        "signedness_unresolved": 4,
+        "bitfield_flag_correct": 1,
+        "variable_link_unresolved": 1
+      },
+      "differences": [
+        {
+          "metric": "alias",
+          "context": "Configured",
+          "expected": [
+            "options/config.c",
+            6
+          ],
+          "actual": null
+        },
+        {
+          "metric": "bitfield_flag",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "mode"
+          ],
+          "expected": true,
+          "actual": null
+        },
+        {
+          "metric": "width",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "mode"
+          ],
+          "expected": 3,
+          "actual": null
+        },
+        {
+          "metric": "range",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "mode"
+          ],
+          "expected": [
+            0,
+            7
+          ],
+          "actual": null
+        },
+        {
+          "metric": "signedness",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "mode"
+          ],
+          "expected": false,
+          "actual": null
+        },
+        {
+          "metric": "bitfield_flag",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "target"
+          ],
+          "expected": true,
+          "actual": null
+        },
+        {
+          "metric": "width",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "target"
+          ],
+          "expected": 6,
+          "actual": null
+        },
+        {
+          "metric": "range",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "target"
+          ],
+          "expected": [
+            0,
+            63
+          ],
+          "actual": null
+        },
+        {
+          "metric": "signedness",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "target"
+          ],
+          "expected": false,
+          "actual": null
+        },
+        {
+          "metric": "bitfield_flag",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "standard"
+          ],
+          "expected": true,
+          "actual": null
+        },
+        {
+          "metric": "width",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "standard"
+          ],
+          "expected": 4,
+          "actual": null
+        },
+        {
+          "metric": "range",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "standard"
+          ],
+          "expected": [
+            0,
+            15
+          ],
+          "actual": null
+        },
+        {
+          "metric": "signedness",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "standard"
+          ],
+          "expected": false,
+          "actual": null
+        },
+        {
+          "metric": "width",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "sdk"
+          ],
+          "expected": 1,
+          "actual": null
+        },
+        {
+          "metric": "range",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "sdk"
+          ],
+          "expected": [
+            0,
+            1
+          ],
+          "actual": null
+        },
+        {
+          "metric": "signedness",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "sdk"
+          ],
+          "expected": false,
+          "actual": null
+        },
+        {
+          "metric": "variable_link",
+          "context": [
+            [
+              "options/config.c",
+              24
+            ],
+            "configured"
+          ],
+          "expected": [
+            "options/config.c",
+            6
+          ],
+          "actual": null
+        }
+      ]
+    },
+    {
+      "job": "options_off",
+      "counts": {
+        "record_correct": 1,
+        "alias_unresolved": 1,
+        "bitfield_flag_unresolved": 3,
+        "width_unresolved": 4,
+        "range_unresolved": 4,
+        "signedness_unresolved": 4,
+        "bitfield_flag_correct": 1,
+        "variable_link_unresolved": 1
+      },
+      "differences": [
+        {
+          "metric": "alias",
+          "context": "Configured",
+          "expected": [
+            "options/config.c",
+            6
+          ],
+          "actual": null
+        },
+        {
+          "metric": "bitfield_flag",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "mode"
+          ],
+          "expected": true,
+          "actual": null
+        },
+        {
+          "metric": "width",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "mode"
+          ],
+          "expected": 2,
+          "actual": null
+        },
+        {
+          "metric": "range",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "mode"
+          ],
+          "expected": [
+            0,
+            3
+          ],
+          "actual": null
+        },
+        {
+          "metric": "signedness",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "mode"
+          ],
+          "expected": false,
+          "actual": null
+        },
+        {
+          "metric": "bitfield_flag",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "target"
+          ],
+          "expected": true,
+          "actual": null
+        },
+        {
+          "metric": "width",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "target"
+          ],
+          "expected": 5,
+          "actual": null
+        },
+        {
+          "metric": "range",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "target"
+          ],
+          "expected": [
+            0,
+            31
+          ],
+          "actual": null
+        },
+        {
+          "metric": "signedness",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "target"
+          ],
+          "expected": false,
+          "actual": null
+        },
+        {
+          "metric": "bitfield_flag",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "standard"
+          ],
+          "expected": true,
+          "actual": null
+        },
+        {
+          "metric": "width",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "standard"
+          ],
+          "expected": 3,
+          "actual": null
+        },
+        {
+          "metric": "range",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "standard"
+          ],
+          "expected": [
+            0,
+            7
+          ],
+          "actual": null
+        },
+        {
+          "metric": "signedness",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "standard"
+          ],
+          "expected": false,
+          "actual": null
+        },
+        {
+          "metric": "width",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "sdk"
+          ],
+          "expected": 1,
+          "actual": null
+        },
+        {
+          "metric": "range",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "sdk"
+          ],
+          "expected": [
+            0,
+            1
+          ],
+          "actual": null
+        },
+        {
+          "metric": "signedness",
+          "context": [
+            [
+              "options/config.c",
+              6
+            ],
+            "sdk"
+          ],
+          "expected": false,
+          "actual": null
+        },
+        {
+          "metric": "variable_link",
+          "context": [
+            [
+              "options/config.c",
+              24
+            ],
+            "configured"
+          ],
+          "expected": [
+            "options/config.c",
+            6
+          ],
+          "actual": null
+        }
+      ]
+    },
+    {
+      "job": "forward_only",
+      "counts": {
+        "incomplete_variable_correct": 1
+      },
+      "differences": []
+    }
+  ],
+  "diagnostics": [],
+  "totals": {
+    "record_correct": 12,
+    "alias_correct": 9,
+    "bitfield_flag_correct": 24,
+    "width_correct": 19,
+    "range_correct": 17,
+    "signedness_correct": 17,
+    "range_unresolved": 10,
+    "signedness_unresolved": 10,
+    "bitfield_flag_wrong": 1,
+    "variable_link_correct": 19,
+    "variable_link_unresolved": 4,
+    "access_owner_correct": 9,
+    "access_variable_correct": 9,
+    "access_range_correct": 9,
+    "access_excluded": 2,
+    "access_unresolved": 6,
+    "alias_unresolved": 2,
+    "bitfield_flag_unresolved": 6,
+    "width_unresolved": 8,
+    "incomplete_variable_correct": 1
+  },
+  "seconds": 0.14164,
+  "peak_working_set_bytes": 28405760,
+  "files": 16,
+  "python": "3.13.9 (tags/v3.13.9:8183fa5, Oct 14 2025, 14:09:13) [MSC v.1944 64 bit (AMD64)]",
+  "architecture": "AMD64"
+}

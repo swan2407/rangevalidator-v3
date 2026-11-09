@@ -74,14 +74,19 @@ extern DeviceAlias_t conditional;
             ('device.mode', 'MISMATCH', '0~7', True),
             ('sensor.active', 'MATCH', '0~7', False),
             ('sensor.status', 'MATCH', '0~31', False),
+            ('device.status', 'SKIP', '', False),
+            ('device.normal', 'REVIEW', '', False),
+            ('device.active[0]', 'REVIEW', '', False),
+            ('device_array[i + 1].active', 'REVIEW', '', False),
             ('device_p -> active', 'MATCH', '0~1', False),
             ('device_array [ i ] . active', 'MATCH', '0~1', False),
             ('pointer_array[0]->active', 'MATCH', '0~1', False),
             ('unknown.active', 'REVIEW', '', False),
+            ('unknown.temperature', 'REVIEW', '', False),
             ('uncertain.width', 'REVIEW', '', False),
             ('uncertain.sign', 'REVIEW', '', False),
-            ('guessed.mode', 'REVIEW', '', False),
-            ('conditional.active', 'REVIEW', '', False),
+            ('guessed.mode', 'MATCH', '0~7', False),
+            ('conditional.active', 'MATCH', '0~1', False),
             ('double_pointer->active', 'REVIEW', '', False),
             ('matrix[i].active', 'REVIEW', '', False),
         ])
@@ -105,6 +110,21 @@ extern DeviceAlias_t conditional;
             results, _ = compare_book(None, catalog, self.workbook([('device.active', '0~1')], path))
             self.assertEqual([(r.status, r.expected) for r in results], [(status, expected)])
 
+    def test_global_declarations_link_without_include_and_conflicting_members_explain_review(self):
+        other = self.write('other.c', '#include "types.h"\nDevice_t elsewhere;\n'
+                           'void setup(void) { Device_t other_local; }\n')
+        catalog = catalog_headers([*self.paths, other])
+        workbook = self.workbook([('not_collected.active', '0~1'), ('elsewhere.active', '0~1'),
+                                  ('other_local.active', '0~1'), ('device.active', '0~1')])
+        results, _ = compare_book(None, catalog, workbook)
+        self.assertEqual([row.status for row in results], ['REVIEW', 'MATCH', 'REVIEW', 'MATCH'])
+        self.assertTrue(all(not row.candidate for row in results))
+        self.assertIn('DECL_NOT_COLLECTED', results[0].reason)
+        self.assertIn('대응하는 구조체 타입', results[0].reason)
+        self.assertIn('함수 Main / motor.c', results[2].reason)
+        self.assertIn('other.c:2', results[1].reason)
+        self.assertIn('other.c:3 (setup)', results[2].reason)
+
     def test_range_formula_and_non_anchor_merge_still_block_candidates(self):
         book = self.workbook([('device.active', '0~0'), ('device.mode', '0~0')])
         target = book.sheets[2]
@@ -119,7 +139,8 @@ extern DeviceAlias_t conditional;
                             + '\n  4\n#if FEATURE\nextern Device_t flag;\n#endif')
         catalog = catalog_headers([self.header, source])
         results, _ = compare_book(None, catalog, self.workbook([('flag.active', '0~0')], 'spliced.xlsx'))
-        self.assertEqual([(r.status, r.candidate) for r in results], [('REVIEW', False)])
+        self.assertEqual([(r.status, r.expected, r.candidate) for r in results], [('MISMATCH', '0~1', True)])
+        self.assertNotIn('CONDITIONAL', results[0].reason)
 
     def test_reuses_catalog_for_multiple_documents(self):
         details = [self.write('motor.xlsx', ''), self.write('second.xlsx', '')]

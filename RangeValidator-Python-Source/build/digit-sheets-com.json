@@ -1,0 +1,56 @@
+{
+  "openpyxl": [
+    [
+      "update1",
+      "C2",
+      "MATCH"
+    ],
+    [
+      "1_update",
+      "E2",
+      "MATCH"
+    ],
+    [
+      "1",
+      "C2",
+      "MATCH"
+    ],
+    [
+      "CAN2.Update",
+      "E2",
+      "MATCH"
+    ],
+    [
+      "1. update1",
+      "C2",
+      "MATCH"
+    ]
+  ],
+  "com": [
+    [
+      "update1",
+      "C2",
+      "MATCH"
+    ],
+    [
+      "1_update",
+      "E2",
+      "MATCH"
+    ],
+    [
+      "1",
+      "C2",
+      "MATCH"
+    ],
+    [
+      "CAN2.Update",
+      "E2",
+      "MATCH"
+    ],
+    [
+      "1. update1",
+      "C2",
+      "MATCH"
+    ]
+  ]
+}

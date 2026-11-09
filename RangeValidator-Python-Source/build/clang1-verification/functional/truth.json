@@ -1,0 +1,2172 @@
+[
+  {
+    "name": "types_and_access",
+    "source": "app/main.c",
+    "args": [
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc",
+      "-Dcinst="
+    ],
+    "db": true,
+    "confirmed": true,
+    "status": "PARSE_OK",
+    "records": [
+      {
+        "location": [
+          "include/types.h",
+          3
+        ],
+        "tag": "",
+        "aliases": [
+          "CAN_DATA_t",
+          "DataAlias",
+          "DataAlias2"
+        ],
+        "fields": {
+          "active": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "mode": [
+            3,
+            false,
+            [
+              0,
+              7
+            ]
+          ],
+          "state": [
+            3,
+            false,
+            [
+              0,
+              7
+            ]
+          ]
+        },
+        "parent": null,
+        "forwards": 0
+      },
+      {
+        "location": [
+          "include/types.h",
+          4
+        ],
+        "tag": "testmode_control_status_s",
+        "aliases": [
+          "testmode_control_status_t"
+        ],
+        "fields": {
+          "enable": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "mode": [
+            3,
+            false,
+            [
+              0,
+              7
+            ]
+          ]
+        },
+        "parent": null,
+        "forwards": 0
+      },
+      {
+        "location": [
+          "include/types.h",
+          8
+        ],
+        "tag": "Status",
+        "aliases": [
+          "Status_t"
+        ],
+        "fields": {
+          "fault": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "state": [
+            3,
+            false,
+            [
+              0,
+              7
+            ]
+          ],
+          "normal_value": [
+            null,
+            null,
+            null
+          ]
+        },
+        "parent": null,
+        "forwards": 1
+      },
+      {
+        "location": [
+          "include/types.h",
+          9
+        ],
+        "tag": "",
+        "aliases": [
+          "Inner_t"
+        ],
+        "fields": {
+          "fault": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "mode": [
+            3,
+            false,
+            [
+              0,
+              7
+            ]
+          ]
+        },
+        "parent": null,
+        "forwards": 0
+      },
+      {
+        "location": [
+          "include/types.h",
+          10
+        ],
+        "tag": "",
+        "aliases": [
+          "Outer_t"
+        ],
+        "fields": {
+          "status": [
+            null,
+            null,
+            null
+          ],
+          "valid": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ]
+        },
+        "parent": null,
+        "forwards": 0
+      },
+      {
+        "location": [
+          "include/types.h",
+          11
+        ],
+        "tag": "Enclosing",
+        "aliases": [],
+        "fields": {
+          "inner": [
+            null,
+            null,
+            null
+          ]
+        },
+        "parent": null,
+        "forwards": 0
+      },
+      {
+        "location": [
+          "include/types.h",
+          12
+        ],
+        "tag": "Embedded",
+        "aliases": [],
+        "fields": {
+          "ready": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ]
+        },
+        "parent": [
+          "include/types.h",
+          11
+        ],
+        "forwards": 0
+      },
+      {
+        "location": [
+          "include/types.h",
+          14
+        ],
+        "tag": "",
+        "aliases": [
+          "DeviceA_t"
+        ],
+        "fields": {
+          "state": [
+            2,
+            false,
+            [
+              0,
+              3
+            ]
+          ]
+        },
+        "parent": null,
+        "forwards": 0
+      },
+      {
+        "location": [
+          "include/types.h",
+          15
+        ],
+        "tag": "",
+        "aliases": [
+          "DeviceB_t"
+        ],
+        "fields": {
+          "state": [
+            5,
+            false,
+            [
+              0,
+              31
+            ]
+          ]
+        },
+        "parent": null,
+        "forwards": 0
+      },
+      {
+        "location": [
+          "include/types.h",
+          19
+        ],
+        "tag": "Signs",
+        "aliases": [],
+        "fields": {
+          "u": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ],
+          "s": [
+            1,
+            true,
+            [
+              -1,
+              0
+            ]
+          ],
+          "plain": [
+            4,
+            true,
+            [
+              -8,
+              7
+            ]
+          ],
+          "aliased": [
+            6,
+            false,
+            [
+              0,
+              63
+            ]
+          ],
+          "level": [
+            2,
+            true,
+            [
+              -2,
+              1
+            ]
+          ],
+          "wide": [
+            31,
+            false,
+            [
+              0,
+              2147483647
+            ]
+          ],
+          "": [
+            0,
+            null,
+            null
+          ]
+        },
+        "parent": null,
+        "forwards": 0
+      }
+    ],
+    "variables": [
+      {
+        "location": [
+          "include/types.h",
+          20
+        ],
+        "name": "can_data1",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "EXTERN",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          3
+        ],
+        "name": "can_data_p",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 1,
+        "arrays": [],
+        "qualifiers": [
+          [],
+          [
+            "const"
+          ]
+        ],
+        "storage": "EXTERN",
+        "spelling": "const CAN_DATA_t *"
+      },
+      {
+        "location": [
+          "app/main.c",
+          4
+        ],
+        "name": "can_data_array",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [
+          4
+        ],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          5
+        ],
+        "name": "static_data",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "STATIC",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          6
+        ],
+        "name": "const_data",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [
+          [
+            "const"
+          ]
+        ],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          7
+        ],
+        "name": "volatile_data",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [
+          [
+            "volatile"
+          ]
+        ],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          8
+        ],
+        "name": "fixed_pointer",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 1,
+        "arrays": [],
+        "qualifiers": [
+          [
+            "const"
+          ],
+          []
+        ],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          9
+        ],
+        "name": "double_pointer",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 2,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          10
+        ],
+        "name": "pointer_array",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 1,
+        "arrays": [
+          3
+        ],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          11
+        ],
+        "name": "alias_data",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": "DataAlias2"
+      },
+      {
+        "location": [
+          "app/main.c",
+          12
+        ],
+        "name": "wrapped",
+        "record": [
+          "include/types.h",
+          10
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "EXTERN",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          13
+        ],
+        "name": "can_chg_p",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 1,
+        "arrays": [],
+        "qualifiers": [
+          [],
+          [
+            "const"
+          ]
+        ],
+        "storage": "EXTERN",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          14
+        ],
+        "name": "status",
+        "record": [
+          "include/types.h",
+          8
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          15
+        ],
+        "name": "ctrl",
+        "record": [
+          "include/types.h",
+          4
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          16
+        ],
+        "name": "container",
+        "record": [
+          "include/types.h",
+          11
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          17
+        ],
+        "name": "device_a",
+        "record": [
+          "include/types.h",
+          14
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "EXTERN",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          18
+        ],
+        "name": "device_b",
+        "record": [
+          "include/types.h",
+          15
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "EXTERN",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          19
+        ],
+        "name": "shadow",
+        "record": [
+          "include/types.h",
+          14
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          20
+        ],
+        "name": "param_p",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "PARAMETER",
+        "function": "update",
+        "pointers": 1,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          21
+        ],
+        "name": "local_data",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "LOCAL",
+        "function": "update",
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          38
+        ],
+        "name": "shadow",
+        "record": [
+          "include/types.h",
+          15
+        ],
+        "kind": "LOCAL",
+        "function": "update",
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      }
+    ],
+    "accesses": [
+      {
+        "location": [
+          "app/main.c",
+          22
+        ],
+        "expression": "can_data1.state",
+        "function": "update",
+        "variable": [
+          "include/types.h",
+          20
+        ],
+        "member_record": [
+          "include/types.h",
+          3
+        ],
+        "range": [
+          0,
+          7
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          23
+        ],
+        "expression": "can_data_p->state",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          3
+        ],
+        "member_record": [
+          "include/types.h",
+          3
+        ],
+        "range": [
+          0,
+          7
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          24
+        ],
+        "expression": "can_data_array[0].state",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          4
+        ],
+        "member_record": [
+          "include/types.h",
+          3
+        ],
+        "range": [
+          0,
+          7
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          25
+        ],
+        "expression": "param_p->active",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          20
+        ],
+        "member_record": [
+          "include/types.h",
+          3
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          26
+        ],
+        "expression": "local_data.state",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          21
+        ],
+        "member_record": [
+          "include/types.h",
+          3
+        ],
+        "range": [
+          0,
+          7
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          27
+        ],
+        "expression": "wrapped.valid",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          12
+        ],
+        "member_record": [
+          "include/types.h",
+          10
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          28
+        ],
+        "expression": "wrapped.status",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          12
+        ],
+        "member_record": [
+          "include/types.h",
+          10
+        ],
+        "range": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          29
+        ],
+        "expression": "wrapped.status.fault",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          12
+        ],
+        "member_record": [
+          "include/types.h",
+          9
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          30
+        ],
+        "expression": "wrapped.status.mode",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          12
+        ],
+        "member_record": [
+          "include/types.h",
+          9
+        ],
+        "range": [
+          0,
+          7
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          31
+        ],
+        "expression": "device_a.state",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          17
+        ],
+        "member_record": [
+          "include/types.h",
+          14
+        ],
+        "range": [
+          0,
+          3
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          32
+        ],
+        "expression": "device_b.state",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          18
+        ],
+        "member_record": [
+          "include/types.h",
+          15
+        ],
+        "range": [
+          0,
+          31
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          33
+        ],
+        "expression": "shadow.state",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          19
+        ],
+        "member_record": [
+          "include/types.h",
+          14
+        ],
+        "range": [
+          0,
+          3
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          34
+        ],
+        "expression": "status.normal_value",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          14
+        ],
+        "member_record": [
+          "include/types.h",
+          8
+        ],
+        "range": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          35
+        ],
+        "expression": "ctrl.mode",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          15
+        ],
+        "member_record": [
+          "include/types.h",
+          4
+        ],
+        "range": [
+          0,
+          7
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          36
+        ],
+        "expression": "container.inner.ready",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          16
+        ],
+        "member_record": [
+          "include/types.h",
+          12
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          39
+        ],
+        "expression": "shadow.state",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          38
+        ],
+        "member_record": [
+          "include/types.h",
+          15
+        ],
+        "range": [
+          0,
+          31
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          41
+        ],
+        "expression": "shadow.state",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          19
+        ],
+        "member_record": [
+          "include/types.h",
+          14
+        ],
+        "range": [
+          0,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "name": "options_on",
+    "source": "options/config.c",
+    "args": [
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc",
+      "-I",
+      "include",
+      "-isystem",
+      "sdk",
+      "-D",
+      "ENABLE_CAN",
+      "-DMODE_BITS=3"
+    ],
+    "db": true,
+    "confirmed": true,
+    "status": "PARSE_OK",
+    "records": [
+      {
+        "location": [
+          "options/config.c",
+          6
+        ],
+        "tag": "",
+        "aliases": [
+          "Configured"
+        ],
+        "fields": {
+          "mode": [
+            3,
+            false,
+            [
+              0,
+              7
+            ]
+          ],
+          "target": [
+            6,
+            false,
+            [
+              0,
+              63
+            ]
+          ],
+          "standard": [
+            4,
+            false,
+            [
+              0,
+              15
+            ]
+          ],
+          "sdk": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ]
+        },
+        "parent": null,
+        "forwards": 0
+      }
+    ],
+    "variables": [
+      {
+        "location": [
+          "options/config.c",
+          24
+        ],
+        "name": "configured",
+        "record": [
+          "options/config.c",
+          6
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      }
+    ],
+    "accesses": []
+  },
+  {
+    "name": "options_off",
+    "source": "options/config.c",
+    "args": [
+      "-std=c99",
+      "--target=i686-pc-windows-msvc",
+      "-I",
+      "include",
+      "-isystem",
+      "sdk",
+      "-DENABLE_CAN",
+      "-U",
+      "ENABLE_CAN"
+    ],
+    "db": false,
+    "confirmed": true,
+    "status": "PARSE_OK",
+    "records": [
+      {
+        "location": [
+          "options/config.c",
+          6
+        ],
+        "tag": "",
+        "aliases": [
+          "Configured"
+        ],
+        "fields": {
+          "mode": [
+            2,
+            false,
+            [
+              0,
+              3
+            ]
+          ],
+          "target": [
+            5,
+            false,
+            [
+              0,
+              31
+            ]
+          ],
+          "standard": [
+            3,
+            false,
+            [
+              0,
+              7
+            ]
+          ],
+          "sdk": [
+            1,
+            false,
+            [
+              0,
+              1
+            ]
+          ]
+        },
+        "parent": null,
+        "forwards": 0
+      }
+    ],
+    "variables": [
+      {
+        "location": [
+          "options/config.c",
+          24
+        ],
+        "name": "configured",
+        "record": [
+          "options/config.c",
+          6
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      }
+    ],
+    "accesses": []
+  },
+  {
+    "name": "missing_header",
+    "source": "errors/missing_header.c",
+    "args": [
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc"
+    ],
+    "db": false,
+    "confirmed": true,
+    "status": "PARSE_INCOMPLETE",
+    "records": [],
+    "variables": [],
+    "accesses": [],
+    "reason": "CLANG_ERRORS",
+    "marker": "missing_rv.h",
+    "check_inventory": false
+  },
+  {
+    "name": "missing_macro",
+    "source": "errors/missing_macro.c",
+    "args": [
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc"
+    ],
+    "db": false,
+    "confirmed": true,
+    "status": "PARSE_INCOMPLETE",
+    "records": [],
+    "variables": [],
+    "accesses": [],
+    "reason": "CLANG_ERRORS",
+    "marker": "WIDTH_MISSING",
+    "check_inventory": false
+  },
+  {
+    "name": "bad_typedef",
+    "source": "errors/bad_typedef.c",
+    "args": [
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc"
+    ],
+    "db": false,
+    "confirmed": true,
+    "status": "PARSE_INCOMPLETE",
+    "records": [],
+    "variables": [],
+    "accesses": [],
+    "reason": "CLANG_ERRORS",
+    "marker": "MissingType",
+    "check_inventory": false
+  },
+  {
+    "name": "invalid_width",
+    "source": "errors/invalid_width.c",
+    "args": [
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc"
+    ],
+    "db": false,
+    "confirmed": true,
+    "status": "PARSE_INCOMPLETE",
+    "records": [],
+    "variables": [],
+    "accesses": [],
+    "reason": "CLANG_ERRORS",
+    "marker": "width",
+    "check_inventory": false
+  },
+  {
+    "name": "vendor_extension",
+    "source": "errors/vendor_extension.c",
+    "args": [
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc",
+      "--rv-vendor-mode"
+    ],
+    "db": false,
+    "confirmed": true,
+    "status": "PARSE_INCOMPLETE",
+    "records": [],
+    "variables": [],
+    "accesses": [],
+    "reason": "UNSUPPORTED_OPTIONS",
+    "marker": "unsupported",
+    "check_inventory": false
+  },
+  {
+    "name": "conditional_mismatch",
+    "source": "errors/conditional_mismatch.c",
+    "args": [
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc"
+    ],
+    "db": false,
+    "confirmed": true,
+    "status": "PARSE_INCOMPLETE",
+    "records": [],
+    "variables": [],
+    "accesses": [],
+    "reason": "CLANG_ERRORS",
+    "marker": "Wrong build variant",
+    "check_inventory": false
+  },
+  {
+    "name": "bad_target",
+    "source": "errors/bad_target.c",
+    "args": [
+      "-std=c11",
+      "--target=not-a-real-target"
+    ],
+    "db": false,
+    "confirmed": true,
+    "status": "PARSE_INCOMPLETE_OR_FAILED",
+    "records": [],
+    "variables": [],
+    "accesses": [],
+    "reason": null,
+    "marker": "target",
+    "check_inventory": false
+  },
+  {
+    "name": "unconfirmed_options",
+    "source": "errors/unconfirmed_options.c",
+    "args": [
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc"
+    ],
+    "db": false,
+    "confirmed": false,
+    "status": "PARSE_INCOMPLETE",
+    "records": [],
+    "variables": [],
+    "accesses": [],
+    "reason": "BUILD_CONFIGURATION_UNCONFIRMED",
+    "marker": "",
+    "check_inventory": false
+  },
+  {
+    "name": "warning_only",
+    "source": "errors/warning_only.c",
+    "args": [
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc"
+    ],
+    "db": false,
+    "confirmed": true,
+    "status": "PARSE_WARNING",
+    "records": [],
+    "variables": [],
+    "accesses": [],
+    "reason": null,
+    "marker": "",
+    "check_inventory": false
+  },
+  {
+    "name": "cinst_missing",
+    "source": "app/main.c",
+    "args": [
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc"
+    ],
+    "db": false,
+    "confirmed": true,
+    "status": "PARSE_INCOMPLETE",
+    "records": [],
+    "variables": [
+      {
+        "location": [
+          "app/main.c",
+          3
+        ],
+        "name": "can_data_p",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 1,
+        "arrays": [],
+        "qualifiers": [
+          [],
+          [
+            "const"
+          ]
+        ],
+        "storage": "EXTERN",
+        "spelling": "const CAN_DATA_t *"
+      },
+      {
+        "location": [
+          "app/main.c",
+          4
+        ],
+        "name": "can_data_array",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [
+          4
+        ],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          5
+        ],
+        "name": "static_data",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "STATIC",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          6
+        ],
+        "name": "const_data",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [
+          [
+            "const"
+          ]
+        ],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          7
+        ],
+        "name": "volatile_data",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [
+          [
+            "volatile"
+          ]
+        ],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          8
+        ],
+        "name": "fixed_pointer",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 1,
+        "arrays": [],
+        "qualifiers": [
+          [
+            "const"
+          ],
+          []
+        ],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          9
+        ],
+        "name": "double_pointer",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 2,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          10
+        ],
+        "name": "pointer_array",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 1,
+        "arrays": [
+          3
+        ],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          11
+        ],
+        "name": "alias_data",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": "DataAlias2"
+      },
+      {
+        "location": [
+          "app/main.c",
+          12
+        ],
+        "name": "wrapped",
+        "record": [
+          "include/types.h",
+          10
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "EXTERN",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          13
+        ],
+        "name": "can_chg_p",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 1,
+        "arrays": [],
+        "qualifiers": [
+          [],
+          [
+            "const"
+          ]
+        ],
+        "storage": "EXTERN",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          14
+        ],
+        "name": "status",
+        "record": [
+          "include/types.h",
+          8
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          15
+        ],
+        "name": "ctrl",
+        "record": [
+          "include/types.h",
+          4
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          16
+        ],
+        "name": "container",
+        "record": [
+          "include/types.h",
+          11
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          17
+        ],
+        "name": "device_a",
+        "record": [
+          "include/types.h",
+          14
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "EXTERN",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          18
+        ],
+        "name": "device_b",
+        "record": [
+          "include/types.h",
+          15
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "EXTERN",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          19
+        ],
+        "name": "shadow",
+        "record": [
+          "include/types.h",
+          14
+        ],
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          20
+        ],
+        "name": "param_p",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "PARAMETER",
+        "function": "update",
+        "pointers": 1,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          21
+        ],
+        "name": "local_data",
+        "record": [
+          "include/types.h",
+          3
+        ],
+        "kind": "LOCAL",
+        "function": "update",
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          38
+        ],
+        "name": "shadow",
+        "record": [
+          "include/types.h",
+          15
+        ],
+        "kind": "LOCAL",
+        "function": "update",
+        "pointers": 0,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "NONE",
+        "spelling": null
+      }
+    ],
+    "accesses": [
+      {
+        "location": [
+          "app/main.c",
+          22
+        ],
+        "expression": "can_data1.state",
+        "function": "update",
+        "variable": [
+          "include/types.h",
+          20
+        ],
+        "member_record": [
+          "include/types.h",
+          3
+        ],
+        "range": [
+          0,
+          7
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          23
+        ],
+        "expression": "can_data_p->state",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          3
+        ],
+        "member_record": [
+          "include/types.h",
+          3
+        ],
+        "range": [
+          0,
+          7
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          24
+        ],
+        "expression": "can_data_array[0].state",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          4
+        ],
+        "member_record": [
+          "include/types.h",
+          3
+        ],
+        "range": [
+          0,
+          7
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          25
+        ],
+        "expression": "param_p->active",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          20
+        ],
+        "member_record": [
+          "include/types.h",
+          3
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          26
+        ],
+        "expression": "local_data.state",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          21
+        ],
+        "member_record": [
+          "include/types.h",
+          3
+        ],
+        "range": [
+          0,
+          7
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          27
+        ],
+        "expression": "wrapped.valid",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          12
+        ],
+        "member_record": [
+          "include/types.h",
+          10
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          28
+        ],
+        "expression": "wrapped.status",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          12
+        ],
+        "member_record": [
+          "include/types.h",
+          10
+        ],
+        "range": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          29
+        ],
+        "expression": "wrapped.status.fault",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          12
+        ],
+        "member_record": [
+          "include/types.h",
+          9
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          30
+        ],
+        "expression": "wrapped.status.mode",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          12
+        ],
+        "member_record": [
+          "include/types.h",
+          9
+        ],
+        "range": [
+          0,
+          7
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          31
+        ],
+        "expression": "device_a.state",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          17
+        ],
+        "member_record": [
+          "include/types.h",
+          14
+        ],
+        "range": [
+          0,
+          3
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          32
+        ],
+        "expression": "device_b.state",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          18
+        ],
+        "member_record": [
+          "include/types.h",
+          15
+        ],
+        "range": [
+          0,
+          31
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          33
+        ],
+        "expression": "shadow.state",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          19
+        ],
+        "member_record": [
+          "include/types.h",
+          14
+        ],
+        "range": [
+          0,
+          3
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          34
+        ],
+        "expression": "status.normal_value",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          14
+        ],
+        "member_record": [
+          "include/types.h",
+          8
+        ],
+        "range": null
+      },
+      {
+        "location": [
+          "app/main.c",
+          35
+        ],
+        "expression": "ctrl.mode",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          15
+        ],
+        "member_record": [
+          "include/types.h",
+          4
+        ],
+        "range": [
+          0,
+          7
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          36
+        ],
+        "expression": "container.inner.ready",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          16
+        ],
+        "member_record": [
+          "include/types.h",
+          12
+        ],
+        "range": [
+          0,
+          1
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          39
+        ],
+        "expression": "shadow.state",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          38
+        ],
+        "member_record": [
+          "include/types.h",
+          15
+        ],
+        "range": [
+          0,
+          31
+        ]
+      },
+      {
+        "location": [
+          "app/main.c",
+          41
+        ],
+        "expression": "shadow.state",
+        "function": "update",
+        "variable": [
+          "app/main.c",
+          19
+        ],
+        "member_record": [
+          "include/types.h",
+          14
+        ],
+        "range": [
+          0,
+          3
+        ]
+      }
+    ],
+    "reason": "CLANG_ERRORS",
+    "diagnostic_location": [
+      "app/main.c",
+      13
+    ],
+    "check_inventory": false
+  },
+  {
+    "name": "forward_only",
+    "source": "errors/forward_only.c",
+    "args": [
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc"
+    ],
+    "db": false,
+    "confirmed": true,
+    "status": "PARSE_OK",
+    "records": [],
+    "variables": [
+      {
+        "location": [
+          "errors/forward_only.c",
+          2
+        ],
+        "name": "incomplete",
+        "record": null,
+        "kind": "GLOBAL",
+        "function": null,
+        "pointers": 1,
+        "arrays": [],
+        "qualifiers": [],
+        "storage": "EXTERN",
+        "spelling": null
+      }
+    ],
+    "accesses": [],
+    "unresolved_records": 1
+  }
+]

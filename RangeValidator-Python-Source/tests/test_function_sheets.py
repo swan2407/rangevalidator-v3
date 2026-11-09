@@ -26,9 +26,10 @@ class FunctionSheetTests(unittest.TestCase):
             table = [('Name', 'Type', 'Range'),
                      ('obj.bit', 'unsigned int', '0~7'),
                      ('obj.bit', 'unsigned int', '0~3')]
-            names = ['7.Last', '1.Main', '12.Process_Data', '3. 함수이름']
+            names = ['7.Last', '1.Main', '12.Process_Data', '3. 함수이름',
+                     'update1', '1_update', '1', '1.', '1. ', 'CAN2.Update']
             excluded = ['\uD45C\uC9C0', '\uBAA9\uCC28', 'commonparameter', 'CommonParameter',
-                        'Design', 'Main', '1', '1.', '1. ', 'ABC.Main']
+                        'Design', 'Main', 'ABC.Main']
             sheets = [sheet(excluded[0], [('unknown layout',)])]
             sheets += [sheet(name, table) for name in excluded[1:] + names]
             results, coverage = compare_book(None, catalog, Workbook('test.xlsx', 'com', sheets))
@@ -36,6 +37,17 @@ class FunctionSheetTests(unittest.TestCase):
             self.assertEqual([(r.sheet, r.status, r.expected, r.candidate) for r in results],
                              [(name, status, '0~7', status == 'MISMATCH')
                               for name in names for status in ('MATCH', 'MISMATCH')])
+
+    def test_embedded_digits_preserve_function_scope(self):
+        with TemporaryDirectory() as directory:
+            source = Path(directory) / 'test.c'
+            source.write_text('typedef struct { unsigned int bit:3; } T; '
+                              'void update1(void) { T local; }', encoding='ascii')
+            catalog = catalog_headers([source])
+            table = [('Name', 'Type', 'Range'), ('local.bit', 'unsigned int', '0~7')]
+            book = Workbook('test.xlsx', 'openpyxl', [sheet('update1', table)])
+            results, _ = compare_book(None, catalog, book)
+            self.assertEqual([(r.status, r.expected) for r in results], [('MATCH', '0~7')])
 
     def test_no_function_sheets(self):
         with TemporaryDirectory() as directory:

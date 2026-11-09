@@ -1,0 +1,6980 @@
+{
+  "counts": {
+    "structure_correct": 98,
+    "typedef_correct": 98,
+    "bitfield_extracted_correct": 247,
+    "width_correct": 198,
+    "signed_correct": 198,
+    "range_correct": 198,
+    "width_unresolved": 49,
+    "signed_unresolved": 49,
+    "range_unresolved": 49,
+    "variable_type_correct": 197,
+    "expression_range_correct": 147,
+    "expression_member_owner_correct": 147,
+    "expression_range_unresolved": 49,
+    "expression_member_owner_unresolved": 49
+  },
+  "differences": [
+    {
+      "job": "unit_00",
+      "metric": "width",
+      "item": [
+        "unit_00.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_00",
+      "metric": "signed",
+      "item": [
+        "unit_00.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_00",
+      "metric": "range",
+      "item": [
+        "unit_00.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_00",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_00",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_00.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_01",
+      "metric": "width",
+      "item": [
+        "unit_01.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_01",
+      "metric": "signed",
+      "item": [
+        "unit_01.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_01",
+      "metric": "range",
+      "item": [
+        "unit_01.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_01",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_01",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_01.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_02",
+      "metric": "width",
+      "item": [
+        "unit_02.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_02",
+      "metric": "signed",
+      "item": [
+        "unit_02.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_02",
+      "metric": "range",
+      "item": [
+        "unit_02.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_02",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_02",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_02.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_03",
+      "metric": "width",
+      "item": [
+        "unit_03.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_03",
+      "metric": "signed",
+      "item": [
+        "unit_03.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_03",
+      "metric": "range",
+      "item": [
+        "unit_03.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_03",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_03",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_03.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_04",
+      "metric": "width",
+      "item": [
+        "unit_04.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_04",
+      "metric": "signed",
+      "item": [
+        "unit_04.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_04",
+      "metric": "range",
+      "item": [
+        "unit_04.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_04",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_04",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_04.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_05",
+      "metric": "width",
+      "item": [
+        "unit_05.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_05",
+      "metric": "signed",
+      "item": [
+        "unit_05.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_05",
+      "metric": "range",
+      "item": [
+        "unit_05.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_05",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_05",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_05.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_06",
+      "metric": "width",
+      "item": [
+        "unit_06.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_06",
+      "metric": "signed",
+      "item": [
+        "unit_06.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_06",
+      "metric": "range",
+      "item": [
+        "unit_06.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_06",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_06",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_06.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_07",
+      "metric": "width",
+      "item": [
+        "unit_07.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_07",
+      "metric": "signed",
+      "item": [
+        "unit_07.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_07",
+      "metric": "range",
+      "item": [
+        "unit_07.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_07",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_07",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_07.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_08",
+      "metric": "width",
+      "item": [
+        "unit_08.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_08",
+      "metric": "signed",
+      "item": [
+        "unit_08.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_08",
+      "metric": "range",
+      "item": [
+        "unit_08.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_08",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_08",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_08.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_09",
+      "metric": "width",
+      "item": [
+        "unit_09.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_09",
+      "metric": "signed",
+      "item": [
+        "unit_09.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_09",
+      "metric": "range",
+      "item": [
+        "unit_09.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_09",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_09",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_09.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_10",
+      "metric": "width",
+      "item": [
+        "unit_10.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_10",
+      "metric": "signed",
+      "item": [
+        "unit_10.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_10",
+      "metric": "range",
+      "item": [
+        "unit_10.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_10",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_10",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_10.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_11",
+      "metric": "width",
+      "item": [
+        "unit_11.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_11",
+      "metric": "signed",
+      "item": [
+        "unit_11.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_11",
+      "metric": "range",
+      "item": [
+        "unit_11.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_11",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_11",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_11.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_12",
+      "metric": "width",
+      "item": [
+        "unit_12.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_12",
+      "metric": "signed",
+      "item": [
+        "unit_12.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_12",
+      "metric": "range",
+      "item": [
+        "unit_12.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_12",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_12",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_12.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_13",
+      "metric": "width",
+      "item": [
+        "unit_13.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_13",
+      "metric": "signed",
+      "item": [
+        "unit_13.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_13",
+      "metric": "range",
+      "item": [
+        "unit_13.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_13",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_13",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_13.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_14",
+      "metric": "width",
+      "item": [
+        "unit_14.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_14",
+      "metric": "signed",
+      "item": [
+        "unit_14.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_14",
+      "metric": "range",
+      "item": [
+        "unit_14.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_14",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_14",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_14.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_15",
+      "metric": "width",
+      "item": [
+        "unit_15.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_15",
+      "metric": "signed",
+      "item": [
+        "unit_15.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_15",
+      "metric": "range",
+      "item": [
+        "unit_15.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_15",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_15",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_15.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_16",
+      "metric": "width",
+      "item": [
+        "unit_16.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_16",
+      "metric": "signed",
+      "item": [
+        "unit_16.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_16",
+      "metric": "range",
+      "item": [
+        "unit_16.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_16",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_16",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_16.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_17",
+      "metric": "width",
+      "item": [
+        "unit_17.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_17",
+      "metric": "signed",
+      "item": [
+        "unit_17.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_17",
+      "metric": "range",
+      "item": [
+        "unit_17.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_17",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_17",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_17.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_18",
+      "metric": "width",
+      "item": [
+        "unit_18.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_18",
+      "metric": "signed",
+      "item": [
+        "unit_18.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_18",
+      "metric": "range",
+      "item": [
+        "unit_18.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_18",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_18",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_18.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_19",
+      "metric": "width",
+      "item": [
+        "unit_19.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_19",
+      "metric": "signed",
+      "item": [
+        "unit_19.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_19",
+      "metric": "range",
+      "item": [
+        "unit_19.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_19",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_19",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_19.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_20",
+      "metric": "width",
+      "item": [
+        "unit_20.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_20",
+      "metric": "signed",
+      "item": [
+        "unit_20.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_20",
+      "metric": "range",
+      "item": [
+        "unit_20.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_20",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_20",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_20.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_21",
+      "metric": "width",
+      "item": [
+        "unit_21.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_21",
+      "metric": "signed",
+      "item": [
+        "unit_21.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_21",
+      "metric": "range",
+      "item": [
+        "unit_21.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_21",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_21",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_21.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_22",
+      "metric": "width",
+      "item": [
+        "unit_22.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_22",
+      "metric": "signed",
+      "item": [
+        "unit_22.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_22",
+      "metric": "range",
+      "item": [
+        "unit_22.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_22",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_22",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_22.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_23",
+      "metric": "width",
+      "item": [
+        "unit_23.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_23",
+      "metric": "signed",
+      "item": [
+        "unit_23.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_23",
+      "metric": "range",
+      "item": [
+        "unit_23.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_23",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_23",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_23.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_24",
+      "metric": "width",
+      "item": [
+        "unit_24.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_24",
+      "metric": "signed",
+      "item": [
+        "unit_24.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_24",
+      "metric": "range",
+      "item": [
+        "unit_24.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_24",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_24",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_24.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_25",
+      "metric": "width",
+      "item": [
+        "unit_25.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_25",
+      "metric": "signed",
+      "item": [
+        "unit_25.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_25",
+      "metric": "range",
+      "item": [
+        "unit_25.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_25",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_25",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_25.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_26",
+      "metric": "width",
+      "item": [
+        "unit_26.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_26",
+      "metric": "signed",
+      "item": [
+        "unit_26.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_26",
+      "metric": "range",
+      "item": [
+        "unit_26.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_26",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_26",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_26.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_27",
+      "metric": "width",
+      "item": [
+        "unit_27.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_27",
+      "metric": "signed",
+      "item": [
+        "unit_27.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_27",
+      "metric": "range",
+      "item": [
+        "unit_27.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_27",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_27",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_27.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_28",
+      "metric": "width",
+      "item": [
+        "unit_28.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_28",
+      "metric": "signed",
+      "item": [
+        "unit_28.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_28",
+      "metric": "range",
+      "item": [
+        "unit_28.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_28",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_28",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_28.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_29",
+      "metric": "width",
+      "item": [
+        "unit_29.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_29",
+      "metric": "signed",
+      "item": [
+        "unit_29.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_29",
+      "metric": "range",
+      "item": [
+        "unit_29.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_29",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_29",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_29.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_30",
+      "metric": "width",
+      "item": [
+        "unit_30.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_30",
+      "metric": "signed",
+      "item": [
+        "unit_30.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_30",
+      "metric": "range",
+      "item": [
+        "unit_30.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_30",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_30",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_30.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_31",
+      "metric": "width",
+      "item": [
+        "unit_31.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_31",
+      "metric": "signed",
+      "item": [
+        "unit_31.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_31",
+      "metric": "range",
+      "item": [
+        "unit_31.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_31",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_31",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_31.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_32",
+      "metric": "width",
+      "item": [
+        "unit_32.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_32",
+      "metric": "signed",
+      "item": [
+        "unit_32.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_32",
+      "metric": "range",
+      "item": [
+        "unit_32.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_32",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_32",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_32.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_33",
+      "metric": "width",
+      "item": [
+        "unit_33.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_33",
+      "metric": "signed",
+      "item": [
+        "unit_33.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_33",
+      "metric": "range",
+      "item": [
+        "unit_33.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_33",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_33",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_33.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_34",
+      "metric": "width",
+      "item": [
+        "unit_34.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_34",
+      "metric": "signed",
+      "item": [
+        "unit_34.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_34",
+      "metric": "range",
+      "item": [
+        "unit_34.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_34",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_34",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_34.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_35",
+      "metric": "width",
+      "item": [
+        "unit_35.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_35",
+      "metric": "signed",
+      "item": [
+        "unit_35.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_35",
+      "metric": "range",
+      "item": [
+        "unit_35.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_35",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_35",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_35.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_36",
+      "metric": "width",
+      "item": [
+        "unit_36.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_36",
+      "metric": "signed",
+      "item": [
+        "unit_36.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_36",
+      "metric": "range",
+      "item": [
+        "unit_36.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_36",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_36",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_36.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_37",
+      "metric": "width",
+      "item": [
+        "unit_37.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_37",
+      "metric": "signed",
+      "item": [
+        "unit_37.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_37",
+      "metric": "range",
+      "item": [
+        "unit_37.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_37",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_37",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_37.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_38",
+      "metric": "width",
+      "item": [
+        "unit_38.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_38",
+      "metric": "signed",
+      "item": [
+        "unit_38.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_38",
+      "metric": "range",
+      "item": [
+        "unit_38.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_38",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_38",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_38.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_39",
+      "metric": "width",
+      "item": [
+        "unit_39.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_39",
+      "metric": "signed",
+      "item": [
+        "unit_39.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_39",
+      "metric": "range",
+      "item": [
+        "unit_39.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_39",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_39",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_39.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_40",
+      "metric": "width",
+      "item": [
+        "unit_40.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_40",
+      "metric": "signed",
+      "item": [
+        "unit_40.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_40",
+      "metric": "range",
+      "item": [
+        "unit_40.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_40",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_40",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_40.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_41",
+      "metric": "width",
+      "item": [
+        "unit_41.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_41",
+      "metric": "signed",
+      "item": [
+        "unit_41.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_41",
+      "metric": "range",
+      "item": [
+        "unit_41.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_41",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_41",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_41.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_42",
+      "metric": "width",
+      "item": [
+        "unit_42.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_42",
+      "metric": "signed",
+      "item": [
+        "unit_42.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_42",
+      "metric": "range",
+      "item": [
+        "unit_42.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_42",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_42",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_42.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_43",
+      "metric": "width",
+      "item": [
+        "unit_43.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_43",
+      "metric": "signed",
+      "item": [
+        "unit_43.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_43",
+      "metric": "range",
+      "item": [
+        "unit_43.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_43",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_43",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_43.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_44",
+      "metric": "width",
+      "item": [
+        "unit_44.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_44",
+      "metric": "signed",
+      "item": [
+        "unit_44.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_44",
+      "metric": "range",
+      "item": [
+        "unit_44.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_44",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_44",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_44.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_45",
+      "metric": "width",
+      "item": [
+        "unit_45.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_45",
+      "metric": "signed",
+      "item": [
+        "unit_45.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_45",
+      "metric": "range",
+      "item": [
+        "unit_45.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_45",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_45",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_45.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_46",
+      "metric": "width",
+      "item": [
+        "unit_46.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_46",
+      "metric": "signed",
+      "item": [
+        "unit_46.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_46",
+      "metric": "range",
+      "item": [
+        "unit_46.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_46",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_46",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_46.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_47",
+      "metric": "width",
+      "item": [
+        "unit_47.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_47",
+      "metric": "signed",
+      "item": [
+        "unit_47.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_47",
+      "metric": "range",
+      "item": [
+        "unit_47.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_47",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_47",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_47.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_48",
+      "metric": "width",
+      "item": [
+        "unit_48.h",
+        9,
+        "selected"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "unit_48",
+      "metric": "signed",
+      "item": [
+        "unit_48.h",
+        9,
+        "selected"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "unit_48",
+      "metric": "range",
+      "item": [
+        "unit_48.h",
+        9,
+        "selected"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_48",
+      "metric": "expression_range",
+      "item": "local.selected",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "unit_48",
+      "metric": "expression_member_owner",
+      "item": "local.selected",
+      "expected": [
+        "unit_48.h",
+        9
+      ],
+      "actual": null
+    }
+  ],
+  "preprocessor_traces": [
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_00.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_0",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_00.c",
+            "line": 7,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_00.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_00.c",
+            "line": 7,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_00.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_00.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_0",
+        "struct_tag": "Tag_0",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_00.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_01.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_1",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_01.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_01.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_01.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_01.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_01.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_1",
+        "struct_tag": "Tag_1",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_01.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_02.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_2",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_02.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_02.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_02.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_02.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_02.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_2",
+        "struct_tag": "Tag_2",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_02.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_03.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_3",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_03.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_03.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_03.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_03.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_03.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_3",
+        "struct_tag": "Tag_3",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_03.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_04.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_4",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_04.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_04.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_04.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_04.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_04.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_4",
+        "struct_tag": "Tag_4",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_04.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_05.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_5",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_05.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_05.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_05.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_05.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_05.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_5",
+        "struct_tag": "Tag_5",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_05.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_06.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_6",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_06.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_06.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_06.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_06.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_06.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_6",
+        "struct_tag": "Tag_6",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_06.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_07.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_7",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_07.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_07.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_07.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_07.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_07.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_7",
+        "struct_tag": "Tag_7",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_07.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_08.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_8",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_08.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_08.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_08.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_08.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_08.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_8",
+        "struct_tag": "Tag_8",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_08.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_09.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_9",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_09.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_09.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_09.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_09.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_09.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_9",
+        "struct_tag": "Tag_9",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_09.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_10.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_10",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_10.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_10.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_10.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_10.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_10.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_10",
+        "struct_tag": "Tag_10",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_10.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_11.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_11",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_11.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_11.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_11.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_11.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_11.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_11",
+        "struct_tag": "Tag_11",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_11.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_12.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_12",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_12.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_12.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_12.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_12.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_12.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_12",
+        "struct_tag": "Tag_12",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_12.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_13.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_13",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_13.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_13.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_13.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_13.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_13.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_13",
+        "struct_tag": "Tag_13",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_13.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_14.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_14",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_14.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_14.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_14.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_14.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_14.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_14",
+        "struct_tag": "Tag_14",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_14.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_15.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_15",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_15.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_15.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_15.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_15.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_15.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_15",
+        "struct_tag": "Tag_15",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_15.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_16.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_16",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_16.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_16.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_16.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_16.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_16.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_16",
+        "struct_tag": "Tag_16",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_16.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_17.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_17",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_17.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_17.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_17.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_17.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_17.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_17",
+        "struct_tag": "Tag_17",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_17.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_18.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_18",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_18.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_18.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_18.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_18.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_18.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_18",
+        "struct_tag": "Tag_18",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_18.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_19.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_19",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_19.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_19.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_19.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_19.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_19.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_19",
+        "struct_tag": "Tag_19",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_19.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_20.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_20",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_20.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_20.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_20.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_20.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_20.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_20",
+        "struct_tag": "Tag_20",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_20.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_21.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_21",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_21.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_21.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_21.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_21.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_21.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_21",
+        "struct_tag": "Tag_21",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_21.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_22.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_22",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_22.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_22.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_22.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_22.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_22.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_22",
+        "struct_tag": "Tag_22",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_22.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_23.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_23",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_23.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_23.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_23.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_23.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_23.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_23",
+        "struct_tag": "Tag_23",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_23.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_24.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_24",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_24.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_24.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_24.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_24.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_24.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_24",
+        "struct_tag": "Tag_24",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_24.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_25.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_25",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_25.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_25.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_25.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_25.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_25.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_25",
+        "struct_tag": "Tag_25",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_25.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_26.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_26",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_26.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_26.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_26.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_26.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_26.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_26",
+        "struct_tag": "Tag_26",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_26.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_27.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_27",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_27.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_27.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_27.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_27.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_27.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_27",
+        "struct_tag": "Tag_27",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_27.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_28.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_28",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_28.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_28.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_28.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_28.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_28.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_28",
+        "struct_tag": "Tag_28",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_28.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_29.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_29",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_29.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_29.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_29.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_29.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_29.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_29",
+        "struct_tag": "Tag_29",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_29.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_30.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_30",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_30.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_30.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_30.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_30.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_30.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_30",
+        "struct_tag": "Tag_30",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_30.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_31.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_31",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_31.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_31.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_31.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_31.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_31.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_31",
+        "struct_tag": "Tag_31",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_31.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_32.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_32",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_32.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_32.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_32.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_32.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_32.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_32",
+        "struct_tag": "Tag_32",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_32.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_33.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_33",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_33.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_33.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_33.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_33.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_33.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_33",
+        "struct_tag": "Tag_33",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_33.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_34.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_34",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_34.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_34.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_34.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_34.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_34.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_34",
+        "struct_tag": "Tag_34",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_34.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_35.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_35",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_35.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_35.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_35.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_35.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_35.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_35",
+        "struct_tag": "Tag_35",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_35.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_36.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_36",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_36.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_36.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_36.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_36.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_36.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_36",
+        "struct_tag": "Tag_36",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_36.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_37.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_37",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_37.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_37.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_37.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_37.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_37.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_37",
+        "struct_tag": "Tag_37",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_37.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_38.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_38",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_38.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_38.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_38.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_38.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_38.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_38",
+        "struct_tag": "Tag_38",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_38.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_39.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_39",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_39.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_39.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_39.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_39.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_39.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_39",
+        "struct_tag": "Tag_39",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_39.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_40.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_40",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_40.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_40.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_40.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_40.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_40.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_40",
+        "struct_tag": "Tag_40",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_40.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_41.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_41",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_41.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_41.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_41.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_41.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_41.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_41",
+        "struct_tag": "Tag_41",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_41.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_42.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_42",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_42.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_42.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_42.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_42.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_42.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_42",
+        "struct_tag": "Tag_42",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_42.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_43.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_43",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_43.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_43.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_43.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_43.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_43.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_43",
+        "struct_tag": "Tag_43",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_43.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_44.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_44",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_44.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_44.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_44.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_44.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_44.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_44",
+        "struct_tag": "Tag_44",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_44.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_45.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_45",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_45.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_45.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_45.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_45.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_45.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_45",
+        "struct_tag": "Tag_45",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_45.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_46.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_46",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_46.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_46.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_46.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_46.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_46.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_46",
+        "struct_tag": "Tag_46",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_46.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_47.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_47",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_47.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_47.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_47.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_47.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_47.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_47",
+        "struct_tag": "Tag_47",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_47.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    },
+    {
+      "source": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_48.c",
+      "root": "local",
+      "member_path": [
+        {
+          "operator": ".",
+          "member": "selected",
+          "indexes": ""
+        }
+      ],
+      "candidates": [
+        {
+          "name": "local",
+          "spelling": "Alias_48",
+          "origin": {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_48.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          "arrays": [],
+          "qualifiers": [
+            []
+          ],
+          "storage": "",
+          "kind": "TENTATIVE",
+          "conditional": false,
+          "target": null
+        }
+      ],
+      "other_declarations": [],
+      "type_link": {
+        "status": "STRUCT",
+        "definition": {
+          "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_48.h",
+          "line": 9,
+          "ordinal": 0
+        },
+        "integer_type": "",
+        "evidence": [
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_48.c",
+            "line": 6,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_48.h",
+            "line": 9,
+            "ordinal": 0
+          },
+          {
+            "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_48.h",
+            "line": 10,
+            "ordinal": 0
+          }
+        ],
+        "pointer_depth": 0,
+        "qualifiers": [
+          []
+        ]
+      },
+      "bitfield": true,
+      "range": null,
+      "production_match": {
+        "status": "REVIEW",
+        "reason": "'selected' 의 비트필드 범위를 확정할 수 없음 (WIDTH_UNRESOLVED)"
+      },
+      "production_gate": "MEMBER_INDEX_HIT",
+      "root_indexes": "",
+      "function_status": "RESOLVED",
+      "binding_status": "STRUCT",
+      "field": {
+        "struct_name": "Tag_48",
+        "struct_tag": "Tag_48",
+        "member": "selected",
+        "declared_type": "unsigned",
+        "width": 0,
+        "file": "C:\\Range\\RangeValidator-Python-Source\\build\\ch1-final\\stress100\\unit_48.h",
+        "line": 9,
+        "signed": null,
+        "minimum": null,
+        "maximum": null,
+        "note": "WIDTH_UNRESOLVED"
+      },
+      "code": "PREPROCESSOR_UNRESOLVED",
+      "build_options": "BUILD_OPTIONS_PROVIDED_NOT_APPLIED"
+    }
+  ]
+}

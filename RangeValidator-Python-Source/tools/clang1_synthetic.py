@@ -66,7 +66,7 @@ def functional(root):
     types.add('struct Status;\ntypedef struct Status Status_t;')
     status = types.record('struct Status { unsigned fault:1; unsigned state:3; unsigned normal_value; };',
                           'Status', ['Status_t'], {'fault': [1, False, [0, 1]],
-                          'state': [3, False, [0, 7]], 'normal_value': [None, None, None]}, forwards=2)
+                          'state': [3, False, [0, 7]], 'normal_value': [None, None, None]}, forwards=1)
     inner = types.record('typedef struct { unsigned fault:1; unsigned mode:3; } Inner_t;',
                          '', ['Inner_t'], {'fault': [1, False, [0, 1]], 'mode': [3, False, [0, 7]]})
     outer = types.record('typedef struct { Inner_t status; unsigned valid:1; } Outer_t;',
@@ -90,7 +90,7 @@ def functional(root):
     types.add('#endif')
     bridge.add('#ifndef BRIDGE_H\n#define BRIDGE_H\n#include "types.h"\n'
                'typedef CAN_DATA_t DataAlias;\ntypedef DataAlias DataAlias2;\n#endif')
-    main.add('#include "bridge.h"\n#include "types.h"')
+    main.add('#include "../include/bridge.h"\n#include "../include/types.h"')
     ptr = main.var('extern const CAN_DATA_t *can_data_p;', 'can_data_p', data, ptr=1,
                    cv=((), ('const',)), storage='EXTERN', spelling='const CAN_DATA_t *')
     array = main.var('CAN_DATA_t can_data_array[4];', 'can_data_array', data, arrays=(4,))
@@ -132,8 +132,11 @@ def functional(root):
 
     options = Fixture('options/config.c')
     system = Fixture('sdk/probe_config.h')
+    user = Fixture('include/probe_flags.h')
     system.add('#define SDK_BIT 1')
-    options.add('#include <probe_config.h>\n#ifndef MODE_BITS\n#define MODE_BITS 3\n#endif')
+    user.add('#define DEFAULT_BITS 3')
+    options.add('#include <probe_config.h>\n#include "probe_flags.h"\n'
+                '#ifndef MODE_BITS\n#define MODE_BITS DEFAULT_BITS\n#endif')
     config = options.record('typedef struct {', '', ['Configured'],
                             {'mode': [3, False, [0, 7]], 'target': [6, False, [0, 63]],
                              'standard': [4, False, [0, 15]], 'sdk': [1, False, [0, 1]]})
@@ -142,9 +145,9 @@ def functional(root):
                 '#if __STDC_VERSION__ >= 201112L\nunsigned standard:4;\n#else\nunsigned standard:3;\n#endif\n'
                 'unsigned sdk:SDK_BIT;\n} Configured;')
     options.var('Configured configured;', 'configured', config)
-    main_args = [*DEFAULT, '-I', 'include', '-Dcinst=']
-    on = [*DEFAULT, '-isystem', 'sdk', '-D', 'ENABLE_CAN', '-DMODE_BITS=3']
-    off = ['-std=c99', '--target=i686-pc-windows-msvc', '-isystem', 'sdk',
+    main_args = [*DEFAULT, '-Dcinst=']
+    on = [*DEFAULT, '-I', 'include', '-isystem', 'sdk', '-D', 'ENABLE_CAN', '-DMODE_BITS=3']
+    off = ['-std=c99', '--target=i686-pc-windows-msvc', '-I', 'include', '-isystem', 'sdk',
            '-DENABLE_CAN', '-U', 'ENABLE_CAN']
     jobs = [job('types_and_access', main, types, bridge, args=main_args, db=True),
             job('options_on', options, args=on, db=True)]
@@ -155,12 +158,14 @@ def functional(root):
     jobs.append(alternative)
 
     problems = [
-        ('missing_header', 'known.h', '#include "missing_rv.h"', DEFAULT, 'CLANG_ERRORS'),
+        ('missing_header', 'missing_rv.h', '#include "missing_rv.h"', DEFAULT, 'CLANG_ERRORS'),
         ('missing_macro', 'WIDTH_MISSING', 'struct Bad { unsigned bad:WIDTH_MISSING; };', DEFAULT, 'CLANG_ERRORS'),
         ('bad_typedef', 'MissingType', 'typedef MissingType BadType; BadType item;', DEFAULT, 'CLANG_ERRORS'),
         ('invalid_width', 'width', 'struct Bad { unsigned bad:33; };', DEFAULT, 'CLANG_ERRORS'),
         ('vendor_extension', 'unsupported', 'struct Vendor { unsigned n:1; };',
          [*DEFAULT, '--rv-vendor-mode'], 'UNSUPPORTED_OPTIONS'),
+        ('conditional_mismatch', 'Wrong build variant',
+         '#ifndef EXPECTED_BUILD\n#error Wrong build variant\n#endif', DEFAULT, 'CLANG_ERRORS'),
         ('bad_target', 'target', 'struct Target { unsigned n:1; };',
          ['-std=c11', '--target=not-a-real-target'], None),
         ('unconfirmed_options', '', 'struct Guess { unsigned n:2; };', DEFAULT, 'BUILD_CONFIGURATION_UNCONFIRMED'),
@@ -176,15 +181,15 @@ def functional(root):
             status = 'PARSE_INCOMPLETE_OR_FAILED'
         jobs.append(dict(job(name, broken, args=args), status=status, reason=reason,
                          marker=marker, confirmed=name != 'unconfirmed_options', check_inventory=False))
-    jobs.append(dict(job('cinst_missing', main, args=[*DEFAULT, '-working-directory=' + str(root),
-                                                     '-I', 'include']), status='PARSE_INCOMPLETE',
-                     reason='CLANG_ERRORS', marker='can_chg_p', check_inventory=False))
+    cinst_line = next(v['location'] for v in main.variables if v['name'] == 'can_chg_p')
+    jobs.append(dict(job('cinst_missing', main, args=DEFAULT), status='PARSE_INCOMPLETE',
+                     reason='CLANG_ERRORS', diagnostic_location=cinst_line, check_inventory=False))
     incomplete = Fixture('errors/forward_only.c')
     incomplete.add('struct ForwardOnly;')
     incomplete.var('extern struct ForwardOnly *incomplete;', 'incomplete', None, ptr=1, storage='EXTERN')
     incomplete.write(root)
     jobs.append(dict(job('forward_only', incomplete), unresolved_records=1))
-    for item in (types, bridge, main, system, options):
+    for item in (types, bridge, main, system, user, options):
         item.write(root)
     return jobs
 
@@ -217,8 +222,8 @@ def stress(root, count):
         head.add(f'typedef struct {tag} {alias};')
         head.add('#endif')
         body.add(f'#include "{name}.h"\n#include "common/base.h"\n#include "{name}.h"')
-        if i == 0:
-            body.var('Shared_t shared_state;', 'shared_state', shared_rec)
+        shared_use = (body.var('Shared_t shared_state;', 'shared_state', shared_rec)
+                      if i == 0 else global_shared)
         glob = body.var(f'{alias} g_{i};', f'g_{i}', record)
         fn = f'run_{i}'
         param = body.var(f'void {fn}({alias} *param) {{', 'param', record, kind='PARAMETER', fn=fn, ptr=1)
@@ -226,7 +231,7 @@ def stress(root, count):
         body.access(f'g_{i}.state', fn, glob, record, [0, (1 << width) - 1])
         body.access('local.selected', fn, loc, record, [0, 31])
         body.access('param->state', fn, param, record, [0, (1 << width) - 1])
-        body.access('shared_state.state', fn, global_shared, shared_rec, [0, 3])
+        body.access('shared_state.state', fn, shared_use, shared_rec, [0, 3])
         if i == 0:
             body.add('\n'.join(['(void)0;'] * 2500))
         body.add('}')

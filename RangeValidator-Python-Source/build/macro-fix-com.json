@@ -1,0 +1,34 @@
+{
+  "openpyxl": [
+    [
+      "can_data1->state",
+      "C2",
+      "MISMATCH",
+      "0~31",
+      true
+    ],
+    [
+      "unresolved->state",
+      "C3",
+      "REVIEW",
+      "",
+      false
+    ]
+  ],
+  "com": [
+    [
+      "can_data1->state",
+      "C2",
+      "MISMATCH",
+      "0~31",
+      true
+    ],
+    [
+      "unresolved->state",
+      "C3",
+      "REVIEW",
+      "",
+      false
+    ]
+  ]
+}

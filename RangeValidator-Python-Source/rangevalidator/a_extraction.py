@@ -4,7 +4,7 @@ No variable spelling, range classification, or source binding is changed here.
 """
 from collections import defaultdict
 import re
-from .common import rows, at, text
+from .common import rows, at, text, sheet_function_name, normalize_member_expression
 
 KEYS = ('input/output', 'property', 'name', 'datatype', 'scope')
 
@@ -23,6 +23,7 @@ def _safe(cell):
 
 
 def scan_a(sheet):
+    from .b_extraction import DECLARATION_NAME
     headers, tables, candidates = {}, [], []
     active, section = None, ''
     for number, cells in rows(sheet).items():
@@ -55,7 +56,7 @@ def scan_a(sheet):
         plain_name = bool(len(populated)==1 and active and 'name' in active['columns']
                           and populated[0].column==active['columns']['name'].column
                           and re.fullmatch(r'[A-Za-z_]\w*',text(populated[0]).strip()))
-        if len(populated)==1 and not plain_name and not re.fullmatch(r'[A-Za-z_]\w*(?:\[\w+\])?(?:\.|->)\w+',text(populated[0]).strip()):
+        if len(populated)==1 and not plain_name and not DECLARATION_NAME.fullmatch(normalize_member_expression(text(populated[0]))):
             section = text(populated[0]).strip()
             active = None
             continue
@@ -74,7 +75,7 @@ def scan_a(sheet):
         if not name:
             continue
         rc = at(sheet,number,columns['scope'].column) if 'scope' in columns and not active['reason'] else None
-        candidates.append(dict(sheet=sheet.name, function=sheet.name.split('.',1)[-1].strip(),
+        candidates.append(dict(sheet=sheet.name, function=sheet_function_name(sheet.name),
             format='A', table_id=active['id'], section=active['section'], name=name,
             name_cell=nc.address, range_cell=rc.address if rc else None,
             existing_range=rc.value if rc else None, range_formula=rc.formula if rc else None,

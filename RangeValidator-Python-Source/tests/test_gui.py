@@ -63,3 +63,15 @@ class GuiTests(unittest.TestCase):
         self.app.change_page(1);self.assertEqual(len(self.app.tree.get_children()),1000)
         self.app.change_page(1);self.assertEqual(len(self.app.tree.get_children()),5)
         self.assertEqual(self.app.encoding.get(),'utf-8-sig')
+
+    def test_ordinary_member_filter_and_non_editable_label(self):
+        self.app.compare();self.pump(lambda:not self.app.busy)
+        self.app.filter.set('일반 멤버');self.app.refresh()
+        rows = self.app.tree.get_children()
+        self.assertEqual(len(rows), 1)
+        values = self.app.tree.item(rows[0], 'values')
+        self.assertEqual(values[0], '')
+        self.assertEqual(values[1], '일반 멤버 (SKIP)')
+        self.assertIn('일반 멤버 2', self.app.count.get())
+        self.app.select_visible()
+        self.assertEqual(self.app.selected, set())

@@ -1,0 +1,367 @@
+{
+  "status": "MEASURED",
+  "inventory": {
+    "records": 5,
+    "bitfields": 109,
+    "aliases": 5,
+    "global_variables": 6,
+    "local_variables": 4,
+    "parameters": 4
+  },
+  "jobs": [
+    {
+      "job": "unit_00",
+      "counts": {
+        "record_correct": 2,
+        "alias_correct": 2,
+        "bitfield_flag_correct": 103,
+        "width_correct": 102,
+        "range_correct": 102,
+        "signedness_correct": 102,
+        "width_unresolved": 1,
+        "range_unresolved": 1,
+        "signedness_unresolved": 1,
+        "variable_link_correct": 5,
+        "access_owner_correct": 3,
+        "access_variable_correct": 3,
+        "access_range_correct": 3,
+        "access_unresolved": 1
+      },
+      "differences": [
+        {
+          "metric": "width",
+          "context": [
+            [
+              "unit_00.h",
+              9
+            ],
+            "selected"
+          ],
+          "expected": 5,
+          "actual": null
+        },
+        {
+          "metric": "range",
+          "context": [
+            [
+              "unit_00.h",
+              9
+            ],
+            "selected"
+          ],
+          "expected": [
+            0,
+            31
+          ],
+          "actual": null
+        },
+        {
+          "metric": "signedness",
+          "context": [
+            [
+              "unit_00.h",
+              9
+            ],
+            "selected"
+          ],
+          "expected": false,
+          "actual": null
+        },
+        {
+          "metric": "access_unresolved",
+          "context": {
+            "location": [
+              "unit_00.c",
+              9
+            ],
+            "expression": "local.selected",
+            "function": "run_0",
+            "variable": [
+              "unit_00.c",
+              7
+            ],
+            "member_record": [
+              "unit_00.h",
+              9
+            ],
+            "range": [
+              0,
+              31
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "job": "unit_01",
+      "counts": {
+        "record_correct": 2,
+        "alias_correct": 2,
+        "bitfield_flag_correct": 3,
+        "width_correct": 2,
+        "range_correct": 2,
+        "signedness_correct": 2,
+        "width_unresolved": 1,
+        "range_unresolved": 1,
+        "signedness_unresolved": 1,
+        "variable_link_correct": 4,
+        "access_owner_correct": 3,
+        "access_variable_correct": 3,
+        "access_range_correct": 3,
+        "access_unresolved": 1
+      },
+      "differences": [
+        {
+          "metric": "width",
+          "context": [
+            [
+              "unit_01.h",
+              9
+            ],
+            "selected"
+          ],
+          "expected": 5,
+          "actual": null
+        },
+        {
+          "metric": "range",
+          "context": [
+            [
+              "unit_01.h",
+              9
+            ],
+            "selected"
+          ],
+          "expected": [
+            0,
+            31
+          ],
+          "actual": null
+        },
+        {
+          "metric": "signedness",
+          "context": [
+            [
+              "unit_01.h",
+              9
+            ],
+            "selected"
+          ],
+          "expected": false,
+          "actual": null
+        },
+        {
+          "metric": "access_unresolved",
+          "context": {
+            "location": [
+              "unit_01.c",
+              8
+            ],
+            "expression": "local.selected",
+            "function": "run_1",
+            "variable": [
+              "unit_01.c",
+              6
+            ],
+            "member_record": [
+              "unit_01.h",
+              9
+            ],
+            "range": [
+              0,
+              31
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "job": "unit_02",
+      "counts": {
+        "record_correct": 2,
+        "alias_correct": 2,
+        "bitfield_flag_correct": 3,
+        "width_correct": 2,
+        "range_correct": 2,
+        "signedness_correct": 2,
+        "width_unresolved": 1,
+        "range_unresolved": 1,
+        "signedness_unresolved": 1,
+        "variable_link_correct": 4,
+        "access_owner_correct": 3,
+        "access_variable_correct": 3,
+        "access_range_correct": 3,
+        "access_unresolved": 1
+      },
+      "differences": [
+        {
+          "metric": "width",
+          "context": [
+            [
+              "unit_02.h",
+              9
+            ],
+            "selected"
+          ],
+          "expected": 5,
+          "actual": null
+        },
+        {
+          "metric": "range",
+          "context": [
+            [
+              "unit_02.h",
+              9
+            ],
+            "selected"
+          ],
+          "expected": [
+            0,
+            31
+          ],
+          "actual": null
+        },
+        {
+          "metric": "signedness",
+          "context": [
+            [
+              "unit_02.h",
+              9
+            ],
+            "selected"
+          ],
+          "expected": false,
+          "actual": null
+        },
+        {
+          "metric": "access_unresolved",
+          "context": {
+            "location": [
+              "unit_02.c",
+              8
+            ],
+            "expression": "local.selected",
+            "function": "run_2",
+            "variable": [
+              "unit_02.c",
+              6
+            ],
+            "member_record": [
+              "unit_02.h",
+              9
+            ],
+            "range": [
+              0,
+              31
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "job": "unit_03",
+      "counts": {
+        "record_correct": 2,
+        "alias_correct": 2,
+        "bitfield_flag_correct": 3,
+        "width_correct": 2,
+        "range_correct": 2,
+        "signedness_correct": 2,
+        "width_unresolved": 1,
+        "range_unresolved": 1,
+        "signedness_unresolved": 1,
+        "variable_link_correct": 4,
+        "access_owner_correct": 3,
+        "access_variable_correct": 3,
+        "access_range_correct": 3,
+        "access_unresolved": 1
+      },
+      "differences": [
+        {
+          "metric": "width",
+          "context": [
+            [
+              "unit_03.h",
+              9
+            ],
+            "selected"
+          ],
+          "expected": 5,
+          "actual": null
+        },
+        {
+          "metric": "range",
+          "context": [
+            [
+              "unit_03.h",
+              9
+            ],
+            "selected"
+          ],
+          "expected": [
+            0,
+            31
+          ],
+          "actual": null
+        },
+        {
+          "metric": "signedness",
+          "context": [
+            [
+              "unit_03.h",
+              9
+            ],
+            "selected"
+          ],
+          "expected": false,
+          "actual": null
+        },
+        {
+          "metric": "access_unresolved",
+          "context": {
+            "location": [
+              "unit_03.c",
+              8
+            ],
+            "expression": "local.selected",
+            "function": "run_3",
+            "variable": [
+              "unit_03.c",
+              6
+            ],
+            "member_record": [
+              "unit_03.h",
+              9
+            ],
+            "range": [
+              0,
+              31
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "diagnostics": [],
+  "totals": {
+    "record_correct": 8,
+    "alias_correct": 8,
+    "bitfield_flag_correct": 112,
+    "width_correct": 108,
+    "range_correct": 108,
+    "signedness_correct": 108,
+    "width_unresolved": 4,
+    "range_unresolved": 4,
+    "signedness_unresolved": 4,
+    "variable_link_correct": 17,
+    "access_owner_correct": 12,
+    "access_variable_correct": 12,
+    "access_range_correct": 12,
+    "access_unresolved": 4
+  },
+  "seconds": 0.385008,
+  "peak_working_set_bytes": 28409856,
+  "files": 10,
+  "python": "3.13.9 (tags/v3.13.9:8183fa5, Oct 14 2025, 14:09:13) [MSC v.1944 64 bit (AMD64)]",
+  "architecture": "AMD64"
+}

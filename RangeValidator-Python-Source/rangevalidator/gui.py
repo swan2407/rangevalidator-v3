@@ -16,7 +16,7 @@ from .manual_edits import MANUAL_REVIEW, ReviewRequest, is_review_target, manual
 from .report import create_report
 
 
-LABELS={'MATCH':'일치','MISMATCH':'불일치','REVIEW':'검토 필요','CREATE':'신규 입력','SKIP':'분석 제외'}
+LABELS={'MATCH':'일치','MISMATCH':'불일치','REVIEW':'검토 필요','CREATE':'신규 입력','SKIP':'일반 멤버'}
 
 
 SOURCE_EXTENSIONS = {'.c', '.h', '.hpp', '.inc'}
@@ -187,7 +187,7 @@ class App:
         self.file_tree.heading('#0', text='파일 / 함수 시트')
         self.file_tree.column('#0', width=175, minwidth=110)
         for col in (*STATES, '상태'):
-            self.file_tree.heading(col, text=col)
+            self.file_tree.heading(col, text='일반 멤버' if col == 'SKIP' else col)
             self.file_tree.column(col, width=75, minwidth=50, anchor='center')
         self.file_tree.grid(row=0, column=0, sticky='nsew')
         fy = ttk.Scrollbar(nav, orient='vertical', command=self.file_tree.yview)
@@ -206,7 +206,8 @@ class App:
         bar.pack(fill='x', pady=4)
         self.filter = tk.StringVar(value='전체')
         ttk.Label(bar, text='판정').pack(side='left')
-        combo = ttk.Combobox(bar, textvariable=self.filter, values=('전체', *STATES),
+        combo = ttk.Combobox(bar, textvariable=self.filter,
+                             values=('전체', *(('일반 멤버' if s == 'SKIP' else s) for s in STATES)),
                              state='readonly', width=11)
         combo.pack(side='left', padx=5)
         combo.bind('<<ComboboxSelected>>', lambda e: self.change_page(0, reset=True))
@@ -373,7 +374,7 @@ class App:
         counts = self.result_index.counts
         errors = sum(f.record is not None and f.record.status == 'ERROR'
                      for f in self.result_index.files.values())
-        self.count.set(' | '.join(f'{state} {counts[state]}' for state in STATES)
+        self.count.set(' | '.join(f'{"일반 멤버" if state == "SKIP" else state} {counts[state]}' for state in STATES)
                        + f' | 파일 ERROR {errors} | 자동 선택 {len(self.selected)} | 수동 선택 {len(manual)}')
         self.selection_text.set(f'자동 MISMATCH/CREATE {len(self.selected)}개 / REVIEW 수동 {len(manual)}개')
         if not self.busy:

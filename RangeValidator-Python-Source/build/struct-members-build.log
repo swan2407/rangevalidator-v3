@@ -1,0 +1,86 @@
+602 INFO: PyInstaller: 6.22.3, contrib hooks: 2026.9
+602 INFO: Python: 3.13.9
+671 INFO: Platform: Windows-11-10.0.26200-SP0
+671 INFO: Python environment: C:\Dev\RangeValidator-Python\.build-python
+674 INFO: wrote build/struct-members\RangeValidator-StructMembers.spec
+695 INFO: Module search paths (PYTHONPATH):
+['C:\\Range\\RangeValidator-Python-Source',
+ 'C:\\Dev\\RangeValidator-Python\\.build-python\\python313.zip',
+ 'C:\\Dev\\RangeValidator-Python\\.build-python\\DLLs',
+ 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib',
+ 'C:\\Dev\\RangeValidator-Python\\.build-python',
+ 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages',
+ 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\win32',
+ 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\win32\\lib',
+ 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\Pythonwin',
+ 'C:\\Range\\RangeValidator-Python-Source']
+1641 INFO: checking Analysis
+1641 INFO: Building Analysis because Analysis-00.toc is non existent
+1641 INFO: Looking for Python shared library...
+1641 INFO: Using Python shared library: C:\Dev\RangeValidator-Python\.build-python\python313.dll
+1641 INFO: Running Analysis Analysis-00.toc
+1641 INFO: Target bytecode optimization level: 0
+1641 INFO: Initializing module dependency graph...
+1646 INFO: Initializing module graph hook caches...
+1699 INFO: Analyzing modules for base_library.zip ...
+4283 INFO: Processing standard module hook 'hook-math.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\PyInstaller\\hooks'
+4975 INFO: Processing standard module hook 'hook-encodings.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\PyInstaller\\hooks'
+8074 INFO: Processing standard module hook 'hook-pickle.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\PyInstaller\\hooks'
+9889 INFO: Processing standard module hook 'hook-heapq.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\PyInstaller\\hooks'
+11276 INFO: Caching module dependency graph...
+11343 INFO: Analyzing C:\Range\RangeValidator-Python-Source\gui_entry.py
+11451 INFO: Processing pre-find-module-path hook 'hook-tkinter.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\PyInstaller\\hooks\\pre_find_module_path'
+11457 INFO: TclTkInfo: initializing cached Tcl/Tk info...
+12112 INFO: Processing standard module hook 'hook-_tkinter.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\PyInstaller\\hooks'
+12351 INFO: Processing standard module hook 'hook-platform.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\PyInstaller\\hooks'
+12395 INFO: Processing standard module hook 'hook-_ctypes.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\PyInstaller\\hooks'
+12438 INFO: Processing standard module hook 'hook-pythoncom.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+12672 INFO: Processing standard module hook 'hook-pywintypes.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+13195 INFO: Processing standard module hook 'hook-openpyxl.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+14040 INFO: Processing standard module hook 'hook-xml.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\PyInstaller\\hooks'
+14110 INFO: Processing standard module hook 'hook-xml.etree.cElementTree.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\PyInstaller\\hooks'
+15051 INFO: Processing standard module hook 'hook-PIL.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\PyInstaller\\hooks'
+15315 INFO: Processing standard module hook 'hook-PIL.Image.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\PyInstaller\\hooks'
+16673 INFO: Processing standard module hook 'hook-PIL.ImageFilter.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\PyInstaller\\hooks'
+18484 INFO: Processing pre-safe-import-module hook 'hook-win32com.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\pre_safe_import_module'
+18761 INFO: Processing standard module hook 'hook-win32com.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+20136 INFO: Processing module hooks (post-graph stage)...
+20769 INFO: Processing standard module hook 'hook-PIL.SpiderImagePlugin.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\PyInstaller\\hooks'
+21381 INFO: Processing standard module hook 'hook-_tkinter.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\PyInstaller\\hooks'
+21395 INFO: Performing binary vs. data reclassification (929 entries)
+22628 INFO: Looking for ctypes DLLs
+22651 INFO: Analyzing run-time hooks ...
+22654 INFO: Including run-time hook 'pyi_rth_inspect.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+22662 INFO: Including run-time hook 'pyi_rth_pywintypes.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\rthooks'
+22668 INFO: Including run-time hook 'pyi_rth_pythoncom.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\rthooks'
+22673 INFO: Including run-time hook 'pyi_rth__tkinter.py' from 'C:\\Dev\\RangeValidator-Python\\.build-python\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+22760 INFO: Creating base_library.zip...
+22792 INFO: Looking for dynamic libraries
+23751 INFO: Extra DLL search directories (AddDllDirectory): []
+23751 INFO: Extra DLL search directories (PATH): []
+25401 INFO: Warnings written to C:\Range\RangeValidator-Python-Source\build\struct-members\RangeValidator-StructMembers\warn-RangeValidator-StructMembers.txt
+25453 INFO: Graph cross-reference written to C:\Range\RangeValidator-Python-Source\build\struct-members\RangeValidator-StructMembers\xref-RangeValidator-StructMembers.html
+25537 INFO: checking PYZ
+25537 INFO: Building PYZ because PYZ-00.toc is non existent
+25537 INFO: Building PYZ (ZlibArchive) C:\Range\RangeValidator-Python-Source\build\struct-members\RangeValidator-StructMembers\PYZ-00.pyz
+26028 INFO: Building PYZ (ZlibArchive) C:\Range\RangeValidator-Python-Source\build\struct-members\RangeValidator-StructMembers\PYZ-00.pyz completed successfully.
+26061 INFO: checking PKG
+26062 INFO: Building PKG because PKG-00.toc is non existent
+26062 INFO: Building PKG (CArchive) RangeValidator-StructMembers.pkg
+26103 INFO: Building PKG (CArchive) RangeValidator-StructMembers.pkg completed successfully.
+26106 INFO: Bootloader C:\Dev\RangeValidator-Python\.build-python\Lib\site-packages\PyInstaller\bootloader\Windows-64bit-intel\runw.exe
+26106 INFO: checking EXE
+26107 INFO: Building EXE because EXE-00.toc is non existent
+26107 INFO: Building EXE from EXE-00.toc
+26107 INFO: Copying bootloader EXE to C:\Range\RangeValidator-Python-Source\build\struct-members\RangeValidator-StructMembers\RangeValidator-StructMembers.exe
+26149 INFO: Copying icon to EXE
+26184 INFO: Copying 0 resources to EXE
+26184 INFO: Embedding manifest in EXE
+26224 INFO: Appending PKG archive to EXE
+26231 INFO: Fixing EXE headers
+26731 INFO: Building EXE from EXE-00.toc completed successfully.
+26749 INFO: checking COLLECT
+26749 INFO: Building COLLECT because COLLECT-00.toc is non existent
+26750 INFO: Building COLLECT COLLECT-00.toc
+32159 INFO: Building COLLECT COLLECT-00.toc completed successfully.
+32213 INFO: Build complete! The results are available in: C:\Range\RangeValidator-Python-Source\dist

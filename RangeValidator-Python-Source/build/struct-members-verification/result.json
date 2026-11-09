@@ -1,0 +1,202 @@
+{
+  "openpyxl_conditional_False": [
+    {
+      "expression": "can_chg.obc_ready",
+      "status": "MATCH",
+      "cell": "E2",
+      "reason": "기존 범위 = 계산 범위 / unsigned int obc_ready:1 (device.h:5)"
+    },
+    {
+      "expression": "can_chg.qcs_maxcurr",
+      "status": "SKIP",
+      "cell": "E3",
+      "reason": "일반 멤버: 'can_chg_t.qcs_maxcurr' (비트필드 아님) / device.h:5"
+    },
+    {
+      "expression": "can_chg_p->obc_ready",
+      "status": "MATCH",
+      "cell": "E4",
+      "reason": "기존 범위 = 계산 범위 / unsigned int obc_ready:1 (device.h:5)"
+    },
+    {
+      "expression": "can_chg_p->qcs_maxcurr",
+      "status": "SKIP",
+      "cell": "E5",
+      "reason": "일반 멤버: 'can_chg_t.qcs_maxcurr' (비트필드 아님) / device.h:5"
+    },
+    {
+      "expression": "can_chg.obc_ready",
+      "status": "MATCH",
+      "cell": "C2",
+      "reason": "기존 범위 = 계산 범위 / unsigned int obc_ready:1 (device.h:5)"
+    },
+    {
+      "expression": "can_chg.qcs_maxcurr",
+      "status": "SKIP",
+      "cell": "C3",
+      "reason": "일반 멤버: 'can_chg_t.qcs_maxcurr' (비트필드 아님) / device.h:5"
+    },
+    {
+      "expression": "can_chg_p->obc_ready",
+      "status": "MATCH",
+      "cell": "C4",
+      "reason": "기존 범위 = 계산 범위 / unsigned int obc_ready:1 (device.h:5)"
+    },
+    {
+      "expression": "can_chg_p->qcs_maxcurr",
+      "status": "SKIP",
+      "cell": "C5",
+      "reason": "일반 멤버: 'can_chg_t.qcs_maxcurr' (비트필드 아님) / device.h:5"
+    }
+  ],
+  "com_conditional_False": [
+    {
+      "expression": "can_chg.obc_ready",
+      "status": "MATCH",
+      "cell": "E2",
+      "reason": "기존 범위 = 계산 범위 / unsigned int obc_ready:1 (device.h:5)"
+    },
+    {
+      "expression": "can_chg.qcs_maxcurr",
+      "status": "SKIP",
+      "cell": "E3",
+      "reason": "일반 멤버: 'can_chg_t.qcs_maxcurr' (비트필드 아님) / device.h:5"
+    },
+    {
+      "expression": "can_chg_p->obc_ready",
+      "status": "MATCH",
+      "cell": "E4",
+      "reason": "기존 범위 = 계산 범위 / unsigned int obc_ready:1 (device.h:5)"
+    },
+    {
+      "expression": "can_chg_p->qcs_maxcurr",
+      "status": "SKIP",
+      "cell": "E5",
+      "reason": "일반 멤버: 'can_chg_t.qcs_maxcurr' (비트필드 아님) / device.h:5"
+    },
+    {
+      "expression": "can_chg.obc_ready",
+      "status": "MATCH",
+      "cell": "C2",
+      "reason": "기존 범위 = 계산 범위 / unsigned int obc_ready:1 (device.h:5)"
+    },
+    {
+      "expression": "can_chg.qcs_maxcurr",
+      "status": "SKIP",
+      "cell": "C3",
+      "reason": "일반 멤버: 'can_chg_t.qcs_maxcurr' (비트필드 아님) / device.h:5"
+    },
+    {
+      "expression": "can_chg_p->obc_ready",
+      "status": "MATCH",
+      "cell": "C4",
+      "reason": "기존 범위 = 계산 범위 / unsigned int obc_ready:1 (device.h:5)"
+    },
+    {
+      "expression": "can_chg_p->qcs_maxcurr",
+      "status": "SKIP",
+      "cell": "C5",
+      "reason": "일반 멤버: 'can_chg_t.qcs_maxcurr' (비트필드 아님) / device.h:5"
+    }
+  ],
+  "openpyxl_conditional_True": [
+    {
+      "expression": "can_chg.obc_ready",
+      "status": "REVIEW",
+      "cell": "E2",
+      "reason": "비트필드 'can_chg_t.obc_ready' 확인 / 함수 정의를 확정할 수 없음 (CONDITIONAL)"
+    },
+    {
+      "expression": "can_chg.qcs_maxcurr",
+      "status": "SKIP",
+      "cell": "E3",
+      "reason": "일반 멤버: 'can_chg_t.qcs_maxcurr' (비트필드 아님) / device.h:5 / 조건부 선언의 멤버 종류만 확인, 빌드 조건 미확정"
+    },
+    {
+      "expression": "can_chg_p->obc_ready",
+      "status": "REVIEW",
+      "cell": "E4",
+      "reason": "비트필드 'can_chg_t.obc_ready' 확인 / 함수 정의를 확정할 수 없음 (CONDITIONAL)"
+    },
+    {
+      "expression": "can_chg_p->qcs_maxcurr",
+      "status": "SKIP",
+      "cell": "E5",
+      "reason": "일반 멤버: 'can_chg_t.qcs_maxcurr' (비트필드 아님) / device.h:5 / 조건부 선언의 멤버 종류만 확인, 빌드 조건 미확정"
+    },
+    {
+      "expression": "can_chg.obc_ready",
+      "status": "REVIEW",
+      "cell": "C2",
+      "reason": "비트필드 'can_chg_t.obc_ready' 확인 / 함수 정의를 확정할 수 없음 (CONDITIONAL)"
+    },
+    {
+      "expression": "can_chg.qcs_maxcurr",
+      "status": "SKIP",
+      "cell": "C3",
+      "reason": "일반 멤버: 'can_chg_t.qcs_maxcurr' (비트필드 아님) / device.h:5 / 조건부 선언의 멤버 종류만 확인, 빌드 조건 미확정"
+    },
+    {
+      "expression": "can_chg_p->obc_ready",
+      "status": "REVIEW",
+      "cell": "C4",
+      "reason": "비트필드 'can_chg_t.obc_ready' 확인 / 함수 정의를 확정할 수 없음 (CONDITIONAL)"
+    },
+    {
+      "expression": "can_chg_p->qcs_maxcurr",
+      "status": "SKIP",
+      "cell": "C5",
+      "reason": "일반 멤버: 'can_chg_t.qcs_maxcurr' (비트필드 아님) / device.h:5 / 조건부 선언의 멤버 종류만 확인, 빌드 조건 미확정"
+    }
+  ],
+  "com_conditional_True": [
+    {
+      "expression": "can_chg.obc_ready",
+      "status": "REVIEW",
+      "cell": "E2",
+      "reason": "비트필드 'can_chg_t.obc_ready' 확인 / 함수 정의를 확정할 수 없음 (CONDITIONAL)"
+    },
+    {
+      "expression": "can_chg.qcs_maxcurr",
+      "status": "SKIP",
+      "cell": "E3",
+      "reason": "일반 멤버: 'can_chg_t.qcs_maxcurr' (비트필드 아님) / device.h:5 / 조건부 선언의 멤버 종류만 확인, 빌드 조건 미확정"
+    },
+    {
+      "expression": "can_chg_p->obc_ready",
+      "status": "REVIEW",
+      "cell": "E4",
+      "reason": "비트필드 'can_chg_t.obc_ready' 확인 / 함수 정의를 확정할 수 없음 (CONDITIONAL)"
+    },
+    {
+      "expression": "can_chg_p->qcs_maxcurr",
+      "status": "SKIP",
+      "cell": "E5",
+      "reason": "일반 멤버: 'can_chg_t.qcs_maxcurr' (비트필드 아님) / device.h:5 / 조건부 선언의 멤버 종류만 확인, 빌드 조건 미확정"
+    },
+    {
+      "expression": "can_chg.obc_ready",
+      "status": "REVIEW",
+      "cell": "C2",
+      "reason": "비트필드 'can_chg_t.obc_ready' 확인 / 함수 정의를 확정할 수 없음 (CONDITIONAL)"
+    },
+    {
+      "expression": "can_chg.qcs_maxcurr",
+      "status": "SKIP",
+      "cell": "C3",
+      "reason": "일반 멤버: 'can_chg_t.qcs_maxcurr' (비트필드 아님) / device.h:5 / 조건부 선언의 멤버 종류만 확인, 빌드 조건 미확정"
+    },
+    {
+      "expression": "can_chg_p->obc_ready",
+      "status": "REVIEW",
+      "cell": "C4",
+      "reason": "비트필드 'can_chg_t.obc_ready' 확인 / 함수 정의를 확정할 수 없음 (CONDITIONAL)"
+    },
+    {
+      "expression": "can_chg_p->qcs_maxcurr",
+      "status": "SKIP",
+      "cell": "C5",
+      "reason": "일반 멤버: 'can_chg_t.qcs_maxcurr' (비트필드 아님) / device.h:5 / 조건부 선언의 멤버 종류만 확인, 빌드 조건 미확정"
+    }
+  ]
+}

@@ -28,7 +28,8 @@ class BatchWorkflowTests(unittest.TestCase):
         self.assertEqual((r.struct,r.member,r.width,r.expected),('Device_t','active',1,'0~1'))
         self.assertTrue(r.cell);self.assertTrue(r.source_line)
         self.assertEqual([f.read_status for f in s.files],['SUCCESS','SUCCESS'])
-        self.assertTrue(all(f.compared and f.extracted_variables==12 for f in s.files))
+        self.assertTrue(all(f.compared and f.extracted_variables==13 for f in s.files))
+        self.assertEqual(sum(f.counts['SKIP'] for f in s.files), 2)
         self.assertEqual(sum(f.counts['MISMATCH'] for f in s.files),8);s.assert_unchanged()
     def test_empty_document_not_reported_as_variable_comparison(self):
         from openpyxl import Workbook

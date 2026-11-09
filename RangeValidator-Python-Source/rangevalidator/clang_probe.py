@@ -26,13 +26,19 @@ def load_clang(dll=None):
 
 def library_info(dll=None):
     clang = load_clang(dll)
-    clang.Index.create()  # cindex compatibility check stays enabled.
+    try:
+        clang.Index.create()  # cindex compatibility check stays enabled.
+    except clang.LibclangError as exc:
+        raise RuntimeError(f'libclang load or binding compatibility check failed: {exc}') from exc
+    library = clang.conf.lib
     path = Path(clang.conf.get_filename()).resolve()
+    if not path.is_file():
+        raise RuntimeError('Pass the full libclang library path so the loaded file can be identified')
 
     class CXString(ctypes.Structure):
         _fields_ = [('data', ctypes.c_void_p), ('private_flags', ctypes.c_uint)]
 
-    lib = ctypes.CDLL(str(path))
+    lib = ctypes.CDLL(str(path), handle=library._handle)
     lib.clang_getClangVersion.restype = CXString
     lib.clang_getCString.argtypes, lib.clang_getCString.restype = [CXString], ctypes.c_char_p
     lib.clang_disposeString.argtypes, lib.clang_disposeString.restype = [CXString], None
@@ -180,6 +186,9 @@ class _Inventory:
             return
         base = cursor
         while base.kind.name != 'DECL_REF_EXPR':
+            if base.kind.name not in ('MEMBER_REF_EXPR', 'ARRAY_SUBSCRIPT_EXPR', 'UNEXPOSED_EXPR',
+                                      'PAREN_EXPR', 'UNARY_OPERATOR'):
+                return
             base = next(iter(base.get_children()), None)
             if base is None:
                 return
@@ -203,7 +212,7 @@ class _Inventory:
             width=member['width'], range=member['range'],
             trusted=binding['record_link_trusted'] and bool(self.record_id(field.semantic_parent))))
 
-    def visit(self, cursor, function=None, scope=None):
+    def visit(self, cursor, function=None, scope=None, parent_record=None):
         loc = self.location(cursor.location)
         if loc is None:
             return  # Included system declarations remain outside the project inventory.
@@ -217,12 +226,13 @@ class _Inventory:
             row = self.records.setdefault(identity, dict(
                 id=identity, tag=cursor.spelling if not cursor.is_anonymous() else '',
                 kind=kind, declarations=[], definition=None, fields=[], aliases=[],
-                parent_record_id=self.record_id(cursor.semantic_parent)))
+                parent_record_id=parent_record))
             row['declarations'].append(loc)
             if cursor.is_definition():
                 row['definition'] = loc
                 row['fields'] = [self.field(child) for child in cursor.get_children()
                                  if child.kind.name == 'FIELD_DECL']
+            parent_record = identity
         elif kind == 'TYPEDEF_DECL':
             typ = self.type_info(cursor.underlying_typedef_type)
             self.aliases.append(dict(name=cursor.spelling, location=loc, type=typ))
@@ -234,7 +244,7 @@ class _Inventory:
         elif kind == 'MEMBER_REF_EXPR':
             self.access(cursor, function, loc)
         for child in cursor.get_children():
-            self.visit(child, function, scope)
+            self.visit(child, function, scope, parent_record)
 
     def finish(self):
         for alias in self.aliases:

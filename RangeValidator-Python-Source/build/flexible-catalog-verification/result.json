@@ -1,0 +1,458 @@
+{
+  "declarations_without_includes_openpyxl": [
+    {
+      "expression": "CAN_CHG . READY",
+      "status": "MATCH",
+      "expected": "0~7",
+      "cell": "E2",
+      "reason": "기존 범위 = 계산 범위 / uint Ready:3 (device.h:1) / C 선언 device.c:1 (CAN_CHG_T)"
+    },
+    {
+      "expression": "can_chg_p - \n> ready",
+      "status": "MISMATCH",
+      "expected": "0~7",
+      "cell": "E3",
+      "reason": "REPLACED_INVALID_RANGE / uint Ready:3 (device.h:1) / C 선언 device.c:2 (can_chg_t)"
+    },
+    {
+      "expression": "CAN_CHG . CURRENT",
+      "status": "SKIP",
+      "expected": "",
+      "cell": "E4",
+      "reason": "일반 멤버: 'can_chg_t.Current' (비트필드 아님) / device.h:1"
+    },
+    {
+      "expression": "DEVICE . READY",
+      "status": "MISMATCH",
+      "expected": "0~31",
+      "cell": "E5",
+      "reason": "REPLACED_INVALID_RANGE / unsigned int ready:5 (device.h:2) / 변수 선언 연결 없이 변수명으로 타입 추정: 'DEVICE' → device_t / 해당 구조체의 'READY' 비교 / device_t (device.h:2)"
+    },
+    {
+      "expression": "SENSOR_P - > VALUE",
+      "status": "MATCH",
+      "expected": "0~3",
+      "cell": "E6",
+      "reason": "기존 범위 = 계산 범위 / unsigned int value:2 (device.h:3) / 변수 선언 연결 없이 변수명으로 타입 추정: 'SENSOR_P' → sensor_t / 해당 구조체의 'VALUE' 비교 / sensor_t (device.h:3)"
+    },
+    {
+      "expression": "can_chg.missing",
+      "status": "REVIEW",
+      "expected": "",
+      "cell": "E7",
+      "reason": "MEMBER_NOT_FOUND: 'can_chg_t'에서 'missing' 선언을 찾지 못함"
+    },
+    {
+      "expression": "unknown.ready",
+      "status": "REVIEW",
+      "expected": "",
+      "cell": "E8",
+      "reason": "DECL_NOT_COLLECTED: 등록된 C/H에서 'unknown' 선언을 수집하지 못함 / 변수명에 대응하는 구조체 타입을 찾지 못함 (unknown_t, unknown)"
+    },
+    {
+      "expression": "CAN_CHG_P - > ready",
+      "status": "CREATE",
+      "expected": "0~7",
+      "cell": "E9",
+      "reason": "확정 비트필드의 공란 범위 신규 입력 / C 선언 device.c:2 (can_chg_t)"
+    },
+    {
+      "expression": "CAN_CHG . READY",
+      "status": "MATCH",
+      "expected": "0~7",
+      "cell": "C2",
+      "reason": "기존 범위 = 계산 범위 / uint Ready:3 (device.h:1) / C 선언 device.c:1 (CAN_CHG_T)"
+    },
+    {
+      "expression": "can_chg_p - \n> ready",
+      "status": "MISMATCH",
+      "expected": "0~7",
+      "cell": "C3",
+      "reason": "REPLACED_INVALID_RANGE / uint Ready:3 (device.h:1) / C 선언 device.c:2 (can_chg_t)"
+    },
+    {
+      "expression": "CAN_CHG . CURRENT",
+      "status": "SKIP",
+      "expected": "",
+      "cell": "C4",
+      "reason": "일반 멤버: 'can_chg_t.Current' (비트필드 아님) / device.h:1"
+    },
+    {
+      "expression": "DEVICE . READY",
+      "status": "MISMATCH",
+      "expected": "0~31",
+      "cell": "C5",
+      "reason": "REPLACED_INVALID_RANGE / unsigned int ready:5 (device.h:2) / 변수 선언 연결 없이 변수명으로 타입 추정: 'DEVICE' → device_t / 해당 구조체의 'READY' 비교 / device_t (device.h:2)"
+    },
+    {
+      "expression": "SENSOR_P - > VALUE",
+      "status": "MATCH",
+      "expected": "0~3",
+      "cell": "C6",
+      "reason": "기존 범위 = 계산 범위 / unsigned int value:2 (device.h:3) / 변수 선언 연결 없이 변수명으로 타입 추정: 'SENSOR_P' → sensor_t / 해당 구조체의 'VALUE' 비교 / sensor_t (device.h:3)"
+    },
+    {
+      "expression": "can_chg.missing",
+      "status": "REVIEW",
+      "expected": "",
+      "cell": "C7",
+      "reason": "MEMBER_NOT_FOUND: 'can_chg_t'에서 'missing' 선언을 찾지 못함"
+    },
+    {
+      "expression": "unknown.ready",
+      "status": "REVIEW",
+      "expected": "",
+      "cell": "C8",
+      "reason": "DECL_NOT_COLLECTED: 등록된 C/H에서 'unknown' 선언을 수집하지 못함 / 변수명에 대응하는 구조체 타입을 찾지 못함 (unknown_t, unknown)"
+    },
+    {
+      "expression": "CAN_CHG_P - > ready",
+      "status": "CREATE",
+      "expected": "0~7",
+      "cell": "C9",
+      "reason": "확정 비트필드의 공란 범위 신규 입력 / C 선언 device.c:2 (can_chg_t)"
+    }
+  ],
+  "declarations_without_includes_com": [
+    {
+      "expression": "CAN_CHG . READY",
+      "status": "MATCH",
+      "expected": "0~7",
+      "cell": "E2",
+      "reason": "기존 범위 = 계산 범위 / uint Ready:3 (device.h:1) / C 선언 device.c:1 (CAN_CHG_T)"
+    },
+    {
+      "expression": "can_chg_p - \n> ready",
+      "status": "MISMATCH",
+      "expected": "0~7",
+      "cell": "E3",
+      "reason": "REPLACED_INVALID_RANGE / uint Ready:3 (device.h:1) / C 선언 device.c:2 (can_chg_t)"
+    },
+    {
+      "expression": "CAN_CHG . CURRENT",
+      "status": "SKIP",
+      "expected": "",
+      "cell": "E4",
+      "reason": "일반 멤버: 'can_chg_t.Current' (비트필드 아님) / device.h:1"
+    },
+    {
+      "expression": "DEVICE . READY",
+      "status": "MISMATCH",
+      "expected": "0~31",
+      "cell": "E5",
+      "reason": "REPLACED_INVALID_RANGE / unsigned int ready:5 (device.h:2) / 변수 선언 연결 없이 변수명으로 타입 추정: 'DEVICE' → device_t / 해당 구조체의 'READY' 비교 / device_t (device.h:2)"
+    },
+    {
+      "expression": "SENSOR_P - > VALUE",
+      "status": "MATCH",
+      "expected": "0~3",
+      "cell": "E6",
+      "reason": "기존 범위 = 계산 범위 / unsigned int value:2 (device.h:3) / 변수 선언 연결 없이 변수명으로 타입 추정: 'SENSOR_P' → sensor_t / 해당 구조체의 'VALUE' 비교 / sensor_t (device.h:3)"
+    },
+    {
+      "expression": "can_chg.missing",
+      "status": "REVIEW",
+      "expected": "",
+      "cell": "E7",
+      "reason": "MEMBER_NOT_FOUND: 'can_chg_t'에서 'missing' 선언을 찾지 못함"
+    },
+    {
+      "expression": "unknown.ready",
+      "status": "REVIEW",
+      "expected": "",
+      "cell": "E8",
+      "reason": "DECL_NOT_COLLECTED: 등록된 C/H에서 'unknown' 선언을 수집하지 못함 / 변수명에 대응하는 구조체 타입을 찾지 못함 (unknown_t, unknown)"
+    },
+    {
+      "expression": "CAN_CHG_P - > ready",
+      "status": "CREATE",
+      "expected": "0~7",
+      "cell": "E9",
+      "reason": "확정 비트필드의 공란 범위 신규 입력 / C 선언 device.c:2 (can_chg_t)"
+    },
+    {
+      "expression": "CAN_CHG . READY",
+      "status": "MATCH",
+      "expected": "0~7",
+      "cell": "C2",
+      "reason": "기존 범위 = 계산 범위 / uint Ready:3 (device.h:1) / C 선언 device.c:1 (CAN_CHG_T)"
+    },
+    {
+      "expression": "can_chg_p - \n> ready",
+      "status": "MISMATCH",
+      "expected": "0~7",
+      "cell": "C3",
+      "reason": "REPLACED_INVALID_RANGE / uint Ready:3 (device.h:1) / C 선언 device.c:2 (can_chg_t)"
+    },
+    {
+      "expression": "CAN_CHG . CURRENT",
+      "status": "SKIP",
+      "expected": "",
+      "cell": "C4",
+      "reason": "일반 멤버: 'can_chg_t.Current' (비트필드 아님) / device.h:1"
+    },
+    {
+      "expression": "DEVICE . READY",
+      "status": "MISMATCH",
+      "expected": "0~31",
+      "cell": "C5",
+      "reason": "REPLACED_INVALID_RANGE / unsigned int ready:5 (device.h:2) / 변수 선언 연결 없이 변수명으로 타입 추정: 'DEVICE' → device_t / 해당 구조체의 'READY' 비교 / device_t (device.h:2)"
+    },
+    {
+      "expression": "SENSOR_P - > VALUE",
+      "status": "MATCH",
+      "expected": "0~3",
+      "cell": "C6",
+      "reason": "기존 범위 = 계산 범위 / unsigned int value:2 (device.h:3) / 변수 선언 연결 없이 변수명으로 타입 추정: 'SENSOR_P' → sensor_t / 해당 구조체의 'VALUE' 비교 / sensor_t (device.h:3)"
+    },
+    {
+      "expression": "can_chg.missing",
+      "status": "REVIEW",
+      "expected": "",
+      "cell": "C7",
+      "reason": "MEMBER_NOT_FOUND: 'can_chg_t'에서 'missing' 선언을 찾지 못함"
+    },
+    {
+      "expression": "unknown.ready",
+      "status": "REVIEW",
+      "expected": "",
+      "cell": "C8",
+      "reason": "DECL_NOT_COLLECTED: 등록된 C/H에서 'unknown' 선언을 수집하지 못함 / 변수명에 대응하는 구조체 타입을 찾지 못함 (unknown_t, unknown)"
+    },
+    {
+      "expression": "CAN_CHG_P - > ready",
+      "status": "CREATE",
+      "expected": "0~7",
+      "cell": "C9",
+      "reason": "확정 비트필드의 공란 범위 신규 입력 / C 선언 device.c:2 (can_chg_t)"
+    }
+  ],
+  "types_without_variables_openpyxl": [
+    {
+      "expression": "CAN_CHG . READY",
+      "status": "MATCH",
+      "expected": "0~7",
+      "cell": "E2",
+      "reason": "기존 범위 = 계산 범위 / uint Ready:3 (device.h:1) / 변수 선언 연결 없이 변수명으로 타입 추정: 'CAN_CHG' → can_chg_t / 해당 구조체의 'READY' 비교 / can_chg_t (device.h:1)"
+    },
+    {
+      "expression": "can_chg_p - \n> ready",
+      "status": "MISMATCH",
+      "expected": "0~7",
+      "cell": "E3",
+      "reason": "REPLACED_INVALID_RANGE / uint Ready:3 (device.h:1) / 변수 선언 연결 없이 변수명으로 타입 추정: 'can_chg_p' → can_chg_t / 해당 구조체의 'ready' 비교 / can_chg_t (device.h:1)"
+    },
+    {
+      "expression": "CAN_CHG . CURRENT",
+      "status": "SKIP",
+      "expected": "",
+      "cell": "E4",
+      "reason": "일반 멤버: 'CURRENT' (비트필드 아님) / 변수 선언 연결 없이 변수명으로 타입 추정: 'CAN_CHG' → can_chg_t / 해당 구조체의 'CURRENT' 비교 / can_chg_t (device.h:1)"
+    },
+    {
+      "expression": "DEVICE . READY",
+      "status": "MISMATCH",
+      "expected": "0~31",
+      "cell": "E5",
+      "reason": "REPLACED_INVALID_RANGE / unsigned int ready:5 (device.h:2) / 변수 선언 연결 없이 변수명으로 타입 추정: 'DEVICE' → device_t / 해당 구조체의 'READY' 비교 / device_t (device.h:2)"
+    },
+    {
+      "expression": "SENSOR_P - > VALUE",
+      "status": "MATCH",
+      "expected": "0~3",
+      "cell": "E6",
+      "reason": "기존 범위 = 계산 범위 / unsigned int value:2 (device.h:3) / 변수 선언 연결 없이 변수명으로 타입 추정: 'SENSOR_P' → sensor_t / 해당 구조체의 'VALUE' 비교 / sensor_t (device.h:3)"
+    },
+    {
+      "expression": "can_chg.missing",
+      "status": "REVIEW",
+      "expected": "",
+      "cell": "E7",
+      "reason": "MEMBER_NOT_FOUND: 'can_chg_t'에서 'missing' 멤버를 찾지 못함 / 변수 선언 연결 없이 변수명으로 타입 추정: 'can_chg' → can_chg_t / 해당 구조체의 'missing' 비교 / can_chg_t (device.h:1)"
+    },
+    {
+      "expression": "unknown.ready",
+      "status": "REVIEW",
+      "expected": "",
+      "cell": "E8",
+      "reason": "DECL_NOT_COLLECTED: 등록된 C/H에서 'unknown' 선언을 수집하지 못함 / 변수명에 대응하는 구조체 타입을 찾지 못함 (unknown_t, unknown)"
+    },
+    {
+      "expression": "CAN_CHG_P - > ready",
+      "status": "CREATE",
+      "expected": "0~7",
+      "cell": "E9",
+      "reason": "확정 비트필드의 공란 범위 신규 입력 / 변수 선언 연결 없이 변수명으로 타입 추정: 'CAN_CHG_P' → can_chg_t / 해당 구조체의 'ready' 비교 / can_chg_t (device.h:1)"
+    },
+    {
+      "expression": "CAN_CHG . READY",
+      "status": "MATCH",
+      "expected": "0~7",
+      "cell": "C2",
+      "reason": "기존 범위 = 계산 범위 / uint Ready:3 (device.h:1) / 변수 선언 연결 없이 변수명으로 타입 추정: 'CAN_CHG' → can_chg_t / 해당 구조체의 'READY' 비교 / can_chg_t (device.h:1)"
+    },
+    {
+      "expression": "can_chg_p - \n> ready",
+      "status": "MISMATCH",
+      "expected": "0~7",
+      "cell": "C3",
+      "reason": "REPLACED_INVALID_RANGE / uint Ready:3 (device.h:1) / 변수 선언 연결 없이 변수명으로 타입 추정: 'can_chg_p' → can_chg_t / 해당 구조체의 'ready' 비교 / can_chg_t (device.h:1)"
+    },
+    {
+      "expression": "CAN_CHG . CURRENT",
+      "status": "SKIP",
+      "expected": "",
+      "cell": "C4",
+      "reason": "일반 멤버: 'CURRENT' (비트필드 아님) / 변수 선언 연결 없이 변수명으로 타입 추정: 'CAN_CHG' → can_chg_t / 해당 구조체의 'CURRENT' 비교 / can_chg_t (device.h:1)"
+    },
+    {
+      "expression": "DEVICE . READY",
+      "status": "MISMATCH",
+      "expected": "0~31",
+      "cell": "C5",
+      "reason": "REPLACED_INVALID_RANGE / unsigned int ready:5 (device.h:2) / 변수 선언 연결 없이 변수명으로 타입 추정: 'DEVICE' → device_t / 해당 구조체의 'READY' 비교 / device_t (device.h:2)"
+    },
+    {
+      "expression": "SENSOR_P - > VALUE",
+      "status": "MATCH",
+      "expected": "0~3",
+      "cell": "C6",
+      "reason": "기존 범위 = 계산 범위 / unsigned int value:2 (device.h:3) / 변수 선언 연결 없이 변수명으로 타입 추정: 'SENSOR_P' → sensor_t / 해당 구조체의 'VALUE' 비교 / sensor_t (device.h:3)"
+    },
+    {
+      "expression": "can_chg.missing",
+      "status": "REVIEW",
+      "expected": "",
+      "cell": "C7",
+      "reason": "MEMBER_NOT_FOUND: 'can_chg_t'에서 'missing' 멤버를 찾지 못함 / 변수 선언 연결 없이 변수명으로 타입 추정: 'can_chg' → can_chg_t / 해당 구조체의 'missing' 비교 / can_chg_t (device.h:1)"
+    },
+    {
+      "expression": "unknown.ready",
+      "status": "REVIEW",
+      "expected": "",
+      "cell": "C8",
+      "reason": "DECL_NOT_COLLECTED: 등록된 C/H에서 'unknown' 선언을 수집하지 못함 / 변수명에 대응하는 구조체 타입을 찾지 못함 (unknown_t, unknown)"
+    },
+    {
+      "expression": "CAN_CHG_P - > ready",
+      "status": "CREATE",
+      "expected": "0~7",
+      "cell": "C9",
+      "reason": "확정 비트필드의 공란 범위 신규 입력 / 변수 선언 연결 없이 변수명으로 타입 추정: 'CAN_CHG_P' → can_chg_t / 해당 구조체의 'ready' 비교 / can_chg_t (device.h:1)"
+    }
+  ],
+  "types_without_variables_com": [
+    {
+      "expression": "CAN_CHG . READY",
+      "status": "MATCH",
+      "expected": "0~7",
+      "cell": "E2",
+      "reason": "기존 범위 = 계산 범위 / uint Ready:3 (device.h:1) / 변수 선언 연결 없이 변수명으로 타입 추정: 'CAN_CHG' → can_chg_t / 해당 구조체의 'READY' 비교 / can_chg_t (device.h:1)"
+    },
+    {
+      "expression": "can_chg_p - \n> ready",
+      "status": "MISMATCH",
+      "expected": "0~7",
+      "cell": "E3",
+      "reason": "REPLACED_INVALID_RANGE / uint Ready:3 (device.h:1) / 변수 선언 연결 없이 변수명으로 타입 추정: 'can_chg_p' → can_chg_t / 해당 구조체의 'ready' 비교 / can_chg_t (device.h:1)"
+    },
+    {
+      "expression": "CAN_CHG . CURRENT",
+      "status": "SKIP",
+      "expected": "",
+      "cell": "E4",
+      "reason": "일반 멤버: 'CURRENT' (비트필드 아님) / 변수 선언 연결 없이 변수명으로 타입 추정: 'CAN_CHG' → can_chg_t / 해당 구조체의 'CURRENT' 비교 / can_chg_t (device.h:1)"
+    },
+    {
+      "expression": "DEVICE . READY",
+      "status": "MISMATCH",
+      "expected": "0~31",
+      "cell": "E5",
+      "reason": "REPLACED_INVALID_RANGE / unsigned int ready:5 (device.h:2) / 변수 선언 연결 없이 변수명으로 타입 추정: 'DEVICE' → device_t / 해당 구조체의 'READY' 비교 / device_t (device.h:2)"
+    },
+    {
+      "expression": "SENSOR_P - > VALUE",
+      "status": "MATCH",
+      "expected": "0~3",
+      "cell": "E6",
+      "reason": "기존 범위 = 계산 범위 / unsigned int value:2 (device.h:3) / 변수 선언 연결 없이 변수명으로 타입 추정: 'SENSOR_P' → sensor_t / 해당 구조체의 'VALUE' 비교 / sensor_t (device.h:3)"
+    },
+    {
+      "expression": "can_chg.missing",
+      "status": "REVIEW",
+      "expected": "",
+      "cell": "E7",
+      "reason": "MEMBER_NOT_FOUND: 'can_chg_t'에서 'missing' 멤버를 찾지 못함 / 변수 선언 연결 없이 변수명으로 타입 추정: 'can_chg' → can_chg_t / 해당 구조체의 'missing' 비교 / can_chg_t (device.h:1)"
+    },
+    {
+      "expression": "unknown.ready",
+      "status": "REVIEW",
+      "expected": "",
+      "cell": "E8",
+      "reason": "DECL_NOT_COLLECTED: 등록된 C/H에서 'unknown' 선언을 수집하지 못함 / 변수명에 대응하는 구조체 타입을 찾지 못함 (unknown_t, unknown)"
+    },
+    {
+      "expression": "CAN_CHG_P - > ready",
+      "status": "CREATE",
+      "expected": "0~7",
+      "cell": "E9",
+      "reason": "확정 비트필드의 공란 범위 신규 입력 / 변수 선언 연결 없이 변수명으로 타입 추정: 'CAN_CHG_P' → can_chg_t / 해당 구조체의 'ready' 비교 / can_chg_t (device.h:1)"
+    },
+    {
+      "expression": "CAN_CHG . READY",
+      "status": "MATCH",
+      "expected": "0~7",
+      "cell": "C2",
+      "reason": "기존 범위 = 계산 범위 / uint Ready:3 (device.h:1) / 변수 선언 연결 없이 변수명으로 타입 추정: 'CAN_CHG' → can_chg_t / 해당 구조체의 'READY' 비교 / can_chg_t (device.h:1)"
+    },
+    {
+      "expression": "can_chg_p - \n> ready",
+      "status": "MISMATCH",
+      "expected": "0~7",
+      "cell": "C3",
+      "reason": "REPLACED_INVALID_RANGE / uint Ready:3 (device.h:1) / 변수 선언 연결 없이 변수명으로 타입 추정: 'can_chg_p' → can_chg_t / 해당 구조체의 'ready' 비교 / can_chg_t (device.h:1)"
+    },
+    {
+      "expression": "CAN_CHG . CURRENT",
+      "status": "SKIP",
+      "expected": "",
+      "cell": "C4",
+      "reason": "일반 멤버: 'CURRENT' (비트필드 아님) / 변수 선언 연결 없이 변수명으로 타입 추정: 'CAN_CHG' → can_chg_t / 해당 구조체의 'CURRENT' 비교 / can_chg_t (device.h:1)"
+    },
+    {
+      "expression": "DEVICE . READY",
+      "status": "MISMATCH",
+      "expected": "0~31",
+      "cell": "C5",
+      "reason": "REPLACED_INVALID_RANGE / unsigned int ready:5 (device.h:2) / 변수 선언 연결 없이 변수명으로 타입 추정: 'DEVICE' → device_t / 해당 구조체의 'READY' 비교 / device_t (device.h:2)"
+    },
+    {
+      "expression": "SENSOR_P - > VALUE",
+      "status": "MATCH",
+      "expected": "0~3",
+      "cell": "C6",
+      "reason": "기존 범위 = 계산 범위 / unsigned int value:2 (device.h:3) / 변수 선언 연결 없이 변수명으로 타입 추정: 'SENSOR_P' → sensor_t / 해당 구조체의 'VALUE' 비교 / sensor_t (device.h:3)"
+    },
+    {
+      "expression": "can_chg.missing",
+      "status": "REVIEW",
+      "expected": "",
+      "cell": "C7",
+      "reason": "MEMBER_NOT_FOUND: 'can_chg_t'에서 'missing' 멤버를 찾지 못함 / 변수 선언 연결 없이 변수명으로 타입 추정: 'can_chg' → can_chg_t / 해당 구조체의 'missing' 비교 / can_chg_t (device.h:1)"
+    },
+    {
+      "expression": "unknown.ready",
+      "status": "REVIEW",
+      "expected": "",
+      "cell": "C8",
+      "reason": "DECL_NOT_COLLECTED: 등록된 C/H에서 'unknown' 선언을 수집하지 못함 / 변수명에 대응하는 구조체 타입을 찾지 못함 (unknown_t, unknown)"
+    },
+    {
+      "expression": "CAN_CHG_P - > ready",
+      "status": "CREATE",
+      "expected": "0~7",
+      "cell": "C9",
+      "reason": "확정 비트필드의 공란 범위 신규 입력 / 변수 선언 연결 없이 변수명으로 타입 추정: 'CAN_CHG_P' → can_chg_t / 해당 구조체의 'ready' 비교 / can_chg_t (device.h:1)"
+    }
+  ]
+}

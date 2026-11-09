@@ -1,0 +1,86 @@
+{
+  "missing_types": [
+    {
+      "expression": "obj.state",
+      "status": "REVIEW",
+      "cell": "E2"
+    },
+    {
+      "expression": "ptr->state",
+      "status": "REVIEW",
+      "cell": "E3"
+    },
+    {
+      "expression": "arr[0].state",
+      "status": "REVIEW",
+      "cell": "E4"
+    },
+    {
+      "expression": "obj.status.mode",
+      "status": "REVIEW",
+      "cell": "E5"
+    },
+    {
+      "expression": "obj.state",
+      "status": "REVIEW",
+      "cell": "C2"
+    },
+    {
+      "expression": "ptr->state",
+      "status": "REVIEW",
+      "cell": "C3"
+    },
+    {
+      "expression": "arr[0].state",
+      "status": "REVIEW",
+      "cell": "C4"
+    },
+    {
+      "expression": "obj.status.mode",
+      "status": "REVIEW",
+      "cell": "C5"
+    }
+  ],
+  "known_types": [
+    {
+      "expression": "obj.state",
+      "status": "MATCH",
+      "cell": "E2"
+    },
+    {
+      "expression": "ptr->state",
+      "status": "MATCH",
+      "cell": "E3"
+    },
+    {
+      "expression": "arr[0].state",
+      "status": "MATCH",
+      "cell": "E4"
+    },
+    {
+      "expression": "obj.status.mode",
+      "status": "REVIEW",
+      "cell": "E5"
+    },
+    {
+      "expression": "obj.state",
+      "status": "MATCH",
+      "cell": "C2"
+    },
+    {
+      "expression": "ptr->state",
+      "status": "MATCH",
+      "cell": "C3"
+    },
+    {
+      "expression": "arr[0].state",
+      "status": "MATCH",
+      "cell": "C4"
+    },
+    {
+      "expression": "obj.status.mode",
+      "status": "REVIEW",
+      "cell": "C5"
+    }
+  ]
+}

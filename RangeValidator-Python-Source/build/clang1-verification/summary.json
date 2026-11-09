@@ -1,0 +1,131 @@
+{
+  "functional": {
+    "legacy": {
+      "status": "MEASURED",
+      "inventory": {
+        "records": 26,
+        "bitfields": 41,
+        "aliases": 9,
+        "global_variables": 20,
+        "local_variables": 2,
+        "parameters": 1
+      },
+      "totals": {
+        "record_correct": 12,
+        "alias_correct": 9,
+        "bitfield_flag_correct": 24,
+        "width_correct": 19,
+        "range_correct": 17,
+        "signedness_correct": 17,
+        "range_unresolved": 10,
+        "signedness_unresolved": 10,
+        "bitfield_flag_wrong": 1,
+        "variable_link_correct": 19,
+        "variable_link_unresolved": 4,
+        "access_owner_correct": 9,
+        "access_variable_correct": 9,
+        "access_range_correct": 9,
+        "access_excluded": 2,
+        "access_unresolved": 6,
+        "alias_unresolved": 2,
+        "bitfield_flag_unresolved": 6,
+        "width_unresolved": 8,
+        "incomplete_variable_correct": 1
+      },
+      "seconds": 0.14164,
+      "peak_working_set_bytes": 28405760,
+      "files": 16,
+      "python": "3.13.9 (tags/v3.13.9:8183fa5, Oct 14 2025, 14:09:13) [MSC v.1944 64 bit (AMD64)]",
+      "architecture": "AMD64"
+    },
+    "clang": {
+      "status": "DEPENDENCY_UNAVAILABLE",
+      "error": "No module named 'clang'",
+      "files": 16,
+      "python": "3.13.9 (tags/v3.13.9:8183fa5, Oct 14 2025, 14:09:13) [MSC v.1944 64 bit (AMD64)]",
+      "architecture": "AMD64"
+    }
+  },
+  "stress10": {
+    "legacy": {
+      "status": "MEASURED",
+      "inventory": {
+        "records": 5,
+        "bitfields": 109,
+        "aliases": 5,
+        "global_variables": 6,
+        "local_variables": 4,
+        "parameters": 4
+      },
+      "totals": {
+        "record_correct": 8,
+        "alias_correct": 8,
+        "bitfield_flag_correct": 112,
+        "width_correct": 108,
+        "range_correct": 108,
+        "signedness_correct": 108,
+        "width_unresolved": 4,
+        "range_unresolved": 4,
+        "signedness_unresolved": 4,
+        "variable_link_correct": 17,
+        "access_owner_correct": 12,
+        "access_variable_correct": 12,
+        "access_range_correct": 12,
+        "access_unresolved": 4
+      },
+      "seconds": 0.385008,
+      "peak_working_set_bytes": 28409856,
+      "files": 10,
+      "python": "3.13.9 (tags/v3.13.9:8183fa5, Oct 14 2025, 14:09:13) [MSC v.1944 64 bit (AMD64)]",
+      "architecture": "AMD64"
+    },
+    "clang": {
+      "status": "DEPENDENCY_UNAVAILABLE",
+      "error": "No module named 'clang'",
+      "files": 10,
+      "python": "3.13.9 (tags/v3.13.9:8183fa5, Oct 14 2025, 14:09:13) [MSC v.1944 64 bit (AMD64)]",
+      "architecture": "AMD64"
+    }
+  },
+  "stress100": {
+    "legacy": {
+      "status": "MEASURED",
+      "inventory": {
+        "records": 50,
+        "bitfields": 199,
+        "aliases": 50,
+        "global_variables": 51,
+        "local_variables": 49,
+        "parameters": 49
+      },
+      "totals": {
+        "record_correct": 98,
+        "alias_correct": 98,
+        "bitfield_flag_correct": 247,
+        "width_correct": 198,
+        "range_correct": 198,
+        "signedness_correct": 198,
+        "width_unresolved": 49,
+        "range_unresolved": 49,
+        "signedness_unresolved": 49,
+        "variable_link_correct": 197,
+        "access_owner_correct": 147,
+        "access_variable_correct": 147,
+        "access_range_correct": 147,
+        "access_unresolved": 49
+      },
+      "seconds": 1.612519,
+      "peak_working_set_bytes": 29220864,
+      "files": 100,
+      "python": "3.13.9 (tags/v3.13.9:8183fa5, Oct 14 2025, 14:09:13) [MSC v.1944 64 bit (AMD64)]",
+      "architecture": "AMD64"
+    },
+    "clang": {
+      "status": "DEPENDENCY_UNAVAILABLE",
+      "error": "No module named 'clang'",
+      "files": 100,
+      "python": "3.13.9 (tags/v3.13.9:8183fa5, Oct 14 2025, 14:09:13) [MSC v.1944 64 bit (AMD64)]",
+      "architecture": "AMD64"
+    }
+  }
+}

@@ -1,0 +1,570 @@
+{
+  "counts": {
+    "structure_correct": 12,
+    "typedef_correct": 9,
+    "bitfield_extracted_correct": 27,
+    "width_correct": 19,
+    "signed_correct": 17,
+    "range_correct": 17,
+    "ordinary_correct": 3,
+    "signed_unresolved": 10,
+    "range_unresolved": 10,
+    "bitfield_extracted_unresolved": 1,
+    "variable_type_correct": 19,
+    "variable_type_unresolved": 4,
+    "expression_range_correct": 11,
+    "expression_member_owner_correct": 9,
+    "expression_range_unresolved": 6,
+    "expression_member_owner_unresolved": 6,
+    "typedef_unresolved": 2,
+    "width_unresolved": 8,
+    "incomplete_variable_correct": 1
+  },
+  "differences": [
+    {
+      "job": "types_and_access",
+      "metric": "signed",
+      "item": [
+        "include/types.h",
+        19,
+        "plain"
+      ],
+      "expected": true,
+      "actual": null
+    },
+    {
+      "job": "types_and_access",
+      "metric": "range",
+      "item": [
+        "include/types.h",
+        19,
+        "plain"
+      ],
+      "expected": [
+        -8,
+        7
+      ],
+      "actual": null
+    },
+    {
+      "job": "types_and_access",
+      "metric": "signed",
+      "item": [
+        "include/types.h",
+        19,
+        "level"
+      ],
+      "expected": true,
+      "actual": null
+    },
+    {
+      "job": "types_and_access",
+      "metric": "range",
+      "item": [
+        "include/types.h",
+        19,
+        "level"
+      ],
+      "expected": [
+        -2,
+        1
+      ],
+      "actual": null
+    },
+    {
+      "job": "types_and_access",
+      "metric": "bitfield_extracted",
+      "item": [
+        "include/types.h",
+        19,
+        ""
+      ],
+      "expected": true,
+      "actual": null
+    },
+    {
+      "job": "types_and_access",
+      "metric": "variable_type",
+      "item": [
+        "app/main.c",
+        13,
+        "can_chg_p"
+      ],
+      "expected": [
+        "include/types.h",
+        3
+      ],
+      "actual": null
+    },
+    {
+      "job": "types_and_access",
+      "metric": "variable_type",
+      "item": [
+        "app/main.c",
+        38,
+        "shadow"
+      ],
+      "expected": [
+        "include/types.h",
+        15
+      ],
+      "actual": null
+    },
+    {
+      "job": "types_and_access",
+      "metric": "expression_range",
+      "item": "wrapped.status.fault",
+      "expected": [
+        0,
+        1
+      ],
+      "actual": null
+    },
+    {
+      "job": "types_and_access",
+      "metric": "expression_member_owner",
+      "item": "wrapped.status.fault",
+      "expected": [
+        "include/types.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "types_and_access",
+      "metric": "expression_range",
+      "item": "wrapped.status.mode",
+      "expected": [
+        0,
+        7
+      ],
+      "actual": null
+    },
+    {
+      "job": "types_and_access",
+      "metric": "expression_member_owner",
+      "item": "wrapped.status.mode",
+      "expected": [
+        "include/types.h",
+        9
+      ],
+      "actual": null
+    },
+    {
+      "job": "types_and_access",
+      "metric": "expression_range",
+      "item": "shadow.state",
+      "expected": [
+        0,
+        3
+      ],
+      "actual": null
+    },
+    {
+      "job": "types_and_access",
+      "metric": "expression_member_owner",
+      "item": "shadow.state",
+      "expected": [
+        "include/types.h",
+        14
+      ],
+      "actual": null
+    },
+    {
+      "job": "types_and_access",
+      "metric": "expression_range",
+      "item": "container.inner.ready",
+      "expected": [
+        0,
+        1
+      ],
+      "actual": null
+    },
+    {
+      "job": "types_and_access",
+      "metric": "expression_member_owner",
+      "item": "container.inner.ready",
+      "expected": [
+        "include/types.h",
+        12
+      ],
+      "actual": null
+    },
+    {
+      "job": "types_and_access",
+      "metric": "expression_range",
+      "item": "shadow.state",
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "types_and_access",
+      "metric": "expression_member_owner",
+      "item": "shadow.state",
+      "expected": [
+        "include/types.h",
+        15
+      ],
+      "actual": null
+    },
+    {
+      "job": "types_and_access",
+      "metric": "expression_range",
+      "item": "shadow.state",
+      "expected": [
+        0,
+        3
+      ],
+      "actual": null
+    },
+    {
+      "job": "types_and_access",
+      "metric": "expression_member_owner",
+      "item": "shadow.state",
+      "expected": [
+        "include/types.h",
+        14
+      ],
+      "actual": null
+    },
+    {
+      "job": "options_on",
+      "metric": "typedef",
+      "item": "Configured",
+      "expected": [
+        "options/config.c",
+        6
+      ],
+      "actual": null
+    },
+    {
+      "job": "options_on",
+      "metric": "width",
+      "item": [
+        "options/config.c",
+        6,
+        "mode"
+      ],
+      "expected": 3,
+      "actual": null
+    },
+    {
+      "job": "options_on",
+      "metric": "signed",
+      "item": [
+        "options/config.c",
+        6,
+        "mode"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "options_on",
+      "metric": "range",
+      "item": [
+        "options/config.c",
+        6,
+        "mode"
+      ],
+      "expected": [
+        0,
+        7
+      ],
+      "actual": null
+    },
+    {
+      "job": "options_on",
+      "metric": "width",
+      "item": [
+        "options/config.c",
+        6,
+        "target"
+      ],
+      "expected": 6,
+      "actual": null
+    },
+    {
+      "job": "options_on",
+      "metric": "signed",
+      "item": [
+        "options/config.c",
+        6,
+        "target"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "options_on",
+      "metric": "range",
+      "item": [
+        "options/config.c",
+        6,
+        "target"
+      ],
+      "expected": [
+        0,
+        63
+      ],
+      "actual": null
+    },
+    {
+      "job": "options_on",
+      "metric": "width",
+      "item": [
+        "options/config.c",
+        6,
+        "standard"
+      ],
+      "expected": 4,
+      "actual": null
+    },
+    {
+      "job": "options_on",
+      "metric": "signed",
+      "item": [
+        "options/config.c",
+        6,
+        "standard"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "options_on",
+      "metric": "range",
+      "item": [
+        "options/config.c",
+        6,
+        "standard"
+      ],
+      "expected": [
+        0,
+        15
+      ],
+      "actual": null
+    },
+    {
+      "job": "options_on",
+      "metric": "width",
+      "item": [
+        "options/config.c",
+        6,
+        "sdk"
+      ],
+      "expected": 1,
+      "actual": null
+    },
+    {
+      "job": "options_on",
+      "metric": "signed",
+      "item": [
+        "options/config.c",
+        6,
+        "sdk"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "options_on",
+      "metric": "range",
+      "item": [
+        "options/config.c",
+        6,
+        "sdk"
+      ],
+      "expected": [
+        0,
+        1
+      ],
+      "actual": null
+    },
+    {
+      "job": "options_on",
+      "metric": "variable_type",
+      "item": [
+        "options/config.c",
+        24,
+        "configured"
+      ],
+      "expected": [
+        "options/config.c",
+        6
+      ],
+      "actual": null
+    },
+    {
+      "job": "options_off",
+      "metric": "typedef",
+      "item": "Configured",
+      "expected": [
+        "options/config.c",
+        6
+      ],
+      "actual": null
+    },
+    {
+      "job": "options_off",
+      "metric": "width",
+      "item": [
+        "options/config.c",
+        6,
+        "mode"
+      ],
+      "expected": 2,
+      "actual": null
+    },
+    {
+      "job": "options_off",
+      "metric": "signed",
+      "item": [
+        "options/config.c",
+        6,
+        "mode"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "options_off",
+      "metric": "range",
+      "item": [
+        "options/config.c",
+        6,
+        "mode"
+      ],
+      "expected": [
+        0,
+        3
+      ],
+      "actual": null
+    },
+    {
+      "job": "options_off",
+      "metric": "width",
+      "item": [
+        "options/config.c",
+        6,
+        "target"
+      ],
+      "expected": 5,
+      "actual": null
+    },
+    {
+      "job": "options_off",
+      "metric": "signed",
+      "item": [
+        "options/config.c",
+        6,
+        "target"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "options_off",
+      "metric": "range",
+      "item": [
+        "options/config.c",
+        6,
+        "target"
+      ],
+      "expected": [
+        0,
+        31
+      ],
+      "actual": null
+    },
+    {
+      "job": "options_off",
+      "metric": "width",
+      "item": [
+        "options/config.c",
+        6,
+        "standard"
+      ],
+      "expected": 3,
+      "actual": null
+    },
+    {
+      "job": "options_off",
+      "metric": "signed",
+      "item": [
+        "options/config.c",
+        6,
+        "standard"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "options_off",
+      "metric": "range",
+      "item": [
+        "options/config.c",
+        6,
+        "standard"
+      ],
+      "expected": [
+        0,
+        7
+      ],
+      "actual": null
+    },
+    {
+      "job": "options_off",
+      "metric": "width",
+      "item": [
+        "options/config.c",
+        6,
+        "sdk"
+      ],
+      "expected": 1,
+      "actual": null
+    },
+    {
+      "job": "options_off",
+      "metric": "signed",
+      "item": [
+        "options/config.c",
+        6,
+        "sdk"
+      ],
+      "expected": false,
+      "actual": null
+    },
+    {
+      "job": "options_off",
+      "metric": "range",
+      "item": [
+        "options/config.c",
+        6,
+        "sdk"
+      ],
+      "expected": [
+        0,
+        1
+      ],
+      "actual": null
+    },
+    {
+      "job": "options_off",
+      "metric": "variable_type",
+      "item": [
+        "options/config.c",
+        24,
+        "configured"
+      ],
+      "expected": [
+        "options/config.c",
+        6
+      ],
+      "actual": null
+    }
+  ]
+}

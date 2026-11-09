@@ -106,10 +106,15 @@ void Process(void) { Normal local; Device good; float scalar; }
         self.assertEqual(results, [
             ('1.Process', 'device.active', 'MATCH', '0~1', False),
             ('1.Process', 'device->active', 'REVIEW', '', False),
+            ('1.Process', 'normal.active', 'SKIP', '', False),
+            ('1.Process', 'normal->active', 'SKIP', '', False),
+            ('1.Process', 'local->active', 'SKIP', '', False),
             ('1.Process', 'unknown.active', 'REVIEW', '', False),
+            ('1.Process', 'normal.other', 'REVIEW', '', False),
+            ('1.Process', 'normal.mode', 'REVIEW', '', False),
         ])
 
-    def test_conflicting_prototype_and_conditional_definition_are_uncertain(self):
+    def test_conflicting_prototype_blocks_but_conditional_definition_can_compare(self):
         header = self.write('device.h', TYPES + 'void Conflict(Sensor *);')
         source = self.write('device.c', """
 #include "device.h"
@@ -121,8 +126,8 @@ void Conditional(Device *ptr) {}
         results = self.compare([header, source], 'device', [
             (name, [('ptr->active', '0~0')]) for name in ('1.Conflict', '2.Conditional')
         ])
-        self.assertEqual(results, [(name, 'ptr->active', 'REVIEW', '', False)
-                                   for name in ('1.Conflict', '2.Conditional')])
+        self.assertEqual(results, [('1.Conflict', 'ptr->active', 'REVIEW', '', False),
+                                   ('2.Conditional', 'ptr->active', 'MISMATCH', '0~1', True)])
 
     def test_unsupported_pointer_parameter_does_not_fall_back_to_global(self):
         source = self.write('device.c', TYPES + """

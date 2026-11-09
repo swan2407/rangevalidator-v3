@@ -12,6 +12,10 @@ _local = threading.local()
 def emit(diag, stage, status='OK', exc=None, **metadata):
     if diag:
         failure = (exc if isinstance(exc, ReadFailure) else ReadFailure(stage, exc)) if exc else None
+        if failure:
+            metadata.setdefault('api', failure.api)
+            for name in ('attempt', 'max_attempts'):
+                metadata.setdefault(name, failure.context.get(name, 0))
         diag.emit('COM', stage, status, failure.code if failure else None,
                   exception_type=failure.exception_type if failure else '',
                   inner_hresult=failure.inner_hresult if failure else None, **metadata)
@@ -137,10 +141,12 @@ MAX_COLS = 256        # design documents are never wider; cap when the column Fi
 ROW_CAP = 200000      # cap when the row Find fails; block reading stops at the real end anyway
 
 
-def _used_size(sheet):
-    try:
+def _used_size(sheet, diag=None):
+    def size():
         ur = sheet.UsedRange
         return int(ur.Row) + int(ur.Rows.Count) - 1, int(ur.Column) + int(ur.Columns.Count) - 1
+    try:
+        return read_call('com.bounds.usedrange', size, diag)
     except Exception:
         return 0, 0
 
@@ -156,11 +162,13 @@ def _last_cell(sheet, diag=None, *, strict=False):
     DRM files report the whole sheet as used, which made Value2 on it run out of memory."""
     row_cell = _find_last(sheet, 1, diag)
     col_cell = _find_last(sheet, 2, diag)
-    last_row = int(row_cell.Row) if row_cell is not None else 0
-    last_col = int(col_cell.Column) if col_cell is not None else 0
+    last_row = read_call('com.Find.coordinates', lambda: int(row_cell.Row), diag,
+                         search_phase='last_row') if row_cell is not None else 0
+    last_col = read_call('com.Find.coordinates', lambda: int(col_cell.Column), diag,
+                         search_phase='last_column') if col_cell is not None else 0
     emit(diag, 'com.bounds.find', row=last_row, column=last_col)
     if not last_row or not last_col:
-        ur_row, ur_col = _used_size(sheet)
+        ur_row, ur_col = _used_size(sheet, diag)
         emit(diag, 'com.bounds.usedrange', row=ur_row, column=ur_col)
         if strict and ((not last_row and ur_row > ROW_CAP) or (not last_col and ur_col > MAX_COLS)):
             raise _limit_failure('com.bounds.limit', 'UsedRange exceeds fallback bounds',
@@ -204,8 +212,9 @@ def _read_blocks(ws, last_row, last_col, diag=None, *, remaining=None):
     for r0 in range(1, last_row + 1, block):
         r1 = min(last_row, r0 + block - 1)
         if _count_a(ws, r0, r1, last_col) != 0:
-            rng = ws.Range(ws.Cells.Item(r0, 1), ws.Cells.Item(r1, last_col))
             try:
+                rng = read_call('com.cell', lambda: ws.Range(ws.Cells.Item(r0, 1), ws.Cells.Item(r1, last_col)),
+                                diag, row=r0, column=1)
                 vals = read_call('com.Value2', lambda: _lines(rng.Value2, r1-r0+1, last_col),
                                  diag, row=r1, column=last_col)
                 fmls = read_call('com.formula.text', lambda: _lines(rng.Formula, r1-r0+1, last_col),
@@ -228,9 +237,11 @@ def _read_blocks(ws, last_row, last_col, diag=None, *, remaining=None):
     return values, formulas, data_row
 
 
-def _merge_state(ws, r0, r1, c1, c0=1):
+def _merge_state(ws, r0, r1, c1, c0=1, diag=None):
     try:
-        return ws.Range(f'{address(r0, c0)}:{address(r1, c1)}').MergeCells
+        return read_call('com.merge.flag',
+                         lambda: ws.Range(f'{address(r0, c0)}:{address(r1, c1)}').MergeCells,
+                         diag, row=r0, column=c0)
     except Exception:
         return None
 
@@ -239,7 +250,7 @@ def _merge_map(ws, last_row, last_col, diag=None, max_cells=200000):
     """Prune explicitly unmerged rectangles and cache confirmed MergeArea geometry."""
     from .readers import _merge_coordinates
     out, regions, geometry = {}, set(), {}
-    if not last_row or not last_col or _merge_state(ws, 1, last_row, last_col) is False:
+    if not last_row or not last_col or _merge_state(ws, 1, last_row, last_col, diag=diag) is False:
         return out, regions
     if last_row * last_col > max_cells:
         raise _limit_failure('com.bounds.limit', f'Merge scan budget: {max_cells}', last_row, last_col)
@@ -259,7 +270,7 @@ def _merge_map(ws, last_row, last_col, diag=None, max_cells=200000):
                 pending.append((r0, end_col + 1, end_row, c1, False))
             continue
         if r0 != r1 or c0 != c1:
-            if not checked and _merge_state(ws, r0, r1, c1, c0) is False:
+            if not checked and _merge_state(ws, r0, r1, c1, c0, diag) is False:
                 continue
             if r1 - r0 >= c1 - c0:
                 middle = (r0 + r1) // 2
@@ -270,13 +281,14 @@ def _merge_map(ws, last_row, last_col, diag=None, max_cells=200000):
             continue
 
         try:
-            cell = ws.Range(address(r0, c0))
-            merged = cell.MergeCells
+            cell = read_call('com.cell', lambda: ws.Range(address(r0, c0)), diag, row=r0, column=c0)
+            merged = read_call('com.merge.flag', lambda: cell.MergeCells, diag, row=r0, column=c0)
             if merged is False:
                 continue
             if merged is not True:
                 raise ValueError('Single-cell merge state is unknown')
-            region = str(cell.MergeArea.Address).replace('$', '')
+            region = read_call('com.merge.address', lambda: str(cell.MergeArea.Address).replace('$', ''),
+                               diag, row=r0, column=c0)
             ar, ac, br, bc = _merge_coordinates(region)
             if not (ar <= r0 <= br and ac <= c0 <= bc):
                 raise ValueError('MergeArea does not contain the queried cell')
@@ -287,7 +299,7 @@ def _merge_map(ws, last_row, last_col, diag=None, max_cells=200000):
                 for column in range(ac, min(last_col, bc) + 1):
                     out[(row, column)] = (region, anchor)
         except Exception as exc:
-            failure = ReadFailure('com.merge', exc)
+            failure = exc if isinstance(exc, ReadFailure) else ReadFailure('com.merge', exc)
             failure.context['attempted_bounds'] = (r0, c0, r0, c0)
             raise failure from None
     return out, regions
@@ -295,7 +307,9 @@ def _merge_map(ws, last_row, last_col, diag=None, max_cells=200000):
 
 def _copy_sheet(ws, limits, remaining, diag=None, merge_limit=200000):
     row, col = _last_cell(ws, diag, strict=True)
-    sheet = Sheet(str(ws.Name), {-1:'visible', 0:'hidden', 2:'veryHidden'}.get(int(ws.Visible), 'unknown'),
+    name = read_call('com.sheets.name', lambda: str(ws.Name), diag)
+    visible = read_call('com.sheets.visibility', lambda: int(ws.Visible), diag)
+    sheet = Sheet(name, {-1:'visible', 0:'hidden', 2:'veryHidden'}.get(visible, 'unknown'),
                   bounds=(1, 1, row, col) if row and col else None, merge_scope='content_bounds')
     emit(diag, 'com.bounds.final', row=row, column=col)
     if not row or not col:
@@ -350,9 +364,11 @@ def read_workbook_values(path, limits=ReaderLimits(), *, _runtime=None, _trace=N
         stage = 'com.Workbooks.Open'; tick = perf_counter(); book = _open(path, _runtime, _trace)
         timings['open_seconds'] += perf_counter() - tick
         stage = 'com.readonly.verify'
-        if not book.ReadOnly: raise RuntimeError('Workbook did not open read-only')
+        if not read_call('com.readonly.verify', lambda: book.ReadOnly, _trace):
+            raise RuntimeError('Workbook did not open read-only')
         result = Workbook(str(path), 'com')
-        stage = 'com.sheets'; tick = perf_counter(); count = int(book.Worksheets.Count)
+        stage = 'com.sheets'; tick = perf_counter()
+        count = read_call('com.sheets.count', lambda: int(book.Worksheets.Count), _trace)
         timings['sheet_count_seconds'] += perf_counter() - tick
         result.source_sheet_count = count
         if count > limits.max_sheets:
@@ -366,8 +382,8 @@ def read_workbook_values(path, limits=ReaderLimits(), *, _runtime=None, _trace=N
             tick = perf_counter()
             selection = 0.0
             try:
-                com_sheet=book.Worksheets.Item(index)
-                sheet_name = str(com_sheet.Name)
+                com_sheet = read_call('com.sheets.item', lambda: book.Worksheets.Item(index), _trace)
+                sheet_name = read_call('com.sheets.name', lambda: str(com_sheet.Name), _trace)
                 select_started = perf_counter()
                 included = not function_sheets_only or is_function_sheet(sheet_name)
                 selection = perf_counter() - select_started
@@ -380,11 +396,14 @@ def read_workbook_values(path, limits=ReaderLimits(), *, _runtime=None, _trace=N
                 if included: inventory.append((index, sheet_name, observation))
             except Exception as exc:
                 result.partial = True
-                sf = ReadFailure('com.sheets', exc)
+                sf = exc if isinstance(exc, ReadFailure) else ReadFailure('com.sheets', exc)
                 result.read_errors.append(dict(stage=sf.stage,api=sf.api,code=sf.code,
                     exception_type=sf.exception_type,error_class=sf.error_class,
+                    inner_hresult=sf.inner_hresult,attempt=sf.context.get('attempt', 0),
+                    max_attempts=sf.context.get('max_attempts', 0),
                     sheet_index=index,sheet_name='',search_phase=''))
                 emit(_trace, 'com.sheet.error', 'FAILED', sf)
+                del sf
             finally:
                 timings['sheet_selection_seconds'] += selection
                 timings['sheet_names_seconds'] += perf_counter() - tick - selection
@@ -393,7 +412,7 @@ def read_workbook_values(path, limits=ReaderLimits(), *, _runtime=None, _trace=N
             if _trace: _trace.set_context(sheet_index=index,row=0,column=0,sheet_name=sheet_name)
             stage = 'com.extract'
             try:
-                com_sheet=book.Worksheets.Item(index)
+                com_sheet = read_call('com.sheets.item', lambda: book.Worksheets.Item(index), _trace)
                 observation['states'].append('SHEET_BODY_READ_STARTED')
                 emit(_trace, 'SHEET_BODY_READ_STARTED')
                 if _trace: _trace.set_context(sheet_name=sheet_name)
@@ -424,6 +443,7 @@ def read_workbook_values(path, limits=ReaderLimits(), *, _runtime=None, _trace=N
                 if _trace: sf.context.update(_trace.context())
                 error = dict(stage=sf.stage,api=sf.api,code=sf.code,exception_type=sf.exception_type,
                              inner_hresult=sf.inner_hresult,
+                             attempt=sf.context.get('attempt', 0),max_attempts=sf.context.get('max_attempts', 0),
                              error_class=sf.error_class,sheet_index=index,sheet_name=sheet_name,
                              search_phase=sf.context.get('search_phase',''))
                 error.update({key:sf.context[key] for key in ('attempted_bounds','limit_reason') if key in sf.context})

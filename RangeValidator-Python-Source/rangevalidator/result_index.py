@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 from .engine import is_function_sheet
 from .workflow import canonical
 
-STATES = ('MATCH', 'MISMATCH', 'REVIEW', 'CREATE')
+STATES = ('MATCH', 'MISMATCH', 'REVIEW', 'CREATE', 'SKIP')
 
 
 @dataclass
@@ -76,5 +76,7 @@ class ResultIndex:
         if file not in self.files or sheet not in self.files[file].sheets:
             return []
         query = search.strip().casefold()
+        if status == '일반 멤버':
+            status = 'SKIP'
         return [r for r in self.files[file].sheets[sheet].rows
                 if (status == '전체' or r.status == status) and query in r.expression.casefold()]

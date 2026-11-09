@@ -70,7 +70,11 @@ class AExtractionTests(unittest.TestCase):
         for variant in ('missing_scope','duplicate_scope','duplicate_name','missing_name','description_name'):
             with self.subTest(variant=variant):
                 _,tables,c,r=self.read(variant=variant)
-                self.assertEqual(r,[])
+                if variant in ('missing_scope', 'duplicate_scope'):
+                    self.assertEqual(len(r), 10)
+                    self.assertTrue(all(v.status == 'REVIEW' and not v.candidate and not v.cell for v in r))
+                else:
+                    self.assertEqual(r,[])
                 self.assertTrue(tables[0]['state']!='HEADER_FOUND')
                 self.assertTrue(all(v['range_cell'] is None for v in c))
     def test_formula_and_nonanchor_keep_review(self):

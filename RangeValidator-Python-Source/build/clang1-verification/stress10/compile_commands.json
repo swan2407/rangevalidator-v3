@@ -1,0 +1,58 @@
+[
+  {
+    "directory": "C:\\Range\\RangeValidator-Python-Source\\build\\clang1-verification\\stress10",
+    "file": "unit_00.c",
+    "arguments": [
+      "clang",
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc",
+      "-DRV_ENABLED",
+      "-c",
+      "unit_00.c",
+      "-o",
+      "ignore.obj"
+    ]
+  },
+  {
+    "directory": "C:\\Range\\RangeValidator-Python-Source\\build\\clang1-verification\\stress10",
+    "file": "unit_01.c",
+    "arguments": [
+      "clang",
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc",
+      "-DRV_ENABLED",
+      "-c",
+      "unit_01.c",
+      "-o",
+      "ignore.obj"
+    ]
+  },
+  {
+    "directory": "C:\\Range\\RangeValidator-Python-Source\\build\\clang1-verification\\stress10",
+    "file": "unit_02.c",
+    "arguments": [
+      "clang",
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc",
+      "-DRV_ENABLED",
+      "-c",
+      "unit_02.c",
+      "-o",
+      "ignore.obj"
+    ]
+  },
+  {
+    "directory": "C:\\Range\\RangeValidator-Python-Source\\build\\clang1-verification\\stress10",
+    "file": "unit_03.c",
+    "arguments": [
+      "clang",
+      "-std=c11",
+      "--target=x86_64-pc-windows-msvc",
+      "-DRV_ENABLED",
+      "-c",
+      "unit_03.c",
+      "-o",
+      "ignore.obj"
+    ]
+  }
+]

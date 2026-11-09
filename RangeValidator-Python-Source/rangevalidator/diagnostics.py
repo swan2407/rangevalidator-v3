@@ -114,7 +114,7 @@ class Diagnostics:
             safe[k]=data.get(k) if isinstance(data.get(k),bool) else None
         event=replace(event,**safe)
         # Keep the first and each 1000th occurrence; never suppress failures.
-        if status in ('ENTER','OK') and stage in HOT:
+        if status in ('ENTER','OK') and stage in HOT and safe['attempt'] <= 1:
             counts=getattr(self.local,'counts',{})
             k=(stage,status);counts[k]=counts.get(k,0)+1;self.local.counts=counts
             if counts[k]>1 and counts[k]%1000:

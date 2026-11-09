@@ -23,6 +23,20 @@ import re
 ID = re.compile(r"[A-Za-z_][A-Za-z_0-9]*\Z")
 KEYWORDS = set("auto break case char const continue default do double else enum extern float for goto if inline int long register restrict return short signed sizeof static struct switch typedef union unsigned void volatile while _Alignas _Alignof _Atomic _Bool _Complex _Generic _Imaginary _Noreturn _Static_assert _Thread_local".split())
 QUALIFIERS = {"const", "volatile", "static", "extern", "register", "restrict", "inline", "_Atomic", "__restrict", "__restrict__", "__inline", "__inline__", "near", "far", "__near", "__far", "__packed", "__attribute__"}
+_KEYWORD_SPELLINGS = {word.casefold(): word for word in KEYWORDS | QUALIFIERS}
+
+
+def canonical_keyword(word):
+    """Accept case variants of declaration keywords for document comparison."""
+    return _KEYWORD_SPELLINGS.get(word.casefold(), word)
+
+
+def matching_names(names, name):
+    """Prefer source spelling, otherwise retain every case-insensitive candidate."""
+    if name in names:
+        return (name,)
+    folded = name.casefold()
+    return tuple(item for item in names if item.casefold() == folded)
 
 # Built-in / conventional integer profiles: name -> (signed, bits). Source typedefs override these.
 # 32-bit targets (ILP32) are assumed for 'long'; bit-fields are never wider than that in practice.
@@ -230,7 +244,7 @@ class _Parser:
     collect_bitfields = False
 
     def __init__(self, tokens, file, model):
-        self.t = tokens
+        self.t = [Token(canonical_keyword(token.text), token.line) for token in tokens]
         self.file = file
         self.m = model
 

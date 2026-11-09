@@ -84,6 +84,41 @@ Device_t after_factory;
             ('local.active', 'REVIEW', '', False),
         ])
 
+    def test_empty_macro_restores_struct_and_variable_declarations_in_source_order(self):
+        source = self.source('device.c', """\
+extern const DeviceB_t * cinst before;
+#define cinst /* intentionally empty */
+cinst typedef struct { unsigned int state : 5; } DeviceB_t;
+extern const DeviceB_t * cinst can_data1;
+#if OPTION
+#define cinst volatile
+#endif
+extern const DeviceB_t * cinst conditional;
+#define cinst
+extern const DeviceB_t * cinst restored;
+#include "unknown.h"
+extern const DeviceB_t * cinst after_include;
+#define cinst
+#undef cinst
+extern const DeviceB_t * cinst after_undef;
+#define cinst()
+extern const DeviceB_t * cinst function_like;
+""")
+        catalog = build_bitfield_catalog([source])
+        binding = catalog.lookup_variable(source, 'can_data1')
+        self.assertEqual(binding.status, 'STRUCT')
+        self.assertEqual(binding.type_link.definition.line, 3)
+        self.assertEqual(binding.declarations[0].origin.line, 4)
+        self.assertEqual(binding.type_link.qualifiers, (('const',), ()))
+        unresolved = ('before', 'conditional', 'after_include', 'after_undef', 'function_like')
+        expressions = [('can_data1->state', '0~7'), ('restored->state', '0~31')]
+        expressions.extend((f'{name}->state', '0~31') for name in unresolved)
+        self.assertEqual(self.compare([source], 'device', expressions), [
+            ('can_data1->state', 'MISMATCH', '0~31', True),
+            ('restored->state', 'MATCH', '0~31', False),
+            *((f'{name}->state', 'REVIEW', '', False) for name in unresolved),
+        ])
+
     def test_internal_linkage_and_distinct_translation_units(self):
         first = self.source('first.c', """
 typedef struct { unsigned int status:2; } Local;
@@ -101,7 +136,7 @@ struct { int status; } normal;
         self.assertEqual(self.compare(paths, 'first', [('state.status', '0~3')]),
                          [('state.status', 'MATCH', '0~3', False)])
         self.assertEqual(self.compare(paths, 'second', [('state.status', '0~31'), ('normal.status', '0~0')]),
-                         [('state.status', 'MATCH', '0~31', False)])
+                         [('state.status', 'MATCH', '0~31', False), ('normal.status', 'SKIP', '', False)])
         self.assertEqual(self.compare(paths, 'unknown', [
             ('state.status', '0~0'), ('external_state.status', '0~0'),
             ('private_only.status', '0~0'), ('unknown.status', '0~0'),

@@ -26,7 +26,7 @@ class PipelineTests(unittest.TestCase):
         s=self.session()
         for p in self.details:
             actual=[r.status for r in s.results if r.file==str(p) and r.sheet.startswith('1.Design')]
-            self.assertEqual(actual,['MISMATCH','MATCH','MISMATCH','REVIEW','REVIEW','REVIEW',
+            self.assertEqual(actual,['MISMATCH','MATCH','MISMATCH','SKIP','REVIEW','REVIEW','REVIEW',
                                      'MISMATCH','CREATE','MISMATCH','REVIEW','MATCH','MATCH'])
         self.assertEqual(sum(r.candidate for r in s.results),10)
     def test_common_declaration_metadata(self):

@@ -72,7 +72,8 @@ class ReportTests(unittest.TestCase):
         files = [row for row in rows if row[0] == 'Design.xlsx']
         self.assertEqual({row[1] for row in files}, set(self.paths))
         broken = next(row for row in files if row[2] == '3.Broken')
-        self.assertEqual(broken[7], 'ERROR')
+        sheet_header = next(row for row in rows if row[2] == '함수 시트명')
+        self.assertEqual(broken[sheet_header.index('분석 상태')], 'ERROR')
         self.assertEqual(self.outcomes,before)
 
     def test_histories_filters_manual_value_and_original_reason(self):

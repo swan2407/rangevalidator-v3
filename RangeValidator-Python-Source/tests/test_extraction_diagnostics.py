@@ -54,18 +54,22 @@ class ExtractionDiagnosticsTests(unittest.TestCase):
             self.assertIn("SHEET_EXCLUDED", excluded["states"])
             self.assertEqual(report["counts"]["body_read_success"], report["total_sheets"])
 
-    def test_source_binding_review_is_distinct_from_excel_omission(self):
+    def test_struct_only_comparison_preserves_rows_and_reports_fallback(self):
         with TemporaryDirectory() as directory:
             source, paths, _ = build_suite(directory)
-            source.write_text(source.read_text(encoding="utf-8").replace("extern Excel1_t obj;", ""),
-                              encoding="utf-8")
             path = next(p for p in paths if p.name == "a_10.xlsx")
+            before = run_comparison(None, [source], [path], backend="openpyxl")
+            source.write_text(source.read_text(encoding="utf-8").replace("extern Excel1_t obj;", "")
+                              .replace('Excel1_t', 'obj_t'),
+                              encoding="utf-8")
             session = run_comparison(None, [source], [path], backend="openpyxl")
+            self.assertEqual([(r.status, r.expected) for r in session.results],
+                             [(r.status, r.expected) for r in before.results])
             report = diagnose_session(session)[0]
             variables = next(s for s in report["sheets"] if s["function_sheet"])["variables"]
             self.assertEqual(len(variables), 10)
-            self.assertTrue(all(v["extracted"] and v["comparison_status"] == "REVIEW"
-                                and v["comparison_reason"] for v in variables))
+            self.assertTrue(all(v["extracted"] and '변수 선언 연결 없이' in v["comparison_reason"]
+                                for v in variables))
 
     def test_assessor_detects_wrong_range_connection(self):
         with TemporaryDirectory() as directory:

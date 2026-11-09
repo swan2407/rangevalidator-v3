@@ -8,11 +8,12 @@ class ReadBudgetExceeded(ValueError):
 class FindBoundsError(ValueError):
     pass
 
-TRANSIENT = frozenset((0x80010001,0x8001010A))
+# DISP_E_EXCEPTION can be temporary during a read; the third failure is still reported.
+RETRYABLE_READ_CODES = frozenset((0x80010001,0x8001010A,0x80020009))
 READ_APIS = frozenset('''com.Find.cells com.Find.limits com.Find.first_row com.Find.last_row
 com.Find.first_column com.Find.last_column com.Find.coordinates com.Find.bounds com.sheets.count com.sheets.item
 com.sheets.name com.sheets.visibility com.cell com.Value2 com.formula.flag com.formula.text
-com.merge.flag com.merge.area com.merge.address'''.split())
+com.merge.flag com.merge.area com.merge.address com.readonly.verify com.bounds.usedrange'''.split())
 
 
 def parent_stage(api):
@@ -54,7 +55,7 @@ def read_call(api,operation,diagnostics=None,*,search_phase='',row=0,column=0,
             failure.context=dict(context,attempt=attempt,max_attempts=attempts)
             if diagnostics and hasattr(diagnostics,'context'):
                 inherited=diagnostics.context();inherited.update(failure.context);failure.context=inherited
-            retry=isinstance(failure.code,int) and (failure.code&0xffffffff) in TRANSIENT and attempt<attempts
+            retry=isinstance(failure.code,int) and (failure.code&0xffffffff) in RETRYABLE_READ_CODES and attempt<attempts
             emit('RETRY' if retry else 'FAILED',failure.code,exc,attempt)
             if not retry:raise failure from None
             pump();sleep((.1,.25)[attempt-1])
