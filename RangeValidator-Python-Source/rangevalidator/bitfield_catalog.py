@@ -73,6 +73,7 @@ class _Function:
     definition: bool
     return_type: tuple[str, ...]
     prototyped: bool
+    raw_parameters: tuple = ()
 
 
 @dataclass(frozen=True)
@@ -194,6 +195,7 @@ class _Unit:
     conditional_declarations: set[Origin] = field(default_factory=set)
     variables: list[VariableDeclaration] = field(default_factory=list)
     functions: list[_Function] = field(default_factory=list)
+    parameter_typedefs: dict = field(default_factory=lambda: defaultdict(list))
 
 
 class _Collector(_Parser):
@@ -594,8 +596,10 @@ def _collect_function(parser, head, body, conditional):
     if not _type_spelling(' '.join(word for word in return_type if word != '*' and word not in _CV)) and return_type != ('void',):
         return None
     parameters = []
+    raw_parameters = []
     if words[opening + 1:-1] != ['void']:
         for part in parser.split(head[opening + 1:-1]):
+            raw_parameters.append(tuple(t.text for t in part))
             origin = Origin(parser.file, part[0].line)
             uncertain = any(t.line in conditional for t in part)
             declarations = tuple(_variable_declarations(parser, None, part, origin, uncertain))
@@ -611,13 +615,20 @@ def _collect_function(parser, head, body, conditional):
     return _Function(words[opening - 1], Origin(parser.file, head[0].line),
                      'static' in words[:opening], any(t.line in conditional for t in head),
                      tuple(parameters), tuple(_local_declarations(parser, body or (), conditional)),
-                     body is not None, return_type, opening + 1 < len(words) - 1)
+                     body is not None, return_type, opening + 1 < len(words) - 1, tuple(raw_parameters))
 
 
 def _typedefs(parser, tail, target, origin, uncertain, unit, base_cv=()):
     names = []
     for part in parser.split(tail):
         words = [token.text for token in part]
+        from .function_parameters import _declarator as parameter_declarator
+        try:
+            alias, _ = parameter_declarator(words)
+            if alias:
+                unit.parameter_typedefs[alias].append((target, base_cv, tuple(words), origin, uncertain))
+        except ValueError:
+            pass
         parsed = _declarator(words)
         if parsed is not None:
             name, pointers, arrays, initialized = parsed
@@ -638,6 +649,9 @@ def _collect_typedef(parser, tokens, origin, uncertain, unit):
         return
     first = [token.text for token in parser.split(tokens)[0]]
     end = _specifier_end(first)
+    # In an array-pointer typedef the parenthesis starts the declarator itself.
+    if '(' in first and first[first.index('(') + 1:first.index('(') + 2] == ['*']:
+        end = first.index('(')
     if end < 1:
         return
     spec = first[:end]
@@ -702,7 +716,7 @@ class _Registry:
         if is_tag:
             scope = self.scopes[root]
         names = matching_names(self.type_names[root if is_tag else file], name)
-        if not names:
+        if not names and not getattr(self, 'isolated', False):
             scope = self.global_scope
             names = matching_names(self.all_type_names, name)
         if len(names) > 1:
@@ -713,7 +727,7 @@ class _Registry:
         if key in seen or len(seen) >= 128:
             return TypeLink('UNRESOLVED')
         declarations = [d for path in sorted(scope) for d in self.units[path].types.get(name, ())]
-        if is_tag and not any(
+        if not getattr(self, 'isolated', False) and is_tag and not any(
                 isinstance(d.target, Origin) for d in declarations) and declarations:
             # Comparison inputs form one catalog, even without an include edge.
             declarations.extend(d for path in sorted(self.units)
@@ -723,7 +737,7 @@ class _Registry:
         if not declarations and not is_tag:
             macro_scope = self.scopes[file]
             macro_names = matching_names(self.macro_names[file], name)
-            if not macro_names:
+            if not macro_names and not getattr(self, 'isolated', False):
                 macro_scope = self.global_scope
                 macro_names = matching_names(self.all_macro_names, name)
             if len(macro_names) > 1:
@@ -952,22 +966,10 @@ def _bind_functions(registry, globals_by_scope):
         for function in unit.functions:
             groups[function.name].append(function)
 
+    from .function_parameters import signature as parameter_signature, array_parameter_binding
+
     def signature(function, root):
-        types = []
-        for parameter in function.parameters:
-            if parameter is None:
-                return None
-            link = _bind_declarations(registry, (parameter,), root).type_link
-            if not link or (link.status not in ('STRUCT', 'INTEGER', 'SCALAR')
-                            and not (link.status == 'CONDITIONAL' and
-                                     (link.definition is not None or link.integer_type))):
-                return None
-            qualifiers = link.qualifiers or ((),)
-            if parameter.arrays:
-                qualifiers = (*qualifiers, ())
-            # Top-level parameter qualifiers do not affect function compatibility.
-            types.append((link.definition, link.integer_type, qualifiers[:-1], len(parameter.arrays[1:])))
-        return tuple(types)
+        return parameter_signature(registry, function, root)
 
     functions = {}
     for name, declarations in groups.items():
@@ -989,9 +991,13 @@ def _bind_functions(registry, globals_by_scope):
                 status = 'AMBIGUOUS'
 
             names = defaultdict(list)
-            for parameter in definition.parameters:
+            array_bindings = {}
+            for index, parameter in enumerate(definition.parameters):
                 if parameter:
                     names[parameter.name].append((parameter, False))
+                    binding = array_parameter_binding(registry, definition, index, parameter, file)
+                    if binding is not None:
+                        array_bindings[parameter.name] = binding
             for declaration, nested in definition.locals:
                 names[declaration.name].append((declaration, nested))
             variables = {}
@@ -1003,6 +1009,8 @@ def _bind_functions(registry, globals_by_scope):
                                           and all(not inner and d.kind != 'PARAMETER' for d, inner in candidates))
                 if (len(items) != 1 and not repeated_at_same_level) or (nested and previous is not None):
                     binding = VariableBinding('AMBIGUOUS', items)
+                elif len(items) == 1 and variable in array_bindings:
+                    binding = array_bindings[variable]
                 elif items[0].storage == 'extern':
                     if previous and previous.status not in ('STRUCT', 'INTEGER', 'SCALAR'):
                         binding = VariableBinding(previous.status, items)
@@ -1017,15 +1025,19 @@ def _bind_functions(registry, globals_by_scope):
     return functions
 
 
-def build_bitfield_catalog(paths, encoding='utf-8-sig'):
+def build_bitfield_catalog(paths, encoding='utf-8-sig', *, sources=None, isolated=False):
     """Collect input files first, then link declarations by source scope.
 
     Includes supply the preferred context; missing types use all supplied files. Numeric ranges describe
     the declared width and signedness, without asserting target storage capacity or layout.
     """
     files = sorted({str(Path(path).resolve()) for path in paths})
+    supplied = sources
     units, sources, diagnostics = {}, {}, []
     for file in files:
+        if supplied is not None:
+            sources[file] = supplied[file]
+            continue
         try:
             raw = Path(file).read_bytes()
         except OSError as exc:
@@ -1042,6 +1054,7 @@ def build_bitfield_catalog(paths, encoding='utf-8-sig'):
     units.update(_collect_units(sources, set(files)))
     diagnostics.extend(d for unit in units.values() for d in unit.reviews)
     registry = _Registry(units)
+    registry.isolated = isolated
     links, aliases = {}, defaultdict(set)
     for file, scope in registry.scopes.items():
         names = {name for path in scope for name in units[path].types}

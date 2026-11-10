@@ -32,7 +32,7 @@ from rangevalidator.analysis import (BASE_PROFILES, CONVENTIONAL_PROFILES, Diagn
                                      identifier, matching_names, tokenize)
 from rangevalidator.bitfield_catalog import Origin, TypeLink, _Declaration, _Unit, _CMT_STR, _DIRECTIVE, _INCLUDE, _guard
 
-PATCH_VERSION = "DirectCompare-fix-6"
+PATCH_VERSION = "DirectCompare-fix-8"
 
 # =============================================================================
 # 1번. Excel 읽기 오류 — 셀 예산 · 메모리
@@ -885,9 +885,9 @@ def _member_table(registry, catalog):
     return table
 
 
-def build_bitfield_catalog(paths, encoding='utf-8-sig'):
+def build_bitfield_catalog(paths, encoding='utf-8-sig', **kwargs):
     """원본 build_bitfield_catalog 를 호출한 뒤 catalog.member_types(정의별 멤버 타입 표)를 덧붙인다."""
-    catalog = _original_build(paths, encoding)
+    catalog = _original_build(paths, encoding, **kwargs)
     registry = _LAST_REGISTRY.pop('registry', None)
     catalog.member_types = _member_table(registry, catalog) if registry is not None else {}
     catalog.function_declarations = {}
@@ -959,25 +959,9 @@ def _split_path(member):
     return [(op, name, _SUBSCRIPT.findall(subs)) for op, name, subs in _SEGMENT.findall(member)]
 
 
-def _c_index_literal(text):
-    match = bc._INTEGER.fullmatch(text)
-    if not match or len(match[1]) > 24:
-        return None
-    digits = match[1]
-    base = 0 if digits.lower().startswith(('0x', '0b')) else 8 if digits.startswith('0') else 10
-    return int(digits, base)
-
-
 def _access_issue(name, indices, depth, arrays, operator=None):
-    for index, size in zip(indices, arrays):
-        value, bound = _c_index_literal(index), _c_index_literal(size)
-        if value is not None and bound is not None and value >= bound:
-            if bound == 0:
-                return f"배열 '{name}'에 접근할 수 있는 원소가 없습니다."
-            reason = f"'{name}[{index}]'는 배열 범위를 벗어났습니다 (0~{bound - 1})."
-            if value == bound:
-                reason += f" [{index}]가 원소 개수 표기인지 확인해 주세요."
-            return reason
+    # Design ranges describe the final member's type, regardless of the index value.
+    # Keep array dimensions and pointer access checks for resolving that type.
     remaining = len(arrays) - len(indices)
     depth += min(0, remaining)
     if depth < 0:
@@ -1190,6 +1174,10 @@ def _catalog_match(catalog, access, source_file, function, function_name=''):
         return 'REVIEW', reason + details, None
     source_file = function.file or source_file or None
     binding = bitfields.lookup_variable(source_file, name, function.variables)
+    if binding.status == 'MISSING' and getattr(catalog, 'build_context', None) is not None:
+        from rangevalidator.build_options import member_scope
+        return eng._member_catalog_match(member_scope(bitfields, source_file), access,
+                                         eng._missing_declaration_reason(bitfields, name, source_file, function_name))
     if binding.status == 'MISSING' and source_file is not None:
         binding = bitfields.lookup_variable(None, name)
     if binding.status == 'MISSING':

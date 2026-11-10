@@ -189,9 +189,46 @@ REC_ROWS = [('rec->items[i].flag', 'u1', '0~1'), ('rec->status.bit', 'u1', '0~1'
             ('rec->data[4]', 'u1', '0~255')]
 case("포인터 매개변수와 중첩 union, 배열 및 접근 검증",
      files(types=REC, decl='', c='#include "g.h"\nvoid Motor_Run(Rec_t *rec) {}\n'),
-     REC_ROWS, ['MATCH', 'MATCH', 'SKIP', 'MATCH', 'REVIEW', 'REVIEW', 'REVIEW'],
-     reason_contains={4: "'pointer'의 멤버에는 '->'로 접근", 5: "'literal[4]'는 배열 범위를 벗어났습니다 (0~3)",
-                      6: '[4]가 원소 개수 표기인지 확인'})
+     REC_ROWS, ['MATCH', 'MATCH', 'SKIP', 'MATCH', 'REVIEW', 'MATCH', 'SKIP'],
+     reason_contains={4: "'pointer'의 멤버에는 '->'로 접근"})
+
+ARRAY_MEMBER_TYPES = PRE + """
+typedef struct { u1 iConnection:1; signed int signedFlag:3; u1 ordinary; u1 data[3]; } Status_t;
+typedef struct { Status_t iStatus; } Mngr_t;
+typedef struct { Mngr_t iMngr[2]; } Package_t;
+"""
+case("배열 길이와 무관하게 중첩 경로의 마지막 멤버 판정",
+     files(types=ARRAY_MEMBER_TYPES, decl='extern Package_t cell_package;'),
+     [('cell_package.iMngr[0].iStatus.iConnection', 'u1', '0~1'),
+      ('cell_package.iMngr[2].iStatus.iConnection', 'u1', '0~1'),
+      ('cell_package.iMngr[100].iStatus.iConnection', 'u1', '0~1'),
+      ('cell_package.iMngr[2].iStatus.signedFlag', 'signed int', '-4~3'),
+      ('cell_package.iMngr[2].iStatus.ordinary', 'u1', '0~255'),
+      ('cell_package.iMngr[2].iStatus.data[3]', 'u1', '0~255'),
+      ('cell_package.iMngr[2].iStatus.missing', 'u1', '0~1')],
+     ['MATCH', 'MATCH', 'MATCH', 'MATCH', 'SKIP', 'SKIP', 'REVIEW'])
+case("루트 및 다차원 배열 길이와 무관한 비트필드 범위 비교",
+     files(types=ARRAY_MEMBER_TYPES, decl='extern Status_t records[2]; extern Status_t matrix[2][3];'),
+     [('records[2].iConnection', 'u1', '0~7'),
+      ('records[100].iConnection', 'u1', ''),
+      ('records[2].ordinary', 'u1', '0~255'),
+      ('matrix[2][3].iConnection', 'u1', '0~1'),
+      ('matrix[100][100].signedFlag', 'signed int', '-4~3')],
+     ['MISMATCH', 'CREATE', 'SKIP', 'MATCH', 'MATCH'])
+
+case("배열 포인터 매개변수의 선언과 정의 연결 후 전역 비트필드 비교",
+     files(decl='extern Dev_t g_dev;\nvoid Dfm_EnvDataStore_User(u1 (*data)[16], u2 event, u1 entry);',
+           c='#include "g.h"\nvoid Dfm_EnvDataStore_User(u1 (*buffer)[16], u2 event, u1 entry) {}\n'),
+     ROWS, M3, sheet='1. Dfm_EnvDataStore_User')
+case("구조체 배열 포인터 및 typedef 매개변수의 마지막 비트필드 비교",
+     files(types=DEV + '\ntypedef Dev_t (*DevRows)[4];\n',
+           decl='void Motor_Run(Dev_t values[][4], const Dev_t (*readonly)[4], DevRows alias);',
+           c='#include "g.h"\nvoid Motor_Run(Dev_t (*values)[4], const Dev_t (*readonly)[4], DevRows alias) {}\n'),
+     [('values[100][100].active', 'u1', '0~1'),
+      ('readonly[0][2].mode', 'u1', '0~3'),
+      ('alias[0][3].level', 'u2', ''),
+      ('values->active', 'u1', '0~1')],
+     ['MATCH', 'MISMATCH', 'CREATE', 'REVIEW'])
 
 TRUNCATED = 'chg_remaining_time_qcs_100m'
 TRUNCATED_C = f'#include "g.h"\nvoid {TRUNCATED}s(void) {{ static Dev_t ls_rct_qcs_100ms; }}\n'

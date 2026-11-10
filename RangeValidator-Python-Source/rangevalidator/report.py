@@ -76,6 +76,12 @@ def _summary(ws, session, index, entries):
         ('REVIEW 수동 수정 선택 건수', selected[MANUAL_REVIEW]),
         *[(label + ' 건수', saved[state]) for state, label in SAVE_LABELS.items()],
     ]
+    if getattr(session, 'build_options', None):
+        options = session.build_options
+        metrics.extend([('빌드옵션 XML', options['file']), ('빌드옵션 SHA256', options['sha256']),
+                        ('빌드옵션 매크로', '\n'.join(f'{name}={value}' for name, value in options['macros'].items())),
+                        ('빌드옵션 include 경로', '\n'.join(options['include_paths'])),
+                        ('전처리 실패', '\n'.join(options.get('errors', {}).values()))])
     header(ws, 1, ['전체 집계', '건수 / 값'])
     for number, pair in enumerate(metrics, 2):
         literal(ws, number, pair)

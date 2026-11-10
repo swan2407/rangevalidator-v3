@@ -63,17 +63,19 @@ class Session:
     catalog_summary: dict = field(default_factory=dict)
     excel1_timings: dict = field(default_factory=dict, repr=False)
     _signature: str = ''
+    build_options: dict = field(default_factory=dict)
 
     def signature(self):
         payload=dict(id=self.id,inputs=[self.headers,self.details,self.backend,self.encoding],
-                     results=[asdict(r) for r in self.results],files=[asdict(f) for f in self.files],errors=self.errors)
+                     results=[asdict(r) for r in self.results],files=[asdict(f) for f in self.files],errors=self.errors,
+                     build_options=self.build_options)
         return hashlib.sha256(json.dumps(payload,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
 
     def assert_unchanged(self):
         if self._signature!=self.signature():raise RuntimeError('REVIEW: analysis session was changed; compare again')
 
 
-def _run_comparison(headers,details,backend='auto',encoding='utf-8-sig',diagnostics=None,progress=None):
+def _run_comparison(headers,details,backend='auto',encoding='utf-8-sig',diagnostics=None,progress=None,build_options=None):
     diag=diagnostics or Diagnostics()
     hdr=tuple(dict.fromkeys(source_path(p) for p in headers));det=tuple(dict.fromkeys(source_path(p) for p in details))
     s=Session(hdr,det,backend,encoding,diagnostics=diag)
@@ -116,7 +118,10 @@ def _run_comparison(headers,details,backend='auto',encoding='utf-8-sig',diagnost
         return item
     diag.set_context(input_role='header',file_index=0,sheet_index=0,row=0,column=0,sheet_name='')
     advance('C/H 파일 분석 및 비트필드 카탈로그 구축 중')
-    catalog=catalog_headers(hdr,encoding,diag)
+    catalog=(catalog_headers(hdr,encoding,diag,build_options=build_options) if build_options is not None
+             else catalog_headers(hdr,encoding,diag))
+    if getattr(catalog, 'build_context', None) is not None:
+        s.build_options = catalog.build_context.receipt()
     loaded={canonical(path) for path in catalog.files}
     missing=[path for path in hdr if canonical(path) not in loaded]
     if missing:
@@ -208,8 +213,8 @@ def _run_comparison(headers,details,backend='auto',encoding='utf-8-sig',diagnost
     return s
 
 
-def run_comparison(common_path=None, headers=(), details=(), backend='auto', encoding='utf-8-sig', diagnostics=None, progress=None):
+def run_comparison(common_path=None, headers=(), details=(), backend='auto', encoding='utf-8-sig', diagnostics=None, progress=None, build_options=None):
     """Compare C/H and detail files. The legacy common_path argument is ignored."""
     from .com_values import excel_session
     with excel_session(diagnostics):
-        return _run_comparison(headers, details, backend, encoding, diagnostics, progress)
+        return _run_comparison(headers, details, backend, encoding, diagnostics, progress, build_options)

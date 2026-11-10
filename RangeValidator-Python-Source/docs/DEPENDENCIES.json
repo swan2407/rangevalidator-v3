@@ -306,5 +306,12 @@
       "docs\\dependency-licenses\\setuptools-15-LICENSE",
       "docs\\dependency-licenses\\setuptools-16-LICENSE"
     ]
+  },
+  {
+    "name": "pcpp",
+    "version": "1.30",
+    "license": "BSD-3-Clause",
+    "purpose": "Build-option C preprocessing",
+    "license_file": "dependency-licenses/pcpp-1.30-LICENSE.txt"
   }
 ]

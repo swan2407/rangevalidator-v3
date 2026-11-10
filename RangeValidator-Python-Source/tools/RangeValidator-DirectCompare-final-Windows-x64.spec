@@ -1,12 +1,13 @@
 # -*- mode: python ; coding: utf-8 -*-
+from PyInstaller.utils.hooks import collect_data_files, collect_submodules
 
 
 a = Analysis(
     ['../run_gui.py'],
     pathex=[],
     binaries=[],
-    datas=[],
-    hiddenimports=['win32timezone', 'win32com.client.dynamic', 'win32com.client.gencache', 'tkinter', 'rangevalidator.a_extraction', 'rangevalidator.analysis', 'rangevalidator.b_extraction', 'rangevalidator.bitfield_catalog', 'rangevalidator.com_read', 'rangevalidator.com_values', 'rangevalidator.common', 'rangevalidator.diagnostics', 'rangevalidator.engine', 'rangevalidator.error_info', 'rangevalidator.gui', 'rangevalidator.manual_edits', 'rangevalidator.models', 'rangevalidator.preservation', 'rangevalidator.readers', 'rangevalidator.report', 'rangevalidator.result_index', 'rangevalidator.save_display', 'rangevalidator.selfcheck', 'rangevalidator.workflow', 'rangevalidator.writer'],
+    datas=collect_data_files('pcpp', include_py_files=True),
+    hiddenimports=['win32timezone', 'win32com.client.dynamic', 'win32com.client.gencache', 'tkinter', 'rangevalidator.a_extraction', 'rangevalidator.analysis', 'rangevalidator.b_extraction', 'rangevalidator.bitfield_catalog', 'rangevalidator.com_read', 'rangevalidator.com_values', 'rangevalidator.common', 'rangevalidator.diagnostics', 'rangevalidator.engine', 'rangevalidator.error_info', 'rangevalidator.gui', 'rangevalidator.manual_edits', 'rangevalidator.models', 'rangevalidator.preservation', 'rangevalidator.readers', 'rangevalidator.report', 'rangevalidator.result_index', 'rangevalidator.save_display', 'rangevalidator.selfcheck', 'rangevalidator.workflow', 'rangevalidator.writer'] + collect_submodules('pcpp'),
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
@@ -22,7 +23,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='RangeValidator-DirectCompare-fix6-Windows-x64',
+    name='RangeValidator-DirectCompare-fix8-Windows-x64',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

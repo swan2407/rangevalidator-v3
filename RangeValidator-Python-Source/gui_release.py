@@ -3,7 +3,10 @@
 import queue
 import time
 import tkinter as tk
-from tkinter import messagebox, ttk
+from tkinter import filedialog, messagebox, ttk
+from pathlib import Path
+
+from rangevalidator.build_options import BuildOptionsError, load_build_options
 
 from rangevalidator.gui import App as BaseApp
 from rangevalidator.manual_edits import MANUAL_REVIEW
@@ -12,6 +15,40 @@ from rangevalidator.workflow import run_comparison
 
 
 class App(BaseApp):
+    def build_inputs(self):
+        super().build_inputs()
+        self.build_options_path = ''
+        box = ttk.LabelFrame(self.tabs[0], text='빌드옵션 (선택)', padding=6)
+        box.pack(fill='x', pady=4)
+        self.button(box, '빌드옵션 XML 선택', self.choose_build_options).pack(side='left', padx=3)
+        self.button(box, '적용 해제', self.clear_build_options).pack(side='left', padx=3)
+        self.build_options_text = tk.StringVar(value='미적용 · 기존 방식으로 모든 조건부 후보 비교')
+        ttk.Label(box, textvariable=self.build_options_text, wraplength=900).pack(side='left', padx=8)
+
+    def set_build_options(self, path):
+        options = load_build_options(path)
+        self.build_options_path = options.path
+        self.build_options_text.set(f'{options.path} · 매크로 {len(options.macros)}개 · 값 없는 매크로는 정의 여부만 적용')
+        self.invalidate()
+
+    def choose_build_options(self):
+        if self.busy:
+            return
+        path = filedialog.askopenfilename(parent=self.root, title='Eclipse CDT 빌드옵션 XML 선택',
+                                          filetypes=[('Eclipse CDT XML', '*.xml')])
+        if path:
+            try:
+                self.set_build_options(path)
+            except BuildOptionsError as exc:
+                messagebox.showerror('빌드옵션 확인', str(exc), parent=self.root)
+
+    def clear_build_options(self):
+        if self.busy:
+            return
+        self.build_options_path = ''
+        self.build_options_text.set('미적용 · 기존 방식으로 모든 조건부 후보 비교')
+        self.invalidate()
+
     def __init__(self, root):
         super().__init__(root)
         progress_area = self.progress.master
@@ -38,8 +75,13 @@ class App(BaseApp):
         self.invalidate()
         headers, details = tuple(self.headers), tuple(self.details)
         encoding = self.encoding.get()
+        try:
+            options = load_build_options(self.build_options_path) if self.build_options_path else None
+        except BuildOptionsError as exc:
+            messagebox.showerror('빌드옵션 확인', str(exc), parent=self.root)
+            return
         self.start(lambda: run_comparison(headers=headers, details=details, encoding=encoding,
-                                          progress=self.progress_event), 'compare')
+                                          progress=self.progress_event, build_options=options), 'compare')
 
     def start(self, func, kind):
         if self.busy:
@@ -125,6 +167,11 @@ class App(BaseApp):
                     f"구조체 {summary.get('structs', 0)}개 · 비트필드 {summary.get('bitfields', 0)}개 "
                     f"(범위 확정 {summary.get('certified', 0)}개) · 변수 {summary.get('variables', 0)}개 · "
                     f"typedef {summary.get('typedefs', 0)}개")
+            if getattr(result, 'build_options', None):
+                options = result.build_options
+                failures = len(options.get('errors', {}))
+                self.status.set(self.status.get() + f" · 빌드옵션 {Path(options['file']).name}" +
+                                (f' · 전처리 실패 {failures}개 C/H 문맥은 REVIEW (행 사유 확인)' if failures else ' 적용'))
             self.notebook.select(self.tabs[1])
             if incomplete:
                 failed = next((node for node, (key, name) in self.nav_scopes.items()

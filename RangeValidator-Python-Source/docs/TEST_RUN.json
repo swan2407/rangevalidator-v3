@@ -1,0 +1,98 @@
+{
+  "started_utc": "2026-11-10T13:11:48.601658+00:00",
+  "python": "3.13.17 (tags/v3.13.17:64e080d, Oct 21 2026, 14:08:53) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "excel_opt_in": false,
+  "tests": 304,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 12,
+  "elapsed_seconds": 32.501,
+  "successful": true,
+  "skipped_tests": [
+    {
+      "test": "test_functional_ast_matches_independent_truth (test_clang_probe.ClangProbeTests.test_functional_ast_matches_independent_truth)",
+      "reason": "Clang dependency unavailable: clang.cindex is absent"
+    },
+    {
+      "test": "test_actual_large_five_column_sheet (test_com_reference.ActualExcelTests.test_actual_large_five_column_sheet)",
+      "reason": "Actual Excel opt-in required"
+    },
+    {
+      "test": "test_common_ab_multifile_engine_and_preserve (test_com_reference.ActualExcelTests.test_common_ab_multifile_engine_and_preserve)",
+      "reason": "Actual Excel opt-in required"
+    },
+    {
+      "test": "test_com_only_evidence_never_reports_protection_verified (test_pipeline.WriterIntegrationTests.test_com_only_evidence_never_reports_protection_verified)",
+      "reason": "Actual Excel opt-in required"
+    },
+    {
+      "test": "test_com_saveas_selected_preservation (test_pipeline.WriterIntegrationTests.test_com_saveas_selected_preservation)",
+      "reason": "Actual Excel opt-in required"
+    },
+    {
+      "test": "test_per_file_failure_continues (test_pipeline.WriterIntegrationTests.test_per_file_failure_continues)",
+      "reason": "Actual Excel opt-in required"
+    },
+    {
+      "test": "test_reader_semantic_decisions_equal (test_pipeline.WriterIntegrationTests.test_reader_semantic_decisions_equal)",
+      "reason": "Actual Excel opt-in required"
+    },
+    {
+      "test": "test_real_excel_synthetic_readonly (test_readers.ExcelIntegrationTests.test_real_excel_synthetic_readonly)",
+      "reason": "Explicit RV_TEST_EXCEL=1 and Excel/pywin32 required"
+    },
+    {
+      "test": "test_existing_instance_preserved_and_owned_exits (test_readers.ExcelLifecycleTests.test_existing_instance_preserved_and_owned_exits)",
+      "reason": "Explicit Excel integration opt-in required"
+    },
+    {
+      "test": "test_missing_corrupt_paths (test_readers.ExcelLifecycleTests.test_missing_corrupt_paths)",
+      "reason": "Explicit Excel integration opt-in required"
+    },
+    {
+      "test": "test_mta_refused (test_readers.ExcelLifecycleTests.test_mta_refused)",
+      "reason": "Explicit Excel integration opt-in required"
+    },
+    {
+      "test": "test_shared_value_semantics (test_readers.ExcelLifecycleTests.test_shared_value_semantics)",
+      "reason": "Explicit Excel integration opt-in required"
+    }
+  ],
+  "source_sha256": {
+    "rangevalidator\\analysis.py": "c6183f96027f1a4be9b42bd01f0b32afa609efd934d542e514ad2d37262060c2",
+    "rangevalidator\\a_extraction.py": "c9fdd0bb45c62e42e9cd37927543aea4ffb384a6c9650b26b29e3758f9bb42e2",
+    "rangevalidator\\batch_probe.py": "d1cf3a1a64f9b712920f84d59edd01d10a53066d273684f655c8e6fe802ec9d5",
+    "rangevalidator\\bitfield_catalog.py": "0bb84e86666fc56705766176fcc6e1bb70f6aa91e646141d28c7a4b884e9850e",
+    "rangevalidator\\build_options.py": "3f91c7f279904adb6f50500e9771f54162fc2ec0126f927c37508744ca5c127f",
+    "rangevalidator\\build_options_smoke.py": "6e2089b9a05767fb1a9e602303ba629041934ab3b753fe4563bfc9dc70004ea0",
+    "rangevalidator\\b_extraction.py": "21b6bd03a1cefd41c8cfdd571d60aa049b8b5a9590fa515f187190c5b7980e9b",
+    "rangevalidator\\ch_diagnostics.py": "633e6c26df4007a7a5e0e5d3a6884e856c09505a7c6de8656d53c8e117babca1",
+    "rangevalidator\\clang_probe.py": "1eb5bc742e43bb34cff0ee9a6b2ed5f38b1778f01e285db96b1ec302a51e5b2b",
+    "rangevalidator\\cli.py": "08a47a05528c3c454bd7697603c6e5869e7aa5aac4157b4eb8332670393260da",
+    "rangevalidator\\common.py": "b7075c93ffb11bad0f83dfa9746756e7a89a52c7b19b7e76707872839fdf0c35",
+    "rangevalidator\\com_read.py": "08e7f352bce222662936a019809c9b8bec6080192881da9f927eabb9451f6a46",
+    "rangevalidator\\com_values.py": "ed46aee42a749c4a19c52ed4b653b8e601dd4727d5c040c96bcf3ffc060862c1",
+    "rangevalidator\\design.py": "34f2f827230dee681733bae3c389318f32dbb5010daa759f55b473c00c636a72",
+    "rangevalidator\\development_probe.py": "a6eeaa00a1140b4f2b843109f197bf96115758ad9650500b7e9933b5de99f2b0",
+    "rangevalidator\\diagnostics.py": "621bdb31d1a730df1b116f49dca56467793d3de83d4b826f1a49187ea4907bed",
+    "rangevalidator\\diagnostic_probe.py": "9c5d302c82687f66d182d56d0326e166917d1c46cdfbde6b3c6414112f8ee4f4",
+    "rangevalidator\\engine.py": "f223fe344f14600b14cfadb281d2e59ecac9c53af7a1ee731a40b91184f7f184",
+    "rangevalidator\\error_info.py": "8fc711b8e774147a71d56b29448bd1e0c15afaa5b56b351fc9fd7ec3f93ba42b",
+    "rangevalidator\\extraction_diagnostics.py": "deeaa891fa08042a8f70da40be08583ee068cdc4ebcc4eb2bb9f6e711e5058c3",
+    "rangevalidator\\function_parameters.py": "c070fd7110a2c7a1febd0177e196fb22e7d754cd06fa685fc7043f63b7d62461",
+    "rangevalidator\\gui.py": "ef9be762b9dbbf2c9ee0998a769438d4e5e1e05d51115eabdfdfa90e2e477b7e",
+    "rangevalidator\\manual_edits.py": "7163401ddfcf7c61dbfc954080436383ec5169d395beb7b616455d6c09a8aa4d",
+    "rangevalidator\\models.py": "04faf8143db27359ce48c8093674ced93054350e546b3555cc00a33bd58e999a",
+    "rangevalidator\\preservation.py": "c61429b4c5b638f673a57ca5b06c355aee88ae05b10427828f5c9291691e5bdf",
+    "rangevalidator\\readers.py": "616bf033df093bc3b3a705a6ac491971cff1e06b12e5a05ffc041d3139f141e2",
+    "rangevalidator\\report.py": "6e52055826dd9ad5efade8779e55dd657b934932789630eeb007b06b1c59cb72",
+    "rangevalidator\\result_index.py": "38ea22568c66b3b5e16e72006463fe282078e0311aa3229f690d5f642aab3ffe",
+    "rangevalidator\\save_display.py": "dec965e086e1b709ba4ecd4dd38492cc1bd93b4987741cf30d42a4e81bc07993",
+    "rangevalidator\\selfcheck.py": "7996b53a8a8bc54afcbe61abf57cb87c2c72d9ff2539ed43e8a8e5c7bd4ba281",
+    "rangevalidator\\workflow.py": "5ddc1693824d8c4e0fdc2e77d134540615eb10724b1bc83581ef546f3d507701",
+    "rangevalidator\\writer.py": "40f49f3f251089e5800920fbb69b606922a97691a5390af8a46300d70f32b858",
+    "rangevalidator\\__init__.py": "4922f144c37cd15d79164169b38d0f186a1213108411a00f577ffc94fca569c9",
+    "rangevalidator\\__main__.py": "8bc10ca41c4b41d68c96190894ed718094c3bd3ebfc4a99d6cfade3fb9469fbf"
+  }
+}

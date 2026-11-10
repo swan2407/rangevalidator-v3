@@ -61,26 +61,41 @@ def _signature(st):
     return tuple((f.member, f.declared_type, f.width) for f in st.fields) + tuple(sorted(st.members.items()))
 
 
-def catalog_headers(headers, encoding='utf-8-sig', diagnostics=None):
+def catalog_headers(headers, encoding='utf-8-sig', diagnostics=None, build_options=None):
     """Analyze every C header/source once and merge into one catalog.
     Same struct identity (typedef name or tag) defined twice: identical → kept once, different → marked conflict."""
     from .analysis import Struct
     headers = tuple(headers)
-    bitfields = build_bitfield_catalog(headers, encoding)
+    build_context = None
+    original_headers = headers
+    if build_options is not None:
+        from .build_options import BuildOptions, load_build_options, preprocess_sources
+        if not isinstance(build_options, BuildOptions):
+            build_options = load_build_options(build_options)
+        build_context = preprocess_sources(headers, build_options, encoding)
+        headers = tuple(build_context.sources)
+        bitfields = build_bitfield_catalog(headers, encoding, sources=build_context.sources, isolated=True)
+    else:
+        bitfields = build_bitfield_catalog(headers, encoding)
     members = frozenset(f.declaration.member for st in bitfields.definitions.values() for f in st.fields)
     catalog = Catalog(bitfields=bitfields, bitfield_members=members)
+    catalog.build_context = build_context
     models = []
     for path in headers:
         try:
             if diagnostics: diagnostics.emit('C','source.read')
-            raw = Path(path).read_bytes()
-            text = None
-            for enc in (encoding, 'utf-8-sig', 'cp949', 'latin-1'):
-                try:
-                    text = raw.decode(enc); break
-                except UnicodeDecodeError:
-                    continue
-            m = analyze(text or raw.decode('latin-1'), str(Path(path).resolve()))
+            if build_context is not None:
+                text = build_context.sources[path]
+            else:
+                raw = Path(path).read_bytes()
+                text = None
+                for enc in (encoding, 'utf-8-sig', 'cp949', 'latin-1'):
+                    try:
+                        text = raw.decode(enc); break
+                    except UnicodeDecodeError:
+                        continue
+                text = text or raw.decode('latin-1')
+            m = analyze(text, str(Path(path).resolve()))
             models.append(m)
             catalog.files.append(str(Path(path).resolve()))
             catalog.reviews.extend(f'{r.code}: {Path(r.file).name}:{r.line}: {r.reason}' for r in m.reviews)
@@ -131,6 +146,9 @@ def catalog_headers(headers, encoding='utf-8-sig', diagnostics=None):
                 hv = HeaderVariable(hv.name, hv.pointer or hit[1], catalog.types[hit[0]], hv.file, hv.line, hv.array, hv.type_text)
         fixed.append(hv)
     catalog.variables = fixed
+    if build_context is not None:
+        catalog.files = [str(Path(p).resolve()) for p in original_headers]
+        catalog.reviews.extend('BUILD_OPTIONS_UNRESOLVED: ' + message for message in build_context.errors.values())
     return catalog
 
 
@@ -308,6 +326,10 @@ def _catalog_match(catalog, access, source_file, function, *, function_name=None
         return 'REVIEW', f'함수 정의를 확정할 수 없음 ({function.status})', None
     source_file = source_file or function.file or None
     binding = bitfields.lookup_variable(source_file, name, function.variables)
+    if binding.status == 'MISSING' and getattr(catalog, 'build_context', None) is not None:
+        from .build_options import member_scope
+        return _member_catalog_match(member_scope(bitfields, source_file), access,
+            _missing_declaration_reason(bitfields, name, source_file, function_name))
     if binding.status == 'MISSING' and source_file is not None:
         binding = bitfields.lookup_variable(None, name)
     if binding.status == 'MISSING':
@@ -603,5 +625,9 @@ def compare_book(common, catalog, book, relative_path=None):
     for r in results:
         k = (r.sheet,r.cell)
         counts[k] = counts.get(k,0) + 1
-    return [replace(r,status='REVIEW',reason='Duplicate target cell',candidate=False)
-            if r.cell and counts[(r.sheet,r.cell)] > 1 else r for r in results], coverage
+    results = [replace(r,status='REVIEW',reason='Duplicate target cell',candidate=False)
+               if r.cell and counts[(r.sheet,r.cell)] > 1 else r for r in results]
+    if getattr(catalog, 'build_context', None) is not None:
+        from .build_options import annotate_results
+        results = annotate_results(results, catalog, relative_path or Path(book.path).name)
+    return results, coverage

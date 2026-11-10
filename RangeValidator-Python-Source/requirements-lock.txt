@@ -1,4 +1,5 @@
 ﻿openpyxl==3.1.5
 et-xmlfile==2.0.0
-pywin32==311; sys_platform == "win32"
+pywin32==312; sys_platform == "win32"
 Pillow==13.0.0
+pcpp==1.30

@@ -13,6 +13,10 @@ import rangevalidator_patch  # noqa: E402,F401  ← 원본 모듈을 import 한 
 
 
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == '--build-options-test':
+        from rangevalidator.build_options_smoke import run
+        run(sys.argv[2], sys.argv[3] if len(sys.argv) > 3 else None)
+        return
     if len(sys.argv) > 1 and sys.argv[1] == '--selftest':
         import selftest_patch
         raise SystemExit(selftest_patch.main())

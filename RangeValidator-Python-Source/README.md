@@ -1,3 +1,5 @@
+> **DirectCompare fix8** — Eclipse CDT 빌드옵션 XML 선택 및 C 파일별 조건부 분석을 추가했습니다. 사용법과 제한은 [빌드옵션 안내](docs/BUILD_OPTIONS.md)를 확인하세요.
+
 > **V3.1 (2026-11-04)**: 느린 읽기·PARTIAL_READ·INPUT_CONTENT_CHANGED·SOURCE_CONTEXT_REVIEW 로 모든 행이 막히던 문제 수정, C 분석기 재작성(typedef 사전·매크로 비트폭·중첩 구조체·.c 변수 선언), **[계산 범위 전체 내보내기]** 추가. 원인·수정 내용은 [docs/V3.1_변경_분석.md](docs/V3.1_변경_분석.md).
 
 # RangeValidator Python V3.1
@@ -24,15 +26,15 @@ Python/pip/MSYS2 설치는 필요하지 않습니다. COM에는 설치·인증�
 
 ## 최신 Windows 배포판
 
-[DirectCompare-fix6 Windows x64 배포 ZIP](dist/RangeValidator-DirectCompare-fix6-Windows-x64.zip)을 풀고
-`RangeValidator-DirectCompare-fix6-Windows-x64.exe`를 실행하세요. Python 설치가 필요 없는 단일 EXE입니다.
+`RangeValidator-DirectCompare-fix8-Windows-x64.zip`을 풀고
+`RangeValidator-DirectCompare-fix8-Windows-x64.exe`를 실행하세요. Python 설치가 필요 없는 단일 EXE입니다.
 비교에는 셀 값만 사용하며, 선언 수식어가 붙은 C/H 변수도 등록된 구조체 타입으로 연결합니다.
 비교 결과에서 파일별 오류와 간단한 REVIEW 사유를 확인할 수 있고, 진행률 옆에 경과 시간과 최종 소요 시간을 표시합니다.
 
 이 배포판은 아래 명령으로 실행하거나 다시 빌드할 수 있습니다. 빌드 도구는 Windows CPython 3.13 x64에 설치합니다.
 
 ```powershell
-py -3.13 -m pip install openpyxl==3.1.5 pywin32==312 PyInstaller==6.22.3
+py -3.13 -m pip install -r requirements-lock.txt -r requirements-build-lock.txt
 py -3.13 run_gui.py
 py -3.13 run_gui.py --selftest
 py -3.13 -m PyInstaller --distpath dist --workpath build/directcompare-final tools/RangeValidator-DirectCompare-final-Windows-x64.spec
