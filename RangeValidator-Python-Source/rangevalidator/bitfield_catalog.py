@@ -934,6 +934,12 @@ def _bind_variables(registry):
                  and b.status in ('STRUCT', 'INTEGER', 'SCALAR') for b in contexts) and not any(
                      d.storage == 'static' for d in declarations):
             binding = _bind_declarations(registry, declarations, None)
+        elif (any(d.storage == 'extern' for d in declarations)
+              and all(d.storage != 'static' for d in declarations)
+              and len({d.origin.file for d in declarations if d.storage != 'extern'}) == 1):
+            # A header declaration and one defining source can agree even if
+            # no include edge was collected. Check every declaration's type.
+            binding = _bind_declarations(registry, declarations, None)
         else:
             binding = VariableBinding('AMBIGUOUS' if len(declarations) > 1 else 'UNRESOLVED', declarations)
         bindings[None, name] = binding

@@ -27,11 +27,12 @@ from dataclasses import replace
 from pathlib import Path
 
 from rangevalidator import analysis, bitfield_catalog as bc, engine as eng, models, readers as rd, com_values as cv
+from rangevalidator.com_read import ReadBudgetExceeded
 from rangevalidator.analysis import (BASE_PROFILES, CONVENTIONAL_PROFILES, Diagnostic, Token, canonical_keyword,
                                      identifier, matching_names, tokenize)
 from rangevalidator.bitfield_catalog import Origin, TypeLink, _Declaration, _Unit, _CMT_STR, _DIRECTIVE, _INCLUDE, _guard
 
-PATCH_VERSION = "DirectCompare-fix-2"
+PATCH_VERSION = "DirectCompare-fix-6"
 
 # =============================================================================
 # 1번. Excel 읽기 오류 — 셀 예산 · 메모리
@@ -68,14 +69,13 @@ def read_openpyxl(path, limits=None):
       2. 사각형(iter_rows)으로 훑지 않고 실제 존재하는 셀(ws._cells)만 모은다 → 멀리 떨어진 셀 하나 때문에
          수십만 개의 빈 Cell 을 만들지 않는다. 값이 None 인 셀은 병합 영역 안쪽 셀만 보관(COM 경로와 동일).
       3. 셀 예산(limits.max_cells)은 '값이 있는 셀 수' 기준으로 센다.
-      4. 값(캐시) 통합문서는 read_only 스트리밍으로 열고 수식 셀의 캐시 값만 가져온다 → 메모리 절반.
-         (원본은 formula/value 두 통합문서를 모두 전체 로드: 셀당 약 400B × 2)
+      4. 통합문서를 data_only로 한 번 열어 저장된 셀 값만 비교에 사용한다.
     결과 구조(Workbook/Sheet/Cell, bounds, merged_ranges, read_timings)는 원본과 같다.
     """
     from time import perf_counter
     from datetime import date, datetime, time, timedelta
     limits = limits or models.ReaderLimits()
-    stage, formula_book, value_book = 'path', None, None
+    stage, value_book = 'path', None
     cleanup, result, failure = [], None, None
     try:
         rd.check_limits(limits)
@@ -85,18 +85,17 @@ def read_openpyxl(path, limits=None):
         from openpyxl.utils.datetime import to_excel, time_to_days, timedelta_to_days
         stage = 'openpyxl.open'
         tick = perf_counter()
-        formula_book = load_workbook(p, read_only=False, data_only=False, keep_links=False)
+        value_book = load_workbook(p, read_only=False, data_only=True, keep_links=False)
         open_seconds = perf_counter() - tick
         stage = 'openpyxl.extract'
-        if len(formula_book.worksheets) > limits.max_sheets:
-            raise ValueError('Sheet budget exceeded')
+        if len(value_book.worksheets) > limits.max_sheets:
+            raise ReadBudgetExceeded(f'시트 수 한도 초과 ({len(value_book.worksheets):,} / {limits.max_sheets:,})')
         result = models.Workbook(str(p), 'openpyxl')
-        result.source_sheet_count = len(formula_book.worksheets)
+        result.source_sheet_count = len(value_book.worksheets)
         result.read_timings['open_seconds'] = open_seconds
         tick = perf_counter()
         total = text = 0
-        formula_cells = {}          # 시트명 → {(row, col): Cell}  수식 셀 (캐시 값은 뒤에서 채움)
-        for ws in formula_book.worksheets:
+        for ws in value_book.worksheets:
             ranges = list(ws.merged_cells.ranges)
             sheet = models.Sheet(ws.title, ws.sheet_state, merged_ranges=sorted(map(str, ranges)))
             if not eng.is_function_sheet(ws.title):
@@ -108,68 +107,36 @@ def read_openpyxl(path, limits=None):
             if bounds:
                 total += len(active)
                 if total > limits.max_cells:
-                    raise ValueError('Content cell budget exceeded')
-                wanted = {}
+                    raise ReadBudgetExceeded(f'내용 셀 수 한도 초과 ({total:,} / {limits.max_cells:,})')
                 for c in ws._cells.values():
+                    value = c.value
                     region, anchor = rd._merge(c, ranges)
-                    if c.value is None and not region:
+                    if value is None and not region:
                         continue
-                    is_formula = c.data_type == 'f'
-                    formula = c.value if is_formula and isinstance(c.value, str) else None
-                    if is_formula and formula is None:
-                        formula = getattr(c.value, 'text', None) or '<non-scalar formula>'
-                    value = None if is_formula else c.value
                     if isinstance(value, (datetime, date)):
-                        value = to_excel(value, formula_book.epoch)
+                        value = to_excel(value, value_book.epoch)
                     elif isinstance(value, time):
                         value = time_to_days(value)
                     elif isinstance(value, timedelta):
                         value = timedelta_to_days(value)
-                    kind = 'error' if c.data_type == 'e' else ('formula' if is_formula else 'value')
-                    cell = models.Cell(c.row, c.column, c.coordinate, value, is_formula, formula, region, anchor, kind)
+                    kind = 'error' if c.data_type == 'e' else 'value'
+                    cell = models.Cell(c.row, c.column, c.coordinate, value,
+                                       merged_range=region, merge_anchor=anchor, kind=kind)
                     if isinstance(value, str):
                         text += len(value)
-                    if formula:
-                        text += len(formula)
                     if text > limits.max_text:
-                        raise ValueError('Text budget exceeded')
+                        raise ReadBudgetExceeded(f'텍스트 길이 한도 초과 ({text:,} / {limits.max_text:,})')
                     sheet.cells[cell.address] = cell
-                    if is_formula:
-                        wanted[(c.row, c.column)] = (sheet, cell.address)
-                if wanted:
-                    formula_cells[ws.title] = wanted
             result.sheets.append(sheet)
-        if formula_cells:                        # 수식 셀의 캐시 값만 read_only 스트리밍으로 보충
-            value_book = load_workbook(p, read_only=True, data_only=True, keep_links=False)
-            for title, wanted in formula_cells.items():
-                vs = value_book[title]
-                rows = sorted({r for r, _ in wanted})
-                for row in vs.iter_rows(min_row=rows[0], max_row=rows[-1]):
-                    for vc in row:
-                        hit = wanted.get((getattr(vc, 'row', None), getattr(vc, 'column', None)))
-                        if hit is None:
-                            continue
-                        value = vc.value
-                        if isinstance(value, (datetime, date)):
-                            value = to_excel(value, formula_book.epoch)
-                        elif isinstance(value, time):
-                            value = time_to_days(value)
-                        elif isinstance(value, timedelta):
-                            value = timedelta_to_days(value)
-                        target_sheet, address = hit
-                        target_sheet.cells[address] = replace(target_sheet.cells[address], value=value)
-                        if isinstance(value, str):
-                            text += len(value)
         result.read_timings['body_read_seconds'] = perf_counter() - tick
     except Exception as exc:                     # noqa: BLE001 — 원본과 같이 ReadFailure 로 감싼다
         failure = models.ReadFailure(stage, exc)
     finally:
-        for label, book in (('values.close', value_book), ('formulas.close', formula_book)):
-            if book is not None:
-                try:
-                    book.close()
-                except Exception as exc:        # noqa: BLE001
-                    cleanup.append(models.ReadFailure(label, exc).as_dict())
+        if value_book is not None:
+            try:
+                value_book.close()
+            except Exception as exc:        # noqa: BLE001
+                cleanup.append(models.ReadFailure('values.close', exc).as_dict())
     if failure or cleanup:
         if not failure:
             failure = models.ReadFailure('cleanup', RuntimeError('Workbook cleanup failed'))
@@ -192,13 +159,13 @@ _original_merge_map = cv._merge_map
 
 def _last_cell(sheet, diag, strict=False):
     """원본 _last_cell: strict=True 호출(→ _copy_sheet) 도 비-엄격으로 바꿔, 열이 MAX_COLS 를 넘으면 실패 대신 MAX_COLS 까지만 읽는다."""
-    row, col = _original_last_cell(sheet, diag, strict=False)
+    row, col = _original_last_cell(sheet, diag, strict=False, look_in=-4163)  # xlValues
     return row, min(col, cv.MAX_COLS)
 
 
-def _merge_map(ws, last_row, last_col, diag, max_cells=200000):
+def _merge_map(ws, last_row, last_col, diag, max_cells=200000, *, sparse=False):
     """원본 _merge_map 의 병합 스캔 예산(200000 → 5,000,000)."""
-    return _original_merge_map(ws, last_row, last_col, diag, max_cells=max(max_cells, 5_000_000))
+    return _original_merge_map(ws, last_row, last_col, diag, max_cells=max(max_cells, 5_000_000), sparse=sparse)
 
 
 _original_copy_sheet = cv._copy_sheet
@@ -207,8 +174,7 @@ _original_copy_sheet = cv._copy_sheet
 def _copy_sheet(ws, limits, remaining=None, diag=None, merge_limit=200000):
     """원본 _copy_sheet 를 호출하되, 통합문서 누적 예산에 더하는 '셀 수' 를 (데이터 행×열 사각형) 대신 **실제 저장한 셀 수**로
     돌려준다 → 멀리 떨어진 셀 하나가 있는 시트가 뒤쪽 시트들의 예산을 잠식하지 않는다."""
-    sheet, _cells, chars, errors = _original_copy_sheet(ws, limits, remaining, diag, merge_limit)
-    return sheet, len(sheet.cells), chars, errors
+    return _original_copy_sheet(ws, limits, remaining, diag, merge_limit, sparse=True, values_only=True)
 
 
 cv._last_cell = _last_cell
@@ -810,6 +776,20 @@ def _registry_resolve(self, file, name, root=None, seen=frozenset()):
         return TypeLink('INTEGER', integer_type='unsigned int',
                         assumptions=(f"열거형({spelled}) 비트필드: unsigned 로 가정",))
     link = _original_resolve(self, file, name, root, seen)
+    if link.status == 'UNRESOLVED' and isinstance(spelled, str):
+        prefix, _, candidate = spelled.partition(' ')
+        # For one extra identifier, try the actual record type after it. This is
+        # a comparison fallback; explicit types and incompatible macros win.
+        record_spelling = candidate.removeprefix('struct ').removeprefix('union ')
+        if (identifier(prefix) and identifier(record_spelling) and prefix not in CONVENTIONAL_PROFILES
+                and not matching_names(self.all_type_names, prefix)):
+            declarations = [d for unit in self.units.values()
+                            for macro in matching_names(unit.macros, prefix) for d in unit.macros[macro]]
+            if all(set(d.target.split()) <= {'far', 'near', '__far', '__near'} for d in declarations):
+                resolved = self.resolve(file, candidate, root, seen)
+                if resolved.definition is not None:
+                    return replace(resolved, assumptions=(*resolved.assumptions,
+                                   f"'{prefix}' 선언 수식어로 해석, 타입 '{candidate}'"))
     if link.status == 'UNRESOLVED' and not link.evidence and isinstance(spelled, str) and spelled in CONVENTIONAL_PROFILES \
             and spelled not in BASE_PROFILES:
         profile = CONVENTIONAL_PROFILES[spelled]
@@ -1095,6 +1075,8 @@ def _match_binding(bitfields, access, binding):
         return 'REVIEW', reason + details, None
     first = binding.declarations[0]
     reason = f"C 선언 {Path(first.origin.file).name}:{first.origin.line} ({first.spelling})"
+    if link and link.assumptions:
+        reason += ' / ' + ' / '.join(link.assumptions)
     candidates = {definition: bitfields.definitions[definition]} if definition in bitfields.definitions else {}
     if not candidates:
         for declaration in binding.declarations:

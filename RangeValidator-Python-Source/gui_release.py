@@ -126,6 +126,14 @@ class App(BaseApp):
                     f"(범위 확정 {summary.get('certified', 0)}개) · 변수 {summary.get('variables', 0)}개 · "
                     f"typedef {summary.get('typedefs', 0)}개")
             self.notebook.select(self.tabs[1])
+            if incomplete:
+                failed = next((node for node, (key, name) in self.nav_scopes.items()
+                               if not name and self.result_index.files[key].record
+                               and self.result_index.files[key].record.status in ('ERROR', 'PARTIAL')), None)
+                if failed:
+                    self.file_tree.selection_set(failed)
+                    self.file_tree.see(failed)
+                    self.show_file_status()
         elif operation == 'save':
             folder, self.outcomes = result
             incomplete = (getattr(self.outcomes, 'report_warning', '') or

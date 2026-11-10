@@ -45,6 +45,18 @@ def fault_ranges(sheet, attribute, fault):
 
 
 class ComExceptionRetryTests(unittest.TestCase):
+    def test_value_only_read_never_requests_formula_text(self):
+        from rangevalidator.com_values import _copy_sheet
+        from rangevalidator.models import ReaderLimits
+
+        runtime, fault, diagnostics = FakeRuntime(), Fault(None), Diagnostics()
+        source = fault_ranges(runtime.book.Worksheets.ws, 'Formula', fault)
+        sheet, _, _, errors = _copy_sheet(source, ReaderLimits(), 500, diagnostics,
+                                          sparse=True, values_only=True)
+        self.assertEqual((fault.calls, errors), (0, []))
+        self.assertEqual((sheet.cells['C3'].value, sheet.cells['C3'].is_formula), (2, False))
+        self.assertEqual(sheet.cells['B2'].merge_anchor, 'A2')
+
     def test_success_on_third_attempt_is_logged_even_after_prior_success(self):
         fault, diagnostics, sleeps = Fault(), Diagnostics(), []
         read_call('com.Value2', lambda: 'previous block', diagnostics)

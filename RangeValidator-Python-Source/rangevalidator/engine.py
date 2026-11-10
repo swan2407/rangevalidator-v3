@@ -233,6 +233,8 @@ def parse_interval(value):
 def interval_status(value, expected):
     """Existing range cell vs expected 'lo~hi'. Accepts 'lo~hi', 'lo ~ hi', 'lo..hi', 'lo to hi', '[lo, hi]', 'lo – hi'."""
     s = '' if value is None else str(value).strip()
+    if s == "'-":
+        s = '-'  # Some producers store Excel's leading text marker literally.
     if not s:
         return 'MISMATCH', 'FILLED_EMPTY_RANGE'
     bounds = parse_interval(s)

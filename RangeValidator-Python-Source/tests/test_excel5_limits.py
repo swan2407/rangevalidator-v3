@@ -5,14 +5,32 @@ from tempfile import TemporaryDirectory
 import unittest
 from unittest.mock import patch
 
-from rangevalidator.com_values import _merge_map, _read_blocks
+from rangevalidator.com_values import _copy_sheet, _merge_map, _read_blocks
 from rangevalidator.models import ReadFailure, ReaderLimits
 from rangevalidator.readers import read_com
 from rangevalidator.workflow import run_comparison
 from test_com_reference import ComError, Sheet, runtime
+from test_excel6_reader import MergeSheet
 
 
 class Excel5LimitTests(unittest.TestCase):
+    def test_sparse_release_budget_counts_content_and_preserves_far_merge(self):
+        source = Sheet({(1, 1): 'Name', (1, 2): 'Type', (1, 3): 'Range',
+                        (2, 1): 'obj.state', (2, 3): '0~31', (5001, 2): 'note'})
+        merges = MergeSheet()
+        merges.areas = [(5001, 2, 5001, 3, '$B$5001:$C$5001')]
+        value_range = source.Range
+        source.Range = lambda first, last=None: (
+            merges.Range(first) if isinstance(first, str) else value_range(first, last))
+        with patch('rangevalidator.com_values._count_a',
+                   side_effect=lambda ws, first, last, col: int(first == 1 or last == 5001)):
+            sheet, cells, _, _ = _copy_sheet(source, ReaderLimits(max_cells=32), 32,
+                                              merge_limit=64, sparse=True)
+        self.assertLess(cells, 32)
+        self.assertEqual(sheet.cells['C2'].value, '0~31')
+        self.assertEqual(sheet.cells['C5001'].merge_anchor, 'B5001')
+        self.assertEqual(sheet.merged_ranges, ['B5001:C5001'])
+
     def test_real_content_after_two_empty_blocks_is_not_dropped(self):
         tail = 393217
         sheet = Sheet({(1, 1): 'first', (tail, 1): 'last'})

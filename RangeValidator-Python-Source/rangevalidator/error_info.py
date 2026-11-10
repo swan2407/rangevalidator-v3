@@ -15,3 +15,19 @@ def classify_error(code,exception_type):
         return 'COM_ERROR' if code<0 or code>0xffff else 'OS_ERROR'
     return {'TypeError':'PYTHON_TYPE_ERROR','AttributeError':'PYTHON_ATTRIBUTE_ERROR',
             'ValueError':'PYTHON_VALUE_ERROR'}.get(name,'PYTHON_ERROR')
+
+
+def read_error_summary(error):
+    def evidence(item):
+        code = item.get('code')
+        hresult = item.get('inner_hresult')
+        return ' · '.join(filter(None, (
+            item.get('api') or item.get('stage'),
+            item.get('exception_type', '').rsplit('.', 1)[-1],
+            f'0x{code & 0xffffffff:08X}' if isinstance(code, int) else '',
+            f'내부 코드 0x{hresult & 0xffffffff:08X}' if isinstance(hresult, int) and hresult != code else '',
+            item.get('limit_reason'),
+        )))
+
+    native = error.get('native_read_failure')
+    return ' → '.join(filter(None, (evidence(native) if native else '', evidence(error)))) or '읽기 실패'

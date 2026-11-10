@@ -225,6 +225,12 @@ def read_auto(path, limits=ReaderLimits(), diagnostics=None, *, function_sheets_
             raise
         if diagnostics:
             diagnostics.emit('COM','fallback','ENTER',message='Native Reader failed; DRM status unknown')
-        if function_sheets_only:
-            return read_com(path,limits,_trace=diagnostics,function_sheets_only=True)
-        return read_com(path,limits,_trace=diagnostics)
+        try:
+            if function_sheets_only:
+                return read_com(path,limits,_trace=diagnostics,function_sheets_only=True)
+            return read_com(path,limits,_trace=diagnostics)
+        except ReadFailure as fallback:
+            fallback.context['native_read_failure'] = {
+                'api': exc.api, 'stage': exc.stage, 'code': exc.code, 'exception_type': exc.exception_type,
+            }
+            raise

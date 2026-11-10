@@ -126,6 +126,53 @@ case("별도 include 폴더의 STRUCT/NCM 별칭 연결",
       'motor.c': '#include "types.h"\n#pragma section farbss = DATA\nNCM Dev_t g_dev;\nvoid Motor_Run(void) {}'},
      ROWS, M3)
 
+NCM_TYPES = '''typedef union {
+    struct { unsigned int state:5; } T;
+    unsigned int raw;
+} ncm_id2_union_t;
+extern NCM ncm_id2_union_t ncm_id2;
+'''
+NCM_ROWS = [('ncm_id2.T.state', 'unsigned int', '0~31')]
+case('NCM 정의 미수집, 헤더 extern과 C 정의 및 중첩 union',
+     {'NCM_Data.h': NCM_TYPES, 'Ncm_Data.c': '#include "NCM_Data.h"\nNCM ncm_id2_union_t ncm_id2;'},
+     NCM_ROWS, ['MATCH'], xlsx='Ncm_Data_Detail.xlsx', reason_contains={0: "'NCM' 선언 수식어"})
+case('include 미수집, 다른 이름의 설계서에서도 동일한 NCM 타입 연결',
+     {'NCM_Data.h': NCM_TYPES, 'Ncm_Data.c': 'NCM ncm_id2_union_t ncm_id2;'},
+     NCM_ROWS, ['MATCH'])
+case('NCM 선언의 실제 타입 충돌은 REVIEW',
+     {'NCM_Data.h': NCM_TYPES, 'Ncm_Data.c': '#include "NCM_Data.h"\n'
+      'typedef struct { unsigned int state:2; } Other;\nNCM Other ncm_id2;'},
+     NCM_ROWS, ['REVIEW'], xlsx='Ncm_Data_Detail.xlsx', reason_contains={0: '타입 후보'})
+
+CHARGING_TYPES = ('typedef struct { unsigned int state:5; } rec_data_charging_t;\n'
+                  'extern NVM rec_data_charging_t rec_data_charging;')
+CHARGING_ROWS = [('rec_data_charging.state', 'unsigned int', '0~31')]
+case('NVM 정의 미수집, 헤더 extern과 C 정의의 일반 구조체',
+     {'Charging.h': CHARGING_TYPES, 'Charging.c': '#include "Charging.h"\n'
+      'NVM rec_data_charging_t rec_data_charging;'},
+     CHARGING_ROWS, ['MATCH'], xlsx='Charging_Detail.xlsx', reason_contains={0: "'NVM' 선언 수식어"})
+case('NVM 매크로와 include 없이 헤더와 C의 동일 타입 연결',
+     {'Charging.h': CHARGING_TYPES, 'Charging.c': 'NVM rec_data_charging_t rec_data_charging;'},
+     CHARGING_ROWS, ['MATCH'])
+
+GENERIC_TYPES = 'typedef struct { unsigned int state:3; } b;\nextern a b c;'
+GENERIC_ROWS = [('c.state', 'unsigned int', '0~7')]
+case('extern a b c와 a b c, 등록된 b 타입으로 연결',
+     {'Example.h': GENERIC_TYPES, 'Example.c': '#include "Example.h"\na b c;'},
+     GENERIC_ROWS, ['MATCH'], xlsx='Example_Detail.xlsx', reason_contains={0: "'a' 선언 수식어로 해석, 타입 'b'"})
+case('일반 접두어의 헤더와 C가 include 없이 동일한 타입으로 연결',
+     {'Example.h': GENERIC_TYPES, 'Example.c': 'a b c;'}, GENERIC_ROWS, ['MATCH'])
+case('타입으로 정의된 접두어의 선언은 임의로 비교하지 않음',
+     {'Example.h': 'typedef unsigned int a;\n' + GENERIC_TYPES,
+      'Example.c': '#include "Example.h"\na b c;'}, GENERIC_ROWS, ['REVIEW'])
+case('등록된 타입 변경 매크로는 일반 접두어로 추정하지 않음',
+     {'Example.h': GENERIC_TYPES, 'Example.c': '#include "Example.h"\na b c;',
+      'Config.h': '#define a unsigned int\n'}, GENERIC_ROWS, ['REVIEW'])
+case('일반 접두어가 같아도 실제 타입이 다른 선언은 REVIEW',
+     {'Example.h': GENERIC_TYPES, 'Example.c': '#include "Example.h"\n'
+      'typedef struct { unsigned int state:2; } other;\na other c;'},
+     GENERIC_ROWS, ['REVIEW'], xlsx='Example_Detail.xlsx', reason_contains={0: '타입 후보'})
+
 REC = PRE + """#define ITEM_COUNT 4
 typedef struct { u1 flag:1; u1 ordinary; } Item_t;
 typedef union {

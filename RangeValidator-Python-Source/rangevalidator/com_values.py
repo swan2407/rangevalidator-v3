@@ -124,13 +124,13 @@ def _open(path, runtime=None, diag=None):
     return book
 
 
-def _find_last(sheet, order, diag=None, failures=None):
+def _find_last(sheet, order, diag=None, failures=None, *, look_in=-4123):
     """Find(xlPrevious). What='?*' = cells with at least one character; empty-string phantom cells that DRM
     files carry up to the sheet end are not matched (they made the old '*' search return 1,048,576)."""
     phase = 'last_row' if order == 1 else 'last_column'
     try:
         return read_call('com.Find.' + phase, lambda: sheet.Cells.Find(
-            What='?*', After=sheet.Cells.Item(1, 1), LookIn=-4123, LookAt=2,
+            What='?*', After=sheet.Cells.Item(1, 1), LookIn=look_in, LookAt=2,
             SearchOrder=order, SearchDirection=2, MatchCase=False), diag, search_phase=phase)
     except ReadFailure as exc:
         if failures is not None: failures.append(exc)
@@ -157,11 +157,11 @@ def _limit_failure(stage, reason, row, col):
     return failure
 
 
-def _last_cell(sheet, diag=None, *, strict=False):
+def _last_cell(sheet, diag=None, *, strict=False, look_in=-4123):
     """Upper bound of the content rectangle. UsedRange is used as a cap only (never read as a whole):
     DRM files report the whole sheet as used, which made Value2 on it run out of memory."""
-    row_cell = _find_last(sheet, 1, diag)
-    col_cell = _find_last(sheet, 2, diag)
+    row_cell = _find_last(sheet, 1, diag, look_in=look_in)
+    col_cell = _find_last(sheet, 2, diag, look_in=look_in)
     last_row = read_call('com.Find.coordinates', lambda: int(row_cell.Row), diag,
                          search_phase='last_row') if row_cell is not None else 0
     last_col = read_call('com.Find.coordinates', lambda: int(col_cell.Column), diag,
@@ -205,10 +205,11 @@ def _lines(raw, rows, cols):
     return lines
 
 
-def _read_blocks(ws, last_row, last_col, diag=None, *, remaining=None):
+def _read_blocks(ws, last_row, last_col, diag=None, *, remaining=None, sparse=False, values_only=False):
     """Read ~130k-cell blocks through the observed extent, skipping empty blocks."""
-    block = max(256, 131072 // max(last_col, 1))
+    block = max(1 if sparse else 256, 131072 // max(last_col, 1))
     values, formulas, data_row, data_col = {}, {}, 0, 0
+    content_cells = 0
     for r0 in range(1, last_row + 1, block):
         r1 = min(last_row, r0 + block - 1)
         if _count_a(ws, r0, r1, last_col) != 0:
@@ -217,14 +218,31 @@ def _read_blocks(ws, last_row, last_col, diag=None, *, remaining=None):
                                 diag, row=r0, column=1)
                 vals = read_call('com.Value2', lambda: _lines(rng.Value2, r1-r0+1, last_col),
                                  diag, row=r1, column=last_col)
-                fmls = read_call('com.formula.text', lambda: _lines(rng.Formula, r1-r0+1, last_col),
-                                 diag, row=r1, column=last_col)
+                fmls = None
+                if not values_only:
+                    fmls = read_call('com.formula.text', lambda: _lines(rng.Formula, r1-r0+1, last_col),
+                                     diag, row=r1, column=last_col)
             except ReadFailure as exc:
                 exc.context['attempted_bounds'] = (r0, 1, r1, last_col)
                 raise
             for i, line in enumerate(vals):
+                fline = fmls[i] if fmls is not None else ()
+                if sparse:
+                    row = {c: value for c, value in enumerate(line, 1)
+                           if not _is_empty(value) or (fline and not _is_empty(fline[c - 1]))}
+                    if not row:
+                        continue
+                    content_cells += len(row)
+                    if remaining is not None and content_cells > remaining:
+                        raise _limit_failure('com.bounds.limit', f'Content cell budget remaining: {remaining}',
+                                             last_row, last_col)
+                    data_row = r0 + i
+                    values[data_row] = row
+                    if fline:
+                        formulas[data_row] = {column: fline[column - 1] for column in row}
+                    continue
                 n = len(line)
-                while n and _is_empty(line[n - 1]) and (i >= len(fmls) or n > len(fmls[i]) or _is_empty(fmls[i][n - 1])):
+                while n and _is_empty(line[n - 1]) and (not fline or _is_empty(fline[n - 1])):
                     n -= 1
                 if n:
                     data_row = r0 + i
@@ -233,7 +251,8 @@ def _read_blocks(ws, last_row, last_col, diag=None, *, remaining=None):
                         raise _limit_failure('com.bounds.limit', f'Workbook cell budget remaining: {remaining}',
                                              last_row, last_col)
                     values[r0 + i] = line[:n]
-                    formulas[r0 + i] = (fmls[i] if i < len(fmls) else [])[:n]
+                    if fline:
+                        formulas[r0 + i] = fline[:n]
     return values, formulas, data_row
 
 
@@ -246,17 +265,21 @@ def _merge_state(ws, r0, r1, c1, c0=1, diag=None):
         return None
 
 
-def _merge_map(ws, last_row, last_col, diag=None, max_cells=200000):
+def _merge_map(ws, last_row, last_col, diag=None, max_cells=200000, *, sparse=False):
     """Prune explicitly unmerged rectangles and cache confirmed MergeArea geometry."""
     from .readers import _merge_coordinates
     out, regions, geometry = {}, set(), {}
     if not last_row or not last_col or _merge_state(ws, 1, last_row, last_col, diag=diag) is False:
         return out, regions
-    if last_row * last_col > max_cells:
+    if not sparse and last_row * last_col > max_cells:
         raise _limit_failure('com.bounds.limit', f'Merge scan budget: {max_cells}', last_row, last_col)
 
     pending = [(1, 1, last_row, last_col, True)]
+    probes = 0
     while pending:
+        probes += 1
+        if sparse and probes > min(50_000, max_cells):
+            raise _limit_failure('com.bounds.limit', 'Merge inspection budget exceeded', last_row, last_col)
         r0, c0, r1, c1, checked = pending.pop()
         known = out.get((r0, c0))
         if known:
@@ -295,17 +318,20 @@ def _merge_map(ws, last_row, last_col, diag=None, max_cells=200000):
             geometry[region] = ar, ac, br, bc
             anchor = address(ar, ac)
             regions.add(region)
+            area = (min(last_row, br) - ar + 1) * (min(last_col, bc) - ac + 1)
+            if sparse and len(out) + area > max_cells:
+                raise _limit_failure('com.bounds.limit', f'Merged cell budget: {max_cells}', last_row, last_col)
             for row in range(ar, min(last_row, br) + 1):
                 for column in range(ac, min(last_col, bc) + 1):
                     out[(row, column)] = (region, anchor)
         except Exception as exc:
             failure = exc if isinstance(exc, ReadFailure) else ReadFailure('com.merge', exc)
-            failure.context['attempted_bounds'] = (r0, c0, r0, c0)
+            failure.context.setdefault('attempted_bounds', (r0, c0, r0, c0))
             raise failure from None
     return out, regions
 
 
-def _copy_sheet(ws, limits, remaining, diag=None, merge_limit=200000):
+def _copy_sheet(ws, limits, remaining, diag=None, merge_limit=200000, *, sparse=False, values_only=False):
     row, col = _last_cell(ws, diag, strict=True)
     name = read_call('com.sheets.name', lambda: str(ws.Name), diag)
     visible = read_call('com.sheets.visibility', lambda: int(ws.Visible), diag)
@@ -314,15 +340,18 @@ def _copy_sheet(ws, limits, remaining, diag=None, merge_limit=200000):
     emit(diag, 'com.bounds.final', row=row, column=col)
     if not row or not col:
         return sheet, 0, 0, []
-    values, formulas, data_row = _read_blocks(ws, row, col, diag, remaining=remaining)
-    data_col = max((len(v) for v in values.values()), default=0)
+    values, formulas, data_row = _read_blocks(ws, row, col, diag, remaining=remaining,
+                                             sparse=sparse, values_only=values_only)
+    data_col = max((max(v) if sparse else len(v) for v in values.values()), default=0)
     sheet.bounds = (1, 1, data_row, data_col) if data_row else None
-    merges, regions = _merge_map(ws, data_row, data_col, diag, max_cells=merge_limit)
+    merges, regions = _merge_map(ws, data_row, data_col, diag, max_cells=merge_limit, sparse=sparse)
     text = 0
     for ri, line in values.items():
-        fline = formulas.get(ri, [])
-        for ci, value in enumerate(line, 1):
-            formula = fline[ci - 1] if ci - 1 < len(fline) else None
+        fline = formulas.get(ri)
+        for ci, value in (line.items() if sparse else enumerate(line, 1)):
+            formula = None
+            if fline:
+                formula = fline[ci] if sparse else fline[ci - 1]
             has_formula = isinstance(formula, str) and formula.startswith('=')
             if has_formula and isinstance(value, str) and value == formula:
                 has_formula = False                           # literal text that starts with '='
@@ -349,7 +378,11 @@ def _copy_sheet(ws, limits, remaining, diag=None, merge_limit=200000):
             sheet.cells[a] = Cell(ri, ci, a, None, False, None, region, anchor, 'value')
     sheet.merged_ranges = sorted(regions)
     emit(diag, 'com.merge.restored' if regions else 'com.merge.skipped', row=data_row, column=data_col)
-    return sheet, data_row * data_col, text, []
+    cell_count = len(sheet.cells) if sparse else data_row * data_col
+    if sparse and remaining is not None and cell_count > remaining:
+        raise _limit_failure('com.bounds.limit', f'Content and merged cell budget remaining: {remaining}',
+                             row, col)
+    return sheet, cell_count, text, []
 
 
 def read_workbook_values(path, limits=ReaderLimits(), *, _runtime=None, _trace=None, function_sheets_only=False):

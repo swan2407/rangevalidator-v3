@@ -402,7 +402,8 @@ class App:
         if f:
             code = f'0x{f.code&0xffffffff:08X}' if isinstance(f.code, int) else ''
             text.append(f'{f.reader} / {f.read_status} / {f.status}')
-            text.extend(part for part in (f.failed_api, code, f.exception_type, f.reason) if part)
+            details = (f.reason,) if f.read_status == 'FAILED' else (f.failed_api, code, f.exception_type, f.reason)
+            text.extend(part for part in details if part)
             if f.sheet_index or f.search_phase:
                 text.append(f'시트 #{f.sheet_index} / {f.search_phase}')
         if name:

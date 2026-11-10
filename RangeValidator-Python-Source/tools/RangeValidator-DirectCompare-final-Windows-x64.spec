@@ -22,7 +22,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='RangeValidator-DirectCompare-final-Windows-x64',
+    name='RangeValidator-DirectCompare-fix6-Windows-x64',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

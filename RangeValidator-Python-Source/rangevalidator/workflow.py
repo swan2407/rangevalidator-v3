@@ -11,6 +11,7 @@ from .diagnostics import Diagnostics
 from .engine import catalog_headers, compare_book, is_function_sheet
 from .readers import read_auto, read_workbook, read_com
 from .models import ReadFailure
+from .error_info import classify_error, read_error_summary
 
 
 def source_path(path):
@@ -105,11 +106,12 @@ def _run_comparison(headers,details,backend='auto',encoding='utf-8-sig',diagnost
         if stage=='cleanup' and getattr(exc,'cleanup_errors',None):
             first=exc.cleanup_errors[0];stage=first['stage'];api=first.get('api',stage);code=first.get('code');typename=first.get('exception_type',typename)
         ctx=getattr(exc,'context',{})
-        from .error_info import classify_error
         item=dict(file=path,stage=stage,api=api,code=code,exception_type=typename,error_class=getattr(exc,'error_class',classify_error(code,typename)),error_kind=kind,
                   inner_hresult=getattr(exc,'inner_hresult',None),
                   file_index=roles[path][1],sheet_index=ctx.get('sheet_index',0),search_phase=ctx.get('search_phase',''),
-                  reason=kind+': see file execution status; DRM status unknown')
+                  limit_reason=ctx.get('limit_reason', getattr(exc, 'detail', '') if typename.endswith('.ReadBudgetExceeded') else ''),
+                  native_read_failure=ctx.get('native_read_failure'))
+        item['reason'] = read_error_summary(item) if kind == 'READ_ERROR' else kind + ': see file execution status'
         s.errors.append(item)
         return item
     diag.set_context(input_role='header',file_index=0,sheet_index=0,row=0,column=0,sheet_name='')
@@ -137,7 +139,7 @@ def _run_comparison(headers,details,backend='auto',encoding='utf-8-sig',diagnost
             s.readers[path]=record.reader
             item=error(path,exc,'READ_ERROR');record.read_status='FAILED';record.status='ERROR';record.error_kind='READ_ERROR'
             for attr,k in (('failed_api','api'),('failed_stage','stage'),('code','code'),('exception_type','exception_type'),('error_class','error_class'),('sheet_index','sheet_index'),('search_phase','search_phase')):setattr(record,attr,item[k])
-            record.reason='Document read failed; comparison not performed'
+            record.reason=item['reason']
             continue
         s.excel1_timings[path] = {'read_total_seconds': perf_counter() - read_started,
                                   **book.read_timings}
@@ -170,8 +172,13 @@ def _run_comparison(headers,details,backend='auto',encoding='utf-8-sig',diagnost
                 record.reason = ('PARTIAL_READ: 시트 식별 불가로 파일 전체 수정 차단' if unknown else
                                  'PARTIAL_READ: 읽기 오류가 있는 함수 시트만 수정 제외' if affected else
                                  'PARTIAL_READ: 비교 대상 밖 시트의 읽기 오류')
+                if book.read_errors:
+                    first_error = book.read_errors[0]
+                    location = first_error.get('sheet_name') or '시트 확인 불가'
+                    record.reason += f'\n{location} · {read_error_summary(first_error)}'
                 for item in book.read_errors:
-                    s.errors.append(dict(file=path,**item,error_kind='SHEET_READ_ERROR',file_index=record.index,reason='SHEET_READ_ERROR: sheet evidence incomplete'))
+                    s.errors.append(dict(file=path,**item,error_kind='SHEET_READ_ERROR',file_index=record.index,
+                                         reason=read_error_summary(item)))
             record.extracted_variables=sum(bool(r.cell and r.expression) for r in result)
             record.compared=bool(record.extracted_variables)
             record.counts={status:sum(r.status==status for r in result) for status in record.counts}
