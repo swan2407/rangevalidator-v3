@@ -133,19 +133,28 @@ def parameter_type(registry, file, words, root):
     raise ValueError('unsupported parameter declaration')
 
 
-def signature(registry, function, root):
+def signature_parts(registry, function, root):
+    """Keep independently resolved parameters when another type is unsupported."""
     result = []
-    try:
-        for words in function.raw_parameters:
+    for words in function.raw_parameters:
+        if ''.join(words) == '...':
+            result.append(('variadic',))
+            continue
+        try:
             _, value = parameter_type(registry, function.origin.file, words, root)
             if value.layers and value.layers[0][0] == 'pointer':
                 value = replace(value, layers=(('pointer', ()), *value.layers[1:]))
             elif not value.layers:
                 value = replace(value, qualifiers=())
             result.append(_identity(value))
-    except (ValueError, RecursionError):
-        return None
+        except (ValueError, RecursionError):
+            result.append(None)
     return tuple(result)
+
+
+def signature(registry, function, root):
+    parts = signature_parts(registry, function, root)
+    return None if any(part is None for part in parts) else parts
 
 
 def array_parameter_binding(registry, function, index, parameter, root):

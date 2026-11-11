@@ -60,6 +60,9 @@ class FunctionScope:
     status: str
     variables: dict[str, VariableBinding] = field(default_factory=dict)
     alternatives: tuple['FunctionScope', ...] = ()
+    parameter_issues: dict[str, str] = field(default_factory=dict)
+    linkage_reason: str = ''
+    uncollected_parameters: bool = False
 
 
 @dataclass(frozen=True)
@@ -137,6 +140,11 @@ class BitfieldCatalog:
         local = local or {}
         if name in local:
             return local[name]
+        local_names = matching_names(local, name)
+        if len(local_names) == 1:
+            return local[local_names[0]]
+        if local_names:
+            return VariableBinding('AMBIGUOUS')
         if (scope, name) in self.variable_bindings:
             return self.variable_bindings[scope, name]
         names = set(self.variable_spellings.get((scope, name.casefold()), ()))
@@ -775,12 +783,19 @@ class _Registry:
                        evidence=evidence, assumptions=assumptions)
 
     def width(self, expression, file, *, allow_conditional=False):
-        scope = self.scopes[file]
+        return self.constant(expression, file, allow_conditional=allow_conditional, minimum=0, maximum=32767)
+
+    def constant(self, expression, file=None, *, allow_conditional=True,
+                 minimum=-(1 << 63), maximum=(1 << 64) - 1):
+        """Evaluate a bounded C integer expression using the collected definitions."""
+        scope = self.scopes.get(file, self.global_scope)
+        available = self.macro_names.get(file, self.all_macro_names)
+        unsigned_literals = False
 
         def expand(text, stack):
             def substitute(match):
                 name = match[0]
-                names = matching_names(self.macro_names[file], name)
+                names = matching_names(available, name)
                 macro_scope = scope
                 if not names:
                     names = matching_names(self.all_macro_names, name)
@@ -816,14 +831,25 @@ class _Registry:
         def evaluate(node):
             if isinstance(node, ast.Constant) and type(node.value) is int:
                 value = node.value
+            elif isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.UAdd, ast.USub)):
+                value = evaluate(node.operand)
+                if isinstance(node.op, ast.USub):
+                    value = -value
             elif isinstance(node, ast.BinOp) and type(node.op) in _OPERATORS:
                 left, right = evaluate(node.left), evaluate(node.right)
                 if isinstance(node.op, (ast.LShift, ast.RShift)) and right > 63:
                     raise ValueError('oversized shift')
-                value = _OPERATORS[type(node.op)](left, right)
+                if isinstance(node.op, (ast.FloorDiv, ast.Mod)) and (left < 0 or right < 0):
+                    quotient = abs(left) // abs(right)
+                    quotient = -quotient if (left < 0) != (right < 0) else quotient
+                    value = quotient if isinstance(node.op, ast.FloorDiv) else left - quotient * right
+                else:
+                    value = _OPERATORS[type(node.op)](left, right)
             else:
                 raise ValueError('unsupported width expression')
-            if not 0 <= value <= 32767:
+            if value < 0 and unsigned_literals:
+                raise ValueError('unsigned wraparound needs target integer semantics')
+            if not minimum <= value <= maximum:
                 raise ValueError('constant outside supported width-expression domain')
             return value
 
@@ -838,6 +864,7 @@ class _Registry:
             expanded = expand(expression, frozenset())
             if '//' in expanded:
                 return None
+            unsigned_literals = any('u' in match[2].lower() for match in _INTEGER.finditer(expanded))
             normalized = _INTEGER.sub(literal, expanded).replace('/', '//')
             if not re.fullmatch(r'[0-9+*/%()<>|&^ \t-]+', normalized):
                 return None
@@ -966,10 +993,7 @@ def _bind_functions(registry, globals_by_scope):
         for function in unit.functions:
             groups[function.name].append(function)
 
-    from .function_parameters import signature as parameter_signature, array_parameter_binding
-
-    def signature(function, root):
-        return parameter_signature(registry, function, root)
+    from .function_parameters import signature_parts, array_parameter_binding
 
     functions = {}
     for name, declarations in groups.items():
@@ -983,12 +1007,55 @@ def _bind_functions(registry, globals_by_scope):
             status = 'CONDITIONAL' if definition.conditional else 'RESOLVED'
             if any(p.conditional or visible[p.origin.file] for p in prototypes):
                 status = 'CONDITIONAL'
-            if prototypes and any(tuple(w.casefold() for w in p.return_type) !=
-                                    tuple(w.casefold() for w in definition.return_type)
-                                    or (p.prototyped and (signature(p, file) is None
-                                        or signature(p, file) != signature(definition, file)))
-                                    for p in prototypes):
+            definition_parts = signature_parts(registry, definition, file)
+            unknown = {i for i, part in enumerate(definition_parts) if part is None}
+            def parameter_evidence(function, index):
+                parameter = function.parameters[index]
+                origin = parameter.origin if parameter else function.origin
+                return (f"{Path(origin.file).name}:{origin.line} "
+                        f"({' '.join(function.raw_parameters[index])})")
+            unknown_evidence = {i: [parameter_evidence(definition, i)] for i in unknown}
+            conflicts = []
+            for prototype in prototypes:
+                location = f'{Path(prototype.origin.file).name}:{prototype.origin.line}'
+                if tuple(w.casefold() for w in prototype.return_type) != tuple(w.casefold() for w in definition.return_type):
+                    conflicts.append(f'반환 타입 불일치 ({location})')
+                if not prototype.prototyped:
+                    continue
+                parts = signature_parts(registry, prototype, file)
+                if len(parts) != len(definition_parts):
+                    conflicts.append(f'매개변수 개수 불일치 ({location})')
+                    continue
+                for index, (declared, defined) in enumerate(zip(parts, definition_parts)):
+                    if (declared == ('variadic',)) != (defined == ('variadic',)):
+                        conflicts.append(f'{index + 1}번째 매개변수 가변 인자 불일치 ({location})')
+                    elif declared is None or defined is None:
+                        unknown.add(index)
+                        if declared is None:
+                            unknown_evidence.setdefault(index, []).append(parameter_evidence(prototype, index))
+                    elif declared != defined:
+                        conflicts.append(f'{index + 1}번째 매개변수 타입 불일치 ({location})')
+            parameter_issues = {}
+            uncollected = False
+            for index in sorted(unknown):
+                parameter = definition.parameters[index]
+                if parameter is None:
+                    uncollected = True
+                    continue
+                parameter_issues[parameter.name] = (
+                    f"매개변수 '{parameter.name}'의 타입을 확정하지 못함 / "
+                    f"함수 {name} / 타입 해석 실패 선언: " +
+                    ' / '.join(dict.fromkeys(unknown_evidence[index])))
+            linkage_reason = ''
+            if conflicts:
                 status = 'AMBIGUOUS'
+                linkage_reason = ' / '.join(dict.fromkeys(conflicts))
+            elif unknown:
+                status = 'PARTIAL'
+                labels = [definition.parameters[i].name if definition.parameters[i] else f'{i + 1}번째 인자'
+                          for i in sorted(unknown)]
+                linkage_reason = ('일부 매개변수 타입 미확정 (' + ', '.join(labels[:5]) +
+                                  ') / 비교 대상 선언의 타입을 개별 확인')
 
             names = defaultdict(list)
             array_bindings = {}
@@ -1018,8 +1085,13 @@ def _bind_functions(registry, globals_by_scope):
                         binding = _bind_declarations(registry, items + (previous.declarations if previous else ()), file)
                 else:
                     binding = _bind_declarations(registry, items, file)
+                if variable in parameter_issues:
+                    # An unknown prototype or complex declarator must not use a
+                    # same-named global, inferred struct or incomplete array type.
+                    binding = replace(binding, status='UNRESOLVED', type_link=None)
                 variables[variable] = replace(binding, nested_only=nested)
-            scopes.append(FunctionScope(file, status, variables))
+            scopes.append(FunctionScope(file, status, variables, parameter_issues=parameter_issues,
+                                        linkage_reason=linkage_reason, uncollected_parameters=uncollected))
         if scopes:
             functions[name] = tuple(scopes)
     return functions
@@ -1079,6 +1151,8 @@ def build_bitfield_catalog(paths, encoding='utf-8-sig', *, sources=None, isolate
                                              tuple(sorted(aliases[origin])), status, fields, tuple(st.ordinary))
     conditional = frozenset(origin for unit in units.values() for origin in unit.conditional_declarations)
     variables, bindings = _bind_variables(registry)
-    return BitfieldCatalog(definitions, links, tuple(diagnostics), registry.scopes, conditional,
-                           variables, bindings, _bind_functions(registry, bindings))
+    catalog = BitfieldCatalog(definitions, links, tuple(diagnostics), registry.scopes, conditional,
+                              variables, bindings, _bind_functions(registry, bindings))
+    catalog.constant_value = registry.constant
+    return catalog
 

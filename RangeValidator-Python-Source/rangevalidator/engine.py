@@ -75,6 +75,7 @@ def catalog_headers(headers, encoding='utf-8-sig', diagnostics=None, build_optio
         build_context = preprocess_sources(headers, build_options, encoding)
         headers = tuple(build_context.sources)
         bitfields = build_bitfield_catalog(headers, encoding, sources=build_context.sources, isolated=True)
+        bitfields.constant_value = build_context.constant_value
     else:
         bitfields = build_bitfield_catalog(headers, encoding)
     members = frozenset(f.declaration.member for st in bitfields.definitions.values() for f in st.fields)
@@ -268,6 +269,25 @@ def how_text(f):
     return f"{f.declared_type} {f.member}:{f.width} ({Path(f.file).name}:{f.line})" if f else ''
 
 
+def resolve_excel_range(value, bitfields, source):
+    """Resolve symbolic Excel bounds without replacing the original cell evidence."""
+    if not isinstance(value, str) or parse_interval(value) or not re.search(r'[A-Za-z_]', value):
+        return value, ''
+    lookup = getattr(bitfields, 'constant_value', None)
+    if lookup is None:
+        return value, ''
+    text = value.strip()
+    if text.startswith('[') and text.endswith(']'):
+        text = text[1:-1].strip()
+    interval = re.fullmatch(r'(.+?)\s*(?:~|\.\.|\bto\b|,|–|—)\s*(.+)', text, re.IGNORECASE)
+    expressions = interval.groups() if interval else (text,)
+    values = [lookup(expression.strip(), source) for expression in expressions]
+    if any(number is None for number in values):
+        return value, f" / 엑셀 매크로 범위 '{value[:80]}'의 정의를 확정할 수 없음"
+    resolved = '~'.join(map(str, values)) if interval else str(values[0])
+    return resolved, f" / 엑셀 범위 해석 '{value[:80]}' → {resolved}"
+
+
 MEMBER_ACCESS = re.compile(
     r'(?P<base>[A-Za-z_]\w*)\s*(?:\[\s*(?P<index>\w+)\s*\]\s*)?'
     r'(?P<operator>\.|->)\s*(?P<member>[A-Za-z_]\w*)', re.ASCII)
@@ -312,6 +332,11 @@ def _missing_declaration_reason(bitfields, name, source_file, function_name):
 def _catalog_match(catalog, access, source_file, function, *, function_name=None):
     bitfields = catalog.bitfields
     name, member = access['base'], access['member']
+    if function.status == 'MISSING':
+        from .function_linkage import missing_function_local_reason
+        failure = missing_function_local_reason(bitfields, source_file, function_name, name)
+        if failure:
+            return 'REVIEW', failure, None
     if function.alternatives:
         scopes = function.alternatives
         local_scopes = [scope for scope in scopes if matching_names(scope.variables, name)]
@@ -322,8 +347,12 @@ def _catalog_match(catalog, access, source_file, function, *, function_name=None
         matches = [_catalog_match(catalog, access, source_file, scope, function_name=function_name)
                    for scope in scopes]
         return _agree_member_matches(matches, name, member)
-    if function.status not in ('MISSING', 'RESOLVED', 'CONDITIONAL'):
-        return 'REVIEW', f'함수 정의를 확정할 수 없음 ({function.status})', None
+    if function.status not in ('MISSING', 'RESOLVED', 'CONDITIONAL', 'PARTIAL'):
+        return 'REVIEW', f'함수 정의를 확정할 수 없음 ({function.status}) / {function.linkage_reason}', None
+    from .function_linkage import parameter_linkage_issue
+    issue = parameter_linkage_issue(function, name)
+    if issue:
+        return 'REVIEW', issue, None
     source_file = source_file or function.file or None
     binding = bitfields.lookup_variable(source_file, name, function.variables)
     if binding.status == 'MISSING' and getattr(catalog, 'build_context', None) is not None:
@@ -413,7 +442,7 @@ def _match_binding(bitfields, access, binding):
         depth = link.pointer_depth if definition else declaration.pointer_depth
         compatible &= supports_access(depth + decay, dimensions - decay)
     if not compatible:
-        return 'REVIEW', f"'{name}' 의 배열/포인터 선언과 접근 형태가 다름", None
+        return 'REVIEW', f"'{name}' 의 배열/포인터 선언과 접근 형태가 다름 / {reason}", None
     return status, reason, field
 
 
@@ -547,7 +576,9 @@ def compare_book(common, catalog, book, relative_path=None):
         coverage.append((sheet.name,'TARGET','Design headers recognized'))
         source_file = _input_source(catalog.bitfields, filename)
         function_name = sheet_function_name(sheet.name)
-        function = catalog.bitfields.lookup_function(source_file, function_name) if catalog.bitfields else None
+        from .function_linkage import sheet_function_scope
+        function, function_name, function_reason = sheet_function_scope(
+            catalog.bitfields, source_file, function_name)
         header, section = None,''
         for row,cs in table.items():
             if row in headers:
@@ -593,6 +624,10 @@ def compare_book(common, catalog, book, relative_path=None):
                     None)
             if status == 'SKIP' and not reason:
                 continue
+            if function_reason:
+                reason += ' / ' + function_reason
+            if function.status == 'PARTIAL' and function.linkage_reason:
+                reason += ' / ' + function.linkage_reason
             rid = f'{book.path}|{sheet.name}|{rc.address}'
             base = dict(id=rid,file=book.path,sheet=sheet.name,cell=rc.address,expression=expr,existing=rc.formula if rc.is_formula else rc.value,format=fmt,backend=book.backend)
             if f:
@@ -616,7 +651,10 @@ def compare_book(common, catalog, book, relative_path=None):
                     else:
                         status,reason = 'CREATE','확정 비트필드의 공란 범위 신규 입력'
                 else:
-                    status,reason = interval_status(rc.value,base['expected'])
+                    compared_value, macro_reason = resolve_excel_range(
+                        rc.value, catalog.bitfields, function.file or source_file or f.file)
+                    status,reason = interval_status(compared_value,base['expected'])
+                    reason += macro_reason
                     reason = reason + ' / ' + how_text(f) if status in ('MATCH','MISMATCH','CREATE') else reason
                 reason += ' / ' + binding_reason
             results.append(Result(**base,status=status,reason=reason,candidate=status in ('MISMATCH','CREATE')))

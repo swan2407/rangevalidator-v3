@@ -9,6 +9,7 @@ import io
 from pathlib import Path
 import re
 import xml.etree.ElementTree as ET
+from functools import cached_property
 
 
 class BuildOptionsError(ValueError):
@@ -89,6 +90,22 @@ class PreprocessedSources:
     locations: dict = field(default_factory=dict)
     errors: dict = field(default_factory=dict)
     units: dict = field(default_factory=dict)
+    macro_definitions: dict = field(default_factory=dict, repr=False)
+
+    @cached_property
+    def constant_registry(self):
+        from .bitfield_catalog import _Declaration, _Registry, _Unit, Origin
+        units = {}
+        for root, macros in self.macro_definitions.items():
+            unit = units[root] = _Unit()
+            for name, value in macros.items():
+                unit.macros[name].append(_Declaration(value, Origin(root, 1)))
+        return _Registry(units)
+
+    def constant_value(self, expression, root=None):
+        if not self.macro_definitions or (root is not None and root not in self.macro_definitions):
+            return None
+        return self.constant_registry.constant(expression, root)
 
     def receipt(self):
         return dict(**self.options.receipt(), translation_units=self.units, errors=self.errors)
@@ -247,6 +264,10 @@ def preprocess_sources(paths, options, encoding='utf-8-sig'):
             flush()
             bundle.sources[root] = '\n'.join(lines)
             bundle.locations.update({(root, i): original for i, original in enumerate(location, 1)})
+            bundle.macro_definitions[root] = {
+                name: ''.join(token.value for token in macro.value)
+                for name, macro in pp.macros.items() if macro.arglist is None
+            }
         except (BuildOptionsError, OSError, RecursionError) as exc:
             bundle.sources[root] = ''
             bundle.errors[root] = str(exc)
@@ -272,12 +293,13 @@ def annotate_results(results, catalog, relative_path):
         return results
     from .engine import _input_source, source_context
     from .common import sheet_function_name
+    from .function_linkage import sheet_function_scope
     source = _input_source(catalog.bitfields, source_context(relative_path))
     output = []
     for row in results:
         root = source
-        scope = catalog.bitfields.lookup_function(source, sheet_function_name(row.sheet))
-        if root not in bundle.errors and scope.status == 'RESOLVED' and (root is not None or not bundle.errors):
+        scope, _, _ = sheet_function_scope(catalog.bitfields, source, sheet_function_name(row.sheet))
+        if root not in bundle.errors and scope.status in ('RESOLVED', 'PARTIAL') and (root is not None or not bundle.errors):
             root = scope.file
         errors = ([bundle.errors[root]] if root in bundle.errors else
                   list(bundle.errors.values()) if root is None else [])

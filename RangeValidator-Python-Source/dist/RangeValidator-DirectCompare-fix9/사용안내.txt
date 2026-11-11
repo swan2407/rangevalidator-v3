@@ -1,0 +1,8 @@
+﻿RangeValidator DirectCompare fix9 · 2026-11-11
+
+실행: RangeValidator-DirectCompare-fix9-Windows-x64.zip을 새 폴더에 풀고 안의 EXE를 실행하세요.
+소스: RangeValidator-DirectCompare-fix9-Source.zip
+
+엑셀 매크로 값, 긴 함수명과 변수 연결, 미해석 인자가 있는 함수의 개별 멤버 비교 수정이 포함됩니다.
+Python 설치 없이 실행할 수 있습니다. 기존 EXE가 열려 있다면 닫고 새 EXE를 실행하세요.
+검증 기록: VALIDATION.json / 압축파일 해시: SHA256SUMS.txt

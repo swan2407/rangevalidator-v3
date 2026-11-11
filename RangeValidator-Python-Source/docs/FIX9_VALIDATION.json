@@ -1,0 +1,307 @@
+{
+  "version": "DirectCompare-fix-9",
+  "date": "2026-11-11",
+  "architecture": "Windows x64 onefile",
+  "exe_sha256": "3569d6377fc5aa1ca802797142d6ba1ec8810d45bd8b5748d491518eb47ea8dd",
+  "regression": {
+    "tests": 337,
+    "passed": 319,
+    "skipped": 18,
+    "failures": 0,
+    "errors": 0
+  },
+  "production_targeted_tests": {
+    "tests": 56,
+    "passed": 56
+  },
+  "frozen": [
+    {
+      "name": "release",
+      "exit_code": 0,
+      "seconds": 4.25,
+      "receipt": {
+        "successful": true,
+        "version": "DirectCompare-fix-9",
+        "checks": [
+          {
+            "context": "without_xml",
+            "rows": [
+              [
+                "MATCH",
+                "0~255"
+              ],
+              [
+                "MISMATCH",
+                "0~255"
+              ],
+              [
+                "MISMATCH",
+                "0~7"
+              ],
+              [
+                "SKIP",
+                ""
+              ],
+              [
+                "REVIEW",
+                ""
+              ],
+              [
+                "MISMATCH",
+                "0~3"
+              ],
+              [
+                "MISMATCH",
+                "0~3"
+              ],
+              [
+                "MISMATCH",
+                "0~3"
+              ],
+              [
+                "MATCH",
+                "0~1"
+              ]
+            ]
+          },
+          {
+            "context": "with_xml",
+            "rows": [
+              [
+                "MATCH",
+                "0~255"
+              ],
+              [
+                "MISMATCH",
+                "0~255"
+              ],
+              [
+                "MISMATCH",
+                "0~7"
+              ],
+              [
+                "SKIP",
+                ""
+              ],
+              [
+                "REVIEW",
+                ""
+              ],
+              [
+                "MISMATCH",
+                "0~3"
+              ],
+              [
+                "MISMATCH",
+                "0~3"
+              ],
+              [
+                "MISMATCH",
+                "0~3"
+              ],
+              [
+                "MATCH",
+                "0~1"
+              ]
+            ]
+          }
+        ],
+        "originals_unchanged": true
+      }
+    },
+    {
+      "name": "build_options",
+      "exit_code": 0,
+      "seconds": 4.46,
+      "receipt": {
+        "successful": true,
+        "statuses": [
+          "MATCH",
+          "MISMATCH",
+          "CREATE"
+        ],
+        "expected": [
+          "0~4095",
+          "0~15",
+          "0~15"
+        ],
+        "xml": {
+          "file": "C:\\Range\\release-fix9-20261111\\tmpwfjid0la\\build.xml",
+          "sha256": "6047a185e5ea2efc4afd131dbfb8ffeda9d88223478876c6da02d3e3166c6868",
+          "macros": {
+            "OPT_PRESSURE_SENSOR": ""
+          },
+          "include_paths": [],
+          "empty_values": "defined, empty replacement"
+        },
+        "gui_status": "비교 완료 · Excel 1개 · C 소스 2개 · 구조체 1개 · 비트필드 2개 (범위 확정 2개) · 변수 1개 · typedef 2개 · 빌드옵션 build.xml 적용",
+        "source_locations_verified": true,
+        "array_bounds_ignored": true,
+        "array_pointer_signature_linked": true,
+        "ordinary_branch_verified": true,
+        "missing_include_blocked": true,
+        "gui_option_clear_invalidates": true,
+        "report_created": true
+      }
+    },
+    {
+      "name": "gui",
+      "exit_code": 0,
+      "seconds": 17.44,
+      "receipt": {
+        "tabs": [
+          "파일 등록",
+          "비교 결과",
+          "수정 및 저장"
+        ],
+        "log_button_removed": true,
+        "log_popup_removed": true,
+        "comparison_elapsed": "소요 시간 00:00:13.2",
+        "failed_comparison_elapsed": "소요 시간 00:00:00.0",
+        "mixed_batch_preserved": true
+      }
+    },
+    {
+      "name": "selftest",
+      "exit_code": 0,
+      "seconds": 73.19
+    }
+  ],
+  "source_sha256": {
+    "docs/dependency-licenses/packaging-0-__init__.py": "64070990226176a46373fc68244bf865b595c0ab45b306c569602cb4c46c876d",
+    "docs/dependency-licenses/packaging-1-_spdx.py": "14ade76d395b7e32438dd8ae1cc021954ce0ce1bfedf1f5ceec4d337c2ce8b97",
+    "docs/dependency-licenses/setuptools-4-__init__.py": "64070990226176a46373fc68244bf865b595c0ab45b306c569602cb4c46c876d",
+    "docs/dependency-licenses/setuptools-5-_spdx.py": "14ade76d395b7e32438dd8ae1cc021954ce0ce1bfedf1f5ceec4d337c2ce8b97",
+    "gui_entry.py": "3a02402449eefdcceb71bb942d6e1c0d8597b0abef1c60a949c10ced4e5e74fb",
+    "gui_release.py": "80da5987813934556e2b817c8457b017f7395908708e76ff570eb6d40c22f34c",
+    "rangevalidator/__init__.py": "4922f144c37cd15d79164169b38d0f186a1213108411a00f577ffc94fca569c9",
+    "rangevalidator/__main__.py": "8bc10ca41c4b41d68c96190894ed718094c3bd3ebfc4a99d6cfade3fb9469fbf",
+    "rangevalidator/a_extraction.py": "c9fdd0bb45c62e42e9cd37927543aea4ffb384a6c9650b26b29e3758f9bb42e2",
+    "rangevalidator/analysis.py": "c6183f96027f1a4be9b42bd01f0b32afa609efd934d542e514ad2d37262060c2",
+    "rangevalidator/b_extraction.py": "21b6bd03a1cefd41c8cfdd571d60aa049b8b5a9590fa515f187190c5b7980e9b",
+    "rangevalidator/batch_probe.py": "d1cf3a1a64f9b712920f84d59edd01d10a53066d273684f655c8e6fe802ec9d5",
+    "rangevalidator/bitfield_catalog.py": "a0be32e67e1bf6f059580b5b5931aa6f0be611bbb77f7b9cfbc2282b271d16b9",
+    "rangevalidator/build_options.py": "c4fd63b97eae63e07114a02ff0e674eae8a340ef4e3263782890f691565f2b73",
+    "rangevalidator/build_options_smoke.py": "bdcd2ca3ae8d426e816191db72b7a81180f37870eb80c253789be7d120600f46",
+    "rangevalidator/ch_diagnostics.py": "146316c3a2bc3171a3b1243a38d736b10685f45e756f32bac53ffdc8c60b5109",
+    "rangevalidator/clang_probe.py": "1eb5bc742e43bb34cff0ee9a6b2ed5f38b1778f01e285db96b1ec302a51e5b2b",
+    "rangevalidator/cli.py": "08a47a05528c3c454bd7697603c6e5869e7aa5aac4157b4eb8332670393260da",
+    "rangevalidator/com_read.py": "08e7f352bce222662936a019809c9b8bec6080192881da9f927eabb9451f6a46",
+    "rangevalidator/com_values.py": "ed46aee42a749c4a19c52ed4b653b8e601dd4727d5c040c96bcf3ffc060862c1",
+    "rangevalidator/common.py": "b7075c93ffb11bad0f83dfa9746756e7a89a52c7b19b7e76707872839fdf0c35",
+    "rangevalidator/design.py": "34f2f827230dee681733bae3c389318f32dbb5010daa759f55b473c00c636a72",
+    "rangevalidator/development_probe.py": "a6eeaa00a1140b4f2b843109f197bf96115758ad9650500b7e9933b5de99f2b0",
+    "rangevalidator/diagnostic_probe.py": "9c5d302c82687f66d182d56d0326e166917d1c46cdfbde6b3c6414112f8ee4f4",
+    "rangevalidator/diagnostics.py": "621bdb31d1a730df1b116f49dca56467793d3de83d4b826f1a49187ea4907bed",
+    "rangevalidator/engine.py": "77d54307a16b39d7ffc32e50b9373394890473f003bd954135f6bb78cfbda43b",
+    "rangevalidator/error_info.py": "8fc711b8e774147a71d56b29448bd1e0c15afaa5b56b351fc9fd7ec3f93ba42b",
+    "rangevalidator/extraction_diagnostics.py": "deeaa891fa08042a8f70da40be08583ee068cdc4ebcc4eb2bb9f6e711e5058c3",
+    "rangevalidator/function_linkage.py": "77fb7ff63baabc87e0652f374765ed4167a50bd2997c4a7dd614a85c07262318",
+    "rangevalidator/function_parameters.py": "58c25452016c74005128ac48c5099395afbc25d50f37d6abf2326592ba1a28b7",
+    "rangevalidator/gui.py": "ef9be762b9dbbf2c9ee0998a769438d4e5e1e05d51115eabdfdfa90e2e477b7e",
+    "rangevalidator/manual_edits.py": "7163401ddfcf7c61dbfc954080436383ec5169d395beb7b616455d6c09a8aa4d",
+    "rangevalidator/models.py": "04faf8143db27359ce48c8093674ced93054350e546b3555cc00a33bd58e999a",
+    "rangevalidator/preservation.py": "c61429b4c5b638f673a57ca5b06c355aee88ae05b10427828f5c9291691e5bdf",
+    "rangevalidator/readers.py": "616bf033df093bc3b3a705a6ac491971cff1e06b12e5a05ffc041d3139f141e2",
+    "rangevalidator/release_smoke.py": "5cc548539317a356d25de1f005bb7a1193d60f78678f0979b7c2a3ee978a8f54",
+    "rangevalidator/report.py": "6e52055826dd9ad5efade8779e55dd657b934932789630eeb007b06b1c59cb72",
+    "rangevalidator/result_index.py": "38ea22568c66b3b5e16e72006463fe282078e0311aa3229f690d5f642aab3ffe",
+    "rangevalidator/save_display.py": "dec965e086e1b709ba4ecd4dd38492cc1bd93b4987741cf30d42a4e81bc07993",
+    "rangevalidator/selfcheck.py": "7996b53a8a8bc54afcbe61abf57cb87c2c72d9ff2539ed43e8a8e5c7bd4ba281",
+    "rangevalidator/workflow.py": "5ddc1693824d8c4e0fdc2e77d134540615eb10724b1bc83581ef546f3d507701",
+    "rangevalidator/writer.py": "40f49f3f251089e5800920fbb69b606922a97691a5390af8a46300d70f32b858",
+    "rangevalidator_patch.py": "2a18e949cdf0d11d35b49efb74c57d9a9397fef6ee1b297374ec3846bfd60a9a",
+    "run_gui.py": "2f655d086d4ac18adbbc137e377d396fd73bf5384afdbebe7426dcd7ce6f68a1",
+    "selftest_patch.py": "3126cc6682763227667005d5dfe42a259270adfb6a17d3e91e7b0e02910c4661",
+    "tests/test_a_extraction.py": "18c7e7f4ac154d679d38f0b537d39e8d578d25a1ab95619f9e05e0ae3a9dd05b",
+    "tests/test_analysis.py": "8ad865aa17010638111f2b4c01d98476c2a86f86e773a102d8e66860741629db",
+    "tests/test_array_pointer_parameters.py": "d49b1aba05b611e2aaa7a1647dbc0e35b7e09b9a2763bdea62fa1fc9558cc151",
+    "tests/test_b_extraction.py": "d3b7f6ea91a1f939a1c079025842b58fb9cf48caa31f17e860418dcf569d90b0",
+    "tests/test_bitfield_catalog.py": "5d95fb6076b046d4733a7fcdb97c261ab50cc538e645deb901de59ae72139b7a",
+    "tests/test_build_options.py": "57acc7aec364d9c050d1039fbdea1429d96da6c7e3e2e74f9a3c8756ac8431fa",
+    "tests/test_catalog_comparison.py": "635290d44bbeb8bb1c5ebea45e6f70e66e6908678a3d902748e365bb25fd8305",
+    "tests/test_catalog_fallback.py": "7fce777924635df94bc234830f4d31c1e109b5fd74758a87226ea8e61a1f7b61",
+    "tests/test_ch_diagnostics.py": "3af2df991380cbad13e6e4b63dabb6bd514fc70f6fc40409b93f36015fef1e6e",
+    "tests/test_clang_probe.py": "85fe71e1a1d0fbbed113ea13ec3deed1dffa9b270bd13248aa763752ee9e05e4",
+    "tests/test_cli_fixtures.py": "591269b78236db54e7bef2b31ede233cd6ce17d606518ee18f3b00090fef1114",
+    "tests/test_com_exception_retry.py": "4e8e17d17a515ba841254a2ebe6db2571a6f51b8c8c1851e70aee080d0563b0e",
+    "tests/test_com_reference.py": "7d76f15bcf00eae95aa18279b51cc8b167e57951cac565dbd9cdcbf01dceba51",
+    "tests/test_create.py": "300001a13316230c906cfa066ada0c16e0d088a6a0bc61c5a1591af73335632b",
+    "tests/test_design.py": "37da51e022e6169edc3e3274c3597fa35bc4aecdb6e17597640dddb871149c90",
+    "tests/test_diagnostics.py": "55b07399debd06c2d192c270ab6d3b876ecee30695268f5d567b0cc3151e05ef",
+    "tests/test_drm_batch.py": "3d44dce99a64c9009808707626a63fbd34bfc2fb2ce3f3e983988b33e6c1d623",
+    "tests/test_excel2_selection.py": "bcf700b26cacf21a98731fe96cf83b3d8682deccbfc47ccd138106b1b4efc967",
+    "tests/test_excel5_limits.py": "7dabcea8a1c93750d736f088335a5455dcc41cd5943dad9908746141d2ce8ffa",
+    "tests/test_excel6_reader.py": "b83ff15fec2b663c3b3ddb8e8fcdd78ae6e89733cf74e4f95ceedaf96d6f9d57",
+    "tests/test_excel_macro_ranges.py": "2f647d7af22eedf07524d1beca2bc7d45c1746e8ea17e6a6ba6f2af16b9aea4c",
+    "tests/test_extraction_diagnostics.py": "26a1482845f96ae48c8f5d6a407aa17ffba90e3fa40e7adbb8616ecd7931db9f",
+    "tests/test_file_state_removal.py": "2ed12aad074015c0db600488ff963f48540c9fd933273fd879589bb25c0db8ae",
+    "tests/test_function_scope.py": "29f8a0de565e617a076585ef3bff267572a8f6dbd550e82e774168ad5521fecb",
+    "tests/test_function_sheets.py": "999605a589a3b0dd35c2f692035b07afdbb259bb0eac4ded1d3fc15824baece4",
+    "tests/test_gui.py": "f664b0432d5894941e9ef7351973dadc0ddae65e5d2b40c72aa5f0388e47b8e4",
+    "tests/test_gui_progress.py": "91957b9b4f8862efdeb531ee7434a68a44c8dc3a62179788e1a04af09b492c7e",
+    "tests/test_manual_edits.py": "6b85b88279f28e68e4a47abf0288931123e088fe885e73982caa262abfd84ad3",
+    "tests/test_member_visibility.py": "e73ec4a55d6712b54d7b6e84b745c5bb8b34d3cdac1a9306e51cfd059f8ea70e",
+    "tests/test_partial_function_linkage.py": "e6203306a5b9e6edfaeec27f67a89a85976aadd59252da40e25935178bb6e713",
+    "tests/test_photo_clock.py": "deea531cbe22cf7c6180504801800284716fa0d0ab4ea90ec63208b77f5b14ac",
+    "tests/test_pipeline.py": "1f4f0106438f00a7e4456aae581bd816be27aecb9f92231a9cdecc7354d7a153",
+    "tests/test_readers.py": "bcc23dc1a58405e009b59d016f6697e1bd62d9c6e975553188429b59454535f1",
+    "tests/test_report_layout.py": "eb51aa67dd61d6e74a7a80d05e46b2068a2a3c6172f561992710535d0fa4a3be",
+    "tests/test_result_browse.py": "a4d02a62f25570a34676b3b0acfd6458d597b07fc9c5ff99f95eb86d9e55bdb8",
+    "tests/test_save_display.py": "68604372996b9ec259f33622eab684cdb67aa9b7c6fa200957050f701968651f",
+    "tests/test_sheet_function_linkage.py": "8779adaf38d6405cf8b2bd8ff781fd085b09a07f50b72daebead0da3b688477f",
+    "tests/test_struct_members.py": "1efebeaa80b494d3aae4088360e9f944584732ca8a0db4f6e345f85317f06a07",
+    "tests/test_variable_bindings.py": "7dad94ecba7d80cb9d7da061045c85cdbd8806371b5f023d946504174a56c29e",
+    "tests/test_writer_isolation.py": "2b9f664ce42d202b02bd986c68a0b3208b0f56034c40a9f8e937ffb3915e39d4",
+    "tests/v3_fixtures.py": "95109633813aff6f2ab13aeb4f4491527b9f16d7353ab1e84d5462a25c2c6bb2",
+    "tools/build_development.py": "3d0eb938ac306417aaefbb5073538d96367a13a54b9bb188ceadf3c89aad1fd5",
+    "tools/check_diagnostic_scope.py": "165b47fcbe8d772a53a214b82e85b6146d4300dc5900e2aaf51dc9201ae73dd0",
+    "tools/check_drm_batch_scope.py": "75d58c996ae63541d592db4cdb240abe7751b299c3155de4f760a996b685b840",
+    "tools/check_excel3_com_safety.py": "6a831fb2bf0553e462bffc3f7fe3085bcd25a8f1dedd62a66e2539c1bf256e13",
+    "tools/check_v1.py": "e628e5b7cf14f19b3227b0f710bb4a81863279f0e05a3373fe6a98d5e6bfc556",
+    "tools/check_v1_common.py": "ec8b090540ce91fc75593e9dc84649519e4a24cf5afdc3d31fe08fd4da95be6f",
+    "tools/clang1_synthetic.py": "2454894df3f9207b94f388bdb81c870ee69ab08f8a0c02709f6f572614930745",
+    "tools/compare_clang_parser.py": "287b5416f48d3ae972204ccc4402fdd143c8f57f12d3fd7948f15c0867b2a8bd",
+    "tools/dependency_receipt.py": "e38a262e5aa3a23a7972d968a83e38551eb13bbd0010e4c12eec04876e9a2074",
+    "tools/diagnose_ch1.py": "f6a9f3f309610d3ed8b3aeb86819fb57e524203a52a8da96195121df07e3bc5d",
+    "tools/diagnose_excel1.py": "135a610fe4fa5290e6c96f7fbe099a615de8ea758c9a512cf65180a15ee49aa8",
+    "tools/diagnose_excel2.py": "ca925e44b204292619799f6a35b703363ad5706cb3580f93e85136d2118e1ffa",
+    "tools/diagnose_excel3.py": "ba0bf28d4a58359d82aed270eaa1cd7e5d7e99477258fdaa9a5b2fd8a848d6c6",
+    "tools/diagnose_excel4.py": "527d0c1fa9c82e20bb16afe464644cd9569536e0228175038a1b0dbeef2ed27b",
+    "tools/diagnose_excel5.py": "8fa58ff6c1357bd9a31cc864c2cac62a30651d447518ce84862192aa1428555d",
+    "tools/diagnose_excel6.py": "ee2d254440fd6630b01b731d8d73deb5f73a47f7f0c0506d9cb6e0e7c256572c",
+    "tools/document_diagnostic_release.py": "7acab345e44b66607704b9ac29b4d5c07ab63d0000f9402e28f56e8658c7a5f8",
+    "tools/document_drm_batch_release.py": "9ccfae1abe96cf3cbb5b4c5ed3134941fe6dc287475f058f2bdf7d965fa1efb2",
+    "tools/excel1_synthetic.py": "63492773450822d7f06d47ca9a336bef48b17d6f3e39889912c0e61387e24fed",
+    "tools/excel4_synthetic.py": "29404838d2f1add5a39bcf7e6fc844e0b5c414d3603cef1e20f94c187e567874",
+    "tools/excel5_metrics.py": "f09dc5f17d73b1700df8c81a95310dfcd945dcf4b5df36eeebf13b3d3b2f67aa",
+    "tools/excel5_synthetic.py": "019bb9e1a8383eaf1033c516e9835cc83cfe6b158f1e1cfad5e44baa28d6e0e5",
+    "tools/excel6_benchmark.py": "35e6569d2b3f617cb71dd42cf83d8f96241bd0639b86c6349298faee7b9ad52b",
+    "tools/finalize_diagnostic_release.py": "4774af910abcc78b82d59a2e9a593c84f00444eb8d3d9cbb053eedc5c3041d93",
+    "tools/finalize_drm_batch_release.py": "ada6263c1717072938ecacc90f85376bb24927e4a997ecfe81eaf676e306f780",
+    "tools/package_windows.py": "bd87ec41d0a83ceed2bf705469950d1938c5ec74f39390d3718a543ae662ddca",
+    "tools/photo_clock_audit.py": "75275f6f20926dca7a9e9c830d561a9eb588da91137ae113759314c2b076b72c",
+    "tools/run_com_reference_tests.py": "0f198a9d4766f3bcd13ceb4e2bbc3abbe37959455a5c4d62c1df758a7f19cbf8",
+    "tools/run_diagnostic_tests.py": "ea0ba0ed86bc7abe8bfb78bcffe3e5c1ab100763c7adaccda71b34b9d9f2e5f1",
+    "tools/run_drm_batch_tests.py": "98f6d42ad9179e52903dcc967a824a8839a6aaa1f23be6efb3608ce8429f93ee",
+    "tools/run_frozen_integration.py": "afb1011a64efac3e2bc706930aa9c8e4c410ee1134ce76b3ebc613e256156293",
+    "tools/run_tests.py": "193f4f9ad612a32ee3d519c8c49b00dda4da14606f31a4b9befc08742b75ef14",
+    "tools/smoke_compare.py": "2d888146684053e6fb9ceba22c033948b31a7fbf727074c8977ea5bb513745e9",
+    "tools/verify_com_reference_distribution.py": "4b5ae0295448d8a088d682f957aea006e20a7f0f740c5d5274a5f2ec8cd4bbf1",
+    "tools/verify_diagnostic_distribution.py": "7479b51ab79c8d2f21e7cc81be30edd6679ee6797c93ed9f18dd34426492190a",
+    "tools/verify_distribution.py": "29abca1f7f725603911b43e2007df591012a9521124ebdc386d0cbddc810e7a6",
+    "tools/verify_drm_batch_distribution.py": "b6db9612b5ef2fbaccf7ac98b30dc0514d62bbdc4af260c478d64fd75d5aad27",
+    "tools/write_completion_docs.py": "1fe09900e22550053ed08cbe31f44605067726f91fb2de87e1883bbaed55cbc7"
+  },
+  "python": "3.13.9 (tags/v3.13.9:8183fa5, Oct 14 2025, 14:09:13) [MSC v.1944 64 bit (AMD64)]",
+  "dependencies": {
+    "PyInstaller": "6.22.3",
+    "pyinstaller-hooks-contrib": "2026.9",
+    "openpyxl": "3.1.5",
+    "et-xmlfile": "2.0.0",
+    "Pillow": "13.0.0",
+    "pywin32": "311",
+    "pcpp": "1.30"
+  },
+  "company_original_sources_verified": false
+}

@@ -1,0 +1,2 @@
+bef4646d0fc9411be02caabba53e676fa04a928921bd539d0a4b5bf55554f0ca  RangeValidator-DirectCompare-fix9-Windows-x64.zip
+7aae86fc563e7487647b44286d0b1f9a58870c3575fa754e4017a42dbca107ee  RangeValidator-DirectCompare-fix9-Source.zip

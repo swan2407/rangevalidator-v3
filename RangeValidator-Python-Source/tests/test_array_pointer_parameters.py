@@ -47,7 +47,7 @@ class ArrayPointerParameterTests(unittest.TestCase):
                 _, scope, _ = self.catalog(prototype, definition, extra)
                 self.assertEqual(scope.status, 'RESOLVED')
 
-    def test_conflicts_and_unknown_types_stay_unresolved(self):
+    def test_conflicts_and_unknown_types_are_distinguished(self):
         cases = [
             ('u1 (*p)[16]', 'u2 (*p)[16]', ''),
             ('u1 (*p)[16]', 'u1 (*p)[32]', ''),
@@ -68,7 +68,11 @@ class ArrayPointerParameterTests(unittest.TestCase):
         for prototype, definition, extra in cases:
             with self.subTest(prototype=prototype, definition=definition):
                 _, scope, _ = self.catalog(prototype, definition, extra)
-                self.assertEqual(scope.status, 'AMBIGUOUS')
+                partial = ('UNKNOWN' in prototype or 'Missing' in prototype or
+                           'Alias' in prototype or 'Choice' in prototype or '(*cb)' in prototype)
+                self.assertEqual(scope.status, 'PARTIAL' if partial else 'AMBIGUOUS')
+                if partial:
+                    self.assertEqual(scope.variables['cb' if '(*cb)' in prototype else 'p'].status, 'UNRESOLVED')
 
     def test_valid_array_parameter_unblocks_global_bitfield(self):
         catalog, _, root = self.catalog('u1 (*p)[16], u2 id, u1 entry',

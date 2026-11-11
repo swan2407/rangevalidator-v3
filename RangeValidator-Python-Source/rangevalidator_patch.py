@@ -32,7 +32,7 @@ from rangevalidator.analysis import (BASE_PROFILES, CONVENTIONAL_PROFILES, Diagn
                                      identifier, matching_names, tokenize)
 from rangevalidator.bitfield_catalog import Origin, TypeLink, _Declaration, _Unit, _CMT_STR, _DIRECTIVE, _INCLUDE, _guard
 
-PATCH_VERSION = "DirectCompare-fix-8"
+PATCH_VERSION = "DirectCompare-fix-9"
 
 # =============================================================================
 # 1번. Excel 읽기 오류 — 셀 예산 · 메모리
@@ -1113,22 +1113,6 @@ def _member_catalog_match(bitfields, access, missing_reason):
     return _compare_member_path(bitfields, candidates, path, reason)
 
 
-def _truncated_local_scope(bitfields, source_file, function_name, variable):
-    # Excel 시트 제목에는 31자 제한이 있다. 긴 접두어, 같은 C 파일, 정확한
-    # 지역 선언이 모두 확인될 때에만 잘린 제목을 복원한다.
-    if not source_file or not function_name or len(function_name) < 24 or not identifier(function_name):
-        return None
-    candidates = [(name, scope) for name, scopes in bitfields.functions.items()
-                  if name != function_name and name.startswith(function_name)
-                  for scope in scopes if scope.file == source_file]
-    if len(candidates) == 1:
-        name, scope = candidates[0]
-        binding = scope.variables.get(variable)
-        if scope.status == 'RESOLVED' and binding and binding.status == 'STRUCT':
-            return name, scope
-    return None
-
-
 def _catalog_match(catalog, access, source_file, function, function_name=''):
     """원본 engine._catalog_match 교체.
 
@@ -1139,11 +1123,10 @@ def _catalog_match(catalog, access, source_file, function, function_name=''):
     bitfields = catalog.bitfields
     name, member = access['base'], access['member']
     if function.status == 'MISSING':
-        resolved = _truncated_local_scope(bitfields, source_file, function_name, name)
-        if resolved:
-            full_name, scope = resolved
-            status, reason, field = _catalog_match(catalog, access, source_file, scope, function_name=full_name)
-            return status, f"{reason} / 시트 함수명 '{function_name}' → '{full_name}'", field
+        from rangevalidator.function_linkage import missing_function_local_reason
+        failure = missing_function_local_reason(bitfields, source_file, function_name, name)
+        if failure:
+            return 'REVIEW', failure, None
     if function.alternatives:
         scopes = function.alternatives
         local_scopes = [scope for scope in scopes if matching_names(scope.variables, name)]
@@ -1153,7 +1136,7 @@ def _catalog_match(catalog, access, source_file, function, function_name=''):
                 scopes = local_scopes
         matches = [_catalog_match(catalog, access, source_file, scope, function_name=function_name) for scope in scopes]
         return eng._agree_member_matches(matches, name, member)
-    if function.status not in ('MISSING', 'RESOLVED', 'CONDITIONAL'):
+    if function.status not in ('MISSING', 'RESOLVED', 'CONDITIONAL', 'PARTIAL'):
         declarations = bitfields.function_declarations
         choices = [d for spelling in matching_names(declarations, function_name or '')
                    for d in declarations[spelling]]
@@ -1171,7 +1154,13 @@ def _catalog_match(catalog, access, source_file, function, function_name=''):
         else:
             reason = f"함수 '{function_name}'의 정의를 확인할 수 없습니다."
         details = _origin_summary(choices, lambda d: '정의' if d.definition else '선언')
+        if function.linkage_reason:
+            details += ' / ' + function.linkage_reason
         return 'REVIEW', reason + details, None
+    from rangevalidator.function_linkage import parameter_linkage_issue
+    issue = parameter_linkage_issue(function, name)
+    if issue:
+        return 'REVIEW', issue, None
     source_file = function.file or source_file or None
     binding = bitfields.lookup_variable(source_file, name, function.variables)
     if binding.status == 'MISSING' and getattr(catalog, 'build_context', None) is not None:

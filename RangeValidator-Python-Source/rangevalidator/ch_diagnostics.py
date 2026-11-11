@@ -221,7 +221,7 @@ class CHDiagnostics:
             dict(operator=op, member=member, indexes=subscripts) for op, member, subscripts in parts])
         function = self.bitfields.lookup_function(source, function_name)
         out['function_status'] = function.status
-        if source is None and function.status in ('RESOLVED', 'CONDITIONAL'):
+        if source is None and function.status in ('RESOLVED', 'CONDITIONAL', 'PARTIAL'):
             source = function.file
             out['source'] = source
         binding = self.bitfields.lookup_variable(source, name, function.variables)
@@ -231,7 +231,7 @@ class CHDiagnostics:
         if binding.status != 'STRUCT':
             out['other_declarations'] = [asdict(d) for d in self.bitfields.variables.get(name, ())
                                          if d not in binding.declarations]
-        if function.status not in ('RESOLVED', 'MISSING', 'CONDITIONAL', 'MULTIPLE'):
+        if function.status not in ('RESOLVED', 'MISSING', 'CONDITIONAL', 'MULTIPLE', 'PARTIAL'):
             return finish('AMBIGUOUS_FUNCTION')
         out.update(binding_status=binding.status, type_link=_link(binding.type_link))
         if access:

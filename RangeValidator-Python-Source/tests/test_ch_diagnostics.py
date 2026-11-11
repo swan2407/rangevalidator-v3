@@ -36,7 +36,11 @@ class CHDiagnosticsTests(unittest.TestCase):
             ]:
                 with self.subTest(function=fn, expression=expr):
                     self.assertEqual(rows[fn, expr]['trace']['range'], bounds)
-                    self.assertEqual(rows[fn, expr]['comparison_status'], 'MATCH')
+                    # There is no function named "global" in this fixture. If
+                    # the row also names a local/parameter, sheet comparison now
+                    # refuses to silently substitute the same-named global.
+                    guarded = fn == 'global' and expr in ('device.state', 'param_p->state')
+                    self.assertEqual(rows[fn, expr]['comparison_status'], 'REVIEW' if guarded else 'MATCH')
             self.assertEqual(rows['global', 'can_data1.state']['name_cell'], 'A2')
             self.assertEqual(rows['func', 'device.state']['range_cell'], 'E2')
             expected = {

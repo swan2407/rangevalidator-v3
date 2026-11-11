@@ -26,8 +26,8 @@ Python/pip/MSYS2 설치는 필요하지 않습니다. COM에는 설치·인증�
 
 ## 최신 Windows 배포판
 
-`RangeValidator-DirectCompare-fix8-Windows-x64.zip`을 풀고
-`RangeValidator-DirectCompare-fix8-Windows-x64.exe`를 실행하세요. Python 설치가 필요 없는 단일 EXE입니다.
+`RangeValidator-DirectCompare-fix9-Windows-x64.zip`을 풀고
+`RangeValidator-DirectCompare-fix9-Windows-x64.exe`를 실행하세요. Python 설치가 필요 없는 단일 EXE입니다.
 비교에는 셀 값만 사용하며, 선언 수식어가 붙은 C/H 변수도 등록된 구조체 타입으로 연결합니다.
 비교 결과에서 파일별 오류와 간단한 REVIEW 사유를 확인할 수 있고, 진행률 옆에 경과 시간과 최종 소요 시간을 표시합니다.
 
@@ -102,3 +102,15 @@ rangevalidator/
 어떤 입력 원본도 저장하지 않습니다. 입력 해시/mtime, 현재 값, 수식/병합,
 분석 근거를 저장 전에 재확인합니다. 일반 정수 범위/AST/CFG/Alias Analysis/
 함수 I/O 분석은 구현하지 않았습니다. 수식과 병합 데이터는 자동 수정하지 않습니다.
+
+
+## fix9 보고용 제출 소스
+
+테스트·자가검사·개발 도구·과거 검증 문서·빌드 중간물 등을 제외한 보고용 소스입니다. 실행·비교·저장 코드, 의존성 목록, 빌드 설정과 라이선스를 포함합니다.
+
+- [보고용 소스 ZIP](dist/RangeValidator-DirectCompare-fix9/RangeValidator-DirectCompare-fix9-Source-Report.zip)
+- [전체 개발 소스 ZIP](dist/RangeValidator-DirectCompare-fix9/RangeValidator-DirectCompare-fix9-Source.zip)
+- [Windows 단일 EXE ZIP](dist/RangeValidator-DirectCompare-fix9/RangeValidator-DirectCompare-fix9-Windows-x64.zip)
+- [fix9의 확인된 한계](docs/FIX9_KNOWN_LIMITATIONS.md)
+
+최종 경계 검사에서 발견한 enum 부호, unsigned 연산 등의 문제는 현재 fix9에 남아 있습니다. 보고용 소스 정리는 해당 문제의 수정이나 모든 프로젝트에 대한 검증 완료를 의미하지 않습니다.
